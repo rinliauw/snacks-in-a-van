@@ -1,12 +1,12 @@
 module.exports = [
     {
-        "name":"Van 1",
+        "name":"Van_1",
         "location":"1.001, 1.001",
-        "location description":"outside State Library"
+        "location_description":"outside State Library"
     },
     {
-        "name":"Van 2",
+        "name":"Van_2",
         "location":"1.002, 1.002",
-        "location description":"at Federation Square"
+        "location_description":"at Federation Square"
     }
 ]

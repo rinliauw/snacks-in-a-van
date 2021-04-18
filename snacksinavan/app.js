@@ -1,5 +1,6 @@
 const express = require('express');
 const customerRouter = require('./routes/customerRouter');
+const vendorRouter = require('./routes/vendorRouter');
 const app = express();
 
 // GET the home page
@@ -10,7 +11,8 @@ app.get('/', (req, res) => {
 // Handle the customer requests
 app.use('/customer', customerRouter)
 
-
+// Handle the vendor requests
+app.use('/vendor', vendorRouter)
 
 
 app.listen(3030, () => {
