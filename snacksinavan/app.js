@@ -1,5 +1,5 @@
 const express = require('express');
-const snackRouter = require('./routes/snackRouter');
+const customerRouter = require('./routes/customerRouter');
 const app = express();
 
 // GET the home page
@@ -7,8 +7,10 @@ app.get('/', (req, res) => {
     res.send('<h1>Snacks in a Van</h1>')
 })
 
-// Handle the snack requests
-app.use('/customer/snacks', snackRouter)
+// Handle the customer requests
+app.use('/customer', customerRouter)
+
+
 
 
 app.listen(3030, () => {
