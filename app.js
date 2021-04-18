@@ -1,9 +1,11 @@
 const express = require('express');
-const customerRouter = require('./routes/customerRouter');
-const vendorRouter = require('./routes/vendorRouter');
 const app = express();
 
 require('./models');
+
+// set up routers
+const customerRouter = require('./routes/customerRouter');
+const vendorRouter = require('./routes/vendorRouter');
 
 // GET the home page
 app.get('/', (req, res) => {
