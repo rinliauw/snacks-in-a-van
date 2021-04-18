@@ -1,14 +1,8 @@
-module.exports = [
-    {
-        "name":"Cappuccino",
-        "price":"4.00"
-    },
-    {
-        "name":"Latte",
-        "price":"4.00"
-    },
-    {
-        "name":"Long black",
-        "price":"3.50"
-    }
-]
+const mongoose = require("mongoose")
+const snackSchema = new mongoose.Schema({ 
+    name: {type:String, required:true, unique:true},
+    photo: {type:String},
+    price: {type:float, required:true}
+})
+const Snack = mongoose.model("Snack", snackSchema) 
+module.exports = Snack

@@ -24,3 +24,16 @@ module.exports = [
         "van_name":"Van_1"
     }
 ]
+const mongoose = require("mongoose")
+const { timeStamp } = require("node:console")
+const orderSchema = new mongoose.Schema({ 
+    order_id: {type:int, required:true, unique:true},
+    customer_name: {type:String, required:true},
+    items: {type:[snackSchema], required:true},
+    time_ordered: {type:Date, default:Date.now},
+    fulfilled: {type:Boolean, required:true},
+    picked_up: {type:Boolean, required:true},
+    van_name: {type: mongoose.Schema.Types.ObjectId, ref: "Van"}
+})
+const Order = mongoose.model("Snack", orderSchema) 
+module.exports = Order

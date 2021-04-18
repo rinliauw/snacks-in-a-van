@@ -3,6 +3,8 @@ const customerRouter = require('./routes/customerRouter');
 const vendorRouter = require('./routes/vendorRouter');
 const app = express();
 
+require('./models');
+
 // GET the home page
 app.get('/', (req, res) => {
     res.send('<h1>Snacks in a Van</h1>')
