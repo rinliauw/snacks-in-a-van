@@ -15,6 +15,6 @@ app.use('/customer', customerRouter)
 app.use('/vendor', vendorRouter)
 
 
-app.listen(3030, () => {
-    console.log('The Snacks in a Van app is listening on port 3030!')
+app.listen(process.env.PORT || 3030, () => {
+    console.log('The Snacks in a Van app is running!')
 })
