@@ -1,16 +1,22 @@
 const mongoose = require("mongoose")
 
-const foodOrderSchema = new mongoose.Schema({
-    item:{type:mongoose.Schema.Types.ObjectId, ref: "Snack" }
+const startOrderSchema = new mongoose.Schema({
+    item: {type:mongoose.Schema.Types.ObjectId, ref: "Snack" },
+    customer_id: {type:mongoose.Schema.Types.ObjectId, ref: "User" },
+    vendor_id: {type:mongoose.Schema.Types.ObjectId, ref: "Van" }
 })
+
 const orderSchema = new mongoose.Schema({ 
     order_id: {type:Number, required:true, unique:true},
     customer_name: {type:String, required:true},
-    items: {type:[foodOrderSchema], required:true},
+    items: {type:[startOrderSchema], required:true},
     time_ordered: {type:Date, default:Date.now},
     fulfilled: {type:Boolean, required:true},
     picked_up: {type:Boolean, required:true},
     van_name: {type: mongoose.Schema.Types.ObjectId, ref: "Van"}
 })
-const Order = mongoose.model("Order", orderSchema) 
-module.exports = Order
+
+const Order = mongoose.model("Order", orderSchema)
+const startOrder = mongoose.model("startOrder", startOrderSchema)
+
+module.exports = Order, startOrder

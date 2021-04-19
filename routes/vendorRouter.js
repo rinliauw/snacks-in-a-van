@@ -9,8 +9,8 @@ const orderController = require('../controllers/orderController.js')
 // require the van controller
 const vanController = require('../controllers/vanController.js')
 
-// handle the GET request to get all orders with this van 
-vendorRouter.get('/:van_name', orderController.getOrderWithVanName)
+// handle the GET request to get all outstanding orders with this van 
+vendorRouter.get('/:van_name', orderController.getOustandingOrderWithVanName)
 
 // handle the POST request to update van details
 // update location, location detail, ready_for_order label

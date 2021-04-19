@@ -2,15 +2,19 @@ const mongoose = require("mongoose")
 
 const Order = mongoose.model("Order")
 
-// handle request to get all orders with a van name
-const getOrderWithVanName = async (req, res) => {
+// handle request to get all outstanding orders (not fulfilled) with a van name
+// show from the most recent
+const getOutstandingOrderWithVanName = async (req, res) => {
     try {
-        const vanOrders = await Order.find({van_name:req.params.van_name})
+        const vanOrders = await Order.find({ 
+            $and: [{van_name:req.params.van_name}, {fulfilled: false}] 
+        }).sort({time_ordered: -1})
+        
         if (vanOrders){
             res.send(vanOrders)
         } else {
             res.status(404)
-            return res.send("Orders not found for this van")
+            return res.send("No outstanding orders for this van")
         }
     } catch (e) {
         res.status(400)
@@ -20,5 +24,5 @@ const getOrderWithVanName = async (req, res) => {
 
 
 module.exports = {
-    getOrderWithVanName
+    getOutstandingOrderWithVanName
 }
