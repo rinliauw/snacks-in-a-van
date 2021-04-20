@@ -39,8 +39,47 @@ const updateVan = async (req, res) => {
     }
 }
 
+const closeVan = async (req, res) => {  
+    try {
+        const oneVan = await Van.findOneAndUpdate( 
+            {"name": req.params.name},
+            {"$set":{ready_for_order:false}},
+            {new: true}
+            )
+        if (oneVan === null) {   // no van found in database
+            res.status(404)
+            return res.send("Van not found")
+        }
+        return res.send(oneVan)  // van was found
+    } catch (e) {     // error occurred
+        res.status(400)
+        return res.send("Database query failed")
+    }
+}
 
+const locateVan = async (req, res) => {
+    const new_loc_desc = req.body.location_description
+    const new_loc = req.body.location
+    
+    try {
+        const oneVan = await Van.findOneAndUpdate( 
+            {"name": req.params.name},
+            {"$set":{"location_description": new_loc_desc, "location": new_loc, "ready_for_order": true}},
+            {new: true}
+            )
+        if (oneVan === null) {   // no van found in database
+            res.status(404)
+            return res.send("Van not found")
+        }
+        
+        return res.send(oneVan)  // van was found
+        
+    } catch (e) {     // error occurred
+        res.status(400)
+        return res.send("Database query failed")
+    }
+}
 // export the functions
 module.exports = {
-    showVanDetail, updateVan
+    showVanDetail, updateVan, closeVan, locateVan
 }

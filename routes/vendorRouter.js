@@ -10,14 +10,15 @@ const orderController = require('../controllers/orderController.js')
 const vanController = require('../controllers/vanController.js')
 
 // handle the GET request to get all outstanding orders with this van 
-vendorRouter.get('/:van_name', orderController.getOustandingOrderWithVanName)
-
-// handle the POST request to update van details
-// update location, location detail, ready_for_order label
-vendorRouter.post('/:name/update-van-details', vanController.updateVan)
+vendorRouter.get('/:van_name', orderController.getOrderWithVanName)
 
 // handle the GET request to view a van details
 vendorRouter.get('/:name/update-van-details', vanController.showVanDetail)
 
+// handle the PUT request to update van status to close
+vendorRouter.put('/:name/update-van-details/close', vanController.closeVan)
+
+// handle the POST request to update van status to open and new location
+vendorRouter.post('/:name/update-van-details/open', vanController.locateVan)
 // export the router
 module.exports = vendorRouter

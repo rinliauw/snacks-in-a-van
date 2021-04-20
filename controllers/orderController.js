@@ -4,11 +4,9 @@ const Order = mongoose.model("Order")
 
 // handle request to get all outstanding orders (not fulfilled) with a van name
 // show from the most recent
-const getOutstandingOrderWithVanName = async (req, res) => {
+const getOrderWithVanName = async (req, res) => {
     try {
-        const vanOrders = await Order.find({ 
-            $and: [{van_name:req.params.van_name}, {fulfilled: false}] 
-        }).sort({time_ordered: -1})
+        const vanOrders = await Order.find({ van_name:req.params.van_name })
         
         if (vanOrders){
             res.send(vanOrders)
@@ -24,5 +22,5 @@ const getOutstandingOrderWithVanName = async (req, res) => {
 
 
 module.exports = {
-    getOutstandingOrderWithVanName
+    getOrderWithVanName
 }
