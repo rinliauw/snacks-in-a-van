@@ -1,42 +1,65 @@
 **The University of Melbourne**
 # INFO30005 – Web Information Technologies
 
-# Group Project Repository
-
+# Tutorial 8 Group 2 Project Repository
+## Snacks in A Van
 Welcome!
-
-We have added to this repository a `README.md` file and `.gitignore` file.
-
-* **README.md**: is the document you are currently reading. It should be replaced with information about your project, and instructions on how to use your code in someone else's local computer.
- 
-* **.gitignore**: lets you filter out files that should not be added to git. For example, Windows 10 and Mac OS create hidden system files (e.g., .DS_Store) that are local to your computer and should not be part of the repository. This files should be filtered by the `.gitignore` file. This initial `.gitignore` has  been created to filter local files when using MacOS and Node. Depending on your project make sure you update the `.gitignore` file.  More information about this can be found in this [link](https://www.atlassian.com/git/tutorials/saving-changes/gitignore).
-
-Remember that _"this document"_ can use `different formats` to **highlight** important information. This is just an example of different formating tools available for you. For help with the format you can find a guide [here](https://docs.github.com/en/github/writing-on-github).
 
 ## Table of contents
 * [Team Members](#team-members)
 * [General Info](#general-info)
 * [Technologies](#technologies)
+* [Live Website](#live-website)
+* [Access Details](#access-details)
+* [Postman Requests Instruction](#postman-requests-instruction)
 * [Code Implementation](#code-implementation)
 * [Adding Images](#adding-images)
 
 ## Team Members
 
-| Name | Task | State |
+| Name | Student Number | State |
 | :---         |     :---:      |          ---: |
-| Student Name 1  | Back End     |  Done |
-| Student Name 2    | Front End      |  Testing |
-| Student Name 3    | README Format      |  Amazing! |
+| Georgia Lewis  |  982172    |  |
+| Karina Fitriani Liauw    |  1090015     |   |
+| Laurensia Livia Sugito    |  1090328     |   |
+| Woo Pei Yi    |  1064538     |   |
 
 ## General info
-This is project ...
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+This is a project to create web apps for 'Snacks in A Van' a new startupcompany operating in Melbourne.
 	
 ## Technologies
 Project is created with:
 * NodeJs 14.16.X
 * Ipsum version: 2.33
 * Ament library version: 999
+
+
+## Live Website
+You can view our live website at `https://snacksinavan-group-2-info30005.herokuapp.com/`
+
+## Access Details
+
+Please create a file named `.env` and copy the database credentials below.
+
+```
+MONGO_USERNAME = group2
+
+MONGO_PASSWORD = group2
+```
+
+## Postman Requests Instruction
+### Customer
+
+1. View menu of snacks (including pictures and prices)
+2. View details of asnack
+3. Customer starts a new order by requesting a snack
+
+### Vendor
+
+1. Setting van status (vendor sends location, marksvan as ready-for-orders)
+2. Show list of all outstanding orders 
+3. Mark an order as "fulfilled" (ready to be picked up by customer)
+
 
 ## Code Implementation
 
@@ -84,7 +107,7 @@ To create a gif from a video you can follow this [link](https://ezgif.com/video-
 
 You can use emojis :+1: but do not over use it, we are looking for professional work. If you would not add them in your job, do not use them here! :shipit:
 
-**Now Get ready to complete all the tasks:**
+**Task List:**
 
 - [x] Read the Project handouts carefully
 - [x] User Interface (UI)mockup
