@@ -1,9 +1,7 @@
 const mongoose = require("mongoose")
 
 const startOrderSchema = new mongoose.Schema({
-    item: {type:mongoose.Schema.Types.ObjectId, ref: "Snack" },
-    customer_id: {type:mongoose.Schema.Types.ObjectId, ref: "User" },
-    vendor_id: {type:mongoose.Schema.Types.ObjectId, ref: "Van" }
+    
 })
 
 const orderSchema = new mongoose.Schema({ 
@@ -19,4 +17,4 @@ const orderSchema = new mongoose.Schema({
 const Order = mongoose.model("Order", orderSchema)
 const startOrder = mongoose.model("startOrder", startOrderSchema)
 
-module.exports = Order, startOrder
+module.exports = Order
