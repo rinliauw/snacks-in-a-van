@@ -18,26 +18,6 @@ const showVanDetail = async (req, res) => {
     }
 }
 
-// change a van (POST)
-const updateVan = async (req, res) => {
-  const new_van = req.body   // construct changed Van object from body of POST
-
-  try {
-    const van = await Van.findOne( {"name": req.body.name} )  // check that a van with this name exists
-    if (!van) {    // if van is not already in database, return an error
-      res.status(400)
-      return res.send("Van is not found in database")
-    }
-
-    Object.assign(van, new_van)   // replace properties that are listed in the POST body
-    let result = await van.save()    // save updated van to database
-    return res.send(result)             // return saved van to sender
-
-    } catch (e) {   // error detected
-        res.status(400)
-        return res.send("Database update failed")
-    }
-}
 
 //handle request to update van status to 'closed'
 const closeVan = async (req, res) => {  
@@ -85,7 +65,19 @@ const locateVan = async (req, res) => {
         return res.send("Database query failed")
     }
 }
+
+//handle request to get all vans
+const getAllVans = async (req, res) => {
+    try {
+        const vans = await Van.find()
+        return res.send(vans)
+    } catch (e){
+        res.status(400)
+        return res.send("Database query failed - vans could not be found")
+    }
+}
+
 // export the functions
 module.exports = {
-    showVanDetail, updateVan, closeVan, locateVan
+    showVanDetail, closeVan, locateVan, getAllVans
 }

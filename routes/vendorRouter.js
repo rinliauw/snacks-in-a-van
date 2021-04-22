@@ -23,5 +23,9 @@ vendorRouter.put('/:name/update-van-details/close', vanController.closeVan)
 
 // handle the POST request to update van status to open and new location
 vendorRouter.post('/:name/update-van-details/open', vanController.locateVan)
+
+//handle the GET request to all vans
+vendorRouter.get('/', vanController.getAllVans)
+
 // export the router
 module.exports = vendorRouter
