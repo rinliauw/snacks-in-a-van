@@ -4,6 +4,7 @@
 # Tutorial 8 Group 2 Project Repository
 ## Snacks in A Van
 Welcome!
+
 This is a project to create web apps for 'Snacks in A Van' a new startup company operating in Melbourne.
 There will be 2 web apps, one for the customers and one for the vendors.
 
@@ -11,7 +12,8 @@ There will be 2 web apps, one for the customers and one for the vendors.
 * [Team Members](#team-members)
 * [Technologies](#technologies)
 * [Live Website](#live-website)
-* [Access Details](#access-details)
+* [Getting Started](#getting-started)
+* [Database Access Details](#database-access-details)
 * [Postman Requests Instruction](#postman-requests-instruction)
 
 ## Team Members
@@ -26,14 +28,16 @@ There will be 2 web apps, one for the customers and one for the vendors.
 
 ## Technologies
 Project is created with:
-* NodeJs 14.16.X
+* NodeJs
 * MongoDB
 
 
 ## Live Website
 You can view our live website at `https://snacksinavan-group-2-info30005.herokuapp.com/`
 
-## Access Details
+## Getting Started
+
+To set the environment variables:
 
 Please create a file named `.env` inside the app folder and copy the database credentials below.
 
@@ -43,7 +47,25 @@ MONGO_USERNAME = group2
 MONGO_PASSWORD = group2
 ```
 
-To view the database from Mongo Compass, please paste this connection string.
+To install the dependencies:
+```
+npm install
+```
+To run the program:
+```
+npm start
+```
+You will see this output if successful
+```
+> snacksinavan@1.0.0 start
+> node app.js
+
+The Snacks in a Van app is running!
+Mongo connection started on cluster0-shard-00-00.7qkom.mongodb.net:27017
+```
+## Database Access Details
+
+To view the database from Mongo Compass, please navigate to File -> Connect and paste this connection string.
 `mongodb+srv://group2:group2@cluster0.7qkom.mongodb.net/snacksinavan?retryWrites=true&w=majority`
 
 ## Postman Requests Instruction
@@ -60,6 +82,28 @@ To view the database from Mongo Compass, please paste this connection string.
 | **Data Params**      | None                                |
 | **Success Response** | Code: 200			     |
 
+**Example Request:**
+
+`https://snacksinavan-group-2-info30005.herokuapp.com/customer/snacks`
+
+**Example Response:** 
+```
+[
+    {
+        "_id": "607d4d71aae89387de7663ad",
+        "name": "Cappuccino",
+        "price": 4,
+        "photo": "https://unsplash.com/photos/J-4ozdP9EQ0"
+    },
+    {
+        "_id": "607d4e26b544b956283d6c99",
+        "name": "Flat White",
+        "price": 5,
+        "photo": "https://unsplash.com/photos/ad38qCSnjVc"
+    },
+    ... (etc)
+]
+```
 **2. View details of a snack**
 
 |    <!-- -->          |        <!-- -->                     |
@@ -67,7 +111,7 @@ To view the database from Mongo Compass, please paste this connection string.
 | **Title**            | View A Snack Detail 		     |
 | **URL**              | `/customer/snacks/:name`            |
 | **Method** 	       | GET                 	 	     |
-| **URL Params**       | **Required**<br>Snack Name<br>Example: name=Big Cake          |
+| **URL Params**       | **Required**<br>Snack Name<br>(View available snacks here: https://snacksinavan-group-2-info30005.herokuapp.com/customer/snacks and use the field `name`)<br>Example: name=Big Cake          |
 | **Data Params**      | None                                |
 | **Success Response** | Code: 200			     |
 
@@ -93,11 +137,12 @@ To view the database from Mongo Compass, please paste this connection string.
 | **Title**            | Customer Request A Snack            |
 | **URL**              | `/customer/:id/order`               |
 | **Method** 	       | POST                 	 	     |
-| **URL Params**       | **Required**<br>Customer ID<br>Example: 607efeccaae89387de7663b4	|
-| **Data Params**      | **Required**<br>Snack ID<br>Example: 607d4e62b544b956283d6c9a     |
+| **URL Params**       | **Required**<br>Customer ID<br>(View available customers here: https://snacksinavan-group-2-info30005.herokuapp.com/customer and use the field `_id`)<br>Example: 607efeccaae89387de7663b4	|
+| **Data Params**      | **Required**<br>Snack ID<br>(View available snacks here: https://snacksinavan-group-2-info30005.herokuapp.com/customer/snacks and use the field `_id`)<br>Example: 607d4e62b544b956283d6c9a     |
 | **Success Response** | Code: 200			     |
 
 **Example Request:**
+
 URL:
 
 `https://snacksinavan-group-2-info30005.herokuapp.com/customer/607efeccaae89387de7663b4/order`
@@ -129,8 +174,8 @@ Body:
 
 ### Vendor
 
-1. Setting van status (vendor sends location, marksvan as ready-for-orders)
-We will implement 2 buttons for the van to change their status.
+**1. Setting van status (vendor sends location, marksvan as ready-for-orders)
+We will implement 2 buttons for the van to change their status.**
 
 The first button is used to update their status as **CLOSE** by changing their `ready_for_order` to `false`.
 
@@ -139,7 +184,7 @@ The first button is used to update their status as **CLOSE** by changing their `
 | **Title**            | Update Van Status to Close 	     |
 | **URL**              | `/vendor/:name/update-van-details/close`   |
 | **Method** 	       | PUT                 	 	     |
-| **URL Params**       | **Required**<br>Van Name<br>Example: name=Cool Van          |
+| **URL Params**       | **Required**<br>Van Name<br>(View available vans here: https://snacksinavan-group-2-info30005.herokuapp.com/vendor and use the field `name`)<br>Example: name=Cool Van          |
 | **Data Params**      | None                                |
 | **Success Response** | Code: 200			     |
 
@@ -170,11 +215,12 @@ Open status is denoted by `ready for order` as `true`.
 | **Title**            | Update Van Status to Open + Location |
 | **URL**              | `/vendor/:name/update-van-details/open` |
 | **Method** 	       | POST                 	 	     |
-| **URL Params**       | **Required**<br>Van Name<br>Example: Cool Van	|
-| **Data Params**      | **Required**<br>Location Description and Geo Location [Latitude,Longitude]<br>Example: <code>{<br>"location_description": "Near The Spot Building", "location": [-37.806853,144.959451]}</code>|
+| **URL Params**       | **Required**<br>Van Name<br>(View available vans here: https://snacksinavan-group-2-info30005.herokuapp.com/vendor and use the field `name`)<br>Example: Cool Van	|
+| **Data Params**      | **Required**<br>Location Description (String) and Geo Location [Latitude Number,Longitude Number]<br>Example: <code>{<br>"location_description": "Near The Spot Building", "location": [-37.806853,144.959451]}</code>|
 | **Success Response** | Code: 200			     |
 
 **Example Request:**
+
 URL:
 
 `https://snacksinavan-group-2-info30005.herokuapp.com/vendor/Cool Van/update-van-details/open`
@@ -202,20 +248,90 @@ Body:
 }
 ```
 
-2. Show list of all outstanding orders
+**2. Show list of all outstanding orders**
 
 |    <!-- -->          |        <!-- -->                     |
 |----------------------|-------------------------------------|
-| **Title**            | View A Van's Outstanding Orders     |
+| **Title**            | View All Outstanding Orders     |
 | **URL**              | `/vendor/:van_name/outstanding-orders` |
 | **Method** 	       | GET                 	 	     |
-| **URL Params**       | **Required**<br>Van Name<br>Example: Cool Van   |
+| **URL Params**       | **Required**<br>Van Name<br>(View available vans here: https://snacksinavan-group-2-info30005.herokuapp.com/vendor and use the field `name`)<br>Example: Cool Van   |
 | **Data Params**      | None                                |
 | **Success Response** | Code: 200			     |
 
-3. Mark an order as "fulfilled" (ready to be picked up by customer)
+**Example Request:**
+
+`https://snacksinavan-group-2-info30005.herokuapp.com/vendor/Cool Van/outstanding-orders`
+
+**Example Response:** 
+
+```
+[
+    {
+        "items": [
+            "607d4d71aae89387de7663ad",
+            "607d4e62b544b956283d6c9a"
+        ],
+        "_id": "60806ff3b544b956283d6ca2",
+        "order_id": 2,
+        "customer": "Hamilton",
+        "time_ordered": "2021-04-21T14:12:00.000Z",
+        "fulfilled": false,
+        "picked_up": false,
+        "discount": false,
+        "van": "607d5729aae89387de7663af"
+    },
+    {
+        "items": [
+            "607d4d71aae89387de7663ad",
+            "607d4e62b544b956283d6c9a"
+        ],
+        "_id": "6080701fb544b956283d6ca3",
+        "order_id": 3,
+        "customer": "Ricciardo",
+        "time_ordered": "2021-04-21T14:10:00.000Z",
+        "fulfilled": false,
+        "picked_up": false,
+        "discount": false,
+        "van": "607d5729aae89387de7663af"
+    }
+]
+```
+
+**3. Mark an order as "fulfilled" (ready to be picked up by customer)**
 
 
+|    <!-- -->          |        <!-- -->                     |
+|----------------------|-------------------------------------|
+| **Title**            | Mark Order As Fulfilled             |
+| **URL**              | `vendor/:name/outstanding-orders/:order_id/fulfilled` |
+| **Method** 	       | PUT                 	 	     |
+| **URL Params**       | **Required**<br><ul><li> Van Name <br>(View available vans here: https://snacksinavan-group-2-info30005.herokuapp.com/vendor and use the field `name`)</li><br><li>Order ID in outstanding order list (View the vans' outstanding order list here: https://snacksinavan-group-2-info30005.herokuapp.com/vendor/van_name/outstanding-orders **DON'T FORGET TO PUT THE VAN NAME IN van_name** and then use the field 'order_id')</li></ul><br>Example: Van Name = Cool Van, Order ID = 1  |
+| **Data Params**      | None                                |
+| **Success Response** | Code: 200			     |
+
+**Example Request:**
+
+`https://snacksinavan-group-2-info30005.herokuapp.com/vendor/Cool Van/outstanding-orders/1/fulfilled`
+
+**Example Response:** 
+
+```
+{
+    "items": [
+        "607d4d71aae89387de7663ad",
+        "607d4e62b544b956283d6c9a"
+    ],
+    "_id": "60806730aae89387de7663b6",
+    "order_id": 1,
+    "customer": "Verstappen",
+    "time_ordered": "2016-01-24T02:21:55.000Z",
+    "fulfilled": true,
+    "picked_up": false,
+    "discount": false,
+    "van": "607d5729aae89387de7663af"
+}
+```
 
 **Task List:**
 
