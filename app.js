@@ -20,10 +20,6 @@ app.use('/customer', customerRouter)
 // Handle the vendor requests
 app.use('/vendor', vendorRouter)
 
-app.listen(3030, () => {
-    console.log('The Snacks in a Van app is running!')
+app.listen(process.env.PORT || 3030, () => {
+     console.log('The Snacks in a Van app is running!')
 })
-
-// app.listen(process.env.PORT || 3030, () => {
-//     console.log('The Snacks in a Van app is running!')
-// })
