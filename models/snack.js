@@ -24,4 +24,4 @@ const customerSchema = new mongoose.Schema({
 
 const Customer = mongoose.model("Customer", customerSchema) 
 
-module.exports = Snack, addCart, Customer
+module.exports = {Snack, addCart, Customer}
