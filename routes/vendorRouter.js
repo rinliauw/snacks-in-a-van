@@ -10,7 +10,10 @@ const orderController = require('../controllers/orderController.js')
 const vanController = require('../controllers/vanController.js')
 
 // handle the GET request to get all outstanding orders with this van 
-vendorRouter.get('/:van_name', orderController.getOrderWithVanName)
+vendorRouter.get('/:name/outstanding-orders', orderController.getOrderWithVanName)
+
+// handle the PUT request to mark an order from a van as fulfilled
+vendorRouter.put('/:name/outstanding-orders/:order_id/fulfilled', orderController.markOrderAsFulfilled)
 
 // handle the GET request to view a van details
 vendorRouter.get('/:name/update-van-details', vanController.showVanDetail)
