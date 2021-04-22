@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
-const Snack = require("../models/snack")
 
-// import customer and addcart model
+// import customer, snack, and addcart models
 const Customer = mongoose.model("Customer")
 const addCart = mongoose.model("addCart")
+const Snack = mongoose.model("Snack")
 
 // handle request to get list of customer
 const getAllCustomers = async (req, res) => {
