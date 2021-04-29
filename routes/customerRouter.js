@@ -15,8 +15,8 @@ customerRouter.get('/snacks', snackController.getAllSnacks)
 //handle the GET request to get the details of one snack
 customerRouter.get('/snacks/:name', snackController.getOneSnack)
 
-//handle the GET request to all customers
-customerRouter.get('/', customerController.getAllCustomers)
+//handle the GET request to get the home page
+customerRouter.get('/', (res, req) => customerController.getHomePage(res, req))
 
 //handle the GET request to get the details of one customer
 customerRouter.get('/:id', customerController.getOneCustomer)

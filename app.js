@@ -1,9 +1,19 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser')
-app.use(bodyParser.json())
+const exphbs = require('express-handlebars');
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static('public'))	// define where static assets live
 
 require('./models');
+
+// set the template engine to handlebars
+app.engine('hbs', exphbs({
+    defaultLayout:'main',
+    extname:'hbs'
+}))
+
+// set the view engine
+app.set('view engine', 'hbs')
 
 // set up routers
 const customerRouter = require('./routes/customerRouter');

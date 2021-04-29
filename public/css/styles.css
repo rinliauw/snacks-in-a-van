@@ -1,0 +1,90 @@
+/* central area to control type and colour */
+:root {  
+    --text-big: 36px;
+    --text-medium: 22px;
+    --text-small: 16px;
+    --font-body: 'Montserrat', sans-serif;
+    --font-heading: 'Work Sans', cursive;
+    --color-dark: #24305E;
+    --color-purple: #374785;
+    --color-blue: #A8D0E6;
+    --color-pink: #F76C6C;
+    --color-yellow: #F8E9A1;
+}
+
+
+/* elements that are on every page */
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-medium);
+    background-color: var(--color-yellow);
+    color: var(--color-dark);
+}
+
+header, footer {
+    color: var(--color-purple);
+    background-color: var(--color-blue);
+    text-align: center;
+    font-family: var(--font-heading);
+    margin: 0;
+}
+
+header {    /* "sticky header" which stays at the top of the screen */
+    position: sticky;
+    top: 0;
+}
+
+h1 {
+    text-align: center;
+    font-size: var(--text-big);
+    color: var(--color-dark);
+    margin-top: 0;
+}
+
+a {
+    text-decoration: none;  /* switch off underlining of anchors */
+}
+
+a:hover {                   /* instead, get anchors to expand when hovered over */
+    font-size: larger;
+  }
+
+header h1 a {
+    color: var(--color-dark);
+}
+
+footer p {
+    margin-bottom: 0;
+}
+
+
+
+/* The login homepage */
+#homePage p {
+    text-align: center;
+    flex-basis: 60%;
+}
+#homePage img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+form {        /* centre the form */
+    display: flex;
+    justify-content: center;
+}
+
+form input[type$=submit] {  /* submit button */
+    background-color: var(--color-pink);
+    border-radius: 20px;
+    margin-bottom: 1%;
+    width: 20%;
+    height:auto;
+    font-size: var(--text-medium);
+}
+
+form span.bigScreen {   /* on small screens, hide some of the wording */
+    display: none;
+}
