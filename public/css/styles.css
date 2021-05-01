@@ -3,8 +3,9 @@
     --text-big: 36px;
     --text-medium: 22px;
     --text-small: 16px;
-    --font-body: 'Montserrat', sans-serif;
-    --font-heading: 'Work Sans', cursive;
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Work Sans', cursive;
+    --color-beige: #E3E3E3;
     --color-dark: #24305E;
     --color-purple: #374785;
     --color-blue: #A8D0E6;
@@ -22,8 +23,8 @@ body {
 }
 
 header, footer {
-    color: var(--color-purple);
-    background-color: var(--color-blue);
+    color: var(--color-dark);
+    background-color: var(--color-beige);
     text-align: center;
     font-family: var(--font-heading);
     margin: 0;
@@ -41,16 +42,9 @@ h1 {
     margin-top: 0;
 }
 
-a {
-    text-decoration: none;  /* switch off underlining of anchors */
-}
-
-a:hover {                   /* instead, get anchors to expand when hovered over */
-    font-size: larger;
-  }
-
 header h1 a {
     color: var(--color-dark);
+    text-decoration: none;
 }
 
 footer p {
@@ -87,4 +81,53 @@ form input[type$=submit] {  /* submit button */
 
 form span.bigScreen {   /* on small screens, hide some of the wording */
     display: none;
+}
+
+/* The menu */
+#snacksMenu li {
+    list-style-type: none; /* turn off the bullet points */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#snacksMenu img {
+    width: 140px;
+    height: 80px;
+    padding: 10px;
+}
+
+#snacksMenu a {
+    color: var(--color-purple);
+}
+
+#snacksMenu p {
+    margin-top: 0;
+}
+
+
+/* Responsive Design */
+
+@media screen and (min-width: 768px) {
+
+    #snacksMenu ul {
+        column-count: 2;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+
+    #snacksMenu ul {
+        column-count: 3;
+    }
+    
+}
+
+@media screen and (min-width: 1600px) {
+
+    #snacksMenu ul {
+        column-count: 4;
+    }
+
 }
