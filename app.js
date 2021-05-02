@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 
+app.use(express.json())   // replaces body-parser
 app.use(express.urlencoded({ extended: true })) // replaces body-parser
 app.use(express.static('public'))	// define where static assets live
 
@@ -23,7 +24,7 @@ const vendorRouter = require('./routes/vendorRouter');
 
 // GET the home page
 app.get('/', (req, res) => {
-    res.send('<h1>Snacks in a Van</h1>')
+    res.render('login')
 })
 
 // Handle the customer requests
