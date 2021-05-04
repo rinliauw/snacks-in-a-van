@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const bcrypt = require('bcrypt')
 
 const snackSchema = new mongoose.Schema({ 
     name: {type:String, required:true, unique:true},
@@ -22,6 +23,16 @@ const customerSchema = new mongoose.Schema({
     cart: [addCartSchema]
 })
 
+// method for generating a hash; used for password hashing
+customerSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+};
+
+// checks if password is valid
+customerSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
+
 const Customer = mongoose.model("Customer", customerSchema) 
 
-module.exports = {Snack, addCart, Customer}
+module.exports = {Customer, Snack, addCart}

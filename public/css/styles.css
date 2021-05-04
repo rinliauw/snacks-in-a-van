@@ -63,6 +63,10 @@ footer p {
     margin-right: auto;
     width: 20%;
 }
+/*
+#login form input[type$=submit]{
+    width: 50%;
+}*/
 
 form {        /* centre the form */
     display: flex;
@@ -72,7 +76,7 @@ form {        /* centre the form */
 }
 
 form input[type$=text]{
-    width: 30%;
+    width: auto;
     margin-bottom: 2%;
     font-size: var(--text-small);
 }
@@ -89,6 +93,32 @@ form input[type$=submit] {  /* submit button */
 form span.bigScreen {   /* on small screens, hide some of the wording */
     display: none;
 }
+
+/* the login page */
+/* Modal (background) */
+.modal-background {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    align-items: center;
+    top:25%;
+    left:25%;
+    width: 50%; /* Full width */
+    height: 50%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: var(--color-yellow); /* Fallback color */
+
+  }
+
+/* Modal (content) */
+.modal-foreground {
+    background-color: var(--color-yellow);
+    text-align: center;
+    margin: 30% auto; /* 15% from the top and centered */
+    width: 50%; 
+    opacity:1;
+  }
+
 
 /* The menu */
 #snacksMenu li {

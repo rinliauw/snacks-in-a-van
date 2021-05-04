@@ -9,15 +9,35 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Work+Sans&display=swap" rel="stylesheet"> 
 </head>
+<script>
+        function saveCart(){
+            // get the food object IDs from local storage
+            document.getElementById("cart").value = JSON.parse(JSON.stringify(localStorage.getItem("cart")));
+
+            //alert( document.getElementById("favs").value)
+            // clear local storage (WARNING: I am assuming that only my app is using the local storage!!!)
+            localStorage.clear();
+
+            // submit a hidden form with the food ids. You could use fetch to submit the data to API as well.
+            document.getElementById("logoutform").submit();
+                        
+        }        
+    </script>
 <body>
     <header>
         <h1> <a href="/customer">Snacks in a Van</a> </h1>
     </header>
     <main>
+        <section style="text-align:right;">
+            <a href="/customer/showLogin">Login</a>&nbsp; | &nbsp;<a href="/customer/signup">Sign Up</a>&nbsp; | &nbsp;<a href="javascript:void(0);" onclick="saveCart();">Logout</a>
+        </section>
         {{{body}}}
     </main>
     <footer>
         <p>an INFO30005 project</p>
     </footer>
+    <form method="post" action="/customer/logout" id="logoutform">
+        <input type="hidden" name="cart" id="cart"/>
+    </form>
 </body>
 </html>
