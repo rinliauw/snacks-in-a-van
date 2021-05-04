@@ -1,14 +1,12 @@
 <section id="snacksMenu">
+    <h1> Menu List</h1>
     <form method="post" action="/search">
         <input type="search" size="10" name="snack" placeholder="Search">
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 
-
     
     <div class="snacks-menu">
-
-        
 
         <div class="row">
 
@@ -21,7 +19,7 @@
 
                 <div class="snack-body">
                     <h2 class="snack-name">
-                        <a href="/customer/snacks/{{this._id}}">{{this.name}}</a>
+                        <a href="/customer/snacks/{{this.name}}">{{this.name}}</a>
                         </p>
                     </h2>
 
@@ -30,8 +28,10 @@
                     </div>
 
                 </div>
-            
-            <button type="submit">Add to Cart</button>
+            <form action="/action_page.php"></form>
+                <input class="itemQuantity" type="number" id="quantity" name="quantity" min="1"> {{! change css}}
+                <button type="submit">Add to Cart</button>
+            </form>
 
             </div>
 

@@ -8,7 +8,7 @@ const Snack = mongoose.model("Snack")
 //handle request to get customer homepage
 const getHomePage = async(req, res) => {
     try {
-        res.render('login');
+        res.render('homepage');
     } catch (e){
         console.log(e);
     }
