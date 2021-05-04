@@ -9,7 +9,8 @@ const snackSchema = new mongoose.Schema({
 const Snack = mongoose.model("Snack", snackSchema) 
 
 const addCartSchema = new mongoose.Schema({
-    snackId: {type: mongoose.Schema.Types.ObjectId, ref: 'Snack'}
+    snackId: {type: mongoose.Schema.Types.ObjectId, ref: 'Snack'},
+    quantity: {type:Number}
 })
 
 const addCart = mongoose.model("addCart", addCartSchema) 

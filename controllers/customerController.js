@@ -25,6 +25,25 @@ const getAllCustomers = async (req, res) => {
     }
 }
 
+
+// handle request to show current customer's cart
+const getCustomerCart = async(req, res) => {
+    try{
+        const oneCust = await Customer.findById(req.params.id).populate({path:'cart.snackId', model:'Snack'}).lean()
+        console.log(oneCust.cart)
+        if (oneCust){
+            const cart = oneCust.cart
+            return res.render('cart', {cart})
+        } else {
+            res.status(404)
+            return res.send("Customer is not found in database")
+        }
+    } catch (e){
+        res.status(400)
+        return res.send("Database query failed - this customer could not be found")
+    }
+}
+
 // handle request to get one customer
 const getOneCustomer = async(req, res) => {
     try{
@@ -52,15 +71,17 @@ const addItem = async (req, res) => {
         }
         //find the snack
         let desiredSnack = await Snack.findById(req.body.snackId)
-        
+        let desiredQuantity = req.body.quantity
+        console.log(desiredQuantity)
         //add item to this customer's cart
-        cartRecord = new addCart({snackId: desiredSnack._id})
+        cartRecord = new addCart({snackId: desiredSnack._id, quantity: desiredQuantity})
         
         await thisCust.cart.push(cartRecord)
         // save customer's updated record to database
         await thisCust.save()
         // show the new customer record
         result = await Customer.findById(req.params.id)
+        console.log(result)
         res.send(result)
         
     } catch (e) {     // error occurred
@@ -70,5 +91,5 @@ const addItem = async (req, res) => {
 }
 
 module.exports = {
-    getAllCustomers, getOneCustomer, addItem, getHomePage
+    getAllCustomers, getOneCustomer, addItem, getHomePage, getCustomerCart
 }

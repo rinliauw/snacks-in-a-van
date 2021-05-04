@@ -1,0 +1,12 @@
+{{! view customer order}}
+
+<section id = "currentCart">
+    {{#each cart}}
+    <li>
+        <img class="currentCart" src="https://source.unsplash.com/{{this.snackId.photo}}" alt="hosted by Unsplash">
+        Name:{{this.snackId.name}}
+        Price:{{this.snackId.price}}
+        Quantity:{{this.quantity}}
+    </li>
+    {{/each}}
+</section>
