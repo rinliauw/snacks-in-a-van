@@ -25,6 +25,18 @@ const getAllCustomers = async (req, res) => {
     }
 }
 
+
+// handle request to show current customer's order
+const getCustomerOrder = async(req, res) => {
+
+    try {
+        res.render('customerorder', {Customer: Customer});
+    } catch (e){
+        res.status(400)
+        return res.send("Database query failed - order could not be found")
+    }
+}
+
 // handle request to get one customer
 const getOneCustomer = async(req, res) => {
     try{
@@ -70,5 +82,5 @@ const addItem = async (req, res) => {
 }
 
 module.exports = {
-    getAllCustomers, getOneCustomer, addItem, getHomePage
+    getAllCustomers, getOneCustomer, addItem, getHomePage, getCustomerOrder
 }

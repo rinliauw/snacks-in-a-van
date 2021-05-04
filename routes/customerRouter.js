@@ -20,8 +20,10 @@ customerRouter.get('/snacks/:name', snackController.getOneSnack)
 
 //handle the GET request to get the details of one customer
 customerRouter.get('/:id', customerController.getOneCustomer) // nomor 3
-
 customerRouter.post('/:id/order', customerController.addItem)
+
+//handle the GET request to get the customer order
+customerRouter.get('/:id/orderdetails', customerController.getCustomerOrder) // nomor 3
 
 // export the router
 module.exports = customerRouter
