@@ -23,7 +23,7 @@ customerRouter.get('/:id', customerController.getOneCustomer) // nomor 3
 customerRouter.post('/:id/order', customerController.addItem)
 
 //handle the GET request to get the customer order
-customerRouter.get('/:id/orderdetails', customerController.getCustomerOrder) // nomor 3
+customerRouter.get('/:id/cart', customerController.getCustomerCart) // nomor 3
 
 // export the router
 module.exports = customerRouter
