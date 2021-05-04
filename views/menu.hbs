@@ -1,5 +1,4 @@
 <section id="snacksMenu">
-
     <form method="post" action="/search">
         <input type="search" size="10" name="snack" placeholder="Search">
         <button type="submit"><i class="fa fa-search"></i></button>
@@ -14,11 +13,11 @@
             <img class="browsePage" src="https://source.unsplash.com/{{this.photo}}">
             <a href="/customer/snacks/{{this.name}}">{{this.name}}</a>
             <p>${{this.price}}</p>
-
-            <button onclick="addtoCart()" type="submit">Add to Cart</button>
+            <form action="/:id/order" method="POST"> {{!needs customer id}}
+            <button onclick="addtoCart()" type="submit">Add to Cart</button></form>
         </li>
 
         {{/each}}
 
-    </ul>
+    </ul>=
 </section>
