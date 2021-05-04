@@ -1,73 +1,102 @@
 /* central area to control type and colour */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {  
     --text-big: 36px;
     --text-medium: 22px;
     --text-small: 16px;
-    --text-menu-main: 13px;
-    --text-menu-price: 14px;
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Work Sans', sans-serif;
+    --font-heading: 'Roboto', sans-serif;
+    --font-body: 'Work Sans', cursive;
     --color-beige: #E3E3E3;
     --color-dark: #24305E;
     --color-purple: #374785;
     --color-blue: #A8D0E6;
     --color-pink: #F76C6C;
     --color-yellow: #F8E9A1;
-    --color-grey: #F6F6F8;
+    --color-beige: #e9d6cd;
 }
 
-/* elements that are on every page */
-body {
-    font-family: var(--font-body);
-    font-size: var(--text-medium);
-    background-color: var(--color-yellow);
-    color: var(--color-dark);
+nav{
+    display: flex;
+    justify-content: center;
 }
 
-header, footer {
-    color: var(--color-dark);
-    background-color: var(--color-beige);
-    text-align: center;
-    font-family: var(--font-heading);
+ul{
+    display: inline;
+    list-style: none;
+}
+
+ul li{
+    display: inline-block;
+    padding: 30px;
+    font-size: 20px;
+    
+}
+
+*{
     margin: 0;
-}
-
-header {    /* "sticky header" which stays at the top of the screen */
-    position: sticky;
-    top: 0;
-}
-
-h1 {
-    text-align: center;
-    font-size: var(--text-big);
-    color: var(--color-dark);
-    margin-top: 0;
-}
-
-header h1 a {
-    color: var(--color-dark);
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body);
     text-decoration: none;
 }
-
-footer p {
-    margin-bottom: 0;
-}
-
-div {
-    display: block;
+/* elements that are on every page */
+body {
+    width: 100%;
+    height: 100vh;
+    font-family: var(--font-body);
+    font-size: var(--text-medium);
+    background-color: var(--color-beige);
+    color: var(--color-dark);
 }
 
 
 /* The login homepage */
-#homePage p {
-    text-align: center;
+
+
+#homePage .col1{
+    position: absolute;
+    top: 27vh;
+    left: 10%;
+    width: 33%;
+}
+
+#homePage .col1 h1{
+    font-size: 60px;
+}
+
+#homePage .col1 hr{
+    margin-top: 30px;
+    width: 20%;
+    height: 6px;
+    background: #000;
+
+}
+
+#homePage .col1 p{
+    margin-top: 30px;
+    font-size: 16px;
+    text-align: left;
+}
+
+#homePage .col1 button{
+    margin-top: 20px;
+    background: #dfa167;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 20px;
+    padding: 15px 20px;
+}
+
+#homePage .col1  p {
     flex-basis: 60%;
 }
-#homePage img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 20%;
+#homePage .col2 img {
+    position: absolute;
+    top: 150px;
+    right: 100px;
+    max-width: 50%;
 }
 
 form {        /* centre the form */
@@ -172,15 +201,53 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 
 /* Responsive Design */
 
+  @media screen and (max-width: 1000px) {
+    #homePage .col2 img {
+        width: 100%;
+        right: -20rem;
+        position: fixed; 
+        top: 120px;
+        /* right: 100px; */
+        max-width: 100%;
+        z-index: -1;
+    }
+    
+    #homePage .col2 h1 {
+        size: 50px;
+    }
+  }
+
+
+  @media screen and (max-width: 700px) {
+    #homePage .col2 img {
+        width: 100%;
+        position: fixed;
+        right: 0rem;
+        /* position: fixed; */
+        top: 17rem;
+        left: 100px;
+        max-width: 100%;
+        z-index: -1;
+    }
+    
+    #homePage .col1 {
+        position: absolute;
+        top: 27vh;
+        left: 10%;
+        width: 63%;
+    }
+  }
+  
 @media screen and (min-width: 768px) {
 
-    #snacksMenu .snack {
-        width: 25%;
-        float: left;
+    #snacksMenu ul {
+        column-count: 2;
     }
+
+
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (max-width: 1200px) {
 
     #snacksMenu ul {
         column-count: 3;
@@ -194,4 +261,18 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
         column-count: 4;
     }
 
+}
+
+/* cart */
+#currentCart li {
+    list-style-type: none; /* turn off the bullet points */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#currentCart img {
+    width: 20%;
+    padding: 10px;
 }
