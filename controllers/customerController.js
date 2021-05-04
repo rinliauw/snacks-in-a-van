@@ -1,14 +1,18 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 // import customer, snack, and addcart models
-const Customer = mongoose.model("Customer")
-const addCart = mongoose.model("addCart")
-const Snack = mongoose.model("Snack")
+const Customer = mongoose.model("Customer");
+const addCart = mongoose.model("addCart");
+const Snack = mongoose.model("Snack");
+
+// get express-validator, to validate user data in forms
+const expressValidator = require('express-validator');
+const bcrypt = require('bcrypt');
 
 //handle request to get customer homepage
 const getHomePage = async(req, res) => {
     try {
-        res.render('login');
+        res.render('homepage');
     } catch (e){
         console.log(e);
     }
@@ -23,6 +27,68 @@ const getAllCustomers = async (req, res) => {
         res.status(400)
         return res.send("Database query failed - users could not be found")
     }
+}
+
+const signUpCustomer = async (req, res) => {
+    // first, validate the user input
+	const validationErrors = expressValidator.validationResult(req)
+	if (!validationErrors.isEmpty() ) {
+		return res.status(422).render('error', {errorCode: '422', message: 'Search works on alphabet characters only.'})
+	}
+    // if we get this far, there are no validation errors, so proceed to do the search ...
+	
+    try {
+        // brcrypt code from npm documentation
+        const hash_password = 0;;
+        const saltRounds = 10;
+        bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+            hash_password = hash;
+        }) 
+        const customer = new Customer({
+            email: req.body.email,
+            password: hash_password,
+            nameGiven: req.body.nameGiven,
+            nameFamily: req.body.nameFamily
+        })
+    } catch (err){
+        console.log(err);
+    }
+}
+
+// handle request to login as a customer
+const loginCustomer = async (req, res) => {
+	// first, validate the user input
+	const validationErrors = expressValidator.validationResult(req)
+	if (!validationErrors.isEmpty() ) {
+		return res.status(422).render('error', {errorCode: '422', message: 'Search works on alphabet characters only.'})
+	}
+	// if we get this far, there are no validation errors, so proceed to do the search ...
+	var query = {}
+	if (req.body.email !== '') {
+		query["email"] = {$regex: new RegExp(req.body.email, 'i') }
+	}
+	// the query has been constructed - now execute against the database
+	try {
+		const customer = await Customer.find(query).lean()
+        const hash_input_password = 0;
+        bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+            hash_input_password = hash;
+        }) 
+        bcrypt.compare(customer[password], hash_input_password, function(err, result){
+            if (result == true){
+                res.render('loginSuccess');
+            } else {
+                res.render('loginFailure');
+            }
+        });
+		res.render('login', {"customer": customer})	
+	} catch (err) {
+		console.log(err)
+	}
+}
+//show login page
+const showLogin = (req, res) => { // show filter page - currently unused
+	res.render('login')
 }
 
 // handle request to get one customer
@@ -70,5 +136,5 @@ const addItem = async (req, res) => {
 }
 
 module.exports = {
-    getAllCustomers, getOneCustomer, addItem, getHomePage
+    getAllCustomers, getOneCustomer, addItem, getHomePage, loginCustomer, showLogin
 }

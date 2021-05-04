@@ -73,7 +73,15 @@ footer p {
 
 form {        /* centre the form */
     display: flex;
+    width: 100%;
     justify-content: center;
+    margin-bottom: 1%;
+}
+
+form input[type$=text]{
+    width: 30%;
+    margin-bottom: 2%;
+    font-size: var(--text-small);
 }
 
 form input[type$=submit] {  /* submit button */
@@ -85,6 +93,7 @@ form input[type$=submit] {  /* submit button */
     font-size: var(--text-medium);
 }
 
-form span.bigScreen {   /* on small screens, hide some of the wording */
-    display: none;
+#login p {
+    text-align: center;
+    flex-basis: 60%;
 }

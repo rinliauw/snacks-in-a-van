@@ -1,24 +1,45 @@
-<section id="homePage">
+<section id="login">
+    
+    <h1>Login</h1>
 
-    <section id="vanImage">
-        <img class="homePage" src="https://source.unsplash.com/wHZjYigACUI" alt="Hosted by Unsplash">
-    </section>
-    
-    <h1>Snacks in a Van</h1>
-
-    
-    
-    {{!Display the "find a van" button}}
-    <form method="get" action="/find-van">
-        <input type="submit" value="Find a Van">
+    {{!Display the "login" screen}}
+    <form method="get" action="customer/login">
+        <label for="email"> Email:</label>
+        <input type="text" size="10" name="email" placeholder="Email" pattern="[\.@A-Za-z]+">
     </form>
 
-    {{!Display the "login" button}}
-    <form method="get" action="/login">
-        <input type="submit" value="Login">
+    <form method="get" action="customer/login">
+        <label for="password"> Password:</label>
+        <input type="text" size="10" name="password" placeholder="Password" pattern="[0-9A-Za-z]+">
+    </form>
+
+    <form method="get" action="showModal()">
+        <a id="favourite" title="favourite: requires login" onclick="showModal()">&#9829;</a>
+
     </form>
 
     {{!Display the "sign up here" button}}
-    <p><a href="/">Sign Up Here</a></p>
-    
+    <p>Don't have an account? <a href="/">Sign Up Here</a></p>
+    {{!<a id="favourite" title="favourite: requires login" >&#9829;</a>}}
+
 </section>
+
+<!-- show this modal when login button is clicked -->
+<div id="loginModal" class="modal-background">
+  <div class="modal-foreground">
+    <p>You've added this food to your favourites!</p>
+	<p>(feature requires login)</p>
+    <p><span style="font-size: 40px" onclick="closeModal()">&times;</span></p>
+  </div>
+</div>
+
+<script>
+    function showModal() {
+        var modal = document.getElementById("loginModal");
+        modal.style.display = 'block'
+    }
+    function closeModal() {
+        var modal = document.getElementById("loginModal");
+        modal.style.display = "none";
+    }
+</script>

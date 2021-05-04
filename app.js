@@ -4,7 +4,11 @@ const exphbs = require('express-handlebars');
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))	// define where static assets live
 
+const expressValidator = require('express-validator')
+
+
 require('./models');
+const bcrypt = require('bcrypt');
 
 // set the template engine to handlebars
 app.engine('hbs', exphbs({
