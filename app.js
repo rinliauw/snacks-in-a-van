@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
-app.use(express.urlencoded({ extended: true }))
+
+app.use(express.json())   // replaces body-parser
+app.use(express.urlencoded({ extended: true })) // replaces body-parser
 app.use(express.static('public'))	// define where static assets live
 
 require('./models');
@@ -9,7 +11,8 @@ require('./models');
 // set the template engine to handlebars
 app.engine('hbs', exphbs({
     defaultLayout:'main',
-    extname:'hbs'
+    extname:'hbs',
+    helpers: require(__dirname + "/public/js/helpers.js").helpers
 }))
 
 // set the view engine
@@ -21,7 +24,7 @@ const vendorRouter = require('./routes/vendorRouter');
 
 // GET the home page
 app.get('/', (req, res) => {
-    res.send('<h1>Snacks in a Van</h1>')
+    res.render('login')
 })
 
 // Handle the customer requests
