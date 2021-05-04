@@ -1,0 +1,22 @@
+<section id="snacksMenu">
+
+    <form method="post" action="/search">
+        <input type="search" size="10" name="snack" placeholder="Search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    <ul>
+
+        {{#each snacks}}
+
+        <li>
+
+            <img class="browsePage" src="https://source.unsplash.com/{{this.photo}}">
+            <a href="/customer/snacks/{{this._id}}">{{this.name}}</a>
+            <p>${{this.price}}</p>
+        </li>
+
+        {{/each}}
+
+    </ul>
+</section>
