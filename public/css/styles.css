@@ -9,11 +9,11 @@
     --text-small: 16px;
     --font-heading: 'Roboto', sans-serif;
     --font-body: 'Work Sans', cursive;
-    --color-beige: #E3E3E3;
     --color-dark: #24305E;
     --color-purple: #374785;
     --color-blue: #A8D0E6;
-    --color-pink: #F76C6C;
+    --color-pink: #F76C6C; 
+    --color-pinkhover: #f3a9a9;
     --color-yellow: #F8E9A1;
     --color-beige: #e9d6cd;
 }
@@ -21,6 +21,19 @@
 nav{
     display: flex;
     justify-content: center;
+}
+
+a{
+    color: var(--color-dark);
+}
+
+li{
+    padding: 20px
+}
+a:hover{
+    border: 10px;
+    background-color:#dfa167;
+    color: white;
 }
 
 ul{
@@ -92,6 +105,16 @@ body {
     padding: 15px 20px;
 }
 
+#homePage .col1 button:hover{
+    margin-top: 20px;
+    background: #966c45;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 20px;
+    padding: 15px 20px;
+}
+
 #homePage .col1  p {
     flex-basis: 60%;
 }
@@ -144,6 +167,11 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     border: none;
 }
 
+
+#snacksMenu button:hover {
+    background: var(--color-pinkhover)
+}
+
 #snacksMenu .row {
     display: flex;
     flex-direction: row;
@@ -176,6 +204,7 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     transition-duration: 0.3s;
     transition-timing-function: linear;
     transition-delay: 0s;
+    border-radius: 10%;
     width: 250px !important;
     height: 200px;
     vertical-align: middle;
@@ -209,6 +238,9 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     margin-bottom: 15px;
 }
 
+#snacksMenu .itemQuantity{
+    width:15%;
+}
 
 /* Responsive Design */
 
@@ -275,6 +307,8 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 }
 
 /* cart */
+
+
 
 #currentCart h1 {
     text-align: center;
@@ -350,6 +384,16 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     float: right;
 }
 
+
+#currentCart button:hover {
+    border-radius: 12px;
+    background: var(--color-pinkhover);
+    color: var(--color-beige);
+    font-size: var(--text-small);
+    padding: 10px;
+    border: none;
+    float: right;
+}
 
 /* layout for snack details */
 
