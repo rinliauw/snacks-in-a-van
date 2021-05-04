@@ -24,6 +24,7 @@ const vendorRouter = require('./routes/vendorRouter');
 
 // GET the home page
 app.get('/', (req, res) => {
+    res.send('<h1>Snacks in a Van<h1>')
     res.render('login')
 })
 
