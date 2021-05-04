@@ -5,7 +5,45 @@
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 
-    <ul>
+
+    
+    <div class="snacks-menu">
+
+        
+
+        <div class="row">
+
+            {{#each snacks}}
+
+            <div class="snack">
+                <div class="snack-img">
+                    <img src="https://source.unsplash.com/{{this.photo}}">
+                </div>
+
+                <div class="snack-body">
+                    <h2 class="snack-name">
+                        <a href="/customer/snacks/{{this._id}}">{{this.name}}</a>
+                        </p>
+                    </h2>
+
+                    <div class="snack-price">
+                        <span class="price">${{this.price}}</span>
+                    </div>
+
+                </div>
+            
+            <button type="submit">Add to Cart</button>
+
+            </div>
+
+            {{/each}}
+            
+        </div>
+
+        
+
+    </div>
+    {{!-- <ul>
 
         {{#each snacks}}
 
@@ -20,5 +58,5 @@
 
         {{/each}}
 
-    </ul>
+    </ul> --}}
 </section>

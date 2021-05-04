@@ -3,14 +3,17 @@
     --text-big: 36px;
     --text-medium: 22px;
     --text-small: 16px;
+    --text-menu-main: 13px;
+    --text-menu-price: 14px;
     --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Work Sans', cursive;
+    --font-body: 'Work Sans', sans-serif;
     --color-beige: #E3E3E3;
     --color-dark: #24305E;
     --color-purple: #374785;
     --color-blue: #A8D0E6;
     --color-pink: #F76C6C;
     --color-yellow: #F8E9A1;
+    --color-grey: #F6F6F8;
 }
 
 /* elements that are on every page */
@@ -50,6 +53,9 @@ footer p {
     margin-bottom: 0;
 }
 
+div {
+    display: block;
+}
 
 
 /* The login homepage */
@@ -83,26 +89,84 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 }
 
 /* The menu */
-#snacksMenu li {
-    list-style-type: none; /* turn off the bullet points */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
 
 #snacksMenu img {
-    width: 140px;
-    height: 80px;
-    padding: 10px;
+    max-width: 100%;
+    height: auto;
 }
 
 #snacksMenu a {
     color: var(--color-purple);
+    text-decoration: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
-#snacksMenu p {
-    margin-top: 0;
+#snacksMenu button {
+    border-radius: 12px;
+    background: var(--color-pink);
+    color: var(--color-beige);
+    font-size: var(--text-small);
+    padding: 10px;
+    border: none;
+}
+
+#snacksMenu .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#snacksMenu .snack {
+    padding: 20px;
+    margin-top: -1px;
+    margin-bottom: 0;
+    margin-right: -1px;
+
+}
+
+#snacksMenu .snack-img {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: linear;
+    transition-delay: 0s;
+    width: 250px !important;
+    height: 200px;
+    vertical-align: middle;
+    border: 0;
+}
+
+#snacksMenu .snack-body {
+    box-sizing: border-box;
+}
+
+#snacksMenu .snack-name {
+    font-size: var(--text-small);
+    text-transform: uppercase;
+    font-weight: 700; /* bold */
+    font-family: var(--font-heading);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    line-height: 1.1;
+    display: block;
+    margin-block-start: 0.80em;
+    margin-block-end: 0.80em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+#snacksMenu .snack-body {
+    font-size: var(--text-small);
+    font-weight: 400; /* regular */
+    font-family: var(--font-heading);
+    box-sizing: border-box;
+    margin-bottom: 15px;
 }
 
 
@@ -110,8 +174,9 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 
 @media screen and (min-width: 768px) {
 
-    #snacksMenu ul {
-        column-count: 2;
+    #snacksMenu .snack {
+        width: 25%;
+        float: left;
     }
 }
 
