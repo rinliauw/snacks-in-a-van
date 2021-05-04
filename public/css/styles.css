@@ -276,3 +276,57 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     width: 20%;
     padding: 10px;
 }
+
+#currentCart .cart-page {
+    margin: 80px auto;
+}
+
+#currentCart table {
+    width: 60%;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#currentCart th {
+    text-align: left;
+    padding: 5px;
+    background: var(--color-pink);
+    color: var(--color-beige);
+}
+#currentCart td {
+    padding: 10px 5px;
+}
+
+#currentCart .cart-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#currentCart .total-price {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#currentCart .total-price table {
+    border-top: 3px solid;
+    width: 60%;
+}
+
+#currentCart td:last-child {
+    text-align: right;
+}
+
+#currentCart th:last-child {
+    text-align: right;
+}
+
+#currentCart button {
+    border-radius: 12px;
+    background: var(--color-pink);
+    color: var(--color-beige);
+    font-size: var(--text-small);
+    padding: 10px;
+    border: none;
+    float: right;
+}
