@@ -3,7 +3,7 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
     // if not logged in, redirect to login form
-    res.redirect('/user');
+    res.redirect('/customer/getLoginPage');
 }
 
 
