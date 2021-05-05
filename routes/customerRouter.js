@@ -11,6 +11,8 @@ const customerController = require('../controllers/customerController.js')
 
 //handle the GET request to get the home page
 customerRouter.get('/', (res, req) => customerController.getHomePage(res, req))
+customerRouter.get('/login', (res, req) => customerController.getLoginPage(res, req))
+
 
 // handle the GET request to get all snacks
 customerRouter.get('/snacks', snackController.getAllSnacks)

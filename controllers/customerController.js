@@ -14,6 +14,16 @@ const getHomePage = async(req, res) => {
     }
 }
 
+
+//handle request to get login homepage
+const getLoginPage = async(req, res) => {
+    try {
+        res.render('login');
+    } catch (e){
+        console.log(e);
+    }
+}
+
 // handle request to get list of customer
 const getAllCustomers = async (req, res) => {
     try {
@@ -99,5 +109,5 @@ const addItem = async (req, res) => {
 }
 
 module.exports = {
-    getAllCustomers, getOneCustomer, addItem, getHomePage, getCustomerCart
+    getAllCustomers, getOneCustomer, addItem, getHomePage, getCustomerCart, getLoginPage
 }
