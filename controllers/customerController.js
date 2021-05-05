@@ -10,7 +10,7 @@ const expressValidator = require('express-validator');
 const bcrypt = require('bcrypt');
 
 //handle request to get customer homepage
-const getHomePage = async(req, res) => {
+const getStartPage = async(req, res) => {
     try {
         res.render('homepage');
     } catch (e){
@@ -38,10 +38,18 @@ const showLogin = (req, res) => { // show login page
 const getCustomerCart = async(req, res) => {
     try{
         const oneCust = await Customer.findById(req.params.id).populate({path:'cart.snackId', model:'Snack'}).lean()
-        console.log(oneCust.cart)
         if (oneCust){
             const cart = oneCust.cart
-            return res.render('cart', {cart})
+            //console.log(oneCust.cart.length)
+            var total = 0;
+            var totalEach = new Array(cart.length);
+            for (var i = 0; i < cart.length; i++) {
+                var currentItem = cart[i];
+                totalEach[i] = currentItem.snackId.price*currentItem.quantity
+                total+=(currentItem.snackId.price*currentItem.quantity)
+            }
+            
+            return res.render('cart', {cart, total, totalEach})
         } else {
             res.status(404)
             return res.send("Customer is not found in database")
@@ -126,5 +134,5 @@ const saveCart =  async (req, res, cart) => { // get one food, and render it
 }
 
 module.exports = {
-    getAllCustomers, getOneCustomer, addItem, getHomePage, getCustomerCart, saveCart
+    getAllCustomers, getOneCustomer, addItem, getStartPage, getCustomerCart, saveCart, showLogin
 }

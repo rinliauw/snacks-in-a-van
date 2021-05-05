@@ -1,12 +1,77 @@
 {{! view customer order}}
 
 <section id = "currentCart">
-    {{#each cart}}
-    <li>
-        <img class="currentCart" src="https://source.unsplash.com/{{this.snackId.photo}}" alt="hosted by Unsplash">
-        Name:{{this.snackId.name}}
-        Price:{{this.snackId.price}}
-        Quantity:{{this.quantity}}
-    </li>
-    {{/each}}
+    <h1>Cart List</h1>
+    <div class= "cart-page">
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                
+            </tr>
+            {{#each cart}}
+            <tr>
+                <td>
+                    <div class="cart-info">
+                        <img class="currentCart" src="https://source.unsplash.com/{{this.snackId.photo}}" alt="hosted by Unsplash">
+                        <div>
+                            <p>{{this.snackId.name}}</p>
+                            <small>Price: ${{this.snackId.price}}</small>
+                        </div>
+                    </div>
+                </td>
+                <td>{{this.quantity}}</td>
+                  
+            </tr>
+            {{/each}}
+        </table>
+        
+    </div>
+    <div class="total-price">
+        <table>
+            <tr>
+                <td><b>Total Price</b></td>
+                <td>${{total}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button id="myBtn" type="submit">Confirm Order</button></td>
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>Test.</p>
+                    </div>
+                </div>
+            </tr>
+        </table>
+    </div>
+    
 </section>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
