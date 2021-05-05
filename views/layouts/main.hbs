@@ -38,17 +38,34 @@
         document.getElementById("cartform").submit();
         localStorage.clear();
                     
-    }        
+    }
+
+    const hamburgerMenu = document.getElementsByClassName('menu-toggle')[0]
+    const navbarLinks = document.getElementsByClassName('navbar-links')[0]
+
+    hamburgerMenu.addEventListener('click', () => {
+        navbarLinks.classList.toggle('active')
+    })        
 </script>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="/customer">Home</a></li>
-            <li><a href="/customer/snacks">Menu</a></li>
-            <li><a href="/customer/getLoginPage">Login</li></a>
-            <li><a href="javascript:void(0);" onclick="saveItems();">Cart</a></li>
-        </ul>
+    <nav class="navbar">
+        <div class="brand-logo">
+            <a href="/customer">Snacks in a Van</a>
+        </div>
+        <a href="#" class="menu-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+        <div class="navbar-links">
+            <ul>
+                <li><a href="/customer">Home</a></li>
+                <li><a href="/customer/snacks">Menu</a></li>
+                <li><a href="/customer/getLoginPage">Login</li></a>
+                <li><a href="javascript:void(0);" onclick="saveItems();">Cart</a></li>
+            </ul>
+        </div>
     </nav>
     <main>
         <section style="text-align:right;">
