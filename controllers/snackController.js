@@ -19,9 +19,9 @@ const getAllSnacks = async (req, res) => {
 // handle request to get one snack
 const getOneSnack = async(req, res) => {
     try{
-        const desiredSnack = await Snack.findOne({"name":req.params.name})
+        const desiredSnack = await Snack.findOne({"name":req.params.name}).lean()
         if (desiredSnack){
-            return res.send(desiredSnack)
+            return res.render('snackdetails', {"desiredSnack": desiredSnack})
         } else {
             res.status(404)
             return res.send("Snack not found in database")

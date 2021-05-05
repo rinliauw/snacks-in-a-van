@@ -65,7 +65,7 @@ const vendorRouter = require('./routes/vendorRouter');
 
 // GET the home page
 app.get('/', (req, res) => {
-    res.render('login')
+    res.send('<h1>Snacks in a Van<h1>')
 })
 
 // Handle the customer requests
