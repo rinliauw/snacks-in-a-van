@@ -10,9 +10,19 @@ const expressValidator = require('express-validator');
 const bcrypt = require('bcrypt');
 
 //handle request to get customer homepage
-const getStartPage = async(req, res) => {
+const getHomePage = async(req, res) => {
     try {
         res.render('homepage');
+    } catch (e){
+        console.log(e);
+    }
+}
+
+
+//handle request to get login homepage
+const getLoginPage = async(req, res) => {
+    try {
+        res.render('login');
     } catch (e){
         console.log(e);
     }
@@ -27,11 +37,6 @@ const getAllCustomers = async (req, res) => {
         res.status(400)
         return res.send("Database query failed - users could not be found")
     }
-}
-
-//show login page
-const showLogin = (req, res) => { // show login page
-	res.render('login')
 }
 
 // handle request to show current customer's cart
@@ -134,5 +139,5 @@ const saveCart =  async (req, res, cart) => { // get one food, and render it
 }
 
 module.exports = {
-    getAllCustomers, getOneCustomer, addItem, getStartPage, getCustomerCart, saveCart, showLogin
+    getAllCustomers, getOneCustomer, addItem, getHomePage, getCustomerCart, getLoginPage, saveCart
 }
