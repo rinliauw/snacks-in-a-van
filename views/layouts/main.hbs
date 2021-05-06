@@ -29,8 +29,8 @@
         // get the snack object IDs from local storage
         document.getElementById("items").value = JSON.parse(JSON.stringify(localStorage.getItem("current_cart")));
         document.getElementById("qty").value = JSON.parse(JSON.stringify(localStorage.getItem("quantity")));
-        alert( document.getElementById("items").value)
-        alert( document.getElementById("qty").value)
+        //alert( document.getElementById("items").value)
+        //alert( document.getElementById("qty").value)
         
         // clear local storage (WARNING: I am assuming that only my app is using the local storage!!!)
         
@@ -47,9 +47,8 @@
 
 <body>
     <nav class="navbar">
-        <div class="brand-logo">
-            <a href="/customer">Snacks in a Van</a>
-        </div>
+            <a href="/customer"><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></a>
+        
         <a href="#" class="menu-toggle">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -59,17 +58,14 @@
             <ul>
                 <li><a href="/customer">Home</a></li>
                 <li><a href="/customer/snacks">Menu</a></li>
-                <li><a href="/customer/getLoginPage">Login</li></a>
                 <li><a href="javascript:void(0);" onclick="saveItems();">Cart</a></li>
+                <li><a href="/customer/getLoginPage">Login</li></a>
                 <li><a href="/customer/signup">Sign Up</a></li>
                 <li><a href="javascript:void(0);" onclick="saveLogOut();">Logout</a></li>
             </ul>
         </div>
     </nav>
     <main>
-        <section style="text-align:right;">
-            <a href="/customer/getLoginPage">Login</a>&nbsp; | &nbsp;<a href="/customer/getSignUpPage">Sign Up</a>&nbsp; | &nbsp;<a href="javascript:void(0);" onclick="saveCart();">Logout</a>
-        </section>
         {{{body}}}
     </main>
     <!--<footer>

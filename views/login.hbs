@@ -1,24 +1,11 @@
-{{! Code based on that from foodbuddy app, provided by INFO30005 Faculty 2021}}
 <section id="login">
-    
-    <h1>Login</h1>
-    <p>{{message}}</p>
-    {{!Display the "login" screen}}
     <form method="post" action="/customer/login">
-        <label> Email:
-            <input type="email" size="10" name='email' id='email' placeholder="Email" pattern="[\.0-9A-Za-z]+[@]{1}[\.A-Za-z]+">
-        </label>
-        &nbsp;
-        <label> Password:
-            <input type="password" size="10" name='password' id='password' placeholder="Password" pattern="[0-9A-Za-z]+">
-        </label>
-        &nbsp;
-        <input type="submit" value="Login">
+    <div class="container">
+        <h1>LOGIN FORM</h1>
+        <input type="email" size="10" name='email' id='email' placeholder="Email" pattern="[\.0-9A-Za-z]+[@]{1}[\.A-Za-z]+">
+        <input type="password" size="10" name='password' id='password' placeholder="Password" pattern="[0-9A-Za-z]+">
+        <input type="submit" value="Submit">
+        <p>Don't have an account? <a href="/customer/signup">Sign Up</a></p>
+    </div>
     </form>
-    
-
-    {{!Display the "sign up here" link}}
-    <p>Don't have an account?&nbsp;<a href="/customer/signup">Sign Up Here</a></p>
-
 </section>
-

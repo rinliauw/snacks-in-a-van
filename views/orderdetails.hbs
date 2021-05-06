@@ -1,0 +1,27 @@
+<section id="OrderDetails">
+    <h1> Order Status</h1><br>
+    <table>
+        <tr>
+            <th>Order ID</th>
+            <th>Items</th>
+            <th>Order time</th>
+            <th>Fulfilled</th>
+        </tr>
+        {{#each thisOrder}}
+            <tr>
+                <td> {{this._id}}</td>
+                <td> 
+
+                {{#each items}}
+                    <p>Name: {{this.snackId.name}}</p>
+                    <p>Price: ${{this.snackId.price}}</p>
+                    <p>Quantity: {{this.quantity}}</p>
+                {{/each}}
+                </td>
+                <td> {{this.time_ordered}}</td>
+                <td>{{#if this.fulfilled}}Fulfilled{{else}}Outstanding{{/if}}</td>
+            </tr>
+
+        {{/each}}
+        </table>
+</section>
