@@ -1,3 +1,5 @@
+// Code taken from foodbuddy app, provided by INFO30005 Faculty 2021
+
 // middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())

@@ -18,12 +18,12 @@ There will be 2 web apps, one for the customers and one for the vendors.
 
 ## Team Members
 
-| Name 			| Student Number|
-| :---       		|     :---:     |        
+| Name 			        | Student Number|
+| :---       		    |     :---:     |        
 | Georgia Lewis         |  982172    	| 
 | Karina Fitriani Liauw |  1090015     	|  
 | Laurensia Livia Sugito|  1090328     	|   
-| Woo Pei Yi    	|  1064538     	|  
+| Woo Pei Yi    	    |  1064538     	|  
 
 
 ## Technologies
@@ -332,6 +332,12 @@ Body:
     "van": "607d5729aae89387de7663af"
 }
 ```
+## Customer Login Example
+Login details:
+Email: max1234@gmail.com
+Password: max123
+Should redirect to the customer home page if login is successful, otherwise redirect to the customer login page
+
 
 **Task List:**
 

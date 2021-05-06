@@ -1,3 +1,5 @@
+// This contains all of the routes for customer related functions
+
 const express = require('express')
 const passport = require('passport');
 require('../config/passport')(passport);

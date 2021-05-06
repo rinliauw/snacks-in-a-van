@@ -54,7 +54,6 @@ const getCustomerCart = async(req, res) => {
         const oneCust = await Customer.findById(req.params.id).populate({path:'cart.snackId', model:'Snack'}).lean()
         if (oneCust){
             const cart = oneCust.cart
-            //console.log(oneCust.cart.length)
             var total = 0;
             var totalEach = new Array(cart.length);
             for (var i = 0; i < cart.length; i++) {
