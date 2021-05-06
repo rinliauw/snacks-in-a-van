@@ -229,8 +229,9 @@ input[type="submit"]:hover{
     font-size: 15px;
     padding: 15px 10px;
     width: 50%; 
-
 }
+
+
 form input[type$=submit] {  /* submit button */
     margin-top:20px;
     background-color: var(--color-pink);
@@ -744,3 +745,9 @@ button:hover{
     width:200px;
 }
 
+
+#signUp td{
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 2px;
+    font-size: 90%;
+}
