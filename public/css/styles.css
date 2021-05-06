@@ -260,19 +260,7 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     border-radius: 50px;
     border: 2px solid grey;
     background-color: transparent;
-    color: white;
-}
-
-
-#login input {
-    display: block;
-    margin: 40px auto;
-    width: 70%;
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: 2px solid grey;
-    background-color: transparent;
-    color: white;
+    color: black;
 }
 
 #login input[type="submit"]{
@@ -288,30 +276,6 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 
 #login input[type="submit"]:hover{
     background: #966c45;
-
-    margin-top:20px;
-    border: none;
-    outline: none;
-    letter-spacing: .04em;
-    font-size: 15px;
-    padding: 15px 10px;
-    width: 50%; 
-
-}
-#login input[type="submit"]{
-    background: #dfa167;
-    border: none;
-    outline: none;
-    letter-spacing: .04em;
-    font-size: 15px;
-    padding: 15px 10px;
-    width: 50%;
-
-}
-
-#login input[type="submit"]:hover{
-    background: #966c45;
-
     margin-top:20px;
     border: none;
     outline: none;
@@ -638,18 +602,31 @@ p{
     font-family: 'Raleway', sans-serif;
 }
 
+#snackDetails a {
+    font-size: var(--text-small);
+    text-decoration: underline;
+}
+
 #snackDetails p{
     font-size: var(--text-small);
+    margin-top: 10px;
 }
 
 #snackDetails .Price{
-    text-align:center;
+    text-align: center;
     font-size: var(--text-medium);
     text-transform: uppercase;
     font-weight: 700; /* bold */
     font-family: var(--font-heading);
+    margin-top: 30px;
 }
 
+#snackDetails .container {
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    padding: 40px 30px;
+}
 
 #snackDetails .detail{
     text-justify: center;
@@ -659,6 +636,7 @@ p{
     text-align: center;
     font-family:'Orelega One', cursive;
     font-size: 40px;
+    margin-top: 30px;
 }
 
 #snackDetails img {
@@ -667,8 +645,8 @@ p{
 }
 
 #snackDetails input{
-
-    margin-top:20px;
+    margin-top: 20px;
+    margin-bottom: 100px;
     border-radius: 20px;
     background: #b9a48f;
     border: none;
@@ -779,13 +757,6 @@ button:hover{
     width:200px;
 }
 
-
-#signUp td{
-    font-family: 'Raleway', sans-serif;
-    letter-spacing: 2px;
-    font-size: 80%;
-}
-
 #signUp h1{
     text-align: center;
     font-family: 'Orelega One', cursive;
@@ -821,7 +792,7 @@ button:hover{
     border-radius: 50px;
     border: 2px solid grey;
     background-color: transparent;
-    color: white;
+    color: black;
 }
 
 #signUp input[type="submit"]{
