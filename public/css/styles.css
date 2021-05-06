@@ -258,6 +258,9 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     font-size:var(--text-big);
     padding-bottom: 20px;
 }
+#login p{
+    font-size: 15px;
+}
 
 #login .container {
     width: 500px;
@@ -280,6 +283,41 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     color: white;
 }
 
+
+#login input {
+    display: block;
+    margin: 40px auto;
+    width: 70%;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid grey;
+    background-color: transparent;
+    color: white;
+}
+
+#login input[type="submit"]{
+    background: #dfa167;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%;
+
+}
+
+#login input[type="submit"]:hover{
+    background: #966c45;
+
+    margin-top:20px;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%; 
+
+}
 #login input[type="submit"]{
     background: #dfa167;
     border: none;
@@ -323,17 +361,6 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 #login a {
     text-decoration: underline;
     color: var(--color-dark);
-}
-
-/* The sign Up Screen*/
-#signUp h1 {
-    text-align:center;
-    font-family:'Orelega One', cursive;
-    font-size:var(--text-big);
-    padding-bottom: 20px;
-}
-#signUp input {
-    font-size: var(--text-medium);
 }
 
 /* The menu */
@@ -722,10 +749,6 @@ h1{
     letter-spacing: 3px;
 }
 
-#signup td{
-    font-size: 80%;
-}
-
 input[type="submit"]{
     background: #966c45;
     border: none;
@@ -783,6 +806,52 @@ button:hover{
     font-size: 80%;
 }
 
+#signUp .container {
+    width: 600px;
+    height: 700px;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 40px 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+#signUp input {
+    display: block;
+    margin: 40px auto;
+    width: 70%;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid grey;
+    background-color: transparent;
+    color: white;
+}
+
+#signUp input[type="submit"]{
+    background: #dfa167;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%;
+
+}
+
+#signUp input[type="submit"]:hover{
+    background: #966c45;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%; 
+
+}
 
 #OrderDetails {
     font-family: 'Raleway', sans-serif;
