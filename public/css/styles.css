@@ -18,6 +18,9 @@
     --color-beige: #e9d6cd;
 }
 
+body{
+    margin-bottom: 10%;
+}
 a{
     color: var(--color-dark);
     font-family: 'Raleway', sans-serif;
@@ -265,14 +268,60 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 }
 
 /* the login page */
-#login p {
-    text-align: center;
+
+#login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 #login h1{
     text-align: center;
     font-family: 'Orelega One', cursive;
     font-size:var(--text-big);
     padding-bottom: 20px;
+}
+
+#login .container {
+    width: 500px;
+    height: 600px;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 40px 30px;
+}
+
+#login input {
+    display: block;
+    margin: 40px auto;
+    width: 70%;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid grey;
+    background-color: transparent;
+    color: white;
+}
+
+#login input:focus {
+    outline: none;
+}
+
+#login .btn {
+    margin: 0px;
+    border: 0;
+    padding: 10px 30px;
+    border-radius: 50px;
+    background-color: #dfa167;
+    color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+#login a {
+    text-decoration: underline;
+    color: var(--color-dark);
 }
 
 /* The sign Up Screen*/
@@ -459,6 +508,10 @@ p{
 
     #snacksMenu ul {
         column-count: 2;
+    }
+
+    #login .container {
+        width: 300px;
     }
 
 }
@@ -660,26 +713,6 @@ p{
   text-align: center;
   font-family:'Orelega One', cursive;
   font-size: 40px;
-}
-
-
-#login label{
-    text-align: center;
-    font-family: 'Raleway', sans-serif;
-    font-size: 90%;
-  }
-
-
-
-#login .account{
-    font-family: 'Raleway', sans-serif;
-    align: center;
-    font-size: 80%;
-  }
-
-
-#login .signup{
-    font-size: 80%;
 }
 
 h1{

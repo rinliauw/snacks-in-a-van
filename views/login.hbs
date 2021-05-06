@@ -1,23 +1,9 @@
 <section id="login">
-    
-    <h1>Login</h1>
-    <p>{{message}}</p><br>
-    {{!Display the "login" screen}}
-    <form method="post" action="/customer/login">
-        <label> Email:
-            <input type="email" size="10" name='email' id='email' placeholder="Email" pattern="[\.0-9A-Za-z]+[@]{1}[\.A-Za-z]+">
-        </p>
-        &nbsp;<br>
-        <label> Password:
-            <input type="password" size="10" name='password' id='password' placeholder="Password" pattern="[0-9A-Za-z]+">
-        </label>
-        &nbsp;
-        <input type="submit" value="Login">
-    </form>
-    
-
-    {{!Display the "sign up here" button}}<br>
-    <p style="font-size: 80%">Don't have an account?&nbsp;<a href="/customer/signup">Sign Up Here</a>
-    </p>
+    <div class="container">
+        <h1>LOGIN FORM</h1>
+        <input type="email" size="10" name='email' id='email' placeholder="Email" pattern="[\.0-9A-Za-z]+[@]{1}[\.A-Za-z]+">
+        <input type="password" size="10" name='password' id='password' placeholder="Password" pattern="[0-9A-Za-z]+">
+        <button class="btn">Sign In</button>
+        <p>Don't have an account? <a href="/customer/signup">Sign Up</a></p>
+    </div>
 </section>
-
