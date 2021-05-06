@@ -1,8 +1,10 @@
 {{! view customer order}}
 
 <section id = "currentCart">
+    
     <h1>Cart List</h1>
     <div class= "cart-page">
+        {{#if total}}
         <table>
             <tr>
                 <th>Product</th>
@@ -27,8 +29,11 @@
             </tr>
             {{/each}}
         </table>
-        
+        {{else}}
+        <p>Your cart is empty</p>
+        {{/if}}
     </div>
+    {{#if total}}
     <div class="total-price">
         <table>
             <tr>
@@ -42,7 +47,7 @@
             </tr>
         </table>
     </div>
-    
+    {{/if}}
 </section>
 
 <script>
