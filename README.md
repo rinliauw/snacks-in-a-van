@@ -18,12 +18,12 @@ There will be 2 web apps, one for the customers and one for the vendors.
 
 ## Team Members
 
-| Name 			| Student Number|
-| :---       		|     :---:     |        
+| Name 			        | Student Number|
+| :---       		    |     :---:     |        
 | Georgia Lewis         |  982172    	| 
 | Karina Fitriani Liauw |  1090015     	|  
 | Laurensia Livia Sugito|  1090328     	|   
-| Woo Pei Yi    	|  1064538     	|  
+| Woo Pei Yi    	    |  1064538     	|  
 
 
 ## Technologies
@@ -45,6 +45,8 @@ Please create a file named `.env` inside the app folder and copy the database cr
 MONGO_USERNAME = group2
 
 MONGO_PASSWORD = group2
+
+PASSPORT_KEY = group2
 ```
 
 To install the dependencies:
@@ -332,6 +334,12 @@ Body:
     "van": "607d5729aae89387de7663af"
 }
 ```
+## LOGIN DETAILS
+Customer login example details:
+Email: max1234@gmail.com
+Password: max123
+Should redirect to the customer home page if login is successful, otherwise redirect to the customer login page
+
 
 **Task List:**
 

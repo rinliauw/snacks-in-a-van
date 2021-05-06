@@ -192,12 +192,6 @@ footer {
     right: 100px;
     max-width: 50%;
 }
-/* unsure of how to get it to stick to the bottom*/
-#homePage footer {
-    position:static;
-    bottom:0;
-    height:50px;
-}
 
 form {        /* centre the form */
     display: flex;
@@ -212,12 +206,8 @@ form input[type$=text]{
     font-size: var(--text-small);
 }
 
-
-
-form input[type$=submit] {  /* submit button */
+form input[type$=submit]{
     margin-top:20px;
-    background-color: var(--color-pink);
-    border-radius: 20px;
     background: #dfa167;
     border: none;
     outline: none;
@@ -225,17 +215,6 @@ form input[type$=submit] {  /* submit button */
     font-size: 15px;
     padding: 15px 15px;
     width: 50%; 
-}
-
-
-form input [type$=submit]:hover{
-    margin-top: 20px;
-    background: #966c45;
-    border: none;
-    outline: none;
-    letter-spacing: .04em;
-    font-size: 20px;
-    padding: 15px 20px;
 }
 
 

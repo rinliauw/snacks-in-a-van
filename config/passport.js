@@ -1,4 +1,5 @@
-require('dotenv').config()    // for JWT password key
+// Code taken from foodbuddy app, provided by INFO30005 Faculty 2021
+
 
 // used to create our local strategy for authenticating
 // using username and password
@@ -7,11 +8,6 @@ const LocalStrategy = require('passport-local').Strategy;
 // our user model
 const {Customer} = require('../models/snack');
 
-// the following is required IF you wanted to use passport-jwt
-// JSON Web Tokens
-const passportJWT = require("passport-jwt");
-const JwtStrategy = passportJWT.Strategy;
-const ExtractJwt = passportJWT.ExtractJwt;
 
 module.exports = function(passport) {
 
@@ -127,62 +123,4 @@ module.exports = function(passport) {
             });
         }));
 
-    // used to demonstrate JWT
-    let opts = {};
-    // extract token information
-    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-    // key that was used to hash the token
-    opts.secretOrKey = process.env.PASSPORT_KEY;
-
-    // depending on what data you store in your token, setup a strategy
-    // to verify that the token is valid....
-    passport.use('jwt', new JwtStrategy(opts, (jwt_payload, done) => {
-
-        // here I'm simply searching for a user with the email addr
-        // that was added to the token
-        Customer.findOne({'email':jwt_payload.body._id}, (err, user) => {
-
-            if(err){
-                return done(err, false);
-            }
-
-            if(user){
-                return done(null, user);
-            } else {
-                return done(null, false);
-            }
-        });
-    }));
-
-    //Create a passport middleware to handle user login
-    passport.use('login', new LocalStrategy({
-        usernameField : 'email',
-        passwordField : 'password'
-    }, async (email, password, done) => {
-        try {
-            //Find the user associated with the email provided by the user
-            Customer.findOne({ 'email' :  email }, function(err, user) {
-
-                if (err)
-                    return done(err);
-                if (!user)
-                    return done(null, false, {message: 'No user found.'});
-
-                if (!user.validPassword(password))
-                    return done(null, false, {message: 'Oops! Wrong password.'});
-
-
-                else {
-                    return done(null, user, {message: 'Login successful'});
-                }
-            });
-        } catch (error) {
-            return done(error);
-        }
-    }));
-
-
-};
-
-
-
+}

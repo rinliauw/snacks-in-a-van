@@ -8,7 +8,6 @@ app.use(express.static('public'))	// define where static assets live
 
 const cors = require('cors');
 const session = require('express-session');
-const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
 const flash=require('connect-flash-plus');
 
@@ -24,28 +23,28 @@ const bcrypt = require('bcrypt');
 app.use(cors({
     credentials: true, // add Access-Control-Allow-Credentials to header
     origin: "http://localhost:3030" 
-  }));
+}));
   
   
-  // setup a session store signing the contents using the secret key
-  app.use(session({ secret: process.env.PASSPORT_KEY,
-    resave: true,
-    saveUninitialized: true
-   }));
-  
-  //middleware that's required for passport to operate
-  app.use(passport.initialize());
-  
-  // middleware to store user object
-  app.use(passport.session());
-  
-  // use flash to store messages
-  app.use(flash());
-  
-  // we need to add the following line so that we can access the 
-  // body of a POST request as  using JSON like syntax
-  app.use(express.urlencoded({ extended: true })) 
-  
+// setup a session store signing the contents using the secret key
+app.use(session({ secret: process.env.PASSPORT_KEY,
+resave: true,
+saveUninitialized: true
+}));
+
+//middleware that's required for passport to operate
+app.use(passport.initialize());
+
+// middleware to store user object
+app.use(passport.session());
+
+// use flash to store messages
+app.use(flash());
+
+// we need to add the following line so that we can access the 
+// body of a POST request as  using JSON like syntax
+app.use(express.urlencoded({ extended: true })) 
+
 
 
 
@@ -63,9 +62,9 @@ app.set('view engine', 'hbs')
 const customerRouter = require('./routes/customerRouter');
 const vendorRouter = require('./routes/vendorRouter');
 
-// GET the home page
+// GET a main page that has links to the customer and vendor apps
 app.get('/', (req, res) => {
-    res.send('<h1>Snacks in a Van</h1>')
+    res.send('<h1>Snacks in a Van</h1><p><a href="/customer">CUSTOMERS<\a><\p><p><a href="/vendor">VENDORS<\a><\p>');
 })
 
 // Handle the customer requests
