@@ -14,6 +14,9 @@ const snackController = require('../controllers/snackController.js')
 // require the user controller
 const customerController = require('../controllers/customerController.js')
 
+// require the order controller
+const orderController = require('../controllers/orderController.js')
+
 //handle the GET request to get the home page
 customerRouter.get('/', (res, req) => customerController.getHomePage(res, req))
 customerRouter.get('/getLoginPage', (res, req) => customerController.getLoginPage(res, req))
@@ -25,7 +28,11 @@ customerRouter.get('/snacks', snackController.getAllSnacks)
 //handle the GET request to get the details of one snack
 customerRouter.get('/snacks/:name', snackController.getOneSnack)
 
+//handle the GET request to get the customer's cart
 customerRouter.get('/cart', customerController.getCustomerCart2)
+
+//handle the GET request to get customer order history
+customerRouter.get('/order-details', orderController.confirmOrder)
 
 // POST login form -- authenticate user
 customerRouter.post('/login', passport.authenticate('local-login', {
