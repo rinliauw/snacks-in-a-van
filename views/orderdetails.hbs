@@ -1,0 +1,12 @@
+<section>
+    {{#each thisOrder}}
+        <p>Order ID: {{this._id}}</p>
+        <p>Items: {{this.items}}</p>
+        <p>Order time: {{this.time_ordered}}</p>
+        <p>Fulfilled: {{this.fulfilled}}</p>
+        <p>Picked Up: {{this.picked_up}}</p>
+        <p>Discount: {{this.discount}}</p>
+        <p>Van: Not Yet Applied</p>
+
+    {{/each}}
+</section>

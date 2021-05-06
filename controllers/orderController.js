@@ -2,6 +2,9 @@ const mongoose = require("mongoose")
 
 const Order = mongoose.model("Order")
 const Van = mongoose.model("Van")
+const Customer = mongoose.model("Customer")
+const customerOrder = mongoose.model("customerOrder")
+const startOrder = mongoose.model("startOrder")
 
 // handle request to get all outstanding orders (not fulfilled) with a van name
 // show from the most recent
@@ -39,6 +42,45 @@ const markOrderAsFulfilled = async (req, res) => {
     }
 }
 
+const confirmOrder = async (req, res) => {
+    console.log("confirmorder")
+    try {
+        //find the customer
+        const oneCust = await Customer.findOne( {email: req.session.email} ).lean()
+        console.log(oneCust)
+        const oneCart = oneCust.cart
+        const newOrder = new customerOrder({customer: oneCust._id})
+        
+        //make order outstanding
+        newOrder.fulfilled = false;
+        newOrder.picked_up = false;
+        newOrder.discount = false;
+        
+        
+        for(var i=0; i<oneCart.length; i++) {
+            
+            var newItem = new startOrder({snackId: oneCart[i].snackId, quantity: oneCart[i].quantity})
+            
+            newOrder.items.push(newItem)
+        }
+        console.log("finish for loop")
+        
+        newOrder.save()
+        console.log(newOrder)
+        Customer.updateOne({_id: oneCust._id}, { $set: { cart: [] }}, function(err, affected){
+            console.log('affected: ', affected);
+        });
+
+        const thisOrder = await customerOrder.find({customer: oneCust._id}).lean()
+        
+        return res.render('orderdetails', {"thisOrder": thisOrder})
+    } catch (e) {     // error occurred
+        res.status(400)
+        return res.send("Database query failed")
+    }
+}
+
+
 module.exports = {
-    getOrderWithVanName, markOrderAsFulfilled
+    getOrderWithVanName, markOrderAsFulfilled, confirmOrder,
 }
