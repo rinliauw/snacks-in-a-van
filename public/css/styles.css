@@ -107,9 +107,6 @@ footer {
     padding: 1rem;
 }
 
-.navbar-links li:hover {
-    color: var(--color-purple);
-}
 
 .menu-toggle {
     position: absolute;
@@ -132,7 +129,7 @@ footer {
 /* The login homepage */
 
 #homePage .col1{
-    position: absolute;
+    position:relative;
     top: 27vh;
     left: 10%;
     width: 33%;
@@ -408,38 +405,23 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 
 /* Responsive Design */
 
-@media screen and (max-width: 1000px) {
-    #homePage .col2 img {
-        width: 100%;
-        right: -20rem;
-        position: fixed; 
-        top: 120px;
-        /* right: 100px; */
-        max-width: 100%;
-        z-index: -1;
-    }
-    
-    #homePage .col2 h1 {
-        size: 50px;
-    }
-}
 
 
 @media screen and (max-width: 700px) {
     #homePage .col2 img {
         width: 100%;
-        position: fixed;
+        position: sticky;
         right: 0rem;
         /* position: fixed; */
-        top: 17rem;
-        left: 100px;
+        top: 0px;
+        left: 0px;
         max-width: 100%;
         z-index: -1;
     }
     
     #homePage .col1 {
-        position: absolute;
-        top: 27vh;
+        position: relative;
+        top: 13vh;
         left: 10%;
         width: 63%;
     }
@@ -451,7 +433,25 @@ p{
 
 
 @media screen and (max-width: 768px) {
-
+    @media screen and (max-width: 1000px) {
+        #homePage .col2 img {
+            width: 100%;
+            right: -20rem;
+            position: sticky; 
+            top: 120px;
+            /* right: 100px; */
+            max-width: 100%;
+            z-index: -1;
+        }
+        
+        #homePage .col1 {
+            position: relative;
+            top: 13vh;
+            left: 10%;
+            width: 63%;
+        }
+    }
+    
     .navbar {
         flex-direction: column;
         align-items: flex-start;    
