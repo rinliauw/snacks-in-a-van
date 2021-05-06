@@ -10,11 +10,15 @@
         {{#each thisOrder}}
             <tr>
                 <td> {{this._id}}</td>
-                <td> {{this.items}}</td>
+                <td> 
+                {{#each items}}
+                    {{this.snackId}}
+                {{/each}}
+                </td>
                 <td> {{this.time_ordered}}</td>
                 <td>{{#if this.fulfilled}}Fulfilled{{else}}Outstanding{{/if}}</td>
             </tr>
 
         {{/each}}
-        </table><
+        </table>
 </section>
