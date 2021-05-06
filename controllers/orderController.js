@@ -49,6 +49,10 @@ const confirmOrder = async (req, res) => {
         const oneCust = await Customer.findOne( {email: req.session.email} ).lean()
         console.log(oneCust)
         const oneCart = oneCust.cart
+        if(oneCart.length === 0) {
+            const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
+            return res.render('orderdetails', {"thisOrder": thisOrder})
+        }
         const newOrder = new customerOrder({customer: oneCust._id})
         
         //make order outstanding
@@ -65,9 +69,9 @@ const confirmOrder = async (req, res) => {
         }
         console.log("finish for loop")
         
-        newOrder.save()
+        await newOrder.save()
         console.log(newOrder)
-        Customer.updateOne({_id: oneCust._id}, { $set: { cart: [] }}, function(err, affected){
+        await Customer.updateOne({_id: oneCust._id}, { $set: { cart: [] }}, function(err, affected){
             console.log('affected: ', affected);
         });
 
