@@ -20,6 +20,8 @@
 
 a{
     color: var(--color-dark);
+    font-family: 'Raleway', sans-serif;
+
 }
 section {
     padding-right: 10px;
@@ -293,6 +295,16 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 
 #snacksMenu a {
     color: var(--color-purple);
+    text-decoration: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+
+
+#snacksMenu a:hover {
+    color: #888;
     text-decoration: none;
     background-color: transparent;
     box-sizing: border-box;
