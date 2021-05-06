@@ -140,6 +140,7 @@ footer {
 #homePage .col1 h1{
     font-size: 60px;
     font-family: 'Orelega One', cursive;
+    text-align: left;
 }
 
 #homePage .col1 hr{
@@ -205,13 +206,41 @@ form input[type$=text]{
     font-size: var(--text-small);
 }
 
+
+input[type="submit"]{
+    background: #966c45;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 20em;
+
+}
+
+input[type="submit"]:hover{
+    background: #966c45;
+
+    margin-top:20px;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%; 
+
+}
 form input[type$=submit] {  /* submit button */
-    background-color: var(--color-pink);
+    margin-top:20px;
     border-radius: 20px;
-    margin-bottom: 1%;
-    width: 20%;
-    height:auto;
-    font-size: var(--text-medium);
+    background: #dfa167;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 15px;
+    width: 50%; 
+
 }
 
 form span.bigScreen {   /* on small screens, hide some of the wording */
@@ -266,8 +295,8 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     background: var(--color-pink);
     color: var(--color-beige);
     font-size: var(--text-small);
-    padding: 10px;
     border: none;
+    width: 5px;
 }
 
 
@@ -383,7 +412,12 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
         width: 63%;
     }
 }
-  
+
+p{
+    text-align: center;
+}
+
+
 @media screen and (max-width: 768px) {
 
     .navbar {
@@ -528,6 +562,28 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 
 /* layout for snack details */
 
+#snackDetails .Price{
+    text-align:center;
+    letter-spacing: 2px;
+    font-size: var(--text-medium);
+    text-transform: uppercase;
+    font-weight: 700; /* bold */
+    font-family: 'Raleway', sans-serif;
+}
+
+#snackDetails p{
+    font-size: var(--text-small);
+}
+
+#snackDetails .Price{
+    text-align:center;
+    font-size: var(--text-medium);
+    text-transform: uppercase;
+    font-weight: 700; /* bold */
+    font-family: var(--font-heading);
+}
+
+
 #snackDetails .detail{
     text-justify: center;
 }
@@ -539,8 +595,20 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 }
 
 #snackDetails img {
-    width: 40%;
+    width: 350px;
     border-radius: 50%;
+}
+
+#snackDetails input{
+
+    margin-top:20px;
+    border-radius: 20px;
+    background: #b9a48f;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 15px;
 }
 
 /* The Modal (background) */
@@ -581,3 +649,67 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     text-decoration: none;
     cursor: pointer;
   }
+
+#login h1{
+  text-align: center;
+  font-family:'Orelega One', cursive;
+  font-size: 40px;
+}
+
+
+#login label{
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 90%;
+  }
+
+
+
+#login .account{
+    font-family: 'Raleway', sans-serif;
+    align: center;
+    font-size: 80%%;
+  }
+
+
+#login .signup{
+    font-size: 80%;
+}
+
+h1{
+    font-family:'Orelega One', cursive;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+#signup td{
+    font-size: 80%;
+}
+
+
+button{
+
+    margin-top:20px;
+    border-radius: 20px;
+    background: #dfa167;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 15px;
+    width: 200px; 
+}
+
+button:hover{
+
+    margin-top:20px;
+    border-radius: 20px;
+    background: #966c45;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 15px;
+    width:200px;
+}
+
