@@ -24,6 +24,7 @@
             thisQuantity = document.getElementById("quantity").value;
 
             currentCart.push(thisItem);
+            currentQuantity.push(thisQuantity);
             localStorage.setItem("current_cart", JSON.stringify(currentCart));
             localStorage.setItem("quantity", JSON.stringify(currentQuantity));
             
