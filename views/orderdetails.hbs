@@ -12,7 +12,9 @@
                 <td> {{this._id}}</td>
                 <td> 
                 {{#each items}}
-                    {{this.snackId}}
+                    <p>Name: {{this.snackId.name}}</p>
+                    <p>Price: ${{this.snackId.price}}</p>
+                    <p>Quantity: {{this.quantity}}</p>
                 {{/each}}
                 </td>
                 <td> {{this.time_ordered}}</td>

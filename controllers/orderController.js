@@ -71,7 +71,7 @@ const confirmOrder = async (req, res) => {
             console.log('affected: ', affected);
         });
 
-        const thisOrder = await customerOrder.find({customer: oneCust._id}).lean()
+        const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
         
         return res.render('orderdetails', {"thisOrder": thisOrder})
     } catch (e) {     // error occurred
