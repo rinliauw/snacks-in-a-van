@@ -235,10 +235,7 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     text-align: center;
     font-family: 'Orelega One', cursive;
     font-size:var(--text-big);
-    padding-bottom: 20px;
-}
-#login p{
-    font-size: 15px;
+    padding-bottom: 30px;
 }
 
 #login .container {
@@ -253,25 +250,14 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 
 #login input {
     display: block;
-    margin: 40px auto;
+    margin: 10px auto;
     width: 70%;
     padding: 10px 20px;
     border-radius: 50px;
     border: 2px solid grey;
     background-color: transparent;
-    color: white;
-}
-
-
-#login input {
-    display: block;
-    margin: 40px auto;
-    width: 70%;
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: 2px solid grey;
-    background-color: transparent;
-    color: white;
+    color: black;
+    margin-bottom: 20px;
 }
 
 #login input[type="submit"]{
@@ -282,35 +268,16 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     font-size: 15px;
     padding: 15px 10px;
     width: 50%;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
 
+#login p {
+    font-size: var(--text-small);
 }
 
 #login input[type="submit"]:hover{
     background: #966c45;
-
-    margin-top:20px;
-    border: none;
-    outline: none;
-    letter-spacing: .04em;
-    font-size: 15px;
-    padding: 15px 10px;
-    width: 50%; 
-
-}
-#login input[type="submit"]{
-    background: #dfa167;
-    border: none;
-    outline: none;
-    letter-spacing: .04em;
-    font-size: 15px;
-    padding: 15px 10px;
-    width: 50%;
-
-}
-
-#login input[type="submit"]:hover{
-    background: #966c45;
-
     margin-top:20px;
     border: none;
     outline: none;
@@ -340,6 +307,13 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 #login a {
     text-decoration: underline;
     color: var(--color-dark);
+}
+
+#login label {
+    display: block;
+    margin-bottom: 0;
+    margin-top: 5px;
+    font-size: smaller;
 }
 
 /* The menu */
@@ -637,18 +611,31 @@ p{
     font-family: 'Raleway', sans-serif;
 }
 
+#snackDetails a {
+    font-size: var(--text-small);
+    text-decoration: underline;
+}
+
 #snackDetails p{
     font-size: var(--text-small);
+    margin-top: 10px;
 }
 
 #snackDetails .Price{
-    text-align:center;
+    text-align: center;
     font-size: var(--text-medium);
     text-transform: uppercase;
     font-weight: 700; /* bold */
     font-family: var(--font-heading);
+    margin-top: 30px;
 }
 
+#snackDetails .container {
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    padding: 40px 30px;
+}
 
 #snackDetails .detail{
     text-justify: center;
@@ -658,6 +645,7 @@ p{
     text-align: center;
     font-family:'Orelega One', cursive;
     font-size: 40px;
+    margin-top: 30px;
 }
 
 #snackDetails img {
@@ -666,8 +654,8 @@ p{
 }
 
 #snackDetails input{
-
-    margin-top:20px;
+    margin-top: 20px;
+    margin-bottom: 100px;
     border-radius: 20px;
     background: #b9a48f;
     border: none;
@@ -778,11 +766,11 @@ button:hover{
     width:200px;
 }
 
-
-#signUp td{
-    font-family: 'Raleway', sans-serif;
-    letter-spacing: 2px;
-    font-size: 80%;
+#signUp h1{
+    text-align: center;
+    font-family: 'Orelega One', cursive;
+    font-size:var(--text-big);
+    padding-bottom: 30px;
 }
 
 #signUp .container {
@@ -797,17 +785,23 @@ button:hover{
     margin-right: auto;
 }
 
-
+#signUp label {
+    display: block;
+    margin-bottom: 0;
+    margin-top: 5px;
+    font-size: smaller;
+}
 
 #signUp input {
     display: block;
-    margin: 40px auto;
+    margin: 10px auto;
+    margin-bottom: 30px; 
     width: 70%;
     padding: 10px 20px;
     border-radius: 50px;
     border: 2px solid grey;
     background-color: transparent;
-    color: white;
+    color: black;
 }
 
 #signUp input[type="submit"]{
@@ -818,7 +812,7 @@ button:hover{
     font-size: 15px;
     padding: 15px 10px;
     width: 50%;
-
+    margin-top: 50px;
 }
 
 #signUp input[type="submit"]:hover{
