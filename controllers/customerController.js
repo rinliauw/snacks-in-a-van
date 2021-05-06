@@ -232,5 +232,5 @@ const saveAfterLogOut =  async (req, res, logoutitems, logoutqty) => {
 }
 
 module.exports = {
-    getAllCustomers, getOneCustomer, getCustomerCart2, addItem, getHomePage, getCustomerCart, getLoginPage, saveCart, saveAfterLogOut
+    getAllCustomers, getOneCustomer, getSignUpPage, getCustomerCart2, addItem, getHomePage, getCustomerCart, getLoginPage, saveCart, saveAfterLogOut
 }
