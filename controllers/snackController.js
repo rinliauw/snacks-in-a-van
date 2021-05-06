@@ -21,7 +21,7 @@ const getOneSnack = async(req, res) => {
     try{
         const desiredSnack = await Snack.findOne({"name":req.params.name}).lean()
         if (desiredSnack){
-            return res.render('snackdetails', {"desiredSnack": desiredSnack})
+            return res.render('snackdetails', {"desiredSnack": desiredSnack, "loggedin": req.isAuthenticated()})
         } else {
             res.status(404)
             return res.send("Snack not found in database")

@@ -25,6 +25,8 @@ customerRouter.get('/snacks', snackController.getAllSnacks)
 //handle the GET request to get the details of one snack
 customerRouter.get('/snacks/:name', snackController.getOneSnack)
 
+customerRouter.get('/cart', customerController.getCustomerCart2)
+
 // POST login form -- authenticate user
 customerRouter.post('/login', passport.authenticate('local-login', {
     successRedirect : '/customer', // redirect to the homepage
@@ -42,10 +44,30 @@ customerRouter.post('/signup', passport.authenticate('local-signup', {
 // LOGOUT
 customerRouter.post('/logout', function(req, res) {
     // save the favourites
-    customerController.saveCart(req,res,req.body.cart)
+    customerController.saveAfterLogOut(req,res,req.body.logoutitems, req.body.logoutqty)
     req.logout();
     req.flash('');
     res.redirect('/customer/');
+});
+
+// GET - show the signup form to the user
+// http:localhost:5000/user/signup
+customerRouter.get("/signup", (req, res) => {
+    res.render('signup');
+});
+
+// POST - user submits the signup form -- signup a new user
+// http:localhost:5000/user/signup
+customerRouter.post('/signup', passport.authenticate('local-signup', {
+    successRedirect : '/customer', // redirect to the homepage
+    failureRedirect : '/customer/signup/', // redirect to signup page
+    failureFlash : true // allow flash messages
+}));
+
+// SHOPPING CART
+customerRouter.post('/cart', async function(req, res) {
+    await customerController.saveCart(req,res,req.body.items, req.body.qty)
+    res.redirect('/customer/cart');
 });
 
 //handle the GET request to get the home page

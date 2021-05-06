@@ -2,5 +2,33 @@
 
 <h1> {{desiredSnack.name}} </h1>
 <center><img src="https://source.unsplash.com/{{desiredSnack.photo}}" alt="hosted by Unsplash"></center>
+<h2> {{desiredSnack.price}}</h2>
+<p id="snackid" hidden>{{desiredSnack._id}}</p>
+{{#if loggedin}}<label for="quantity">Quantity (between 1 and 50):</label>
+<input type="number" id="quantity" name="quantity" min="1" max="50">
+<button onclick="toLocalStorage()" type="submit">Add to Cart</button>
+{{else}}<p>Please Log In to Order</p>
+{{/if}}
+<script>
+    function toLocalStorage() {
+        // create a new Array if it does not exist and put Snack ID in it.
+        if (localStorage.getItem("current_cart") === null){
+            localStorage.setItem("current_cart", JSON.stringify([document.getElementById("snackid").innerHTML]))
+            localStorage.setItem("quantity", JSON.stringify([document.getElementById("quantity").value]))
+        }
+        else{ // get list of Snacks in localStorage
+            currentCart = JSON.parse(localStorage.getItem("current_cart"));
+            currentQuantity = JSON.parse(localStorage.getItem("quantity"));
+            thisItem = document.getElementById("snackid").innerHTML;
+            thisQuantity = document.getElementById("quantity").value;
+
+            currentCart.push(thisItem);
+            localStorage.setItem("current_cart", JSON.stringify(currentCart));
+            localStorage.setItem("quantity", JSON.stringify(currentQuantity));
+            
+        }
+        
+    }
+</script>
 
 </section>

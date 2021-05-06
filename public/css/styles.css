@@ -18,11 +18,6 @@
     --color-beige: #e9d6cd;
 }
 
-nav{
-    display: flex;
-    justify-content: center;
-}
-
 a{
     color: var(--color-dark);
 }
@@ -76,6 +71,62 @@ footer {
     bottom:0;
     height:50px;
     padding-top:50px
+}
+
+/* top navigation bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+    background-color: transparent;
+}
+
+.brand-logo a {
+    font-size: 1.5rem;
+    margin: 0.5rem;
+}
+
+.navbar-links {
+    height: 100%;
+}
+
+.navbar-links ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    list-style: none;
+}
+
+.navbar-links li a {
+    display: block;
+    text-decoration: none;
+    padding: 1rem;
+}
+
+.navbar-links li:hover {
+    color: var(--color-purple);
+}
+
+.menu-toggle {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--color-dark);
+    border-radius: 10px;
 }
 
 /* The login homepage */
@@ -348,7 +399,7 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 
 /* Responsive Design */
 
-  @media screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     #homePage .col2 img {
         width: 100%;
         right: -20rem;
@@ -362,10 +413,10 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     #homePage .col2 h1 {
         size: 50px;
     }
-  }
+}
 
 
-  @media screen and (max-width: 700px) {
+@media screen and (max-width: 700px) {
     #homePage .col2 img {
         width: 100%;
         position: fixed;
@@ -383,14 +434,44 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
         left: 10%;
         width: 63%;
     }
-  }
+}
   
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;    
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .navbar-links {
+        display: none;
+        width: 100%;
+    }
+
+    .navbar-links ul {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .navbar-links ul li {
+        text-align: center;
+    }
+
+    .navbar-links ul li a {
+        padding: 0.5rem 1rem;
+    }
+    
+    .navbar-links.active {
+        display: flex;
+    }
 
     #snacksMenu ul {
         column-count: 2;
     }
-
 
 }
 
@@ -411,8 +492,6 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 }
 
 /* cart */
-
-
 
 #currentCart h1 {
     text-align: center;

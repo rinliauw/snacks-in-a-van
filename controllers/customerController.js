@@ -90,7 +90,30 @@ const getOneCustomer = async(req, res) => {
     }
 }
 
-
+const getCustomerCart2 = async(req, res) => {
+    try{
+        let oneCust = await Customer.findOne( {email: req.session.email} ).populate({path:'cart.snackId', model:'Snack'}).lean()
+        
+        console.log(oneCust.cart)
+        if (oneCust){
+            const cart = oneCust.cart
+            var total = 0;
+            var totalEach = new Array(cart.length);
+            for (var i = 0; i < cart.length; i++) {
+                var currentItem = cart[i];
+                totalEach[i] = currentItem.snackId.price*currentItem.quantity
+                total+=(currentItem.snackId.price*currentItem.quantity)
+            }
+            return res.render('cart', {cart, total, totalEach})
+        } else {
+            res.status(404)
+            return res.send("Customer is not found in database")
+        }
+    } catch (e){
+        res.status(400)
+        return res.send("Database query failed - this customer could not be found")
+    }
+}
 
 //handle request to add a snack to a customer cart
 const addItem = async (req, res) => {
@@ -122,25 +145,86 @@ const addItem = async (req, res) => {
     }
 }
 
-const saveCart =  async (req, res, cart) => { // get one food, and render it
+
+const saveCart =  async (req, res, items, qty) => {
+    
 	try {
 		// get the user whose email is stored in the session -- user is logged in
-		// and that we are saving at least one favourite food
-		if(req.session.email && cart.length > 0){
+		// and that we are saving at least one item
+		if(req.session.email && items.length > 0){
 			// find user in database	
-			let customer = await Customer.findOne( {email: req.session.email} )
+			let user = await Customer.findOne( {email: req.session.email} )
 			
-			// create a list of Favourites
-			cart = JSON.parse(cart)
-			cartArray = []
-			for (let i = 0; i < cart.length; ++i) {                
-				let snackid = cart[i].replace(/[\\]"/g, '');;
-				snack = await Snack.findOne( {_id: snackid} ).lean()
-				cartArray.push(snack);			
+			
+			items = JSON.parse(items)
+            qty = JSON.parse(qty)
+			itemsArray = []
+            
+            
+			for (let i = 0; i < items.length; ++i) {                
+				let snackid = items[i].replace(/[\\]"/g, '');;
+                let snackqty = qty[i].replace(/[\\]"/g, '');;
+                var found = 0;
+                for(let j=0; j < user.cart.length; j++) {
+                    
+                    if(snackid === user.cart[j].snackId.toString()) {
+                        //overwrite the quantity if the same item is found in db
+                        user.cart[j].quantity = snackqty;
+                        found = 1;
+                        break;
+                    }
+                }
+				//no same item found
+                if(!found) {
+                    user.cart.push({snackId:snackid, quantity:snackqty});
+				    itemsArray.push({snackId:snackid});
+                }			
 			}
-			// save user's favourite foods to the database
-			customer.cart = cartArray		
-			customer.save()
+			// save user's current cart to db
+            	
+			user.save()
+		}
+	} catch (err) {
+		console.log(err)
+	}
+}
+
+const saveAfterLogOut =  async (req, res, logoutitems, logoutqty) => {
+    
+	try {
+		// get the user whose email is stored in the session -- user is logged in
+		// and that we are saving at least one item
+		if(req.session.email && logoutitems.length > 0){
+			// find user in database	
+			let user = await Customer.findOne( {email: req.session.email} )
+			
+			
+			logoutitems = JSON.parse(logoutitems)
+            logoutqty = JSON.parse(logoutqty)
+			itemsArray = []
+            
+            
+			for (let i = 0; i < logoutitems.length; ++i) {                
+				let snackid = logoutitems[i].replace(/[\\]"/g, '');;
+                let snackqty = logoutqty[i].replace(/[\\]"/g, '');;
+                var found = 0;
+                for(let j=0; j < user.cart.length; j++) {
+                    
+                    if(snackid === user.cart[j].snackId.toString()) {
+                        user.cart[j].quantity = snackqty;
+                        found = 1;
+                        break;
+                    }
+                }
+				
+                if(!found) {
+                    user.cart.push({snackId:snackid, quantity:snackqty});
+				    itemsArray.push({snackId:snackid});
+                }			
+			}
+			// save user's current cart to db
+            	
+			user.save()
 		}
 	} catch (err) {
 		console.log(err)
@@ -148,5 +232,5 @@ const saveCart =  async (req, res, cart) => { // get one food, and render it
 }
 
 module.exports = {
-    getAllCustomers, getOneCustomer, addItem, getHomePage, getCustomerCart, getSignUpPage, getLoginPage, saveCart
+    getAllCustomers, getOneCustomer, getCustomerCart2, addItem, getHomePage, getCustomerCart, getLoginPage, saveCart, saveAfterLogOut
 }
