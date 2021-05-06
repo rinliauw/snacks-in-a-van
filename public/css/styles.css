@@ -278,7 +278,6 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 
 #login input[type="submit"]:hover{
     background: #966c45;
-    margin-top:20px;
     border: none;
     outline: none;
     letter-spacing: .04em;
