@@ -33,8 +33,11 @@ customerRouter.get('/snacks/:name', snackController.getOneSnack)
 //handle the GET request to get the customer's cart
 customerRouter.get('/cart', customerController.getCustomerCart2)
 
-//handle the GET request to get customer order history
+//handle the GET request to get customer order details
 customerRouter.get('/order-details', orderController.confirmOrder)
+
+//handle the GET request to get customer order history
+customerRouter.get('/order-history', orderController.viewOrderHistory)
 
 // POST login form -- authenticate user
 customerRouter.post('/login', passport.authenticate('local-login', {

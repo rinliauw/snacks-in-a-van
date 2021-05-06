@@ -96,7 +96,22 @@ const confirmOrder = async (req, res) => {
     }
 }
 
+const viewOrderHistory = async (req, res) => {
+    console.log("view order history")
+    try {
+        //find the customer
+        const oneCust = await Customer.findOne( {email: req.session.email} ).lean()
+        
+        const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
+        
+        return res.render('orderhistory', {"thisOrder": thisOrder})
+    } catch (e) {     // error occurred
+        res.status(400)
+        return res.send("Database query failed")
+    }
+}
+
 
 module.exports = {
-    getOrderWithVanName, markOrderAsFulfilled, confirmOrder,
+    getOrderWithVanName, markOrderAsFulfilled, confirmOrder, viewOrderHistory
 }
