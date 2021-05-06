@@ -45,6 +45,8 @@ Please create a file named `.env` inside the app folder and copy the database cr
 MONGO_USERNAME = group2
 
 MONGO_PASSWORD = group2
+
+PASSPORT_KEY = group2
 ```
 
 To install the dependencies:
