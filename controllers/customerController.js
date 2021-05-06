@@ -28,6 +28,15 @@ const getLoginPage = async(req, res) => {
     }
 }
 
+//handle request to get signup page
+const getSignUpPage = async(req, res) => {
+    try {
+        res.render('signup');
+    } catch (e){
+        console.log(e);
+    }
+}
+
 // handle request to get list of customer
 const getAllCustomers = async (req, res) => {
     try {
@@ -223,5 +232,5 @@ const saveAfterLogOut =  async (req, res, logoutitems, logoutqty) => {
 }
 
 module.exports = {
-    getAllCustomers, getOneCustomer, getCustomerCart2, addItem, getHomePage, getCustomerCart, getLoginPage, saveCart, saveAfterLogOut
+    getAllCustomers, getOneCustomer, getSignUpPage, getCustomerCart2, addItem, getHomePage, getCustomerCart, getLoginPage, saveCart, saveAfterLogOut
 }

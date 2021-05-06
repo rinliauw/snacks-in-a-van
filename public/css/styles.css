@@ -70,6 +70,7 @@ footer {
     width:100%;
     bottom:0;
     height:50px;
+    padding-top:50px
 }
 
 /* top navigation bar */
@@ -232,6 +233,7 @@ input[type="submit"]:hover{
 }
 form input[type$=submit] {  /* submit button */
     margin-top:20px;
+    background-color: var(--color-pink);
     border-radius: 20px;
     background: #dfa167;
     border: none;
@@ -240,8 +242,20 @@ form input[type$=submit] {  /* submit button */
     font-size: 15px;
     padding: 15px 15px;
     width: 50%; 
-
 }
+
+
+form input [type$=submit]:hover{
+    margin-top: 20px;
+    background: #966c45;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 20px;
+    padding: 15px 20px;
+}
+
+
 
 form span.bigScreen {   /* on small screens, hide some of the wording */
     display: none;
@@ -273,6 +287,23 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
   }
 #login p {
     text-align: center;
+}
+#login h1{
+    text-align: center;
+    font-family: 'Orelega One', cursive;
+    font-size:var(--text-big);
+    padding-bottom: 20px;
+}
+
+/* The sign Up Screen*/
+#signUp h1 {
+    text-align:center;
+    font-family:'Orelega One', cursive;
+    font-size:var(--text-big);
+    padding-bottom: 20px;
+}
+#signUp input {
+    font-size: var(--text-medium);
 }
 
 /* The menu */

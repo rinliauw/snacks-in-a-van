@@ -17,7 +17,7 @@ const customerController = require('../controllers/customerController.js')
 //handle the GET request to get the home page
 customerRouter.get('/', (res, req) => customerController.getHomePage(res, req))
 customerRouter.get('/getLoginPage', (res, req) => customerController.getLoginPage(res, req))
-
+customerRouter.get('/getSignUpPage', (res, req) => customerController.getSignUpPage(res, req))
 
 // handle the GET request to get all snacks
 customerRouter.get('/snacks', snackController.getAllSnacks)
@@ -30,10 +30,16 @@ customerRouter.get('/cart', customerController.getCustomerCart2)
 // POST login form -- authenticate user
 customerRouter.post('/login', passport.authenticate('local-login', {
     successRedirect : '/customer', // redirect to the homepage
-    failureRedirect : '/customer/login', // redirect back to the login page if there is an error
+    failureRedirect : '/customer/getLoginPage', // redirect back to the login page if there is an error
     failureFlash : true // allow flash messages
 }));
 
+// POST - user submits the signup form -- signup a new user
+customerRouter.post('/signup', passport.authenticate('local-signup', {
+    successRedirect : '/customer', // redirect to the homepage
+    failureRedirect : '/customer/getSignUpPage/', // redirect to signup page
+    failureFlash : true // allow flash messages
+}));
 
 // LOGOUT
 customerRouter.post('/logout', function(req, res) {
