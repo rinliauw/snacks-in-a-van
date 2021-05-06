@@ -332,8 +332,8 @@ Body:
     "van": "607d5729aae89387de7663af"
 }
 ```
-## Customer Login Example
-Login details:
+## LOGIN DETAILS
+Customer login example details:
 Email: max1234@gmail.com
 Password: max123
 Should redirect to the customer home page if login is successful, otherwise redirect to the customer login page
