@@ -7,6 +7,7 @@
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
+                <th>Subtotal</th>
                 
             </tr>
             {{#each cart}}
@@ -21,6 +22,7 @@
                     </div>
                 </td>
                 <td>{{this.quantity}}</td>
+                <td>{{multiply this.snackId.price this.quantity}}</td>
                   
             </tr>
             {{/each}}
