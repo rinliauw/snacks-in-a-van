@@ -53,13 +53,25 @@ const confirmOrder = async (req, res) => {
             const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
             return res.render('orderdetails', {"thisOrder": thisOrder})
         }
+        var isnotEmpty = 0;
+        for(var i=0; i<oneCart.length; i++) {
+            
+            if(oneCart[i].quantity != 0) {
+                isnotEmpty = 1;
+            }
+        }
+
+        if(!isnotEmpty){
+            const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
+            return res.render('orderdetails', {"thisOrder": thisOrder})
+        }
+        
         const newOrder = new customerOrder({customer: oneCust._id})
         
         //make order outstanding
         newOrder.fulfilled = false;
         newOrder.picked_up = false;
         newOrder.discount = false;
-        
         
         for(var i=0; i<oneCart.length; i++) {
             

@@ -854,3 +854,8 @@ button:hover{
     background-color: var(--color-pink);
     color: white;
 }
+
+#currentCart a {
+    font-size: var(--text-small);
+    text-decoration: underline;
+}

@@ -5,8 +5,8 @@
 <center><img src="https://source.unsplash.com/{{desiredSnack.photo}}" alt="hosted by Unsplash"></center>
 <div class="Price"> Price: ${{desiredSnack.price}}</p><br>
 <p id="snackid" hidden>{{desiredSnack._id}}</p>
-{{#if loggedin}}<label for="quantity"><p>Quantity (between 1 and 50):</p></label>
-<input type="number" id="quantity" name="quantity" min="1" max="50">
+{{#if loggedin}}<label for="quantity"><p>Quantity: (put 0 to remove item)</p></label>
+<input type="number" id="quantity" name="quantity" min="0" max="50">
 <button onclick="toLocalStorage()" type="submit">Add to Cart</button>
 {{else}}<p>Please <a href="/customer/getLoginPage">Log In</a> to Order</p>
 {{/if}}

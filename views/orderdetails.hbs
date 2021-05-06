@@ -1,11 +1,11 @@
 <section id="OrderDetails">
-    <h1> Order Status</h1><br>
+    <h1>Order Details</h1><br>
     <table>
         <tr>
             <th>Order ID</th>
             <th>Items</th>
             <th>Order time</th>
-            <th>Fulfilled</th>
+            <th>Status</th>
         </tr>
         {{#each thisOrder}}
             <tr>
@@ -13,9 +13,9 @@
                 <td> 
 
                 {{#each items}}
-                    {{this.snackId.name}}
-                    <p>Price: ${{this.snackId.price}}</p>
-                    <p>Quantity: {{this.quantity}}</p>
+                    {{#if this.quantity}}
+                    <p>{{this.quantity}}x{{this.snackId.name}}</p>
+                    {{/if}}
                 {{/each}}
                 </td>
                 <td> {{this.time_ordered}}</td>

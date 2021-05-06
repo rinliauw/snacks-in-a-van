@@ -1,7 +1,7 @@
 {{! view customer order}}
 
 <section id = "currentCart">
-    
+    <p><a href="/customer/order-details">View Order History</a></p>
     <h1>Cart List</h1>
     <div class= "cart-page">
         {{#if total}}
@@ -13,6 +13,7 @@
                 
             </tr>
             {{#each cart}}
+            {{#if this.quantity}}
             <tr>
                 <td>
                     <div class="cart-info">
@@ -27,6 +28,7 @@
                 <td>{{multiply this.snackId.price this.quantity}}</td>
                   
             </tr>
+            {{/if}}
             {{/each}}
         </table>
         {{else}}
@@ -41,8 +43,8 @@
                 <td>${{total}}</td>
             </tr>
             <tr>
-                <td>Confirm and Place Order</a></td>
-                <td> <button onclick="location.href = '/customer/order-details'">Confirm Order</button></td>
+                <td> <button onclick="location.href = '/customer/snacks'">CHANGE ORDER</button></td>
+                <td> <button onclick="location.href = '/customer/order-details'">CONFIRM ORDER</button></td>
                 </div>
             </tr>
         </table>
