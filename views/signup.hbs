@@ -1,12 +1,23 @@
 {{! Code based on that from foodbuddy app, provided by INFO30005 Faculty 2021}}
 
 <section id="signUp">
-    <div class="container">
-    <h1>Sign Up</h1>
-
-    {{!Display the "signup" form}}
     <form method="post" action="/customer/signup">
-        <table>
+    <div class="container">
+      <h1>Sign Up</h1>
+      
+      <label for="gname">Given name</label>
+      <input placeholder="Given Name" name='nameGiven' id='nameGiven' value=""/>
+      <label for="fname">Family name</label>
+      <input placeholder="Family Name"  name='nameFamily' id='nameFamily' value=""/>
+      <label for="email">Email</label>
+      <input placeholder="Email" name='email' id='email' value=""/>
+      <label for="password">Password</label>
+      <input placeholder="Password" type="password" name='password' id='password' value=""/>
+
+      <input type="submit" value="Sign Up">
+    {{!Display the "signup" form}}
+    
+        {{!-- <table>
           <tr>
             <td>Given Name:&nbsp;</td>
             <td> <input placeholder="Given Name" name='nameGiven' id='nameGiven' value=""/></td>
@@ -26,7 +37,7 @@
           <tr>
             <td colspan="2"><center><input type="submit" value="Sign Up"></center></td>
           </tr>
-        </table>
-    </form>
+        </table> --}}
     </div>
+    </form>
 </section>

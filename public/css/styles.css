@@ -237,6 +237,7 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     font-size:var(--text-big);
     padding-bottom: 20px;
 }
+
 #login p{
     font-size: 15px;
 }
@@ -785,6 +786,13 @@ button:hover{
     font-size: 80%;
 }
 
+#signUp h1{
+    text-align: center;
+    font-family: 'Orelega One', cursive;
+    font-size:var(--text-big);
+    padding-bottom: 30px;
+}
+
 #signUp .container {
     width: 600px;
     height: 700px;
@@ -797,11 +805,17 @@ button:hover{
     margin-right: auto;
 }
 
-
+#signUp label {
+    display: block;
+    margin-bottom: 0;
+    margin-top: 5px;
+    font-size: smaller;
+}
 
 #signUp input {
     display: block;
-    margin: 40px auto;
+    margin: 10px auto;
+    margin-bottom: 30px; 
     width: 70%;
     padding: 10px 20px;
     border-radius: 50px;
@@ -818,6 +832,7 @@ button:hover{
     font-size: 15px;
     padding: 15px 10px;
     width: 50%;
+    margin-top: 50px;
 
 }
 
