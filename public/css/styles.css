@@ -75,6 +75,7 @@ footer {
     width:100%;
     bottom:0;
     height:50px;
+    padding-top:50px
 }
 
 /* The login homepage */
@@ -153,8 +154,8 @@ form input[type$=text]{
     margin-bottom: 2%;
     font-size: var(--text-small);
 }
-
-form input[type$=submit] {  /* submit button */
+/*
+form input[type$=submit] {  
     background-color: var(--color-pink);
     border-radius: 20px;
     margin-bottom: 1%;
@@ -162,6 +163,28 @@ form input[type$=submit] {  /* submit button */
     height:auto;
     font-size: var(--text-medium);
 }
+*/
+form input[type$=submit]{
+    margin-top:20px;
+    background: #dfa167;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: var(--text-medium);
+    padding: 15px 20px;
+}
+
+form input [type$=submit]:hover{
+    margin-top: 20px;
+    background: #966c45;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 20px;
+    padding: 15px 20px;
+}
+
+
 
 form span.bigScreen {   /* on small screens, hide some of the wording */
     display: none;
@@ -193,6 +216,35 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
   }
 #login p {
     text-align: center;
+}
+#login form input{
+    font-size:var(--text-medium)
+}
+#login h1{
+    text-align: center;
+    font-family: 'Orelega One', cursive;
+    font-size:var(--text-big);
+    padding-bottom: 20px;
+}
+#login form input[type$=submit]{
+    margin-top:-15px;
+    background: #dfa167;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: var(--text-medium);
+    padding: 15px 20px;
+}
+
+/* The sign Up Screen*/
+#signUp h1 {
+    text-align:center;
+    font-family:'Orelega One', cursive;
+    font-size:var(--text-big);
+    padding-bottom: 20px;
+}
+#signUp input {
+    font-size: var(--text-medium);
 }
 
 /* The menu */
