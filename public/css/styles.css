@@ -213,29 +213,6 @@ form input[type$=text]{
 }
 
 
-input[type="submit"]{
-    background: #966c45;
-    border: none;
-    outline: none;
-    letter-spacing: .04em;
-    font-size: 15px;
-    padding: 15px 10px;
-    width: 20em;
-
-}
-
-input[type="submit"]:hover{
-    background: #966c45;
-
-    margin-top:20px;
-    border: none;
-    outline: none;
-    letter-spacing: .04em;
-    font-size: 15px;
-    padding: 15px 10px;
-    width: 50%; 
-}
-
 
 form input[type$=submit] {  /* submit button */
     margin-top:20px;
@@ -301,6 +278,30 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     border: 2px solid grey;
     background-color: transparent;
     color: white;
+}
+
+#login input[type="submit"]{
+    background: #dfa167;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%;
+
+}
+
+#login input[type="submit"]:hover{
+    background: #966c45;
+
+    margin-top:20px;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%; 
+
 }
 
 #login input:focus {
@@ -725,6 +726,29 @@ h1{
     font-size: 80%;
 }
 
+input[type="submit"]{
+    background: #966c45;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 20em;
+
+}
+
+input[type="submit"]:hover{
+    background: #966c45;
+
+    margin-top:20px;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%; 
+
+}
 
 button{
 
