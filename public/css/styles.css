@@ -107,6 +107,9 @@ footer {
     padding: 1rem;
 }
 
+.navbar-links li:hover {
+    color: var(--color-purple);
+}
 
 .menu-toggle {
     position: absolute;
@@ -260,29 +263,6 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 }
 
 /* the login page */
-/* Modal (background) */
-.modal-background {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    align-items: center;
-    top:25%;
-    left:25%;
-    width: 50%; /* Full width */
-    height: 50%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: var(--color-yellow); /* Fallback color */
-
-  }
-
-/* Modal (content) */
-.modal-foreground {
-    background-color: var(--color-yellow);
-    text-align: center;
-    margin: 30% auto; /* 15% from the top and centered */
-    width: 50%; 
-    opacity:1;
-  }
 #login p {
     text-align: center;
 }
@@ -433,25 +413,7 @@ p{
 
 
 @media screen and (max-width: 768px) {
-    @media screen and (max-width: 1000px) {
-        #homePage .col2 img {
-            width: 100%;
-            right: -20rem;
-            position: sticky; 
-            top: 120px;
-            /* right: 100px; */
-            max-width: 100%;
-            z-index: -1;
-        }
-        
-        #homePage .col1 {
-            position: relative;
-            top: 13vh;
-            left: 10%;
-            width: 63%;
-        }
-    }
-    
+
     .navbar {
         flex-direction: column;
         align-items: flex-start;    
@@ -700,7 +662,7 @@ p{
 #login .account{
     font-family: 'Raleway', sans-serif;
     align: center;
-    font-size: 80%%;
+    font-size: 80%;
   }
 
 
@@ -749,5 +711,36 @@ button:hover{
 #signUp td{
     font-family: 'Raleway', sans-serif;
     letter-spacing: 2px;
-    font-size: 90%;
+    font-size: 80%;
+}
+
+
+#OrderDetails {
+    font-family: 'Raleway', sans-serif;
+    font-size: 70%;
+    border-collapse: collapse;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+#OrderDetails td, #OrderDetails th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+#OrderDetails tr:nth-child(even){
+      background-color: #f2f2f2;
+}
+
+#OrderDetails tr:hover {
+      background-color: #ddd;
+}
+  
+#OrderDetails th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--color-pink);
+    color: white;
 }
