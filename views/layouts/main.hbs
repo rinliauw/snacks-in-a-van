@@ -40,11 +40,7 @@
         localStorage.clear();
                     
     }
-    const hamburgerMenu = document.querySelector('menu-toggle')[0]
-    const navbarLinks = document.querySelector('navbar-links')[0]
-    hamburgerMenu.addEventListener('click', () => {
-        navbarLinks.classList.toggle('active')
-    })
+    
     
            
 </script>
@@ -65,6 +61,8 @@
                 <li><a href="/customer/snacks">Menu</a></li>
                 <li><a href="/customer/getLoginPage">Login</li></a>
                 <li><a href="javascript:void(0);" onclick="saveItems();">Cart</a></li>
+                <li><a href="/customer/signup">Sign Up</a></li>
+                <li><a href="javascript:void(0);" onclick="saveLogOut();">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -89,5 +87,12 @@
         <input type="hidden" name="items" id="items"/>
         <input type="hidden" name="qty" id="qty"/>
     </form>
+    <script>
+        const hamburgerMenu = document.querySelector('.menu-toggle')
+        const navbarLinks = document.querySelector('.navbar-links')
+        hamburgerMenu.addEventListener('click', () => {
+            navbarLinks.classList.toggle('active')
+        })
+    </script>
 </body>
 </html>
