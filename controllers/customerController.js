@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 //handle request to get customer homepage
 const getHomePage = async(req, res) => {
     try {
-        //console.log(req.user)
+        console.log(req.user)
         res.render('homepage');
     } catch (e){
         console.log(e);

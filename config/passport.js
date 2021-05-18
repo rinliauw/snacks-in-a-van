@@ -18,13 +18,13 @@ module.exports = function(passport) {
     });
 
     passport.deserializeUser(function(user, done) {
-        //console.log(user.type, 'user')
+        console.log(user.type, 'user')
         //console.log(user.id, 'user') debug
         if (user.type === 'vendor') {
         Van.findById(user.id, function(err, user) {
             done(err, user);
         });
-        } else {
+        } else if (user.type === 'customer'){
         Customer.findById(user.id, function(err, user) {
             done(err, user);
         });
@@ -110,7 +110,7 @@ module.exports = function(passport) {
                         newCustomer.nameFamily = req.body.nameFamily;
                         newCustomer.nameGiven = req.body.nameGiven;
                         newCustomer.favourites = [];
-                        newCustomer.accoun_type = 'customer';
+                        newCustomer.account_type = 'customer';
 
                         // and save the user
                         newCustomer.save(function(err) {

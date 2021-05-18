@@ -27,7 +27,8 @@ const customerSchema = new mongoose.Schema({
     password: {type:String, required:true},
     nameGiven: {type:String},
     nameFamily: {type:String},
-    cart: [addCartSchema]
+    cart: [addCartSchema],
+    account_type: {type: String}
 })
 
 
