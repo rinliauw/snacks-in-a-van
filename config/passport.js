@@ -110,6 +110,7 @@ module.exports = function(passport) {
                         newCustomer.nameFamily = req.body.nameFamily;
                         newCustomer.nameGiven = req.body.nameGiven;
                         newCustomer.favourites = [];
+                        newCustomer.accoun_type = 'customer';
 
                         // and save the user
                         newCustomer.save(function(err) {

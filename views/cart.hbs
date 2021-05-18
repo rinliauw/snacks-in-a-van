@@ -1,9 +1,9 @@
 {{! view customer order}}
 
 <section id = "currentCart">
-    <center><a href="/customer/order-history">View Order History</a></center>
+    <center>
     <h1>Cart List</h1>
-    {{#if loggedin}}
+    {{#if loggedin}}<a href="/customer/order-history">View Order History</a></center>
     <div class= "cart-page">
         {{#if total}}
         <table>

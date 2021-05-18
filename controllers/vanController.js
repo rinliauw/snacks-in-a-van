@@ -5,6 +5,13 @@ const Van = mongoose.model("Van")
 const utility = require('../routes/utility.js')
 
 //handle request to get login homepage
+const getApi = async(req, res) =>{
+    try{
+        res.render('van-api.hbs')
+    } catch (e){
+        console.log(e);
+    }
+}
 const getVanLogin = async(req, res) => {
     try {
         res.render('van-login.hbs', {layout: 'vendor-main.hbs'});
@@ -115,5 +122,5 @@ const showIdDetail = async (req, res) => {
 
 // export the functions
 module.exports = {
-    showVanDetail, closeVan, locateVan, getAllVans, getVanLogin, getVanLocation, showIdDetail
+    showVanDetail, closeVan, locateVan, getAllVans, getVanLogin, getVanLocation, showIdDetail, getApi
 }

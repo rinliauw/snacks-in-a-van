@@ -38,9 +38,9 @@ vendorRouter.post('/login', passport.authenticate('vendor-login', {
     failureFlash : true // allow flash messages
 }));
 
-vendorRouter.get('/location',
-    vanController.getVanLocation)
+vendorRouter.get('/location', vanController.getVanLocation)
 
+vendorRouter.get('/locationapi', vanController.getApi)
 
 vendorRouter.post('/logout', function(req, res) {
     // save the favourites

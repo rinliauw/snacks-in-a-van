@@ -1,12 +1,17 @@
 <section id="setlocation">
 
-<div class="container">
+<div class="container"> 
 
+    <div id="mapping"></div>
     <h1> Update Location </h1>
     {{#if vanloggedin}}
     <form method="post" action="/vendor/update-van-details/open">
     <p>Location longitude</p>
-    <input type="text" id="location" name="location", placeholder="Example: -12983, 119823">
+    <input type="hidden" id="location" name="location">
+    <p>latitude: <span id="latitude" name="location"></span>&deg;<br />
+      longitude: <span id="longitude"></span>&deg;</p>
+    <br>
+    <!--<input type="text" id="location" name="location", placeholder="Example: -12983, 119823">!-->
     <p>Location description</p>
     <input type="text" id="location" name="location_description", placeholder="Example: Near Baillieu Library"><Br>
     <p>Open for business?</p>
@@ -21,5 +26,28 @@
 {{/if}}
 
 </div>
+<script>
+      if ('geolocation' in navigator) {
+        console.log('geolocation available');
+        navigator.geolocation.getCurrentPosition(position => {
+          lat = position.coords.latitude;
+          lon = position.coords.longitude;
+          console.log(lat, lon);
+          document.getElementById('latitude').textContent = lat;
+          document.getElementById('longitude').textContent = lon;
+
+          const mymap = L.map('mapping').setView([lat, lon], 15);
+          const attribution =
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+          const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+          const tiles = L.tileLayer(tileUrl, { attribution });
+          tiles.addTo(mymap);
+          const marker = L.marker([lat, lon]).addTo(mymap);
+        });
+      } else {
+        console.log('geolocation not available');
+      }
+
+</script>
 
 </section>

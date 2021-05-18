@@ -19,6 +19,14 @@ const getHomePage = async(req, res) => {
     }
 }
 
+const getApiPage = async(req, res) => {
+    try {
+        //console.log(req.user)
+        res.render('homepage');
+    } catch (e){
+        console.log(e);
+    }
+}
 //handle request to get login homepage
 const getLoginPage = async(req, res) => {
     try {
