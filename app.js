@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
+const app2 = express();
 const exphbs = require('express-handlebars');
+const MongoStore = require('connect-mongo')
 
 app.use(express.json())   
 app.use(express.urlencoded({ extended: true })) // replaces body-parser
@@ -16,6 +18,7 @@ const expressValidator = require('express-validator');
 // configure passport authenticator
 const passport = require('passport');
 require('./config/passport')(passport);
+require('./config/passportvan')(passport);
 
 require('./models');
 const bcrypt = require('bcrypt');
@@ -25,12 +28,30 @@ app.use(cors({
     origin: "http://localhost:3030" 
 }));
   
-  
+CONNECTION_STRING = "mongodb+srv://<username>:<password>@cluster0.7qkom.mongodb.net/snacksinavan?retryWrites=true&w=majority"
+
+MONGO_URL = CONNECTION_STRING.replace("<username>",process.env.MONGO_USERNAME).replace("<password>",process.env.MONGO_PASSWORD)
+
 // setup a session store signing the contents using the secret key
-app.use(session({ secret: process.env.PASSPORT_KEY,
-resave: true,
-saveUninitialized: true
+app.use(session({ 
+    name: "passport",
+    secret: process.env.PASSPORT_KEY,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: MONGO_URL
+    })
 }));
+
+app.use(session({ 
+ name: "passport2",
+    secret: process.env.PASSPORT_KEY,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: MONGO_URL
+    })
+    }));
 
 //middleware that's required for passport to operate
 app.use(passport.initialize());
@@ -44,9 +65,6 @@ app.use(flash());
 // we need to add the following line so that we can access the 
 // body of a POST request as  using JSON like syntax
 app.use(express.urlencoded({ extended: true })) 
-
-
-
 
 // set the template engine to handlebars
 app.engine('hbs', exphbs({
@@ -64,7 +82,7 @@ const vendorRouter = require('./routes/vendorRouter');
 
 // GET a main page that has links to the customer and vendor apps
 app.get('/', (req, res) => {
-    res.send('<h1>Snacks in a Van</h1><p><a href="/customer">CUSTOMERS<\a><\p><p><a href="/vendor">VENDORS<\a><\p>');
+    res.render('app-homepage', {layout: 'app-main.hbs'})
 })
 
 // Handle the customer requests

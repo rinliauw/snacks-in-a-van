@@ -1,0 +1,25 @@
+<section id="setlocation">
+
+<div class="container">
+
+    <h1> Update Location </h1>
+    {{#if vanloggedin}}
+    <form method="post" action="/vendor/update-van-details/open">
+    <p>Location longitude</p>
+    <input type="text" id="location" name="location", placeholder="Example: -12983, 119823">
+    <p>Location description</p>
+    <input type="text" id="location" name="location_description", placeholder="Example: Near Baillieu Library"><Br>
+    <p>Open for business?</p>
+    <input type="submit" value="Open">
+    </form>
+    
+    <form method="post" action="/vendor/update-van-details/close">
+    <input type="submit" value="Close">
+    </form>
+
+{{else}}<p>Please <a href="/vendor/">Log In</a> to Set Location</p>
+{{/if}}
+
+</div>
+
+</section>

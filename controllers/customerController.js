@@ -12,16 +12,17 @@ const bcrypt = require('bcrypt');
 //handle request to get customer homepage
 const getHomePage = async(req, res) => {
     try {
+        console.log(req.user)
         res.render('homepage');
     } catch (e){
         console.log(e);
     }
 }
 
-
 //handle request to get login homepage
 const getLoginPage = async(req, res) => {
     try {
+        console.log(req.user)
         res.render('login');
     } catch (e){
         console.log(e);

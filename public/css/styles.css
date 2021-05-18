@@ -1,3 +1,5 @@
+/* this css page is for customer page */
+
 /* central area to control type and colour */
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway&display=swap');
@@ -859,3 +861,4 @@ button:hover{
     font-size: var(--text-small);
     text-decoration: underline;
 }
+

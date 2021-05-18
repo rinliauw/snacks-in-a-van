@@ -1,0 +1,380 @@
+/* this css page is for the vendor app */
+
+/* central area to control type and colour */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+:root {  
+    --text-big: 36px;
+    --text-medium: 22px;
+    --text-small: 16px;
+    --font-heading: 'Roboto', sans-serif;
+    --font-body: 'Work Sans', cursive;
+    --color-dark: #24305E;
+    --color-purple: #374785;
+    --color-blue: #A8D0E6;
+    --color-pink: #F76C6C; 
+    --color-pinkhover: #f3a9a9;
+    --color-yellow: #F8E9A1;
+    --color-beige: #e9d6cd;
+}
+
+/* main */ 
+body{
+    margin-bottom: 10%;
+}
+a{
+    color: var(--color-dark);
+    font-family: 'Raleway', sans-serif;
+
+}
+section {
+    padding-right: 10px;
+}
+
+li{
+    padding: 20px
+}
+
+a:hover{
+    border: 10px;
+    background-color:#dfa167;
+    color: white;
+}
+
+ul{
+    display: inline;
+    list-style: none;
+}
+
+ul li{
+    display: inline-block;
+    padding: 30px;
+    font-size: 20px;
+    
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+    text-decoration: none;
+}
+/* elements that are on every page */
+body {
+    width: 100%;
+    height: 100vh;
+    font-family: var(--font-body);
+    font-size: var(--text-medium);
+    background-color: var(--color-beige);
+    color: var(--color-dark);
+}
+footer {
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 0;
+    width:100%;
+    bottom:0;
+    height:50px;
+    padding-top:50px
+}
+
+/* top navigation bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+    background-color: transparent;
+}
+
+.brand-logo a {
+    font-size: 1.5rem;
+    margin: 0.5rem;
+}
+
+.navbar-links {
+    height: 100%;
+}
+
+.navbar-links ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    list-style: none;
+}
+
+.navbar-links li a {
+    display: block;
+    text-decoration: none;
+    padding: 1rem;
+}
+
+.navbar-links li:hover {
+    color: var(--color-purple);
+}
+
+.menu-toggle {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--color-dark);
+    border-radius: 10px;
+}
+
+/* setlocation page */
+#setlocation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#setlocation h1{
+    text-align: center;
+    font-family: 'Orelega One', cursive;
+    font-size:var(--text-big);
+    padding-bottom: 30px;
+}
+
+#setlocation .container {
+    width: 500px;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 40px 30px;
+}
+
+#setlocation input {
+    display: block;
+    margin: 10px auto;
+    width: 70%;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid grey;
+    background-color: transparent;
+    color: black;
+    margin-bottom: 20px;
+}
+
+#setlocation input[type="submit"]{
+    background: #dfa167;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+#setlocation p {
+    font-size: var(--text-small);
+}
+
+#setlocation input[type="submit"]:hover{
+    background: #966c45;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%; 
+
+}
+
+#setlocation input:focus {
+    outline: none;
+}
+
+#setlocation .btn {
+    margin: 0px;
+    border: 0;
+    padding: 10px 30px;
+    border-radius: 50px;
+    background-color: #dfa167;
+    color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+#setlocation a {
+    text-decoration: underline;
+    color: var(--color-dark);
+}
+
+#setlocation label {
+    display: block;
+    margin-bottom: 0;
+    margin-top: 5px;
+    font-size: smaller;
+}
+
+/* login page */
+#login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login h1{
+    text-align: center;
+    font-family: 'Orelega One', cursive;
+    font-size:var(--text-big);
+    padding-bottom: 30px;
+}
+
+#login .container {
+    width: 500px;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 40px 30px;
+}
+
+#login input {
+    display: block;
+    margin: 10px auto;
+    width: 70%;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid grey;
+    background-color: transparent;
+    color: black;
+    margin-bottom: 20px;
+}
+
+#login input[type="submit"]{
+    background: #dfa167;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+#login p {
+    font-size: var(--text-small);
+}
+
+#login input[type="submit"]:hover{
+    background: #966c45;
+    border: none;
+    outline: none;
+    letter-spacing: .04em;
+    font-size: 15px;
+    padding: 15px 10px;
+    width: 50%; 
+
+}
+
+#login input:focus {
+    outline: none;
+}
+
+#login .btn {
+    margin: 0px;
+    border: 0;
+    padding: 10px 30px;
+    border-radius: 50px;
+    background-color: #dfa167;
+    color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+#login a {
+    text-decoration: underline;
+    color: var(--color-dark);
+}
+
+#login label {
+    display: block;
+    margin-bottom: 0;
+    margin-top: 5px;
+    font-size: smaller;
+}
+
+
+/* responsive design */ 
+
+@media screen and (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;    
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .navbar-links {
+        display: none;
+        width: 100%;
+    }
+
+    .navbar-links ul {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .navbar-links ul li {
+        text-align: center;
+    }
+
+    .navbar-links ul li a {
+        padding: 0.5rem 1rem;
+    }
+    
+    .navbar-links.active {
+        display: flex;
+    }
+
+    #snacksMenu ul {
+        column-count: 2;
+    }
+
+    #login .container {
+        width: 300px;
+    }
+
+}
+
+@media screen and (max-width: 1200px) {
+
+    #snacksMenu ul {
+        column-count: 3;
+    }
+    
+}
+
+@media screen and (min-width: 1600px) {
+
+    #snacksMenu ul {
+        column-count: 4;
+    }
+
+}

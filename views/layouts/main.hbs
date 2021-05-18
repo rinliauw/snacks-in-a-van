@@ -22,8 +22,7 @@
         localStorage.clear();
 
         // submit a hidden form with the snack ids. You could use fetch to submit the data to API as well.
-        document.getElementById("logoutform").submit();
-                    
+        document.getElementById("logoutform").submit();          
     }
     function saveItems(){
         // get the snack object IDs from local storage
@@ -40,14 +39,12 @@
         localStorage.clear();
                     
     }
-    
-    
-           
+          
 </script>
 
 <body>
     <nav class="navbar">
-            <a href="/customer"><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></a>
+            <a href="/"><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></a>
         
         <a href="#" class="menu-toggle">
             <span class="bar"></span>
@@ -68,12 +65,6 @@
     <main>
         {{{body}}}
     </main>
-    <!--<footer>
-        <p>an INFO30005 project</p>
-        <a href="/customer">Home</a> | 
-        <a href="">Order details</a> | 
-        <a href=""> Profile</a>
-    </footer>-->
     <form method="post" action="/customer/logout" id="logoutform">
         <input type="hidden" name="logoutitems" id="logoutitems"/>
         <input type="hidden" name="logoutqty" id="logoutqty"/>

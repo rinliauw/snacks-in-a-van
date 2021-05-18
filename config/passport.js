@@ -8,7 +8,6 @@ const LocalStrategy = require('passport-local').Strategy;
 // our user model
 const {Customer} = require('../models/snack');
 
-
 module.exports = function(passport) {
 
     // these two functions are used by passport to store information
@@ -22,7 +21,6 @@ module.exports = function(passport) {
             done(err, user);
         });
     });
-
 
     // strategy to login
     // this method only takes in username and password, and the field names
@@ -75,8 +73,6 @@ module.exports = function(passport) {
 
         }));
 
-
-
     // for signup
     passport.use('local-signup', new LocalStrategy({
             usernameField : 'email',
@@ -122,5 +118,4 @@ module.exports = function(passport) {
                 });
             });
         }));
-
 }

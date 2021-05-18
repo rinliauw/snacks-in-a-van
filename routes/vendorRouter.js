@@ -1,7 +1,11 @@
-const express = require('express')
+const passport = require('passport');
+require('../config/passportvan')(passport);
+
+const express = require('express');
 
 // add the router
 const vendorRouter = express.Router()
+const utility = require('../routes/utility.js')
 
 // require the snack controller
 const orderController = require('../controllers/orderController.js')
@@ -17,15 +21,33 @@ vendorRouter.put('/:name/outstanding-orders/:order_id/fulfilled', orderControlle
 
 // handle the GET request to view a van details
 vendorRouter.get('/:name/update-van-details', vanController.showVanDetail)
+// /vendor/Sister Coffee/update-van-details
 
 // handle the PUT request to update van status to close
-vendorRouter.put('/:name/update-van-details/close', vanController.closeVan)
+vendorRouter.post('/update-van-details/close', vanController.closeVan)
 
 // handle the POST request to update van status to open and new location
-vendorRouter.post('/:name/update-van-details/open', vanController.locateVan)
+vendorRouter.post('/update-van-details/open', vanController.locateVan)
 
 //handle the GET request to all vans
-vendorRouter.get('/', vanController.getAllVans)
+//vendorRouter.get('/', vanController.getAllVans)
+vendorRouter.get('/', vanController.getVanLogin)
+vendorRouter.post('/login', passport.authenticate('vendor-login', {
+    successRedirect : '/vendor/location', // redirect to set the location
+    failureRedirect : '/vendor', // redirect back to the login page if there is an error
+    failureFlash : true // allow flash messages
+}));
+
+vendorRouter.get('/location',
+    vanController.getVanLocation)
+
+
+vendorRouter.post('/logout', function(req, res) {
+    // save the favourites
+    req.logout();
+    req.flash('');
+    res.redirect('/vendor/');
+});
 
 // export the router
 module.exports = vendorRouter

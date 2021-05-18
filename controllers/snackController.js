@@ -3,7 +3,6 @@ const mongoose = require("mongoose")
 // import snack model
 const Snack = mongoose.model("Snack")
 
-
 //handle request to get all snacks
 const getAllSnacks = async (req, res) => {
     try {
