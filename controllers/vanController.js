@@ -15,10 +15,9 @@ const getVanLogin = async(req, res) => {
 
 const getVanLocation = async(req, res) => {
     try {
-        console.log(req.session)
-
-        console.log(req.user)
-        console.log(req.isAuthenticated())
+        //console.log(req.session)
+        //console.log(req.user)
+        //console.log(req.isAuthenticated())
         res.header('Access-Control-Allow-Credentials', true);
         res.render('van-location', {layout: 'vendor-main.hbs', "vanloggedin": req.isAuthenticated()});
     } catch (e){

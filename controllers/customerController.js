@@ -104,7 +104,7 @@ const getCustomerCart2 = async(req, res) => {
                 totalEach[i] = currentItem.snackId.price*currentItem.quantity
                 total+=(currentItem.snackId.price*currentItem.quantity)
             }
-            return res.render('cart', {cart, total, totalEach})
+            return res.render('cart', {cart, total, totalEach, 'loggedin': req.isAuthenticated()})
         } else {
             res.status(404)
             return res.send("Customer is not found in database")
