@@ -42,6 +42,13 @@
         <a href=""> Profile</a>
     </footer>-->
 
+    <script>
+        const hamburgerMenu = document.querySelector('.menu-toggle')
+        const navbarLinks = document.querySelector('.navbar-links')
+        hamburgerMenu.addEventListener('click', () => {
+            navbarLinks.classList.toggle('active')
+        })
+    </script>
 <form method="post" action="/vendor/logout" class="inline"></form>
 </body>
 </html>

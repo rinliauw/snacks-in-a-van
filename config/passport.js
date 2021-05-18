@@ -7,19 +7,28 @@ const LocalStrategy = require('passport-local').Strategy;
 
 // our user model
 const {Customer} = require('../models/snack');
+const {Van} = require('../models/van');
 
 module.exports = function(passport) {
 
     // these two functions are used by passport to store information
     // in and retrieve data from sessions. We are using user's object id
     passport.serializeUser(function(user, done) {
-        done(null, user._id);
+        done(null, {'id': user._id, 'type': user.account_type});
     });
 
-    passport.deserializeUser(function(_id, done) {
-        Customer.findById(_id, function(err, user) {
+    passport.deserializeUser(function(user, done) {
+        //console.log(user.type, 'user')
+        //console.log(user.id, 'user') debug
+        if (user.type === 'vendor') {
+        Van.findById(user.id, function(err, user) {
             done(err, user);
         });
+        } else {
+        Customer.findById(user.id, function(err, user) {
+            done(err, user);
+        });
+        }
     });
 
     // strategy to login
@@ -63,7 +72,6 @@ module.exports = function(passport) {
                         // server uses that identifier to identify different clients
                         // all this is handled by the session middleware that we are using 
                         req.session.email = email; // for demonstration of using express-session
-                        
                         // done() is used by the strategy to set the authentication status with
                         // details of the user who was authenticated
                         return done(null, user, req.flash('loginMessage', 'Login successful'));

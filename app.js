@@ -17,8 +17,9 @@ const expressValidator = require('express-validator');
 
 // configure passport authenticator
 const passport = require('passport');
-require('./config/passport')(passport);
 require('./config/passportvan')(passport);
+
+require('./config/passport')(passport);
 
 require('./models');
 const bcrypt = require('bcrypt');

@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 //handle request to get customer homepage
 const getHomePage = async(req, res) => {
     try {
-        console.log(req.user)
+        //console.log(req.user)
         res.render('homepage');
     } catch (e){
         console.log(e);
@@ -22,7 +22,7 @@ const getHomePage = async(req, res) => {
 //handle request to get login homepage
 const getLoginPage = async(req, res) => {
     try {
-        console.log(req.user)
+        //console.log(req.user)
         res.render('login');
     } catch (e){
         console.log(e);
@@ -63,7 +63,7 @@ const getCustomerCart = async(req, res) => {
                 total+=(currentItem.snackId.price*currentItem.quantity)
             }
             
-            return res.render('cart', {cart, total, totalEach})
+            return res.render('cart', {cart, total, totalEach, 'loggedin': req.isAuthenticated()})
         } else {
             res.status(404)
             return res.send("Customer is not found in database")

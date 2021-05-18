@@ -8,18 +8,6 @@ const {Van} = require('../models/van');
 
 module.exports = function(passport) {
 
-    // these two functions are used by passport to store information
-    // in and retrieve data from sessions. We are using user's object id
-    passport.serializeUser(function(userr, done) {
-        done(null, userr._id);
-    });
-
-    passport.deserializeUser(function(_id, done) {
-        Van.findById(_id, function(err, userr) {
-            done(err, userr);
-        });
-    });
-
     // strategy to login
     // this method only takes in username and password, and the field names
     // should match of those in the login form
@@ -35,20 +23,20 @@ module.exports = function(passport) {
             // so it's part of the 'syntax'
             process.nextTick(function() {
                 // see if the user with the email exists
-                Van.findOne({ 'name' :  name }, function(err, userr) {
+                Van.findOne({ 'name' :  name }, function(err, user) {
                     // if there are errors, user is not found or password
                     // does match, send back errors
                     if (err){
                         console.log(err);
                         return done(err);
-                    }if (!userr){
+                    }if (!user){
                         console.log("no user found");
                         return done(null, false, req.flash('loginMessage', 'No user found.'));
                     }
-                    if (!userr.validPassword(password)){
+                    if (!user.validPassword(password)){
                         console.log("found user but invalid password")
                         console.log(password)
-                        console.log(userr.password)
+                        console.log(user.password)
                         // false in done() indicates to the strategy that authentication has
                         // failed
                         return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
@@ -64,7 +52,7 @@ module.exports = function(passport) {
                         
                         // done() is used by the strategy to set the authentication status with
                         // details of the user who was authenticated
-                        return done(null, userr, req.flash('loginMessage', 'Login successful'));
+                        return done(null, user, req.flash('loginMessage', 'Login successful'));
                     }
                 });
             });

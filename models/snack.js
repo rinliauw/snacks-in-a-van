@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt')
 const snackSchema = new mongoose.Schema({ 
     name: {type:String, required:true, unique:true},
     photo: {type:String},
-    price: {type:Number, required:true}
+    price: {type:Number, required:true},
+    account_type: {type: String}
 })
 
 const Snack = mongoose.model("Snack", snackSchema) 

@@ -3,6 +3,7 @@
 <section id = "currentCart">
     <center><a href="/customer/order-history">View Order History</a></center>
     <h1>Cart List</h1>
+    {{#if loggedin}}
     <div class= "cart-page">
         {{#if total}}
         <table>
@@ -49,6 +50,9 @@
             </tr>
         </table>
     </div>
+    {{/if}}
+    {{else}}
+    <p><a href="/customer/getLoginPage">Login to view order history</a></p>
     {{/if}}
 </section>
 

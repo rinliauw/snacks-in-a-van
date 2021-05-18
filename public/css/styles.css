@@ -189,7 +189,7 @@ footer {
     flex-basis: 60%;
 }
 #homePage .col2 img {
-    position:absolute;
+    position:fixed;
     top: 150px;
     right: 100px;
     max-width: 50%;
@@ -430,25 +430,6 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
 
 
 
-@media screen and (max-width: 700px) {
-    #homePage .col2 img {
-        width: 100%;
-        position: sticky;
-        right: 0rem;
-        /* position: fixed; */
-        top: 0px;
-        left: 0px;
-        max-width: 100%;
-        z-index: -1;
-    }
-    
-    #homePage .col1 {
-        position: relative;
-        top: 13vh;
-        left: 10%;
-        width: 63%;
-    }
-}
 
 p{
     text-align: center;
@@ -494,6 +475,24 @@ p{
 
     #login .container {
         width: 300px;
+    }
+
+    #homePage .col2 img {
+        width: 100%;
+        position: sticky;
+        right: 0rem;
+        /* position: fixed; */
+        top: 0px;
+        left: 0px;
+        max-width: 100%;
+        z-index: -1;
+    }
+    
+    #homePage .col1 {
+        position: relative;
+        top: 13vh;
+        left: 10%;
+        width: 63%;
     }
 
 }

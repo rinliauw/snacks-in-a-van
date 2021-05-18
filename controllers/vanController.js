@@ -15,7 +15,7 @@ const getVanLogin = async(req, res) => {
 
 const getVanLocation = async(req, res) => {
     try {
-        console.log(req.session.name)
+        console.log(req.session)
 
         console.log(req.user)
         console.log(req.isAuthenticated())
