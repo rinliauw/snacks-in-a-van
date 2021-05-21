@@ -358,7 +358,6 @@ Van login example details:
 |----------------------|-------------------------------------|
 | **Vendor Name**      | SisterCoffee   |
 | **Password**         | Sister123456 |
-| **Method** 	       | PUT                 	 	     |
 | **Details**       | Should redirect to the customer home page if login is successful, otherwise redirect to the vendor login page |
 
 
