@@ -340,8 +340,8 @@ Body:
     "van": "607d5729aae89387de7663af"
 }
 ```
-### Login Details
-## Customer Login
+## Login Details
+### Customer Login
 Customer login example details:
 
 Email: max123@gmail.com
@@ -350,7 +350,7 @@ Password: Max123456
 
 Should redirect to the customer home page if login is successful, otherwise redirect to the customer login page
 
-## Van Login
+### Van Login
 Van login example details:
 
 Email: SisterCoffee
