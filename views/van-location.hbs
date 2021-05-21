@@ -21,11 +21,11 @@
             <!--<input type="text" id="location" name="location", placeholder="Example: -12983, 119823">!-->
             <p>Location description</p>
             <input type="text" id="location" name="location_description" ,
-              placeholder="Example: Near Baillieu Library"><Br>
+              placeholder="Example: Near Baillieu Library"><Br><br>
             <p>Open for business?</p>
-            <input type="submit" value="Open">
+            <input class="btn btn-secondary" type="submit" value="Open">
           </form>
-
+          <br>
           <form method="post" action="/vendor/update-van-details/close">
             <input class="btn btn-primary" type="submit" value="Close">
           </form>
@@ -65,7 +65,7 @@
 
 <style>
   #mapping {
-    height: 80vh;
+    height: 60vh;
   }
 
   @media (max-width: 990px) {

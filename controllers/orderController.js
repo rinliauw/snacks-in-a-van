@@ -11,11 +11,11 @@ const startOrder = mongoose.model("startOrder")
 const getOrderWithVanName = async (req, res) => {
     try {
         //find van
-        const oneVan = await Van.findOne( {"name": req.params.name} )
+        const oneVan = await Van.findOne( {"name": req.session.name} )
         //find all its outstanding orders
         const vanOrders = await Order.find({ van:oneVan._id, fulfilled:false },{},{sort: '-time_ordered'})
         
-        res.send(vanOrders);
+        res.render('van-orders', {"vanOrders": vanOrders, layout: 'vendor-main'});
         
     } catch (e) {
         res.status(400)

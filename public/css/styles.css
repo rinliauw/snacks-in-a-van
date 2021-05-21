@@ -20,9 +20,6 @@
     --color-beige: #e9d6cd;
 }
 
-body{
-    margin-bottom: 10%;
-}
 a{
     color: var(--color-dark);
     font-family: 'Raleway', sans-serif;
@@ -69,7 +66,9 @@ body {
     font-size: var(--text-medium);
     background-color: var(--color-beige);
     color: var(--color-dark);
+    margin-bottom: 10%;
 }
+
 footer {
     text-align: center;
     justify-content: center;
