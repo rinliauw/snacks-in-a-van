@@ -12,9 +12,11 @@ There will be 2 web apps, one for the customers and one for the vendors.
 * [Team Members](#team-members)
 * [Technologies](#technologies)
 * [Live Website](#live-website)
+* [Commit ID](#commit-id)
 * [Getting Started](#getting-started)
 * [Database Access Details](#database-access-details)
 * [Postman Requests Instruction](#postman-requests-instruction)
+
 
 ## Team Members
 
@@ -30,10 +32,13 @@ There will be 2 web apps, one for the customers and one for the vendors.
 Project is created with:
 * NodeJs
 * MongoDB
-
+* HTML, CSS, Javascript & Handlebars
 
 ## Live Website
 You can view our live website at `https://snacksinavan-group-2-info30005.herokuapp.com/`
+
+## Commit ID
+The commit id for marking: `*fill*`
 
 ## Getting Started
 
@@ -62,7 +67,7 @@ You will see this output if successful
 > snacksinavan@1.0.0 start
 > node app.js
 
-The Snacks in a Van app is running!
+The Snacks in a Van app is running on por!
 Mongo connection started on cluster0-shard-00-00.7qkom.mongodb.net:27017
 ```
 ## Database Access Details
@@ -336,8 +341,12 @@ Body:
 ```
 ## LOGIN DETAILS
 Customer login example details:
-Email: max1234@gmail.com
-Password: max123
+Email: max123@gmail.com
+Password: Max123456
+Should redirect to the customer home page if login is successful, otherwise redirect to the customer login page
+Van login example details:
+Email: SisterCoffee
+Password: Sister123456
 Should redirect to the customer home page if login is successful, otherwise redirect to the customer login page
 
 
@@ -345,8 +354,8 @@ Should redirect to the customer home page if login is successful, otherwise redi
 
 - [x] Read the Project handouts carefully
 - [x] User Interface (UI)mockup
-- [ ] App server mockup
-- [ ] Front-end + back-end (one feature)
+- [x] App server mockup
+- [x] Front-end + back-end (one feature)
 - [ ] Complete system + source code
 - [ ] Report on your work(+ test1 feature)
 

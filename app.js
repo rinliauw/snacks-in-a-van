@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const app2 = express();
 const exphbs = require('express-handlebars');
 const MongoStore = require('connect-mongo')
 
@@ -18,7 +17,6 @@ const expressValidator = require('express-validator');
 // configure passport authenticator
 const passport = require('passport');
 require('./config/passportvan')(passport);
-
 require('./config/passport')(passport);
 
 require('./models');
@@ -43,16 +41,6 @@ app.use(session({
         mongoUrl: MONGO_URL
     })
 }));
-
-app.use(session({ 
- name: "passport2",
-    secret: process.env.PASSPORT_KEY,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-        mongoUrl: MONGO_URL
-    })
-    }));
 
 //middleware that's required for passport to operate
 app.use(passport.initialize());
@@ -83,7 +71,7 @@ const vendorRouter = require('./routes/vendorRouter');
 
 // GET a main page that has links to the customer and vendor apps
 app.get('/', (req, res) => {
-    res.render('app-homepage', {layout: 'app-main.hbs'})
+    res.render('app-homepage.hbs', {layout: 'app-main.hbs'})
 })
 
 // Handle the customer requests
@@ -93,5 +81,5 @@ app.use('/customer', customerRouter)
 app.use('/vendor', vendorRouter)
 
 app.listen(process.env.PORT || 3030, () => {
-     console.log('The Snacks in a Van app is running!')
+     console.log('The Snacks in a Van app is running on port 3030!')
 })

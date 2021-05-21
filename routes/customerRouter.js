@@ -1,8 +1,7 @@
 // This contains all of the routes for customer related functions
-
 const express = require('express')
 const passport = require('passport');
-require('../config/passport')(passport);
+require('../config/passport')(passport); // import passport
 
 // add the router
 const customerRouter = express.Router()
@@ -53,7 +52,7 @@ customerRouter.post('/signup', passport.authenticate('local-signup', {
     failureFlash : true // allow flash messages
 }));
 
-// LOGOUT
+// LOGOUT - for customer
 customerRouter.post('/logout', function(req, res) {
     // save the favourites
     customerController.saveAfterLogOut(req,res,req.body.logoutitems, req.body.logoutqty)

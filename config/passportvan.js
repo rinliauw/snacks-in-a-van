@@ -3,9 +3,8 @@
 // using username and password
 const LocalStrategy = require('passport-local').Strategy;
 
-// our user model
+// our Van model
 const {Van} = require('../models/van');
-
 module.exports = function(passport) {
 
     // strategy to login
@@ -17,9 +16,7 @@ module.exports = function(passport) {
             passReqToCallback : true}, // pass the req as the first arg to the callback for verification 
         function(req, name, password, done) {
             
-            // you can read more about the nextTick() function here: 
-            // https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/
-            // we are using it because without it the Customer.findOne does not work,
+            // we are using nextTick because without it the Customer.findOne does not work,
             // so it's part of the 'syntax'
             process.nextTick(function() {
                 // see if the user with the email exists

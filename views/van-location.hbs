@@ -1,53 +1,76 @@
 <section id="setlocation">
+  <div class="p-2 mb-4 bg-light rounded-3">
+    <div class="container text-center">
+      <h1 class="display-5 fw-bold">Update Location</h1>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div id="mapping"></div>
+      </div>
+      <div class="col-lg-6">
+        <div class="col-xl-3 col-lg-5 col-md-8 text-left">
+          {{#if vanloggedin}}
+          <form method="post" action="/vendor/update-van-details/open">
+            <p>Location longitude</p>
+            <input type="hidden" id="location" name="location">
+            <p>latitude: <span id="latitude" name="location"></span>&deg;<br />
+              longitude: <span id="longitude"></span>&deg;</p>
+            <br>
+            <!--<input type="text" id="location" name="location", placeholder="Example: -12983, 119823">!-->
+            <p>Location description</p>
+            <input type="text" id="location" name="location_description" ,
+              placeholder="Example: Near Baillieu Library"><Br>
+            <p>Open for business?</p>
+            <input type="submit" value="Open">
+          </form>
 
-<div class="container"> 
+          <form method="post" action="/vendor/update-van-details/close">
+            <input class="btn btn-primary" type="submit" value="Close">
+          </form>
 
-    <div id="mapping"></div>
-    <h1> Update Location </h1>
-    {{#if vanloggedin}}
-    <form method="post" action="/vendor/update-van-details/open">
-    <p>Location longitude</p>
-    <input type="hidden" id="location" name="location">
-    <p>latitude: <span id="latitude" name="location"></span>&deg;<br />
-      longitude: <span id="longitude"></span>&deg;</p>
-    <br>
-    <!--<input type="text" id="location" name="location", placeholder="Example: -12983, 119823">!-->
-    <p>Location description</p>
-    <input type="text" id="location" name="location_description", placeholder="Example: Near Baillieu Library"><Br>
-    <p>Open for business?</p>
-    <input type="submit" value="Open">
-    </form>
-    
-    <form method="post" action="/vendor/update-van-details/close">
-    <input type="submit" value="Close">
-    </form>
+          {{else}}<p>Please <a href="/vendor/">Log In</a> to Set Location</p>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    if ('geolocation' in navigator) {
+      console.log('geolocation available');
+      navigator.geolocation.getCurrentPosition(position => {
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+        // console.log(lat, lon);
+        document.getElementById('latitude').textContent = lat;
+        document.getElementById('longitude').textContent = lon;
+        document.getElementById('location').value = lat, lon;
 
-{{else}}<p>Please <a href="/vendor/">Log In</a> to Set Location</p>
-{{/if}}
+        const mymap = L.map('mapping').setView([lat, lon], 15);
+        const attribution =
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+        const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const tiles = L.tileLayer(tileUrl, { attribution });
+        tiles.addTo(mymap);
+        const marker = L.marker([lat, lon]).addTo(mymap);
+      });
+    } else {
+      console.log('geolocation not available');
+    }
 
-</div>
-<script>
-      if ('geolocation' in navigator) {
-        console.log('geolocation available');
-        navigator.geolocation.getCurrentPosition(position => {
-          lat = position.coords.latitude;
-          lon = position.coords.longitude;
-          console.log(lat, lon);
-          document.getElementById('latitude').textContent = lat;
-          document.getElementById('longitude').textContent = lon;
-
-          const mymap = L.map('mapping').setView([lat, lon], 15);
-          const attribution =
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-          const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-          const tiles = L.tileLayer(tileUrl, { attribution });
-          tiles.addTo(mymap);
-          const marker = L.marker([lat, lon]).addTo(mymap);
-        });
-      } else {
-        console.log('geolocation not available');
-      }
-
-</script>
+  </script>
 
 </section>
+
+<style>
+  #mapping {
+    height: 80vh;
+  }
+
+  @media (max-width: 990px) {
+    #mapping {
+      height: 40vh;
+    }
+  }
+</style>

@@ -1,6 +1,5 @@
 const mongoose = require("mongoose")
 const bcrypt = require('bcrypt')
-
 // Define the snack schema
 const snackSchema = new mongoose.Schema({ 
     name: {type:String, required:true, unique:true},
@@ -11,7 +10,6 @@ const snackSchema = new mongoose.Schema({
 
 const Snack = mongoose.model("Snack", snackSchema) 
 
-
 // Define the cart schema
 const addCartSchema = new mongoose.Schema({
     snackId: {type: mongoose.Schema.Types.ObjectId, ref: 'Snack'},
@@ -19,7 +17,6 @@ const addCartSchema = new mongoose.Schema({
 })
 
 const addCart = mongoose.model("addCart", addCartSchema) 
-
 
 // define the customer schema
 const customerSchema = new mongoose.Schema({ 
@@ -30,7 +27,6 @@ const customerSchema = new mongoose.Schema({
     cart: [addCartSchema],
     account_type: {type: String}
 })
-
 
 // the following two functions are taken from foodbuddy app, provided by INFO30005 Faculty 2021
 // method for generating a hash; used for password hashing
@@ -44,7 +40,5 @@ customerSchema.methods.validPassword = function(password) {
 };
 
 const Customer = mongoose.model("Customer", customerSchema) 
-
-
 
 module.exports = {Customer, Snack, addCart}

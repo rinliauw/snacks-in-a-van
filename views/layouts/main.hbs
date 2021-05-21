@@ -56,9 +56,12 @@
                 <li><a href="/customer">Home</a></li>
                 <li><a href="/customer/snacks">Menu</a></li>
                 <li><a href="javascript:void(0);" onclick="saveItems();">Cart</a></li>
+                {{#unless loggedin}}
                 <li><a href="/customer/getLoginPage">Login</li></a>
                 <li><a href="/customer/signup">Sign Up</a></li>
+                {{else}}
                 <li><a href="javascript:void(0);" onclick="saveLogOut();">Logout</a></li>
+                {{/unless}}
             </ul>
         </div>
     </nav>

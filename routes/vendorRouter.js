@@ -1,6 +1,6 @@
+// This contains all of the routes for vendor related functions
 const passport = require('passport');
 require('../config/passportvan')(passport);
-
 const express = require('express');
 
 // add the router
@@ -38,11 +38,11 @@ vendorRouter.post('/login', passport.authenticate('vendor-login', {
     failureFlash : true // allow flash messages
 }));
 
+// GET page for set up location
 vendorRouter.get('/location', vanController.getVanLocation)
 
-vendorRouter.get('/locationapi', vanController.getApi)
-
-vendorRouter.post('/logout', function(req, res) {
+// LOGOUT - for logging out after user authentication
+vendorRouter.get('/logout', function(req, res) {
     // save the favourites
     req.logout();
     req.flash('');

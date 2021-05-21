@@ -18,13 +18,14 @@ module.exports = function(passport) {
     });
 
     passport.deserializeUser(function(user, done) {
-        console.log(user.type, 'user')
-        //console.log(user.id, 'user') debug
+        //console.log(user.type, 'user')
+        //console.log(user.id, 'user') for debugging
+        // deserializes user for either vendor or customer
         if (user.type === 'vendor') {
         Van.findById(user.id, function(err, user) {
             done(err, user);
         });
-        } else if (user.type === 'customer'){
+        } else {
         Customer.findById(user.id, function(err, user) {
             done(err, user);
         });
@@ -40,9 +41,7 @@ module.exports = function(passport) {
             passReqToCallback : true}, // pass the req as the first arg to the callback for verification 
         function(req, email, password, done) {
             
-            // you can read more about the nextTick() function here: 
-            // https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/
-            // we are using it because without it the Customer.findOne does not work,
+            // we are using nextTick because without it the Customer.findOne does not work,
             // so it's part of the 'syntax'
             process.nextTick(function() {
                 // see if the user with the email exists
@@ -56,6 +55,7 @@ module.exports = function(passport) {
                         console.log("no user found");
                         return done(null, false, req.flash('loginMessage', 'No user found.'));
                     }
+                    // if the password is invalid
                     if (!user.validPassword(password)){
                         console.log("found user but invalid password")
                         console.log(password)
@@ -71,9 +71,7 @@ module.exports = function(passport) {
                         // sessions. each client gets assigned a unique identifier and the
                         // server uses that identifier to identify different clients
                         // all this is handled by the session middleware that we are using 
-                        req.session.email = email; // for demonstration of using express-session
-                        // done() is used by the strategy to set the authentication status with
-                        // details of the user who was authenticated
+                        req.session.email = email;
                         return done(null, user, req.flash('loginMessage', 'Login successful'));
                     }
                 });
@@ -81,7 +79,7 @@ module.exports = function(passport) {
 
         }));
 
-    // for signup
+    // authentication for signup
     passport.use('local-signup', new LocalStrategy({
             usernameField : 'email',
             passwordField : 'password',
@@ -110,7 +108,7 @@ module.exports = function(passport) {
                         newCustomer.nameFamily = req.body.nameFamily;
                         newCustomer.nameGiven = req.body.nameGiven;
                         newCustomer.favourites = [];
-                        newCustomer.account_type = 'customer';
+                        newCustomer.accoun_type = 'customer';
 
                         // and save the user
                         newCustomer.save(function(err) {

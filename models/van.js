@@ -10,15 +10,6 @@ const vanSchema = new mongoose.Schema({
     account_type: {type: String}
 })
 
-
-// vanSchema.methods.validPassword = function(password) {
-//     if (password === this.password){
-//         return true;
-//     }
-//     return false;
-    
-// };
-
 // checks if password is valid
 // testing : 
 // user SisterCoffee

@@ -4,28 +4,26 @@ const mongoose = require("mongoose")
 const Van = mongoose.model("Van")
 const utility = require('../routes/utility.js')
 
-//handle request to get login homepage
-const getApi = async(req, res) =>{
-    try{
-        res.render('van-api.hbs')
-    } catch (e){
-        console.log(e);
-    }
-}
+// handles request to get van login page
 const getVanLogin = async(req, res) => {
     try {
-        res.render('van-login.hbs', {layout: 'vendor-main.hbs'});
+        console.log("IsAuthenticated:")
+        console.log(req.isAuthenticated())
+        res.render('van-login.hbs', {layout: 'vendor-main.hbs', "vanloggedin": req.isAuthenticated()})
     } catch (e){
         console.log(e);
     }
 }
 
+// handles request to get van location
 const getVanLocation = async(req, res) => {
     try {
         //console.log(req.session)
         //console.log(req.user)
         //console.log(req.isAuthenticated())
         res.header('Access-Control-Allow-Credentials', true);
+        console.log("IsAuthenticated:")
+        console.log(req.isAuthenticated())
         res.render('van-location', {layout: 'vendor-main.hbs', "vanloggedin": req.isAuthenticated()});
     } catch (e){
         console.log(e);
@@ -122,5 +120,5 @@ const showIdDetail = async (req, res) => {
 
 // export the functions
 module.exports = {
-    showVanDetail, closeVan, locateVan, getAllVans, getVanLogin, getVanLocation, showIdDetail, getApi
+    showVanDetail, closeVan, locateVan, getAllVans, getVanLogin, getVanLocation, showIdDetail
 }

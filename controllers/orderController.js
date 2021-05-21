@@ -42,6 +42,7 @@ const markOrderAsFulfilled = async (req, res) => {
     }
 }
 
+// handles request to confirm order
 const confirmOrder = async (req, res) => {
     console.log("confirmorder")
     try {
@@ -51,7 +52,7 @@ const confirmOrder = async (req, res) => {
         const oneCart = oneCust.cart
         if(oneCart.length === 0) {
             const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
-            return res.render('orderdetails', {"thisOrder": thisOrder})
+            return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
         }
         var isnotEmpty = 0;
         for(var i=0; i<oneCart.length; i++) {
@@ -63,7 +64,7 @@ const confirmOrder = async (req, res) => {
 
         if(!isnotEmpty){
             const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
-            return res.render('orderdetails', {"thisOrder": thisOrder})
+            return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
         }
         
         const newOrder = new customerOrder({customer: oneCust._id})
@@ -89,13 +90,14 @@ const confirmOrder = async (req, res) => {
 
         const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
         
-        return res.render('orderdetails', {"thisOrder": thisOrder})
+        return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
     } catch (e) {     // error occurred
         res.status(400)
         return res.send("Database query failed")
     }
 }
 
+// handles request to view order history
 const viewOrderHistory = async (req, res) => {
     console.log("view order history")
     try {
@@ -104,7 +106,7 @@ const viewOrderHistory = async (req, res) => {
         
         const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
         
-        return res.render('orderhistory', {"thisOrder": thisOrder})
+        return res.render('orderhistory', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
     } catch (e) {     // error occurred
         res.status(400)
         return res.send("Database query failed")

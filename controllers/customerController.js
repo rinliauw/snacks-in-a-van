@@ -12,26 +12,17 @@ const bcrypt = require('bcrypt');
 //handle request to get customer homepage
 const getHomePage = async(req, res) => {
     try {
-        console.log(req.user)
-        res.render('homepage');
+        //console.log(req.user)
+        res.render('homepage', {"loggedin": req.isAuthenticated()});
     } catch (e){
         console.log(e);
     }
 }
 
-const getApiPage = async(req, res) => {
-    try {
-        //console.log(req.user)
-        res.render('homepage');
-    } catch (e){
-        console.log(e);
-    }
-}
 //handle request to get login homepage
 const getLoginPage = async(req, res) => {
     try {
-        //console.log(req.user)
-        res.render('login');
+        res.render('login', {"loggedin": req.isAuthenticated()});
     } catch (e){
         console.log(e);
     }
@@ -40,7 +31,7 @@ const getLoginPage = async(req, res) => {
 //handle request to get signup page
 const getSignUpPage = async(req, res) => {
     try {
-        res.render('signup');
+        res.render('signup', {"loggedin": req.isAuthenticated()});
     } catch (e){
         console.log(e);
     }
@@ -98,6 +89,7 @@ const getOneCustomer = async(req, res) => {
     }
 }
 
+// handle request to show current customer's cart
 const getCustomerCart2 = async(req, res) => {
     try{
         let oneCust = await Customer.findOne( {email: req.session.email} ).populate({path:'cart.snackId', model:'Snack'}).lean()
@@ -154,6 +146,7 @@ const addItem = async (req, res) => {
 }
 
 
+// handle request to save to Cart
 const saveCart =  async (req, res, items, qty) => {
     
 	try {
@@ -163,11 +156,9 @@ const saveCart =  async (req, res, items, qty) => {
 			// find user in database	
 			let user = await Customer.findOne( {email: req.session.email} )
 			
-			
 			items = JSON.parse(items)
             qty = JSON.parse(qty)
 			itemsArray = []
-            
             
 			for (let i = 0; i < items.length; ++i) {                
 				let snackid = items[i].replace(/[\\]"/g, '');;
@@ -197,6 +188,7 @@ const saveCart =  async (req, res, items, qty) => {
 	}
 }
 
+// handle request to save cart after logging out
 const saveAfterLogOut =  async (req, res, logoutitems, logoutqty) => {
     
 	try {

@@ -1,12 +1,32 @@
 <section id="vanopen"><div class="container"> 
-<h1> Location Updated!</h1><br>
 
+    <div id="mapping"></div><br>
+<h1> Location Updated!</h1><br>
 
 <p>Van Name: {{oneVan.name}}</p>
 <p>Location: {{oneVan.location}}</p>
 <p>Location Description: {{oneVan.location_description}}</p>
 <p>Open?
-    {{#if oneVan.ready_for_order}} Ready for order!
-    {{else}} Currently closed {{/if}}</p><br>
+    {{#if oneVan.ready_for_order}} Yes, we are open!
+    {{else}} Sorry, we are closed! {{/if}}</p><br>
 <p><a href="/vendor/location"> Back to Update Location</a></p>
 </div></section>
+
+<script>
+      if ('geolocation' in navigator) {
+        console.log('geolocation available');
+        navigator.geolocation.getCurrentPosition(position => {
+          lat = position.coords.latitude;
+          lon = position.coords.longitude;
+          const mymap = L.map('mapping').setView([lat, lon], 15);
+          const attribution =
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+          const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+          const tiles = L.tileLayer(tileUrl, { attribution });
+          tiles.addTo(mymap);
+          const marker = L.marker([lat, lon]).addTo(mymap);
+        });
+      } else {
+        console.log('geolocation not available');
+      }
+</script>

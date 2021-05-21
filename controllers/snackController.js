@@ -7,7 +7,7 @@ const Snack = mongoose.model("Snack")
 const getAllSnacks = async (req, res) => {
     try {
         const snacks = await Snack.find().lean()
-        res.render('menu', {"snacks": snacks})
+        res.render('menu', {"snacks": snacks, "loggedin": req.isAuthenticated()})
         // return res.send(snacks)
     } catch (e){
         res.status(400)
