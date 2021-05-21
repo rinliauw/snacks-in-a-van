@@ -16,7 +16,7 @@ There will be 2 web apps, one for the customers and one for the vendors.
 * [Getting Started](#getting-started)
 * [Database Access Details](#database-access-details)
 * [Postman Requests Instruction](#postman-requests-instruction)
-
+* [Login Details](#login-details)
 
 ## Team Members
 
@@ -53,6 +53,7 @@ MONGO_PASSWORD = group2
 
 PASSPORT_KEY = group2
 ```
+
 
 To install the dependencies:
 ```
@@ -339,14 +340,23 @@ Body:
     "van": "607d5729aae89387de7663af"
 }
 ```
-## LOGIN DETAILS
+### Login Details
+## Customer Login
 Customer login example details:
+
 Email: max123@gmail.com
+
 Password: Max123456
+
 Should redirect to the customer home page if login is successful, otherwise redirect to the customer login page
+
+## Van Login
 Van login example details:
+
 Email: SisterCoffee
+
 Password: Sister123456
+
 Should redirect to the customer home page if login is successful, otherwise redirect to the customer login page
 
 
