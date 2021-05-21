@@ -342,26 +342,25 @@ Body:
 ```
 ## Login Details
 ### Customer Login
-```
 Customer login example details:
 
-Email: max123@gmail.com
-
-Password: Max123456
-
-Should redirect to the customer home page if login is successful, otherwise redirect to the customer login page
-```
+|    <!-- -->          |        <!-- -->                     |
+|----------------------|-------------------------------------|
+| **Email**            | max123@gmail.com   |
+| **Password**         | Max123456 |
+| **Details**       | Should redirect to the customer home page if login is successful, otherwise redirect to the customer login page |
 
 ### Van Login
-```
+
 Van login example details:
 
-Email: SisterCoffee
+|    <!-- -->          |        <!-- -->                     |
+|----------------------|-------------------------------------|
+| **Vendor Name**      | SisterCoffee   |
+| **Password**         | Sister123456 |
+| **Method** 	       | PUT                 	 	     |
+| **Details**       | Should redirect to the customer home page if login is successful, otherwise redirect to the vendor login page |
 
-Password: Sister123456
-
-Should redirect to the customer home page if login is successful, otherwise redirect to the vendor login page
-```
 
 **Task List:**
 
