@@ -72,6 +72,7 @@ module.exports = function(passport) {
                         // server uses that identifier to identify different clients
                         // all this is handled by the session middleware that we are using 
                         req.session.email = email;
+                        console.log("login successful")
                         return done(null, user, req.flash('loginMessage', 'Login successful'));
                     }
                 });
