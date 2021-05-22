@@ -18,6 +18,9 @@ const customerController = require('../controllers/customerController.js')
 // require the order controller
 const orderController = require('../controllers/orderController.js')
 
+//handle GET request for find nearest van
+customerRouter.post('/nearest-van', customerController.getNearestforCustomer)
+
 //handle the GET request to get the home page
 customerRouter.get('/', (res, req) => customerController.getHomePage(res, req))
 customerRouter.get('/getLoginPage', (res, req) => customerController.getLoginPage(res, req))

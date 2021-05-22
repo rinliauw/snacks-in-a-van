@@ -172,6 +172,7 @@ footer {
     letter-spacing: .04em;
     font-size: 20px;
     padding: 15px 20px;
+    width: 60%;
 }
 
 #homePage .col1 button:hover{

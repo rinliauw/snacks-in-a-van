@@ -4,7 +4,7 @@
 <h1> Location Updated!</h1><br>
 
 <p>Van Name: {{oneVan.name}}</p>
-<p>Location: {{oneVan.location}}</p>
+<p>Location: {{oneVan.location.latitude}}, {{oneVan.location.longitude}}</p>
 <p>Location Description: {{oneVan.location_description}}</p>
 <p>Open?
     {{#if oneVan.ready_for_order}} Yes, we are open!

@@ -113,7 +113,6 @@ const viewOrderHistory = async (req, res) => {
     }
 }
 
-
 module.exports = {
     getOrderWithVanName, markOrderAsFulfilled, confirmOrder, viewOrderHistory
 }

@@ -21,6 +21,18 @@
     --color-beige: #e9d6cd;
 }
 
+a{
+    color: var(--color-dark);
+    font-family: 'Raleway', sans-serif;
+}
+
+
+a:hover{
+    border: 10px;
+    background-color:#dfa167;
+    color: white;
+}
+
 p{
     font-family: 'Raleway', sans-serif;
 }

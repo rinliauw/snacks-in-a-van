@@ -1,18 +1,39 @@
 {{!Homepage for the customer website}}  
 <section id="homePage">
+    <div class="col1">
+        <h1>Snacks in a Van</h1>
+        <hr>
+        <p>
+            Welcome! This is a project to create web apps for 'Snacks in A Van' a new startup company operating in Melbourne.
+            There will be 2 web apps, one for the customers and one for the vendors.
+        </p>
+        <!--<button onclick="location.href = '/customer/nearest-van'">FIND NEAREST VAN</button>!-->
+        <form method="POST" action="/customer/nearest-van">
+            <input type="hidden" id="location" name="location">
+            <input type="submit" value="Find Nearest Van">
+            <br>
+        </form>
+    </div>
     
-        <div class="col1">
-            <h1>Snacks in a Van</h1>
-            <hr>
-            <p>
-                Welcome! This is a project to create web apps for 'Snacks in A Van' a new startup company operating in Melbourne.
-                There will be 2 web apps, one for the customers and one for the vendors.
-            </p>
-            <button onclick="location.href = '/customer/snacks'">ORDER NOW</button>
-        </div>
-        
-        <div class="col2">
-            <img src="https://pngimg.com/uploads/mug_coffee/mug_coffee_PNG16824.png">
-        </div>
-        
+    <div class="col2">
+        <img src="https://pngimg.com/uploads/mug_coffee/mug_coffee_PNG16824.png">
+    </div>
+    
+    <script>
+        if ('geolocation' in navigator) {
+        console.log('geolocation available');
+        navigator.geolocation.getCurrentPosition(position => {
+        lat = position.coords.latitude; 
+        lon = position.coords.longitude;
+        //console.log(lat, lon);
+
+        a = JSON.stringify({'latitude': lat, 'longitude':lon})
+        console.log(a)
+        document.getElementById('location').value = a;
+      });
+    } else {
+      console.log('geolocation not available');
+    }
+
+    </script>
 </section>

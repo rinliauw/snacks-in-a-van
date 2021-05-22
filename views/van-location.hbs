@@ -15,8 +15,8 @@
           <form method="post" action="/vendor/update-van-details/open">
             <p>Location longitude</p>
             <input type="hidden" id="location" name="location">
-            <p>latitude: <span id="latitude" name="location"></span>&deg;<br />
-              longitude: <span id="longitude"></span>&deg;</p>
+            <p>latitude: <span id="latitude" name="latitude"></span>&deg;<br />
+              longitude: <span id="longitude" name="longitude"></span>&deg;</p>
             <br>
             <!--<input type="text" id="location" name="location", placeholder="Example: -12983, 119823">!-->
             <p>Location description</p>
@@ -42,10 +42,13 @@
       navigator.geolocation.getCurrentPosition(position => {
         lat = position.coords.latitude;
         lon = position.coords.longitude;
-        // console.log(lat, lon);
+        //console.log(lat, lon);
+
+        a = JSON.stringify({'latitude': lat, 'longitude':lon})
+        console.log(a)
         document.getElementById('latitude').textContent = lat;
         document.getElementById('longitude').textContent = lon;
-        document.getElementById('location').value = lat, lon;
+        document.getElementById('location').value = a;
 
         const mymap = L.map('mapping').setView([lat, lon], 15);
         const attribution =

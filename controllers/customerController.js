@@ -5,9 +5,26 @@ const Customer = mongoose.model("Customer");
 const addCart = mongoose.model("addCart");
 const Snack = mongoose.model("Snack");
 
+// require vanController module to get nearest van
+const vanController = require('../controllers/vanController.js')
+
 // get express-validator, to validate user data in forms
 const expressValidator = require('express-validator');
 const bcrypt = require('bcrypt');
+
+// getNearest Van
+const getNearestforCustomer = async(req, res) => {
+    try {
+        console.log('locate van')
+        console.log(req.body.location)
+        customerlocation = JSON.parse(req.body.location)
+        console.log(await vanController.getNearestVan(customerlocation))
+        const nearestVan = await vanController.getNearestVan(customerlocation)
+        res.send(nearestVan)
+    } catch (e){
+        console.log(e); 
+    }
+}
 
 //handle request to get customer homepage
 const getHomePage = async(req, res) => {
@@ -232,5 +249,5 @@ const saveAfterLogOut =  async (req, res, logoutitems, logoutqty) => {
 }
 
 module.exports = {
-    getAllCustomers, getOneCustomer, getSignUpPage, getCustomerCart2, addItem, getHomePage, getCustomerCart, getLoginPage, saveCart, saveAfterLogOut
+    getAllCustomers, getOneCustomer, getSignUpPage, getCustomerCart2, addItem, getHomePage, getCustomerCart, getLoginPage, saveCart, saveAfterLogOut, getNearestforCustomer
 }
