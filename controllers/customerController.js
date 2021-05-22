@@ -56,7 +56,7 @@ const getLoginPage = async(req, res) => {
 //handle request to get signup page
 const getSignUpPage = async(req, res) => {
     try {
-        res.render('signup', {"loggedin": req.isAuthenticated()});
+        res.render('signup', {"loggedin": req.isAuthenticated(), "message": req.flash('signupMessage')[0]});
     } catch (e){
         console.log(e);
     }
