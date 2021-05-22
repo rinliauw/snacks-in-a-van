@@ -25,7 +25,7 @@
         navigator.geolocation.getCurrentPosition(position => {
         lat = position.coords.latitude; 
         lon = position.coords.longitude;
-        //console.log(lat, lon);
+        console.log(lat, lon);
 
         a = JSON.stringify({'latitude': lat, 'longitude':lon})
         console.log(a)

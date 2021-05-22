@@ -16,13 +16,13 @@ const bcrypt = require('bcrypt');
 const getNearestforCustomer = async(req, res) => {
     try {
         if (req.isAuthenticated()){
-            console.log('locate van')
-            console.log(req.body.location)
-            customerlocation = await JSON.parse(req.body.location)
-            console.log(await vanController.getNearestVan(customerlocation))
+            // console.log('locate van')
+            // console.log(req.body.location)
+            customerlocation = (req.body.location)
+            // console.log(await vanController.getNearestVan(customerlocation))
             const nearestVan = await vanController.getNearestVan(customerlocation)
             //res.send(nearestVan)
-            return res.render('nearest-van.hbs', {nearestVan, 'loggedin': req.isAuthenticated()})
+            return res.render('nearest-van.hbs', {'nearestVan':nearestVan, 'loggedin': req.isAuthenticated()})
         }
         else{
             return res.redirect('/customer/getLoginPage')
