@@ -73,7 +73,7 @@ module.exports = function(passport) {
                         // all this is handled by the session middleware that we are using 
                         req.session.email = email;
                         console.log("login successful")
-                        return done(null, user, req.flash('loginMessage', 'Login successful'));
+                        return done(null, user, req.flash('loginMessages', 'Login successful'));
                     }
                 });
             });

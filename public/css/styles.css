@@ -776,7 +776,7 @@ button:hover{
 .bg-modal {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0);
     position: absolute;
     top: 0;
     display: flex;
@@ -785,10 +785,22 @@ button:hover{
     
 }
 
+.addcart-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    overflow: auto;
+}
+
 .modal-content {
     width: 500px;
     height: 250px;
-    background-color: #e9d6cd;
+    background-color: #dfa167;
     border-radius: 4px;
     text-align: center;
     padding: 20px;

@@ -5,30 +5,66 @@
 <center><img src="https://source.unsplash.com/{{desiredSnack.photo}}" alt="hosted by Unsplash"></center>
 <div class="Price"> Price: ${{desiredSnack.price}}</p><br>
 <p id="snackid" hidden>{{desiredSnack._id}}</p>
-{{#if loggedin}}<label for="quantity"><p>Quantity: (put 0 to remove item)</p></label>
+
+{{#if loggedin}}
+<label for="quantity"><p>Quantity: (put 0 to remove item)</p></label>
 <input type="number" id="quantity" name="quantity" min="0" max="50">
 <button onclick="toLocalStorage()" type="submit">Add to Cart</button><br>
 <a href="/customer/cart">Proceed to Checkout</a> 
-{{else}}<p>Please <a href="/customer/getLoginPage">Log In</a> to Order</p>
+{{else}}
+<p>Please <a href="/customer/getLoginPage">Log In</a> to Order</p>
 {{/if}}
+</section>
+
+<!-- pop up message when clicking add to cart -->
+<div class="addcart-modal">
+    <div class="modal-content">
+        <div class="close">&times;</div>
+        <div><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></div>
+        <div>
+            <p id="addToCartMessage"></p>
+        </div>
+    </div>
+</div>
+
 <script>
     function toLocalStorage() {
         // create a new Array if it does not exist and put Snack ID in it.
         if (localStorage.getItem("current_cart") === null){
-            localStorage.setItem("current_cart", JSON.stringify([document.getElementById("snackid").innerHTML]))
-            localStorage.setItem("quantity", JSON.stringify([document.getElementById("quantity").value]))
+            if(document.getElementById("quantity").value === ""){
+                //user haven't put quantity
+                console.log("quantity empty");
+                document.getElementById("addToCartMessage").innerHTML = "Please put desired quantity.";
+            }
+            else{
+                localStorage.setItem("current_cart", JSON.stringify([document.getElementById("snackid").innerHTML]))
+                localStorage.setItem("quantity", JSON.stringify([document.getElementById("quantity").value]))
+                document.getElementById("addToCartMessage").innerHTML = "Successfully added to cart."
+            }
         }
         else{ // get list of Snacks in localStorage
             currentCart = JSON.parse(localStorage.getItem("current_cart"));
             currentQuantity = JSON.parse(localStorage.getItem("quantity"));
             thisItem = document.getElementById("snackid").innerHTML;
             thisQuantity = document.getElementById("quantity").value;
-
-            currentCart.push(thisItem);
-            currentQuantity.push(thisQuantity);
-            localStorage.setItem("current_cart", JSON.stringify(currentCart));
-            localStorage.setItem("quantity", JSON.stringify(currentQuantity));    
+            if(thisQuantity.length === 0) {
+                //user haven't put quantity
+                console.log("quantity empty");
+                document.getElementById("addToCartMessage").innerHTML = "Please put desired quantity.";
+            }
+            else { //add to array in local storage
+                currentCart.push(thisItem);
+                currentQuantity.push(thisQuantity);
+                localStorage.setItem("current_cart", JSON.stringify(currentCart));
+                localStorage.setItem("quantity", JSON.stringify(currentQuantity));
+                document.getElementById("addToCartMessage").innerHTML = "Successfully added to cart."
+            }   
         }
+        document.querySelector('.addcart-modal').style.display='flex';
     }
+
+    document.querySelector('.close').addEventListener('click', function() {
+        document.querySelector('.addcart-modal').style.display='none';
+    });
 </script>
-</section>
+
