@@ -14,7 +14,8 @@ const getNearestVan = async (customerlocation, limit=5) => {
     // location getallVan : longitude, latitude
 try {
     console.log(customerlocation)
-    const vans = await Van.find()
+    const vans = await Van.find().lean()
+    console.log(customerlocation.longitude)
     for (i=0; i < vans.length; i++){
         long = vans[i].location.longitude - customerlocation.longitude
         latitude = vans[i].location.latitude - customerlocation.latitude

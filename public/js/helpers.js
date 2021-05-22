@@ -3,6 +3,18 @@ var register = function(Handlebars) {
   var helpers = { 
     multiply: function (num1, num2) {
       return num1*num2
+    },
+
+    van_helper: function (thisVan){
+      var ret = "";
+
+      for (var i = 0, j = thisVan.length; i < j; i++){
+        ret = ret + "<p>" + thisVan[i].name + "<br>" + thisVan[i].location_description + " </p>" 
+        + "<p><span class = van_lat_" + String(i) + '">' + thisVan[i].location.latitude +
+        "</span>" + " " + "<span class = van_long_" + String(i) + '">' + thisVan[i].location.longitude +
+        "</span></p>"
+      }
+      return ret;
     }
   };
 

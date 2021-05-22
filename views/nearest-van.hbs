@@ -1,1 +1,72 @@
-{{nearestVan}}
+<h1 id="h1">5 Vans Near You</h1>
+
+<div id="mapping2"></div>
+{{!-- {{#van_helper nearestVan}}</div> --}}
+{{#each nearestVan}}
+    <p>{{this.name}}</p>
+    <p>{{this.location_description}}</p>
+    <p><span class="vans_lat">{{this.location.latitude}}</span>
+    <span class="vans_lon">{{this.location.longitude}}</span></p>
+    {{/each}}
+{{!-- {{/van_helper}} --}}
+
+
+<style>
+    #mapping2{
+        height: 60vh;
+    }
+</style>
+
+<script>
+    if ('geolocation' in navigator) {
+      console.log('geolocation available');
+      navigator.geolocation.getCurrentPosition(position => {
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+        console.log('printing')
+        //console.log(lat, lon);
+
+        var mymap2 = L.map('mapping2').setView([lat, lon], 15);
+        var attribution =
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+        var tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        var tiles = L.tileLayer(tileUrl, { attribution });
+        var locations = []
+        tiles.addTo(mymap2);
+        var marker = L.marker([lat, lon]).addTo(mymap2);
+        var vans_lat = document.getElementsByClassName('vans_lat')
+        var vans_long = document.getElementsByClassName('vans_lon')
+
+        var lat_array = new Array();
+          for (var i=0; i<5; i++){ //5 is because top 5 nearest van
+            var curr_lat = vans_lat[i].innerHTML
+            var curr_lon = vans_long[i].innerHTML
+            lat_array.push([curr_lat, curr_lon])
+          }
+
+        console.log(lat_array)
+        console.log('after')
+        var greenIcon = L.icon({
+            iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png',
+            shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+
+            iconSize:     [38, 95], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        for (var i=0; i < lat_array.length; i++){
+          console.log('inside')
+          marker = new L.marker([lat_array[i][0], lat_array[i][1]], {'icon': greenIcon})
+          .addTo(mymap2);
+        }
+        //const van_long = document.getElementById("van_long").innerHTML
+        //const marker2 = L.marker([van_lat, van_long]).addTo(mymap2);
+      })
+    }
+    else {
+      console.log('geolocation not available');
+    }
+    
+</script>
