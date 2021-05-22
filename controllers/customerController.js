@@ -17,11 +17,12 @@ const getNearestforCustomer = async(req, res) => {
     try {
         if (req.isAuthenticated()){
             // console.log('locate van')
-            // console.log(req.body.location)
-            customerlocation = (req.body.location)
+            console.log(typeof(req.body.location))
+            customerlocation = JSON.parse(req.body.location)
             // console.log(await vanController.getNearestVan(customerlocation))
             const nearestVan = await vanController.getNearestVan(customerlocation)
             //res.send(nearestVan)
+            console.log(nearestVan)
             return res.render('nearest-van.hbs', {'nearestVan':nearestVan, 'loggedin': req.isAuthenticated()})
         }
         else{

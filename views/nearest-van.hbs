@@ -1,4 +1,62 @@
-<h1>5 Vans Near You</h1>
-{{#each nearestVan}}
-    {{this}}
-{{/each}}
+<h1 id="h1">5 Vans Near You</h1>
+
+<div id="mapping2"></div>
+<span id="latitude"></span>
+<span id="longitude"></span>
+{{#van_helper nearestVan}}</div>
+    {{!-- <p>{{this.name}}</p>
+    <p>{{this.location_description}}</p>
+    <span id="van_lat">{{this.location.latitude}}</span>,
+    <span id="van_long">{{this.location.longitude}}</span>
+    <span id="van_lat_0">{{nearestVan[0].location.latitude}}</span>
+    <span id="van_lat_1">{{nearestVan[1].location.latitude}}</span>
+    <span id="van_lat_2">{{nearestVan[2].location.latitude}}</span>
+    <span id="van_lat_3">{{nearestVan[3].location.latitude}}</span>
+    <span id="van_lat_4">{{nearestVan[4].location.latitude}}</span> --}}
+{{/van_helper}}
+
+
+<style>
+    #mapping2{
+        height: 60vh;
+        width: 60vh;
+    }
+</style>
+
+<script>
+    if ('geolocation' in navigator) {
+      console.log('geolocation available');
+      navigator.geolocation.getCurrentPosition(position => {
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+        //console.log('printing')
+        //console.log(lat, lon);
+
+        document.getElementById('latitude').textContent = lat;
+        document.getElementById('longitude').textContent = lon;
+
+        const mymap2 = L.map('mapping2').setView([lat, lon], 15);
+        const attribution =
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+        const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const tiles = L.tileLayer(tileUrl, { attribution });
+        var locations = []
+        tiles.addTo(mymap2);
+        const marker = L.marker([lat, lon]).addTo(mymap2);
+        setTimeout(function(){  
+
+          for (var i=0; i<5; i++){ //5 is because top 5 nearest van
+            var van_lat = document.getElementById("van_lat_" + toString(i))
+            console.log(document.getElementById("van_lat" + toString(i)))
+          }
+        },1000);
+        console.log('after')
+        //const van_long = document.getElementById("van_long").innerHTML
+        //const marker2 = L.marker([van_lat, van_long]).addTo(mymap2);
+      });
+    }
+    else {
+      console.log('geolocation not available');
+    }
+    
+</script>
