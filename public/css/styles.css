@@ -164,7 +164,7 @@ footer {
     text-align: left;
 }
 
-#homePage .col1 button{
+#homePage .col1 input[type="submit"]{
     margin-top: 20px;
     background: #dfa167;
     border: none;
@@ -175,7 +175,11 @@ footer {
     width: 60%;
 }
 
-#homePage .col1 button:hover{
+#homePage form {
+    display: block;
+}
+
+#homePage .col1 input[type="submit"]:hover{
     margin-top: 20px;
     background: #966c45;
     border: none;
@@ -184,6 +188,8 @@ footer {
     font-size: 20px;
     padding: 15px 20px;
 }
+
+
 
 #homePage .col1  p {
     flex-basis: 60%;
@@ -218,6 +224,7 @@ form input[type$=submit]{
     padding: 15px 15px;
     width: 50%; 
 }
+
 
 
 
