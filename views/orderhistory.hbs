@@ -1,17 +1,17 @@
 <section id="OrderDetails">
-    <h1>Order History</h1><br>
+    <h1>Order Details</h1><br>
     <table>
         <tr>
             <th>Order ID</th>
             <th>Items</th>
             <th>Order time</th>
             <th>Status</th>
+            <th>Allocated Van</th>
         </tr>
         {{#each thisOrder}}
             <tr>
                 <td> {{this._id}}</td>
                 <td> 
-
                 {{#each items}}
                     {{#if this.quantity}}
                     <p>{{this.quantity}}x{{this.snackId.name}}</p>
@@ -20,8 +20,8 @@
                 </td>
                 <td> {{this.time_ordered}}</td>
                 <td>{{#if this.fulfilled}}Fulfilled{{else}}Outstanding{{/if}}</td>
+                <td>{{this.van.name}}</td>
             </tr>
-
         {{/each}}
         </table>
 </section>

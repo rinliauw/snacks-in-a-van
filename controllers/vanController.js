@@ -1,3 +1,4 @@
+const { compareSync } = require("bcrypt")
 const mongoose = require("mongoose")
 
 // import van model
@@ -45,6 +46,7 @@ catch (e) {     // error occurred
 // handles request to get van login page
 const getVanLogin = async (req, res) => {
     try {
+        // Testing Purpose Only Remove this later :)
         console.log("getNearest")
         const customerLocation = {"latitude":100, "longitude":120}
         const getResponse = await getNearestVan(customerLocation)
@@ -60,9 +62,7 @@ const getVanLogin = async (req, res) => {
 // handles request to get van location
 const getVanLocation = async (req, res) => {
     try {
-        //console.log(req.session)
-        //console.log(req.user)
-        //console.log(req.isAuthenticated())
+           // Testing
         res.header('Access-Control-Allow-Credentials', true);
         console.log("IsAuthenticated:")
         console.log(req.isAuthenticated())
@@ -100,7 +100,7 @@ const closeVan = async (req, res) => {
             res.status(404)
             return res.send("Van not found")
         }
-        return res.render('van-close', { "oneVan": oneVan, layout: 'vendor-main.hbs' })  // van was found
+        return res.render('van-close', { "oneVan": oneVan, layout: 'vendor-main.hbs', "vanloggedin": req.isAuthenticated() })  // van was found
     } catch (e) {     // error occurred
         res.status(400)
         return res.send("Database query failed")
@@ -127,7 +127,7 @@ const locateVan = async (req, res) => {
             return res.send("Van not found")
         }
         console.log(oneVan)
-        return res.render('van-open', { "oneVan": oneVan, layout: 'vendor-main.hbs' })  // van was found
+        return res.render('van-open', { "oneVan": oneVan, layout: 'vendor-main.hbs', "vanloggedin": req.isAuthenticated()  })  // van was found
 
     } catch (e) {     // error occurred
         res.status(400)
@@ -160,6 +160,8 @@ const showIdDetail = async (req, res) => {
         return res.send("Database query failed")
     }
 }
+
+
 
 // export the functions
 module.exports = {
