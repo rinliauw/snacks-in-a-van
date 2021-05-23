@@ -33,7 +33,7 @@ customerRouter.get('/snacks', snackController.getAllSnacks)
 customerRouter.get('/snacks/:name', snackController.getOneSnack)
 
 //handle the GET request to get the customer's cart
-customerRouter.get('/cart', customerController.getCustomerCart2)
+customerRouter.get('/cart', customerController.getCustomerCart)
 
 //handle the GET request to get customer order details
 // customerRouter.post('/order-details', orderController.confirmOrder)
@@ -94,9 +94,6 @@ customerRouter.get('/', (res, req) => customerController.getStartPage(res, req))
 //handle the GET request to get the details of one customer
 customerRouter.get('/:id', customerController.getOneCustomer) 
 customerRouter.post('/:id/order', customerController.addItem)
-
-//handle the GET request to get the customer order
-customerRouter.get('/:id/cart', customerController.getCustomerCart) 
 
 // export the router
 module.exports = customerRouter

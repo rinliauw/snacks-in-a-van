@@ -244,13 +244,16 @@ footer {
 
 #homePage .col1 input[type="button"]{
     margin-top: 20px;
+    margin-bottom: 25px;
+    border-radius: 20px;
     background: #dfa167;
     border: none;
     outline: none;
     letter-spacing: .04em;
-    font-size: 20px;
-    padding: 15px 20px;
-    width: 60%;
+    font-size: 23px;
+    font-family: 'Raleway', sans-serif;;
+    padding: 15px 15px;
+    width: 250px; 
 }
 
 #homePage form {
@@ -258,13 +261,7 @@ footer {
 }
 
 #homePage .col1 input[type="button"]:hover{
-    margin-top: 20px;
     background: #966c45;
-    border: none;
-    outline: none;
-    letter-spacing: .04em;
-    font-size: 20px;
-    padding: 15px 20px;
 }
 
 
@@ -446,8 +443,8 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-}
 
+}
 
 #snacksMenu h1 {
     text-align: center;
@@ -479,6 +476,10 @@ form span.bigScreen {   /* on small screens, hide some of the wording */
     vertical-align: middle;
     border: 0;
 }
+#snacksMenu .snack-img:hover {
+    opacity: 0.3;
+}
+
 
 #snacksMenu .snack-body {
     box-sizing: border-box;

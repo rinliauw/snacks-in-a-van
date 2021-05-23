@@ -12,9 +12,6 @@ const vanController = require('../controllers/vanController.js')
 const expressValidator = require('express-validator');
 const bcrypt = require('bcrypt');
 
-// update 
-
-
 // get top 5 nearest van and show them on the map
 const getNearestforCustomer = async(req, res) => {
     try {
@@ -76,31 +73,6 @@ const getAllCustomers = async (req, res) => {
     }
 }
 
-// handle request to show current customer's cart
-const getCustomerCart = async(req, res) => {
-    try{
-        const oneCust = await Customer.findById(req.params.id).populate({path:'cart.snackId', model:'Snack'}).lean()
-        if (oneCust){
-            const cart = oneCust.cart
-            var total = 0;
-            var totalEach = new Array(cart.length);
-            for (var i = 0; i < cart.length; i++) {
-                var currentItem = cart[i];
-                totalEach[i] = currentItem.snackId.price*currentItem.quantity
-                total+=(currentItem.snackId.price*currentItem.quantity)
-            }
-            
-            return res.render('cart', {cart, total, totalEach, 'loggedin': req.isAuthenticated()})
-        } else {
-            res.status(404)
-            return res.send("Customer is not found in database")
-        }
-    } catch (e){
-        res.status(400)
-        return res.send("Database query failed - this customer could not be found")
-    }
-}
-
 // handle request to get one customer
 const getOneCustomer = async(req, res) => {
     try{
@@ -118,7 +90,7 @@ const getOneCustomer = async(req, res) => {
 }
 
 // handle request to show current customer's cart
-const getCustomerCart2 = async(req, res) => {
+const getCustomerCart = async(req, res) => {
     try{
         let oneCust = await Customer.findOne( {email: req.session.email} ).populate({path:'cart.snackId', model:'Snack'}).lean()
         
@@ -267,5 +239,5 @@ const saveAfterLogOut =  async (req, res, logoutitems, logoutqty) => {
 }
 
 module.exports = {
-    getAllCustomers, getOneCustomer, getSignUpPage, getCustomerCart2, addItem, getHomePage, getCustomerCart, getLoginPage, saveCart, saveAfterLogOut, getNearestforCustomer
+    getAllCustomers, getOneCustomer, getSignUpPage, addItem, getHomePage, getCustomerCart, getLoginPage, saveCart, saveAfterLogOut, getNearestforCustomer
 }

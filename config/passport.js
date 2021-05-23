@@ -20,8 +20,8 @@ module.exports = function(passport) {
     passport.deserializeUser(function(user, done) {
         //console.log(user.type, 'user')
         //console.log(user.id, 'user') for debugging
+        if (user.type === 'vendor') { 
         // deserializes user for either vendor or customer
-        if (user.type === 'vendor') {
         Van.findById(user.id, function(err, user) {
             done(err, user);
         });
@@ -66,11 +66,6 @@ module.exports = function(passport) {
                     }
                     // otherwise, we put the user's email in the session
                     else {
-                        // in app.js, we have indicated that we will be using sessions
-                        // the server uses the included modules to create and manage
-                        // sessions. each client gets assigned a unique identifier and the
-                        // server uses that identifier to identify different clients
-                        // all this is handled by the session middleware that we are using 
                         req.session.email = email;
                         console.log("login successful")
                         return done(null, user, req.flash('loginMessages', 'Login successful'));
@@ -118,7 +113,6 @@ module.exports = function(passport) {
 
                             return done(null, newCustomer);
                         });
-
                         // put the user's email in the session so that it can now be used for all
                         // communications between the client (browser) and the FoodBuddy app
                         req.session.email=email;

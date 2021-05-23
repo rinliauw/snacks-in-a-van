@@ -1,4 +1,6 @@
 // Code taken from foodbuddy app, provided by INFO30005 Faculty 2021
+// passport for vendor app
+
 // used to create our local strategy for authenticating
 // using username and password
 const LocalStrategy = require('passport-local').Strategy;
@@ -15,9 +17,6 @@ module.exports = function(passport) {
             passwordField : 'password',
             passReqToCallback : true}, // pass the req as the first arg to the callback for verification 
         function(req, name, password, done) {
-            
-            // we are using nextTick because without it the Customer.findOne does not work,
-            // so it's part of the 'syntax'
             process.nextTick(function() {
                 // see if the user with the email exists
                 Van.findOne({ 'name' :  name }, function(err, user) {
