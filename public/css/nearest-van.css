@@ -1,0 +1,79 @@
+
+/* the nearest van page */
+
+#nearestVan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#nearestVan h1{
+    text-align: center;
+    font-family: 'Orelega One', cursive;
+    font-size:var(--text-big);
+    padding-bottom: 30px;
+}
+
+#nearestVan .row {
+    display: block;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#nearestVan .container {
+    width: 500px;
+    height: 700px;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 40px 30px;
+    margin-right: 50px
+}
+
+#nearestVan input {
+    display: block;
+    margin: 10px auto;
+    width: 70%;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid grey;
+    background-color: transparent;
+    color: black;
+    margin-bottom: 20px;
+}
+
+#nearestVan p {
+    font-size: var(--text-small);
+    text-align: left;
+}
+
+
+#nearestVan input:focus {
+    outline: none;
+}
+
+#nearestVan .btn {
+    margin: 0px;
+    border: 0;
+    padding: 10px 30px;
+    border-radius: 50px;
+    background-color: #dfa167;
+    color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+#nearestVan a {
+    text-decoration: underline;
+    color: var(--color-dark);
+}
+
+#nearestVan label {
+    display: block;
+    margin-bottom: 0;
+    margin-top: 5px;
+    font-size: smaller;
+}

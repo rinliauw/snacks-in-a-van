@@ -41,7 +41,6 @@ customerRouter.post('/order-details', async function(req, res) {
     await orderController.confirmOrder(req,res,req.body.current_van);
 });
 
-
 //handle the GET request to get customer order history
 customerRouter.get('/order-history', orderController.viewOrderHistory)
 
@@ -69,20 +68,18 @@ customerRouter.post('/logout', function(req, res) {
 });
 
 // GET - show the signup form to the user
-// http:localhost:5000/user/signup
 customerRouter.get("/signup", (req, res) => {
     res.render('signup');
 });
 
 // POST - user submits the signup form -- signup a new user
-// http:localhost:5000/user/signup
 customerRouter.post('/signup', passport.authenticate('local-signup', {
     successRedirect : '/customer', // redirect to the homepage
     failureRedirect : '/customer/signup/', // redirect to signup page
     failureFlash : true // allow flash messages
 }));
 
-// SHOPPING CART
+// shopping cart post request
 customerRouter.post('/cart', async function(req, res) {
     await customerController.saveCart(req,res,req.body.items, req.body.qty)
     res.redirect('/customer/cart');

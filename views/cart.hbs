@@ -1,14 +1,10 @@
 <script>
-    // do we want the van to be removed when submitting order ?
+    // added current van in session storage when submitting order
     function saveItems(){
         console.log(sessionStorage.getItem("current_van"))
         document.getElementById("current_van").value = JSON.parse(JSON.stringify(sessionStorage.getItem("current_van")));
-        console.log(document.getElementById("current_van").value)
-
-        document.getElementById("van_form").submit();
-        // sessionStorage.removeItem("current_van")
-        // sessionStorage.clear();
-                    
+        console.log(document.getElementById("current_van").value);
+        document.getElementById("van_form").submit(););        
     }
 
 </script>
@@ -25,7 +21,6 @@
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
-                
             </tr>
             {{#each cart}}
             {{#if this.quantity}}
@@ -40,8 +35,7 @@
                     </div>
                 </td>
                 <td>{{this.quantity}}</td>
-                <td>{{multiply this.snackId.price this.quantity}}</td>
-                  
+                <td>{{multiply this.snackId.price this.quantity}}</td> 
             </tr>
             {{/if}}
             {{/each}}

@@ -13,7 +13,7 @@ app.use(express.static('public'))	// define where static assets live
 const cors = require('cors');
 const session = require('express-session');
 const dotenv = require('dotenv').config();
-const flash=require('connect-flash-plus');
+const flash = require('connect-flash-plus');
 
 const expressValidator = require('express-validator');
 
@@ -31,7 +31,6 @@ app.use(cors({
 }));
   
 CONNECTION_STRING = "mongodb+srv://<username>:<password>@cluster0.7qkom.mongodb.net/snacksinavan?retryWrites=true&w=majority"
-
 MONGO_URL = CONNECTION_STRING.replace("<username>",process.env.MONGO_USERNAME).replace("<password>",process.env.MONGO_PASSWORD)
 
 // setup a session store signing the contents using the secret key

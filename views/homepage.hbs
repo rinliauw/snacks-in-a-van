@@ -1,14 +1,17 @@
+<link rel="stylesheet" href="/css/homepage.css">
+
 {{!Homepage for the customer website}}
+
 <section id="homePage">
     <div class="col1">
         <h1>Snacks in a Van</h1>
         <hr>
         <p>
             Welcome! This is a project to create web apps for 'Snacks in A Van' a new startup company operating in
-            Melbourne.
-            There will be 2 web apps, one for the customers and one for the vendors. Please enable location to find nearest van.
+            Melbourne. There will be 2 web apps, one for the customers and one for the vendors. Please enable location to find nearest vans.
         </p>
-        <!--<button onclick="location.href = '/customer/nearest-van'">FIND NEAREST VAN</button>!-->
+        
+        {{!-- submit a hidden form to get nearest van --}}
         <form method="POST" action="/customer/nearest-van" id="get_nearest_form">
             <input type="hidden" id="location" name="location">
             <input type="button" onclick="getNearestVan()" value="Find Nearest Van"><br>
@@ -17,34 +20,34 @@
         </form>
     </div>
 
-    <div class="col2">
-        <img src="https://pngimg.com/uploads/mug_coffee/mug_coffee_PNG16824.png">
+    <div class="col2"> {{!-- for coffee image --}}
+        <img src="https://pngimg.com/uploads/mug_coffee/mug_coffee_PNG16824.png"> 
     </div>
 
-    <script>
-        if ('geolocation' in navigator) {
+    <script> 
+        if ('geolocation' in navigator) { // fetch geolocation api for latitude and longitud
             function getNearestVan(){
                 console.log("Get Nearest Van")
 
-                // Call back function
+                // call back function: asynchronous
                 navigator.geolocation.getCurrentPosition(function (position){
                     lat = position.coords.latitude;
                     lon = position.coords.longitude;
                     console.log(lat, lon);
 
-                    a = JSON.stringify({ 'latitude': lat, 'longitude': lon })
+                    json_location = JSON.stringify({ 'latitude': lat, 'longitude': lon })
                     console.log(a)
-                    // Set Element Location 
-                    document.getElementById('location').value = a;
+                    // set Element Location 
+                    document.getElementById('location').value = json_location;
 
-                    // Submit After Successfully Getting Position from geoLocation API
+                    // submit After Successfully Getting Position from geoLocation API
                     document.getElementById("get_nearest_form").submit()
                 })
-                document.getElementById('please_wait').innerHTML = 'Fetching current location... Please wait'
+                document.getElementById('please_wait').innerHTML = 'Fetching current location... Please wait' // outside callback function
             }
         }
         else{
-            document.getElementById('please_wait').innerHTML = 'Please enable location'
+            document.getElementById('please_wait').innerHTML = 'Please enable location' // if location not enabled
         }
     </script>
 </section>

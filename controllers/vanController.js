@@ -8,40 +8,27 @@ const utility = require('../routes/utility.js')
 
 // get nearest van
 const getNearestVan = async (customerlocation, limit=5) => { 
-    // getallVan
-    // customerlocation input {"latitude": ... , "longitude": ...}
-    // variable distance -> mskin ke getallVan tiap van
-    // location user
-    // location getallVan : longitude, latitude
-try {
-    console.log(customerlocation)
-    const vans = await Van.find().lean()
-    console.log(customerlocation.longitude)
-    for (i=0; i < vans.length; i++){
-        long = vans[i].location.longitude - customerlocation.longitude
-        latitude = vans[i].location.latitude - customerlocation.latitude
-        distance = Math.sqrt(long**2 + latitude**2)
-
-        vans[i].distance = distance
+    try {
+        // console.log(customerlocation)
+        const vans = await Van.find().lean()
+        // console.log(customerlocation.longitude)
+        for (i=0; i < vans.length; i++){ // calculate distance between customer and each van available
+            long = vans[i].location.longitude - customerlocation.longitude
+            latitude = vans[i].location.latitude - customerlocation.latitude
+            distance = Math.sqrt(long**2 + latitude**2) // calculate euclidian distance between customer and van locatioe
+            vans[i].distance = distance
+        }
+        // sort van by distance
+        vans.sort((a,b)=>{
+            return a.distance - b.distance
+        })
+        return vans.slice(0, limit)
     }
-    
-    // sort by distance
-    vans.sort((a,b)=>{
-        return a.distance - b.distance
-    })
-    
-    for (i=0; i< vans.length; i++){
-        console.log(vans[i].distance)
-        console.log(vans[i].location)
+    catch (e) {     // error occurred
+        res.status(400)
+        return res.send("Database query failed")
     }
-    return vans.slice(0, limit)
-}
-
-catch (e) {     // error occurred
-    res.status(400)
-    return res.send("Database query failed")
-}
-}
+    }
 
 // handles request to get van login page
 const getVanLogin = async (req, res) => {
@@ -160,8 +147,6 @@ const showIdDetail = async (req, res) => {
         return res.send("Database query failed")
     }
 }
-
-
 
 // export the functions
 module.exports = {

@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snacks in a Van</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css"> <!-- main css !-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Work+Sans&display=swap" rel="stylesheet">
     
+    <!-- Leaflet css for maps !-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin="" />
@@ -18,30 +18,30 @@
     function logout(){ // submit logout form
         document.getElementById("logoutform").submit();          
     }
+
     function saveItems(){
         // get the snack object IDs from local storage
-        document.getElementById("items").value = JSON.parse(JSON.stringify(localStorage.getItem("current_cart")));
-        document.getElementById("qty").value = JSON.parse(JSON.stringify(localStorage.getItem("quantity")));
-        //alert( document.getElementById("items").value)
-        //alert( document.getElementById("qty").value)
-        
-        // submit a hidden form with the snack ids. You could use fetch to submit the data to API as well.
-        document.getElementById("cartform").submit();
+        document.getElementById("items").value = JSON.parse(JSON.stringify(localStorage.getItem("current_cart"))); // set form value of form from localstorage
+        document.getElementById("qty").value = JSON.parse(JSON.stringify(localStorage.getItem("quantity"))); // set quantity value of form from localstorage
+        // submit a hidden form with the snack ids
+        document.getElementById("cartform").submit(); // submit form 
         localStorage.clear();
-                    
+      
     }
-          
 </script>
 
 <body>
     <nav class="navbar">
-            <a href="/" class="logo"><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></a>
+            <a href="/" class="logo"><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></a> <!-- logo !-->
         
+        <!-- hamburger menu for responsive design !-->
         <a href="#" class="menu-toggle">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </a>
+
+        <!-- main navbar links !-->
         <div class="navbar-links">
             <ul>
                 <li><a href="/customer">Home</a></li>
@@ -56,16 +56,19 @@
             </ul>
         </div>
     </nav>
+
     <main>
         {{{body}}}
     </main>
+
     <form method="post" action="/customer/logout" id="logoutform">
     </form>
-
     <form method="post" action="/customer/cart" id="cartform">
         <input type="hidden" name="items" id="items"/>
         <input type="hidden" name="qty" id="qty"/>
     </form>
+
+    <!-- javascript for hamburger menu !-->
     <script>
         const hamburgerMenu = document.querySelector('.menu-toggle')
         const navbarLinks = document.querySelector('.navbar-links')
@@ -74,14 +77,13 @@
         })
     </script>
 
-
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <!-- Leaflet code for maps -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
 </body>
 
-<style>
+<style> /* remove hover effect */
     .logo:hover{
         background-color: #e9d6cd;
     }
