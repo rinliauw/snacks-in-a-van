@@ -66,24 +66,7 @@
                 document.getElementById("addToCartMessage").innerHTML = "Successfully added to cart."
             }
         }
-        else{ // get list of Snacks in localStorage
-            currentCart = JSON.parse(localStorage.getItem("current_cart"));
-            currentQuantity = JSON.parse(localStorage.getItem("quantity"));
-            thisItem = document.getElementById("snackid").innerHTML;
-            thisQuantity = document.getElementById("quantity").value;
-            if(thisQuantity.length === 0) {
-                //user haven't put quantity
-                console.log("quantity empty");
-                document.getElementById("addToCartMessage").innerHTML = "Please put desired quantity.";
-            }
-            else { //add to array in local storage
-                currentCart.push(thisItem);
-                currentQuantity.push(thisQuantity);
-                localStorage.setItem("current_cart", JSON.stringify(currentCart));
-                localStorage.setItem("quantity", JSON.stringify(currentQuantity));
-                document.getElementById("addToCartMessage").innerHTML = "Successfully added to cart."
-            }   
-        }
+        
         document.querySelector('.addcart-modal').style.display='flex';
     }
 
