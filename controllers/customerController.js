@@ -12,7 +12,10 @@ const vanController = require('../controllers/vanController.js')
 const expressValidator = require('express-validator');
 const bcrypt = require('bcrypt');
 
-// getNearest Van
+// update 
+
+
+// get top 5 nearest van and show them on the map
 const getNearestforCustomer = async(req, res) => {
     try {
         if (req.isAuthenticated()){
@@ -176,7 +179,13 @@ const saveCart =  async (req, res, items, qty) => {
     
 	try {
 		// get the user whose email is stored in the session -- user is logged in
-		// and that we are saving at least one item
+		// // and that we are saving at least one item
+        // if(req.session.email){
+        //     van_name = JSON.parse(van_name)
+        //     let user = await Customer.findOne({email: req.session.email});
+        //     user.
+        //     console.log(van_name)
+        // }
 		if(req.session.email && items.length > 0){
 			// find user in database	
 			let user = await Customer.findOne( {email: req.session.email} )
@@ -208,6 +217,7 @@ const saveCart =  async (req, res, items, qty) => {
             	
 			user.save()
 		}
+
 	} catch (err) {
 		console.log(err)
 	}

@@ -3,21 +3,23 @@
 <div id="mapping2"></div>
 {{!-- {{#van_helper nearestVan}}</div> --}}
 {{#each nearestVan}}
-    <p>{{this.name}}</p>
+    <p><div id="van_name">{{this.name}}</div></p>
     <p>{{this.location_description}}</p>
     <p><span class="vans_lat">{{this.location.latitude}}</span>
     <span class="vans_lon">{{this.location.longitude}}</span></p>
+    <button type="submit" onclick="vantoSessionstorage('{{this.name}}')">Choose this van</button>
     {{/each}}
 {{!-- {{/van_helper}} --}}
 
 
-<style>
-    #mapping2{
-        height: 60vh;
-    }
-</style>
-
 <script>
+
+    const nearestVan = {{{ stringify nearestVan }}};
+    function vantoSessionstorage(name) {
+      const van = nearestVan.find(van => van.name === name)
+      sessionStorage.setItem("current_van", JSON.stringify(van))
+    }
+
     if ('geolocation' in navigator) {
       console.log('geolocation available');
       navigator.geolocation.getCurrentPosition(position => {
@@ -68,5 +70,13 @@
     else {
       console.log('geolocation not available');
     }
+
     
 </script>
+
+
+<style>
+    #mapping2{
+        height: 60vh;
+    }
+</style>

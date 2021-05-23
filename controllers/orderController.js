@@ -43,18 +43,22 @@ const markOrderAsFulfilled = async (req, res) => {
 }
 
 // handles request to confirm order
-const confirmOrder = async (req, res) => {
-    console.log("confirmorder")
+const confirmOrder = async (req, res, current_van) => {
     try {
         //find the customer
         const oneCust = await Customer.findOne( {email: req.session.email} ).lean()
         console.log(oneCust)
+
+        console.log("confirmorder")
+        console.log(typeof(current_van))
+        console.log("after")
+
         const oneCart = oneCust.cart
-        if(oneCart.length === 0) {
+        if(oneCart.length === 0) { // if cart is 0, render 'cart is empty page'
             const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
             return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
         }
-        var isnotEmpty = 0;
+        var isnotEmpty = 0; // check if cart is not empty
         for(var i=0; i<oneCart.length; i++) {
             
             if(oneCart[i].quantity != 0) {
@@ -62,18 +66,20 @@ const confirmOrder = async (req, res) => {
             }
         }
 
-        if(!isnotEmpty){
+        if(!isnotEmpty){ // if cart is not empty, render 'order details' page
             const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
             return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
         }
         
+        // make new order
         const newOrder = new customerOrder({customer: oneCust._id})
         
         //make order outstanding
         newOrder.fulfilled = false;
         newOrder.picked_up = false;
         newOrder.discount = false;
-        
+        newOrder.van = JSON.parse(current_van);
+
         for(var i=0; i<oneCart.length; i++) {
             
             var newItem = new startOrder({snackId: oneCart[i].snackId, quantity: oneCart[i].quantity})
@@ -84,11 +90,12 @@ const confirmOrder = async (req, res) => {
         
         await newOrder.save()
         console.log(newOrder)
+
         await Customer.updateOne({_id: oneCust._id}, { $set: { cart: [] }}, function(err, affected){
             console.log('affected: ', affected);
         });
 
-        const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
+        const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
         
         return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
     } catch (e) {     // error occurred

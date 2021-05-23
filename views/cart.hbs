@@ -1,5 +1,19 @@
-{{! view customer order}}
+<script>
+    // do we want the van to be removed when submitting order ?
+    function saveItems(){
+        console.log(sessionStorage.getItem("current_van"))
+        document.getElementById("current_van").value = JSON.parse(JSON.stringify(sessionStorage.getItem("current_van")));
+        console.log(document.getElementById("current_van").value)
 
+        document.getElementById("van_form").submit();
+        // sessionStorage.removeItem("current_van")
+        // sessionStorage.clear();
+                    
+    }
+
+</script>
+
+{{! view customer order}}
 <section id = "currentCart">
     <center>
     <h1>Cart List</h1>
@@ -45,7 +59,11 @@
             </tr>
             <tr>
                 <td> <button onclick="location.href = '/customer/snacks'">CHANGE ORDER</button></td>
-                <td> <button onclick="location.href = '/customer/order-details'">CONFIRM ORDER</button></td>
+                <td><form method="post" action="/customer/order-details" id="van_form">
+                    <input type="hidden" name="current_van" id = "current_van"/>
+                    <input type="submit" onclick = "saveItems()" value="CONFIRM ORDER"/>
+                </form>
+                <td>
                 </div>
             </tr>
         </table>
@@ -57,6 +75,7 @@
 </section>
 
 <script>
+
 // Get the modal
 var modal = document.getElementById("myModal");
 

@@ -586,6 +586,26 @@ p{
     text-align: right;
 }
 
+#currentCart input[type="submit"] {
+    border-radius: 12px;
+    background: var(--color-pink);
+    color: var(--color-beige);
+    font-size: var(--text-small);
+    padding: 10px;
+    border: none;
+    float: right;
+}
+
+#currentCart input[type="submit"]:hover {
+    border-radius: 12px;
+    background: var(--color-pinkhover);
+    color: var(--color-beige);
+    font-size: var(--text-small);
+    padding: 10px;
+    border: none;
+    float: right;
+}
+
 #currentCart button {
     border-radius: 12px;
     background: var(--color-pink);

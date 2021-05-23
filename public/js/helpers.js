@@ -4,6 +4,10 @@ var register = function(Handlebars) {
     multiply: function (num1, num2) {
       return num1*num2
     },
+    
+    stringify: function (object){
+      return JSON.stringify(object);
+    },
 
     van_helper: function (thisVan){
       var ret = "";
