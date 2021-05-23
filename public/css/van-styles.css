@@ -88,3 +88,95 @@ border: hidden;
     background-color: var(--color-pink);
     border: hidden;
     }
+
+    #login {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #login h1{
+        text-align: center;
+        font-family: 'Orelega One', cursive;
+        font-size:var(--text-big);
+        padding-bottom: 30px;
+    }
+    
+    #login .container {
+        width: 500px;
+        height: 500px;
+        text-align: center;
+        background-color: transparent;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        padding: 40px 30px;
+        margin-top: 50px;
+    }
+    
+    #login input {
+        display: block;
+        margin: 10px auto;
+        width: 70%;
+        padding: 10px 20px;
+        border-radius: 50px;
+        border: 2px solid grey;
+        background-color: transparent;
+        color: black;
+        margin-bottom: 20px;
+    }
+    
+    #login input[type="submit"]{
+        background: #dfa167;
+        border: none;
+        outline: none;
+        letter-spacing: .04em;
+        font-size: 15px;
+        padding: 15px 10px;
+        width: 50%;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+    
+    #login p {
+        font-size: var(--text-small);
+    }
+    
+    #login input[type="submit"]:hover{
+        background: #966c45;
+        border: none;
+        outline: none;
+        letter-spacing: .04em;
+        font-size: 15px;
+        padding: 15px 10px;
+        width: 50%; 
+    
+    }
+    
+    #login input:focus {
+        outline: none;
+    }
+    
+    #login .btn {
+        margin: 0px;
+        border: 0;
+        padding: 10px 30px;
+        border-radius: 50px;
+        background-color: #dfa167;
+        color: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        margin-bottom: 30px;
+    }
+    
+    #login a {
+        text-decoration: underline;
+        color: var(--color-dark);
+    }
+    
+    #login label {
+        display: block;
+        margin-bottom: 0;
+        margin-top: 5px;
+        font-size: var(--text-small);
+    }
+    
