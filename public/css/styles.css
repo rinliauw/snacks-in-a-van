@@ -579,7 +579,9 @@ p{
         left: 10%;
         width: 63%;
     }
-
+    #nearestVan {
+        display: block;
+    }
 }
 
 @media screen and (max-width: 1200px) {
