@@ -1,25 +1,26 @@
-<h1 id="h1">5 Vans Near You</h1>
-
-<div id="mapping2"></div>
+<section id="nearestVan">
 {{!-- {{#van_helper nearestVan}}</div> --}}
+
+<div class="container">
+
+<h1 id="h1">5 Vans Near You</h1>
+<div id="mapping2"></div>
+</div>
 {{#each nearestVan}}
+<div class="row">
+  <div class="column">
     <p><div id="van_name">{{this.name}}</div></p>
     <p>{{this.location_description}}</p>
     <p><span class="vans_lat">{{this.location.latitude}}</span>
     <span class="vans_lon">{{this.location.longitude}}</span></p>
+  </div>
     <button type="submit" onclick="vantoSessionstorage('{{this.name}}')">Choose this van</button>
     {{/each}}
+    </div>
 {{!-- {{/van_helper}} --}}
-
+</section>
 
 <script>
-
-    const nearestVan = {{{ stringify nearestVan }}};
-    function vantoSessionstorage(name) {
-      const van = nearestVan.find(van => van.name === name)
-      sessionStorage.setItem("current_van", JSON.stringify(van))
-    }
-
     if ('geolocation' in navigator) {
       console.log('geolocation available');
       navigator.geolocation.getCurrentPosition(position => {
@@ -72,11 +73,18 @@
     }
 
     
+    const nearestVan = {{{ stringify nearestVan }}};
+    function vantoSessionstorage(name) {
+      const van = nearestVan.find(van => van.name === name)
+      sessionStorage.setItem("current_van", JSON.stringify(van))
+      window.location = "/customer/snacks"
+    }
+
 </script>
 
 
 <style>
     #mapping2{
-        height: 60vh;
+        height: 550px;
     }
 </style>
