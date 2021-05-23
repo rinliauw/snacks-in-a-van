@@ -242,7 +242,7 @@ footer {
     text-align: left;
 }
 
-#homePage .col1 input[type="submit"]{
+#homePage .col1 input[type="button"]{
     margin-top: 20px;
     background: #dfa167;
     border: none;
@@ -257,7 +257,7 @@ footer {
     display: block;
 }
 
-#homePage .col1 input[type="submit"]:hover{
+#homePage .col1 input[type="button"]:hover{
     margin-top: 20px;
     background: #966c45;
     border: none;

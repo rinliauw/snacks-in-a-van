@@ -1,3 +1,6 @@
+// yang harus diperbaiki
+// proceed to checkout, find a van button css, confirm order
+
 const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
