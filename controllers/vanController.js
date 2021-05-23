@@ -100,7 +100,7 @@ const closeVan = async (req, res) => {
             res.status(404)
             return res.send("Van not found")
         }
-        return res.render('van-close', { "oneVan": oneVan, layout: 'vendor-main.hbs' })  // van was found
+        return res.render('van-close', { "oneVan": oneVan, layout: 'vendor-main.hbs', "vanloggedin": req.isAuthenticated() })  // van was found
     } catch (e) {     // error occurred
         res.status(400)
         return res.send("Database query failed")
@@ -127,7 +127,7 @@ const locateVan = async (req, res) => {
             return res.send("Van not found")
         }
         console.log(oneVan)
-        return res.render('van-open', { "oneVan": oneVan, layout: 'vendor-main.hbs' })  // van was found
+        return res.render('van-open', { "oneVan": oneVan, layout: 'vendor-main.hbs', "vanloggedin": req.isAuthenticated()  })  // van was found
 
     } catch (e) {     // error occurred
         res.status(400)

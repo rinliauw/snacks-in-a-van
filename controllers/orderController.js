@@ -111,7 +111,7 @@ const viewOrderHistory = async (req, res) => {
         //find the customer
         const oneCust = await Customer.findOne( {email: req.session.email} ).lean()
         
-        const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
+        const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
         
         return res.render('orderhistory', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
     } catch (e) {     // error occurred

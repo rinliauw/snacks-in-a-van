@@ -1,8 +1,16 @@
-<section id="vanopen"><div class="container"> 
+<section id="vanopen">
 
-    <div id="mapping"></div><br>
-<h1> Location Updated!</h1><br>
+  <div class="p-2 mb-4 bg-light rounded-3">
+    <div class="container text-center">
+      <h1 class="display-5 fw-bold">Location Updated!</h1></div></div>
 
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5">
+        <div id="mapping"></div>
+      </div>
+      <div class="col-lg-7">
+        <div class="col-xl-3 col-lg-5 col-md-8 text-left">
 <p>Van Name: {{oneVan.name}}</p>
 <p>Location: {{oneVan.location.latitude}}, {{oneVan.location.longitude}}</p>
 <p>Location Description: {{oneVan.location_description}}</p>
@@ -10,7 +18,7 @@
     {{#if oneVan.ready_for_order}} Yes, we are open!
     {{else}} Sorry, we are closed! {{/if}}</p><br>
 <p><a href="/vendor/location"> Back to Update Location</a></p>
-</div></section>
+</div></div></section>
 
 <script>
       if ('geolocation' in navigator) {
@@ -30,3 +38,8 @@
         console.log('geolocation not available');
       }
 </script>
+<style>
+  #mapping{
+    height: 500px;
+  }
+</style>

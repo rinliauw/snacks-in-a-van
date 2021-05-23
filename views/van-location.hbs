@@ -12,16 +12,16 @@
       <div class="col-lg-6">
         <div class="col-xl-3 col-lg-5 col-md-8 text-left">
           {{#if vanloggedin}}
-          <form method="post" action="/vendor/update-van-details/open"></form>
+          <form method="post" action="/vendor/update-van-details/open">
             <p>Location longitude</p>
             <input type="hidden" id="location" name="location">
-            <p>latitude: <span id="latitude" name="latitude"></span>&deg;<br />
-              longitude: <span id="longitude" name="longitude"></span>&deg;</p>
+            <p>Latitude: <span id="latitude" name="latitude"></span>&deg;<br />
+              Longitude: <span id="longitude" name="longitude"></span>&deg;</p>
             <br>
             <!--<input type="text" id="location" name="location", placeholder="Example: -12983, 119823">!-->
             <p>Location description</p>
             <input type="text" id="location" name="location_description" ,
-              placeholder="Example: Near Baillieu Library"><Br><br>
+              placeholder="Example: 31 Collins St"><Br><br>
             <p>Open for business?</p>
             <input class="btn btn-secondary" type="submit" value="Open">
           </form>
@@ -68,7 +68,7 @@
 
 <style>
   #mapping {
-    height: 60vh;
+    height: 70vh;
   }
 
   @media (max-width: 990px) {
