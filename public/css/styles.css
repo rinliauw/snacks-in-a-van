@@ -915,6 +915,12 @@ button:hover{
     cursor: pointer;
 }
 
+#signUp p {
+    font-size: 12px;
+    margin-top: -20px;
+    margin-bottom: 60px;
+}
+
 #signUp h1{
     text-align: center;
     font-family: 'Orelega One', cursive;
