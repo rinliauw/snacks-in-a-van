@@ -36,7 +36,11 @@ customerRouter.get('/snacks/:name', snackController.getOneSnack)
 customerRouter.get('/cart', customerController.getCustomerCart2)
 
 //handle the GET request to get customer order details
-customerRouter.get('/order-details', orderController.confirmOrder)
+// customerRouter.post('/order-details', orderController.confirmOrder)
+customerRouter.post('/order-details', async function(req, res) {
+    await orderController.confirmOrder(req,res,req.body.current_van);
+});
+
 
 //handle the GET request to get customer order history
 customerRouter.get('/order-history', orderController.viewOrderHistory)
@@ -88,11 +92,11 @@ customerRouter.post('/cart', async function(req, res) {
 customerRouter.get('/', (res, req) => customerController.getStartPage(res, req))
 
 //handle the GET request to get the details of one customer
-customerRouter.get('/:id', customerController.getOneCustomer) // nomor 3
+customerRouter.get('/:id', customerController.getOneCustomer) 
 customerRouter.post('/:id/order', customerController.addItem)
 
 //handle the GET request to get the customer order
-customerRouter.get('/:id/cart', customerController.getCustomerCart) // nomor 3
+customerRouter.get('/:id/cart', customerController.getCustomerCart) 
 
 // export the router
 module.exports = customerRouter

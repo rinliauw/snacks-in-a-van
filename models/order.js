@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 
+// schema for items in order schema
 const startOrderSchema = new mongoose.Schema({
     snackId: {type: mongoose.Schema.Types.ObjectId, ref: 'Snack'},
     quantity: {type:Number}
