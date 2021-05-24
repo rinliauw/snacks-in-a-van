@@ -73,7 +73,7 @@ module.exports = function(passport) {
                         // all this is handled by the session middleware that we are using 
                         req.session.email = email;
                         console.log("login successful")
-                        return done(null, user, req.flash('loginMessages', 'Login successful'));
+                        return done(null, user); // i removed req.flash so login successful stopped appearing ?
                     }
                 });
             });

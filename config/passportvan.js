@@ -49,7 +49,7 @@ module.exports = function(passport) {
                         
                         // done() is used by the strategy to set the authentication status with
                         // details of the user who was authenticated
-                        return done(null, user, req.flash('loginMessage', 'Login successful'));
+                        return done(null, user);
                     }
                 });
             });
