@@ -13,7 +13,6 @@ var register = function(Handlebars) {
       var diff = Math.abs(Date.parse(current_time) - Date.parse(time_ordered)); // in miliseconds
       // now we want to convert to hours
 
-      var milliseconds = Math.floor((diff % 1000) / 100)
       var seconds = Math.floor((diff / 1000) % 60)
       var minutes = Math.floor((diff / (60 * 1000) % 60))
       var hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
@@ -22,7 +21,7 @@ var register = function(Handlebars) {
       minutes = (minutes < 10) ? "0" + minutes : minutes;
       seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-      return (hours + ":" + minutes + ":" + seconds + "." + milliseconds)
+      return (hours + ":" + minutes + ":" + seconds)
 
       console.log(diff)
       return 
