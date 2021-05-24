@@ -25,7 +25,8 @@ customerRouter.post('/nearest-van', customerController.getNearestforCustomer)
 customerRouter.get('/', (res, req) => customerController.getHomePage(res, req))
 customerRouter.get('/getLoginPage', (res, req) => customerController.getLoginPage(res, req))
 customerRouter.get('/getSignUpPage', (res, req) => customerController.getSignUpPage(res, req))
-
+customerRouter.get('/profile', (res, req) => customerController.getProfilePage(res, req))
+customerRouter.get('/edit-profile', (res, req) => customerController.getEditProfilePage(res, req))
 // handle the GET request to get all snacks
 customerRouter.get('/snacks', snackController.getAllSnacks)
 
@@ -98,5 +99,6 @@ customerRouter.post('/:id/order', customerController.addItem)
 //handle the GET request to get the customer order
 customerRouter.get('/:id/cart', customerController.getCustomerCart) 
 
+customerRouter.post('/edit-profile', customerController.editProfile)
 // export the router
 module.exports = customerRouter

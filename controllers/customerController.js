@@ -266,6 +266,88 @@ const saveAfterLogOut =  async (req, res, logoutitems, logoutqty) => {
 	}
 }
 
+//get user's profile page
+const getProfilePage = async(req, res) => {
+    try {
+		
+		if(req.isAuthenticated()){
+			// find user in database	
+			let user = await Customer.findOne( {email: req.session.email} );
+            return res.render('profile', {'email':user.email,
+                                        'loggedin': req.isAuthenticated(),
+                                        'givenname': user.nameGiven,
+                                        'familyname': user.nameFamily
+                                        })
+		}
+
+	} catch (err) {
+		console.log(err)
+	}
+}
+
+//get user's edit profile page 
+const getEditProfilePage = async(req, res) => {
+    try {
+		
+		if(req.isAuthenticated()){
+			// find user in database	
+			let user = await Customer.findOne( {email: req.session.email} );
+            return res.render('editprofile', {
+                                        'loggedin': req.isAuthenticated(),
+                                        'givenname': user.nameGiven,
+                                        'familyname': user.nameFamily
+                                        })
+		}
+
+	} catch (err) {
+		console.log(err)
+	}
+}
+
+//edit user's profile details
+const editProfile = async(req, res, next) => {
+    try {
+        var newpassword = req.body.newpassword;
+        var confirmpassword = req.body.confirmpassword;
+        let user = await Customer.findOne( {email: req.session.email} );
+
+		if(newpassword !== confirmpassword) {
+            //send error message if the new password and confirmed password is different
+            return res.render('editprofile', {
+                                        'loggedin': req.isAuthenticated(),
+                                        'givenname': user.nameGiven,
+                                        'familyname': user.nameFamily,
+                                        'msg': "Password and Confirm Password do not match!"
+                                        })
+        }
+
+        var nameGiven = req.body.nameGiven;
+        var nameFamily = req.body.nameFamily;
+        
+        //assign the new values into the respective fields
+        user.nameGiven = nameGiven;
+        user.nameFamily = nameFamily;
+        user.password = newpassword;
+
+        //save the new values
+        user.save(function(err){
+            if(err) {
+                next(err);
+            }
+            else {
+                res.redirect('/customer/profile/');
+            }
+        });
+
+
+	} catch (err) {
+		console.log(err)
+	}
+}
+
 module.exports = {
-    getAllCustomers, getOneCustomer, getSignUpPage, getCustomerCart2, addItem, getHomePage, getCustomerCart, getLoginPage, saveCart, saveAfterLogOut, getNearestforCustomer
+    getAllCustomers, getOneCustomer, getSignUpPage, 
+    getCustomerCart2, addItem, getHomePage, getCustomerCart, 
+    getLoginPage, saveCart, saveAfterLogOut, getNearestforCustomer,
+    getProfilePage, getEditProfilePage, editProfile
 }

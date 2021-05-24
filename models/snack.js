@@ -39,6 +39,15 @@ customerSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-const Customer = mongoose.model("Customer", customerSchema) 
+// bcrypt middleware
+customerSchema.pre('save', function customerSchemaPre(next) {
+    const user = this;
+    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+    console.log(user)
+    next();
+    
+});
+
+const Customer = mongoose.model("Customer", customerSchema)
 
 module.exports = {Customer, Snack, addCart}
