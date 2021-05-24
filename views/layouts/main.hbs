@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <script>
     // update the timer when page is onload 
@@ -86,6 +87,7 @@
                 <li><a href="/customer/signup">Sign Up</a></li>
                 {{else}}
                 <li><a href="javascript:void(0);" onclick="saveLogOut();">Logout</a></li>
+                <li><a href="/customer/profile"><i class="fa fa-user-circle-o" style="color":#24305E;></i></a></li>
                 {{/unless}}
             </ul>
         </div>
