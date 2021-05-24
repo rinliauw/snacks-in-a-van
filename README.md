@@ -360,6 +360,12 @@ Van login example details:
 | **Password**         | Sister123456 |
 | **Details**       | Should redirect to the customer home page if login is successful, otherwise redirect to the vendor login page |
 
+Alternative:
+|    <!-- -->          |        <!-- -->                     |
+|----------------------|-------------------------------------|
+| **Vendor Name**      | MokaPot   |
+| **Password**         | Moka123456 |
+| **Details**       | Should redirect to the customer home page if login is successful, otherwise redirect to the vendor login page |
 
 **Task List:**
 
@@ -369,4 +375,3 @@ Van login example details:
 - [x] Front-end + back-end (one feature)
 - [ ] Complete system + source code
 - [ ] Report on your work(+ test1 feature)
-
