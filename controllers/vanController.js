@@ -53,7 +53,7 @@ const getVanLogin = async (req, res) => {
         console.log(getResponse)
         console.log("IsAuthenticated:")
         console.log(req.isAuthenticated())
-        res.render('van-login.hbs', { layout: 'vendor-main.hbs', "vanloggedin": req.isAuthenticated() })
+        res.render('van-login.hbs', { layout: 'vendor-main.hbs', "vanloggedin": req.isAuthenticated(), "message": req.flash('loginMessage')[0]})
     } catch (e) {
         console.log(e);
     }

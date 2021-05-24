@@ -65,11 +65,16 @@ const confirmOrder = async (req, res, current_van) => {
     try {
         //find the customer
         const oneCust = await Customer.findOne( {email: req.session.email} ).lean()
-        console.log(oneCust)
-
-        console.log("confirmorder")
-        console.log(typeof(current_van))
-        console.log("after")
+        console.log(current_van)
+        // if hasn't found a van, redirect to find the nearest van
+        if (!Object.keys(current_van).length){
+            return res.redirect('/customer/')
+        }
+        else{ // if has chosen a van, proceed to create an order
+        // console.log(oneCust) for debugging purposes
+        // console.log("confirmorder")
+        // console.log(typeof(current_van))
+        // console.log("after")
 
         const oneCart = oneCust.cart
         if(oneCart.length === 0) { // if cart is 0, render 'cart is empty page'
@@ -78,7 +83,6 @@ const confirmOrder = async (req, res, current_van) => {
         }
         var isnotEmpty = 0; // check if cart is not empty
         for(var i=0; i<oneCart.length; i++) {
-            
             if(oneCart[i].quantity != 0) {
                 isnotEmpty = 1;
             }
@@ -96,7 +100,7 @@ const confirmOrder = async (req, res, current_van) => {
         newOrder.fulfilled = false;
         newOrder.picked_up = false;
         newOrder.discount = false;
-        newOrder.van = JSON.parse(current_van);
+        newOrder.van = JSON.parse(current_van); // add van details (JSON) from sessionstorage to the database
 
         for(var i=0; i<oneCart.length; i++) {
             
@@ -106,7 +110,7 @@ const confirmOrder = async (req, res, current_van) => {
         }
         console.log("finish for loop")
         
-        await newOrder.save()
+        await newOrder.save() // update the new order to the database
         console.log(newOrder)
 
         await Customer.updateOne({_id: oneCust._id}, { $set: { cart: [] }}, function(err, affected){
@@ -116,6 +120,7 @@ const confirmOrder = async (req, res, current_van) => {
         const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
         
         return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
+    }
     } catch (e) {     // error occurred
         res.status(400)
         return res.send("Database query failed")
