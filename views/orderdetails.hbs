@@ -77,25 +77,39 @@
 </section>
 
 <script>
-    const startingMinutes = 15;
-    //total time in seconds
-    let time = startingMinutes * 60;
     
+    // add to local storage: if not in local storage
+    if ((window.localStorage.getItem("minutes") == null) && (window.localStorage.getItem("second") == null)){
+        var startingMinutes = 15;
+        //total time in seconds
+        let time = startingMinutes * 60;
+    }
+    else{ // if already in local storage, update the value
+        console.log(typeof(parseInt(window.localStorage.getItem("minutes"))))
+        var startingMinutes = parseInt(window.localStorage.getItem("minutes"))
+        time = startingMinutes * 60;
+        time += parseInt(window.localStorage.getItem("second"))
+    }
     const countdownEl = document.getElementById('countdown');
    
     //call function every second
     setInterval(updateCountdown, 1000);
-    function updateCountdown() {
-        //get the minute and the second
-        const minutes = Math.floor(time / 60);
-        let seconds = time % 60;
+    function updateCountdown() { // start timer onload
+            //get the minute and the second
+            const minutes = Math.floor(time / 60);
+            let seconds = time % 60;
 
-        //add 0 when second is 0-9
-        seconds = seconds < 10 ? '0' + seconds: seconds;
-        //add to the html
-        countdownEl.innerHTML = `${minutes}:${seconds}`;
-        time--;
-    }
+            //add 0 when second is 0-9
+            seconds = seconds < 10 ? '0' + seconds: seconds;
+            console.log(seconds, minutes)
+            //add to the html
+            countdownEl.innerHTML = `${minutes}:${seconds}`;
+            time--;
+            // add value to local storage every second
+            localStorage.setItem("minutes", minutes)
+            localStorage.setItem("second", seconds)
+        }
+    
 
     //change bullet color in order status
     
