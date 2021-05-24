@@ -33,7 +33,7 @@
                 lon = position.coords.longitude;
                 console.log(lat, lon);
                 json_location = JSON.stringify({ 'latitude': lat, 'longitude': lon })
-                console.log(a)
+                console.log(json_location)
                 // set Element Location 
                 document.getElementById('location').value = json_location;
                 // submit After Successfully Getting Position from geoLocation API
@@ -43,7 +43,7 @@
         }
         
         function login(){
-            location.replace('/customer/getLoginPage')
+            location.replace('/customer/login')
         }
     </script>
 </section>

@@ -2,46 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snacks in a Van</title>
-    <link rel="stylesheet" href="/css/styles.css"> <!-- main css !-->
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Work+Sans&display=swap" rel="stylesheet">
     
-    <!-- Leaflet css for maps !-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin="" />
 </head>
 <script>
-    function logout(){ // submit logout form
+    function saveLogOut(){
+        // get the snack object IDs from local storage
+        document.getElementById("logoutitems").value = JSON.parse(JSON.stringify(localStorage.getItem("current_cart")));
+        document.getElementById("logoutqty").value = JSON.parse(JSON.stringify(localStorage.getItem("quantity")));
+
+        //alert( document.getElementById("favs").value)
+        // clear local storage (WARNING: I am assuming that only my app is using the local storage!!!)
+        localStorage.clear();
+
+        // submit a hidden form with the snack ids. You could use fetch to submit the data to API as well.
         document.getElementById("logoutform").submit();          
     }
-
     function saveItems(){
         // get the snack object IDs from local storage
-        document.getElementById("items").value = JSON.parse(JSON.stringify(localStorage.getItem("current_cart"))); // set form value of form from localstorage
-        document.getElementById("qty").value = JSON.parse(JSON.stringify(localStorage.getItem("quantity"))); // set quantity value of form from localstorage
-        // submit a hidden form with the snack ids
-        document.getElementById("cartform").submit(); // submit form 
+        document.getElementById("items").value = JSON.parse(JSON.stringify(localStorage.getItem("current_cart")));
+        document.getElementById("qty").value = JSON.parse(JSON.stringify(localStorage.getItem("quantity")));
+        //alert( document.getElementById("items").value)
+        //alert( document.getElementById("qty").value)
+        
+        // clear local storage (WARNING: I am assuming that only my app is using the local storage!!!)
+        
+
+        // submit a hidden form with the snack ids. You could use fetch to submit the data to API as well.
+        document.getElementById("cartform").submit();
         localStorage.clear();
-      
+                    
     }
+          
 </script>
 
 <body>
     <nav class="navbar">
-            <a href="/" class="logo"><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></a> <!-- logo !-->
+            <a href="/"><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></a>
         
-        <!-- hamburger menu for responsive design !-->
         <a href="#" class="menu-toggle">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </a>
-
-        <!-- main navbar links !-->
         <div class="navbar-links">
             <ul>
                 <li><a href="/customer">Home</a></li>
@@ -51,24 +63,23 @@
                 <li><a href="/customer/getLoginPage">Login</li></a>
                 <li><a href="/customer/signup">Sign Up</a></li>
                 {{else}}
-                <li><a href="javascript:void(0);" onclick="logout();">Logout</a></li>
+                <li><a href="javascript:void(0);" onclick="saveLogOut();">Logout</a></li>
                 {{/unless}}
             </ul>
         </div>
     </nav>
-
     <main>
         {{{body}}}
     </main>
-
     <form method="post" action="/customer/logout" id="logoutform">
+        <input type="hidden" name="logoutitems" id="logoutitems"/>
+        <input type="hidden" name="logoutqty" id="logoutqty"/>
     </form>
+
     <form method="post" action="/customer/cart" id="cartform">
         <input type="hidden" name="items" id="items"/>
         <input type="hidden" name="qty" id="qty"/>
     </form>
-
-    <!-- javascript for hamburger menu !-->
     <script>
         const hamburgerMenu = document.querySelector('.menu-toggle')
         const navbarLinks = document.querySelector('.navbar-links')
@@ -77,16 +88,10 @@
         })
     </script>
 
-    <!-- Leaflet code for maps -->
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
 </body>
-
-<style> /* remove hover effect */
-    .logo:hover{
-        background-color: #e9d6cd;
-    }
-</style>
-
 </html>

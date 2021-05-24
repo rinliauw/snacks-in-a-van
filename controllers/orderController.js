@@ -14,7 +14,7 @@ const getOrderWithVanName = async (req, res) => {
         const oneVan = await Van.findOne( {"name": req.session.name} )
         //find all its outstanding orders
         const vanOrders = await Order.find({ van:oneVan._id, fulfilled:false },{},{sort: '-time_ordered'})
-        res.render('van-orders', {"vanOrders": vanOrders, layout: 'vendor-main'}); 
+        res.send(vanOrders); 
     } catch (e) {
         res.status(400)
         return res.send("Database query failed - an error occurred")
