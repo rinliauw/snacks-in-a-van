@@ -1,16 +1,10 @@
 <section id="snacksMenu">
     <h1> Menu List</h1>
     <form method="post" action="/search">
-        <!--<input type="search" size="10" name="snack" placeholder="Search">
-        <button type="submit"><i class="fa fa-search"></i></button>!-->
     </form>
-
     <div class="snacks-menu">
-
         <div class="row">
-
             {{#each snacks}}
-
             <div class="snack">
                 <div class="snack-img">
                     <a href="/customer/snacks/{{this.name}}"><img src="https://source.unsplash.com/{{this.photo}}"></a>
@@ -27,10 +21,8 @@
                     </div>
                 </div>
             </div>
-
             {{/each}}
             
         </div>
     </div>
-
 </section>

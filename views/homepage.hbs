@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="/css/homepage.css">
 
 {{!Homepage for the customer website}}
-
 <section id="homePage">
     <div class="col1">
         <h1>Snacks in a Van</h1>
@@ -10,13 +9,13 @@
             Welcome! This is a project to create web apps for 'Snacks in A Van' a new startup company operating in
             Melbourne. There will be 2 web apps, one for the customers and one for the vendors. Please enable location to find nearest vans.
         </p>
-        
         {{!-- submit a hidden form to get nearest van --}}
         <form method="POST" action="/customer/nearest-van" id="get_nearest_form">
             <input type="hidden" id="location" name="location">
+            {{if loggedin}}
             <input type="button" onclick="getNearestVan()" value="Find Nearest Van"><br>
             <span id="please_wait" style="font-size:15px; font-style: italic;"></span>
-            <br>
+            {{else}}<input type="button" onclick="login()" value="Find Nearest Van"><br>
         </form>
     </div>
 
@@ -28,18 +27,15 @@
         if ('geolocation' in navigator) { // fetch geolocation api for latitude and longitud
             function getNearestVan(){
                 console.log("Get Nearest Van")
-
                 // call back function: asynchronous
                 navigator.geolocation.getCurrentPosition(function (position){
                     lat = position.coords.latitude;
                     lon = position.coords.longitude;
                     console.log(lat, lon);
-
                     json_location = JSON.stringify({ 'latitude': lat, 'longitude': lon })
                     console.log(a)
                     // set Element Location 
                     document.getElementById('location').value = json_location;
-
                     // submit After Successfully Getting Position from geoLocation API
                     document.getElementById("get_nearest_form").submit()
                 })

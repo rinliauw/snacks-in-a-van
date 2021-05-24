@@ -33,11 +33,6 @@ const getNearestVan = async (customerlocation, limit=5) => {
 // handles request to get van login page
 const getVanLogin = async (req, res) => {
     try {
-        // Testing Purpose Only Remove this later :)
-        console.log("getNearest")
-        const customerLocation = {"latitude":100, "longitude":120}
-        const getResponse = await getNearestVan(customerLocation)
-        console.log(getResponse)
         console.log("IsAuthenticated:")
         console.log(req.isAuthenticated())
         res.render('van-login.hbs', { layout: 'vendor-main.hbs', "vanloggedin": req.isAuthenticated() })

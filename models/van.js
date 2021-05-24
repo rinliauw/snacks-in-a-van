@@ -10,11 +10,6 @@ const vanSchema = new mongoose.Schema({
     account_type: {type: String}
 })
 
-// checks if password is valid
-// testing : 
-// user SisterCoffee
-// password 123456
-
 vanSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
