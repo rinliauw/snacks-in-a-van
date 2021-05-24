@@ -78,8 +78,17 @@ const confirmOrder = async (req, res, current_van) => {
 
         const oneCart = oneCust.cart
         if(oneCart.length === 0) { // if cart is 0, render 'cart is empty page'
-            const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
-            return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
+            const thisOrder = await customerOrder.findOne({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
+            //count total
+            const items = thisOrder.items;
+            var total = 0;
+            var totalEach = new Array(items.length);
+            for (var i = 0; i < items.length; i++) {
+                var currentItem = items[i];
+                totalEach[i] = currentItem.snackId.price*currentItem.quantity
+                total+=(currentItem.snackId.price*currentItem.quantity)
+            }
+            return res.render('orderdetails', {"thisOrder": thisOrder, "total": total, "loggedin": req.isAuthenticated()})
         }
         var isnotEmpty = 0; // check if cart is not empty
         for(var i=0; i<oneCart.length; i++) {
@@ -89,8 +98,17 @@ const confirmOrder = async (req, res, current_van) => {
         }
 
         if(!isnotEmpty){ // if cart is not empty, render 'order details' page
-            const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
-            return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
+            const thisOrder = await customerOrder.findOne({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
+            //count total
+            const items = thisOrder.items;
+            var total = 0;
+            var totalEach = new Array(items.length);
+            for (var i = 0; i < items.length; i++) {
+                var currentItem = items[i];
+                totalEach[i] = currentItem.snackId.price*currentItem.quantity
+                total+=(currentItem.snackId.price*currentItem.quantity)
+            }
+            return res.render('orderdetails', {"thisOrder": thisOrder, "total": total, "loggedin": req.isAuthenticated()})
         }
         
         // make new order
@@ -117,9 +135,17 @@ const confirmOrder = async (req, res, current_van) => {
             console.log('affected: ', affected);
         });
 
-        const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
-        
-        return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
+        const thisOrder = await customerOrder.findOne({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
+        //count total
+        const items = thisOrder.items;
+        var total = 0;
+        var totalEach = new Array(items.length);
+        for (var i = 0; i < items.length; i++) {
+            var currentItem = items[i];
+            totalEach[i] = currentItem.snackId.price*currentItem.quantity
+            total+=(currentItem.snackId.price*currentItem.quantity)
+        }
+        return res.render('orderdetails', {"thisOrder": thisOrder, "total":total, "loggedin": req.isAuthenticated()})
     }
     } catch (e) {     // error occurred
         res.status(400)
