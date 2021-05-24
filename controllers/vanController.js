@@ -128,22 +128,8 @@ const getAllVans = async (req, res) => {
     }
 }
 
-// show id details
-const showIdDetail = async (req, res) => {
-    try {
-        const oneVan = await Van.findById(req.user.id)
-        if (oneVan === null) {   // no van found in database
-            res.status(404)
-            return res.send("Van not found")
-        }
-        return res.send(req.user.id)  // van was found
-    } catch (e) {     // error occurred
-        res.status(400)
-        return res.send("Database query failed")
-    }
-}
 
 // export the functions
 module.exports = {
-    showVanDetail, closeVan, locateVan, getAllVans, getVanLogin, getVanLocation, showIdDetail, getNearestVan
+    showVanDetail, closeVan, locateVan, getAllVans, getVanLogin, getVanLocation, getNearestVan
 }
