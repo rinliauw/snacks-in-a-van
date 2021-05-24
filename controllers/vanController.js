@@ -8,31 +8,49 @@ const utility = require('../routes/utility.js')
 
 // get nearest van
 const getNearestVan = async (customerlocation, limit=5) => { 
-    try {
-        // console.log(customerlocation)
-        const vans = await Van.find().lean()
-        // console.log(customerlocation.longitude)
-        for (i=0; i < vans.length; i++){ // calculate distance between customer and each van available
-            long = vans[i].location.longitude - customerlocation.longitude
-            latitude = vans[i].location.latitude - customerlocation.latitude
-            distance = Math.sqrt(long**2 + latitude**2) // calculate euclidian distance between customer and van locatioe
-            vans[i].distance = distance
-        }
-        // sort van by distance
-        vans.sort((a,b)=>{
-            return a.distance - b.distance
-        })
-        return vans.slice(0, limit)
+    // getallVan
+    // customerlocation input {"latitude": ... , "longitude": ...}
+    // variable distance -> mskin ke getallVan tiap van
+    // location user
+    // location getallVan : longitude, latitude
+try {
+    console.log(customerlocation)
+    const vans = await Van.find().lean()
+    console.log(customerlocation.longitude)
+    for (i=0; i < vans.length; i++){
+        long = vans[i].location.longitude - customerlocation.longitude
+        latitude = vans[i].location.latitude - customerlocation.latitude
+        distance = Math.sqrt(long**2 + latitude**2)
+
+        vans[i].distance = distance
     }
-    catch (e) {     // error occurred
-        res.status(400)
-        return res.send("Database query failed")
+    
+    // sort by distance
+    vans.sort((a,b)=>{
+        return a.distance - b.distance
+    })
+    
+    for (i=0; i< vans.length; i++){
+        console.log(vans[i].distance)
+        console.log(vans[i].location)
     }
-    }
+    return vans.slice(0, limit)
+}
+
+catch (e) {     // error occurred
+    res.status(400)
+    return res.send("Database query failed")
+}
+}
 
 // handles request to get van login page
 const getVanLogin = async (req, res) => {
     try {
+        // Testing Purpose Only Remove this later :)
+        console.log("getNearest")
+        const customerLocation = {"latitude":100, "longitude":120}
+        const getResponse = await getNearestVan(customerLocation)
+        console.log(getResponse)
         console.log("IsAuthenticated:")
         console.log(req.isAuthenticated())
         res.render('van-login.hbs', { layout: 'vendor-main.hbs', "vanloggedin": req.isAuthenticated() })
@@ -128,8 +146,24 @@ const getAllVans = async (req, res) => {
     }
 }
 
+// show id details
+const showIdDetail = async (req, res) => {
+    try {
+        const oneVan = await Van.findById(req.user.id)
+        if (oneVan === null) {   // no van found in database
+            res.status(404)
+            return res.send("Van not found")
+        }
+        return res.send(req.user.id)  // van was found
+    } catch (e) {     // error occurred
+        res.status(400)
+        return res.send("Database query failed")
+    }
+}
+
+
 
 // export the functions
 module.exports = {
-    showVanDetail, closeVan, locateVan, getAllVans, getVanLogin, getVanLocation, getNearestVan
+    showVanDetail, closeVan, locateVan, getAllVans, getVanLogin, getVanLocation, showIdDetail, getNearestVan
 }

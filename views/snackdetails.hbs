@@ -41,12 +41,16 @@
         //alert( document.getElementById("items").value)
         //alert( document.getElementById("qty").value)
         console.log(document.getElementById("qty").value)
+        
         // clear local storage (WARNING: I am assuming that only my app is using the local storage!!!)
+        
+
         // submit a hidden form with the snack ids. You could use fetch to submit the data to API as well.
         document.getElementById("cartform").submit();
         localStorage.clear();
                     
     }
+
 
     function toLocalStorage() {
         // create a new Array if it does not exist and put Snack ID in it.
@@ -65,6 +69,7 @@
         
         document.querySelector('.addcart-modal').style.display='flex';
     }
+
     document.querySelector('.close').addEventListener('click', function() {
         document.querySelector('.addcart-modal').style.display='none';
     });

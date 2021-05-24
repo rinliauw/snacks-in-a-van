@@ -14,7 +14,9 @@ const getOrderWithVanName = async (req, res) => {
         const oneVan = await Van.findOne( {"name": req.session.name} )
         //find all its outstanding orders
         const vanOrders = await Order.find({ van:oneVan._id, fulfilled:false },{},{sort: '-time_ordered'})
-        res.send(vanOrders); 
+        
+        res.render('van-orders', {"vanOrders": vanOrders, layout: 'vendor-main'});
+        
     } catch (e) {
         res.status(400)
         return res.send("Database query failed - an error occurred")
@@ -45,6 +47,11 @@ const confirmOrder = async (req, res, current_van) => {
     try {
         //find the customer
         const oneCust = await Customer.findOne( {email: req.session.email} ).lean()
+        console.log(oneCust)
+
+        console.log("confirmorder")
+        console.log(typeof(current_van))
+        console.log("after")
 
         const oneCart = oneCust.cart
         if(oneCart.length === 0) { // if cart is 0, render 'cart is empty page'
@@ -53,32 +60,35 @@ const confirmOrder = async (req, res, current_van) => {
         }
         var isnotEmpty = 0; // check if cart is not empty
         for(var i=0; i<oneCart.length; i++) {
+            
             if(oneCart[i].quantity != 0) {
                 isnotEmpty = 1;
             }
         }
+
         if(!isnotEmpty){ // if cart is not empty, render 'order details' page
             const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate({path:'items.snackId', model:'Snack'}).lean()
             return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
         }
         
-        // start to make a new order
+        // make new order
         const newOrder = new customerOrder({customer: oneCust._id})
         
         //make order outstanding
-        newOrder.fulfilled = false; // set all to false
+        newOrder.fulfilled = false;
         newOrder.picked_up = false;
         newOrder.discount = false;
-        newOrder.van = JSON.parse(current_van); // add current van from sessionstorage
+        newOrder.van = JSON.parse(current_van);
 
-        // save items from cart to newOrder
         for(var i=0; i<oneCart.length; i++) {
+            
             var newItem = new startOrder({snackId: oneCart[i].snackId, quantity: oneCart[i].quantity})
+            
             newOrder.items.push(newItem)
         }
         console.log("finish for loop")
         
-        await newOrder.save() // save neworder
+        await newOrder.save()
         console.log(newOrder)
 
         await Customer.updateOne({_id: oneCust._id}, { $set: { cart: [] }}, function(err, affected){
@@ -86,7 +96,7 @@ const confirmOrder = async (req, res, current_van) => {
         });
 
         const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
-        // renders a page that shows customer's new order
+        
         return res.render('orderdetails', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
     } catch (e) {     // error occurred
         res.status(400)

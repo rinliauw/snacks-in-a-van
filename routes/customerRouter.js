@@ -33,13 +33,14 @@ customerRouter.get('/snacks', snackController.getAllSnacks)
 customerRouter.get('/snacks/:name', snackController.getOneSnack)
 
 //handle the GET request to get the customer's cart
-customerRouter.get('/cart', customerController.getCustomerCart)
+customerRouter.get('/cart', customerController.getCustomerCart2)
 
 //handle the GET request to get customer order details
 // customerRouter.post('/order-details', orderController.confirmOrder)
 customerRouter.post('/order-details', async function(req, res) {
     await orderController.confirmOrder(req,res,req.body.current_van);
 });
+
 
 //handle the GET request to get customer order history
 customerRouter.get('/order-history', orderController.viewOrderHistory)
@@ -68,18 +69,20 @@ customerRouter.post('/logout', function(req, res) {
 });
 
 // GET - show the signup form to the user
+// http:localhost:5000/user/signup
 customerRouter.get("/signup", (req, res) => {
     res.render('signup');
 });
 
 // POST - user submits the signup form -- signup a new user
+// http:localhost:5000/user/signup
 customerRouter.post('/signup', passport.authenticate('local-signup', {
     successRedirect : '/customer', // redirect to the homepage
     failureRedirect : '/customer/signup/', // redirect to signup page
     failureFlash : true // allow flash messages
 }));
 
-// shopping cart post request
+// SHOPPING CART
 customerRouter.post('/cart', async function(req, res) {
     await customerController.saveCart(req,res,req.body.items, req.body.qty)
     res.redirect('/customer/cart');
@@ -91,6 +94,9 @@ customerRouter.get('/', (res, req) => customerController.getStartPage(res, req))
 //handle the GET request to get the details of one customer
 customerRouter.get('/:id', customerController.getOneCustomer) 
 customerRouter.post('/:id/order', customerController.addItem)
+
+//handle the GET request to get the customer order
+customerRouter.get('/:id/cart', customerController.getCustomerCart) 
 
 // export the router
 module.exports = customerRouter

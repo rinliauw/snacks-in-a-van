@@ -1,7 +1,8 @@
-<link rel="stylesheet" href="/css/nearest-van.css">
-
 <section id="nearestVan">
+{{!-- {{#van_helper nearestVan}}</div> --}}
+
 <div class="container">
+
 <h1 id="h1">5 Vans Near You</h1>
 <div id="mapping2"></div>
 </div>
@@ -16,6 +17,7 @@
     <button type="submit" onclick="vantoSessionstorage('{{this.name}}')">Choose this van</button>
     {{/each}}
     </div>
+{{!-- {{/van_helper}} --}}
 </section>
 
 <script>

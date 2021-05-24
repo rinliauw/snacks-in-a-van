@@ -44,7 +44,7 @@ vendorRouter.post('/login', passport.authenticate('vendor-login', {
 // GET page for set up location
 vendorRouter.get('/location', vanController.getVanLocation)
 
-// LOGOUT - for logging out after vendor authentication
+// LOGOUT - for logging out after user authentication
 vendorRouter.get('/logout', function(req, res) {
     // save the favourites
     req.logout();
