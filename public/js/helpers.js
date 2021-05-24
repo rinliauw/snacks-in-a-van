@@ -4,11 +4,19 @@ var register = function(Handlebars) {
     multiply: function (num1, num2) {
       return num1*num2
     },
-    
+    // stringify json object
     stringify: function (object){
       return JSON.stringify(object);
     },
-
+    // subtract between current time and time ordered
+    subtract: function (time_ordered, current_time) {
+      var diff = Math.abs(current_time - time_ordered);
+      console.log(time_ordered)
+      console.log(current_time)
+      console.log(typeof(time_ordered))
+      return 
+    },
+    
     van_helper: function (thisVan){
       var ret = "";
 

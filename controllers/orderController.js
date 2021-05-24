@@ -13,9 +13,27 @@ const getOrderWithVanName = async (req, res) => {
         //find van
         const oneVan = await Van.findOne( {"name": req.session.name} )
         //find all its outstanding orders
-        const vanOrders = await Order.find({ van:oneVan._id, fulfilled:false },{},{sort: '-time_ordered'})
+        const vanOrders = await customerOrder.find({ van:oneVan._id, fulfilled:false },{},{sort: '-time_ordered'}).populate({path: 'customer'}).lean()
+        let date_ob = Date()
+        for (var i=0; i < vanOrders.length; i++){
+            vanOrders[i].current_date = date_ob
+        }
+        console.log;(vanOrders)
+        res.render('van-orders', {"vanOrders": vanOrders, layout: 'vendor-main', "vanloggedin": req.isAuthenticated()});
         
-        res.render('van-orders', {"vanOrders": vanOrders, layout: 'vendor-main'});
+    } catch (e) {
+        res.status(400)
+        return res.send("Database query failed - an error occurred")
+    }
+}
+
+const getPickedupOrder = async (req, res) => {
+    try {
+        //find van
+        const oneVan = await Van.findOne( {"name": req.session.name} )
+        //find all its outstanding orders
+        const vanOrders = await customerOrder.find({ van:oneVan._id, fulfilled:true },{},{sort: '-time_ordered'}).populate({path: 'customer'}).lean()
+        res.render('van-pickedup-orders.hbs', {"vanOrders": vanOrders, layout: 'vendor-main', "vanloggedin": req.isAuthenticated()});
         
     } catch (e) {
         res.status(400)
@@ -121,5 +139,5 @@ const viewOrderHistory = async (req, res) => {
 }
 
 module.exports = {
-    getOrderWithVanName, markOrderAsFulfilled, confirmOrder, viewOrderHistory
+    getOrderWithVanName, markOrderAsFulfilled, confirmOrder, viewOrderHistory, getPickedupOrder
 }

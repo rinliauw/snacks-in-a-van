@@ -1,7 +1,6 @@
-
 <div class="p-2 bg-light rounded-3">
     <div class="container text-center">
-      <h1 class="display-5 fw-bold">Outstanding Orders</h1></div>
+      <h1 class="display-5 fw-bold">Pickedup Orders</h1></div>
   </div>
   <div class="list-group">
 {{#each vanOrders}}
@@ -13,6 +12,9 @@
     <p class="mb-1">Customer Name: {{this.customer.nameGiven}} {{this.customer.nameFamily}}</p>
     <small>Time remaining: {{subtract this.time_ordered this.current_date}}</small> <!-- to be changed for time remaining !-->
   </a>
+  {{else}}<div class="alert alert-warning" role="alert">
+  <center>No fulfilled Orders!</center>
+</div>
   {{/each}}
 
 {{!-- {{#each vanOrders}}

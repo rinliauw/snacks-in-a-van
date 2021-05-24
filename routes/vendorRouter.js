@@ -19,6 +19,9 @@ const vanController = require('../controllers/vanController.js')
 // handle the GET request to get all outstanding orders with current logged in
 vendorRouter.get('/outstanding-orders', orderController.getOrderWithVanName)
 
+// handle the GET request to get all outstanding orders with current logged in
+vendorRouter.get('/pickedup-orders', orderController.getPickedupOrder)
+
 // handle the PUT request to mark an order from a van as fulfilled
 vendorRouter.put('/:name/outstanding-orders/:order_id/fulfilled', orderController.markOrderAsFulfilled)
 

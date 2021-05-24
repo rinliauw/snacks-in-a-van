@@ -19,18 +19,8 @@
     --color-pinkhover: #f3a9a9;
     --color-yellow: #F8E9A1;
     --color-beige: #e9d6cd;
-}
-
-a{
-    color: var(--color-dark);
-    font-family: 'Raleway', sans-serif;
-}
-
-
-a:hover{
-    border: 10px;
-    background-color:#dfa167;
-    color: white;
+    --color-listgroup: #ffefdf;
+    --color-listgrouphover: #c9b6a4;
 }
 
 p{
@@ -39,6 +29,14 @@ p{
 
 h1{
     font-family: 'Orelega One', cursive;
+}
+
+.list-group-item{
+    background-color:var(--color-listgroup) !important;
+}
+
+.list-group-item:hover{
+    background-color: var(--color-listgrouphover) !important;
 }
 
 .bg-light{
