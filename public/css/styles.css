@@ -974,7 +974,7 @@ button:hover{
 
 }
 
-#OrderDetails {
+#OrderHistory {
     font-family: 'Raleway', sans-serif;
     font-size: 70%;
     border-collapse: collapse;
@@ -983,20 +983,20 @@ button:hover{
     margin-right: auto;
 }
   
-#OrderDetails td, #OrderDetails th {
+#OrderHistory td, #OrderHistory th {
     border: 1px solid #ddd;
     padding: 8px;
 }
   
-#OrderDetails tr:nth-child(even){
+#OrderHistory tr:nth-child(even){
       background-color: #f2f2f2;
 }
 
-#OrderDetails tr:hover {
+#OrderHistory tr:hover {
       background-color: #ddd;
 }
   
-#OrderDetails th {
+#OrderHistory th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -1009,3 +1009,130 @@ button:hover{
     text-decoration: underline;
 }
 
+#OrderDetails {
+    font-family: 'Raleway', sans-serif;
+    border-collapse: collapse;
+}
+
+#OrderDetails .orderid {
+    text-align:center;
+    font-size: 70%;
+    padding: 15px;
+}
+
+#OrderDetails .container {
+    width:70%;
+    overflow: hidden;
+    margin:auto;
+    
+}
+
+#OrderDetails .flex-direction{
+    flex-direction:row;
+}
+
+#OrderDetails .summary{
+    background-color: white;
+    width:50%;
+    height:100%;
+    padding:10px;
+    border-radius:5px;
+    float:left;
+}
+  
+#OrderDetails .status{
+    background-color: white;
+    width:50%;
+    height:100%;
+    padding:10px;
+    border-radius:5px;
+    float:right;
+}
+
+#OrderDetails .section-title{
+    font-family: 'Orelega One', cursive;
+    font-size:var(--text-medium);
+    padding-bottom: 20px;
+}
+
+#OrderDetails li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+    font-size: 70%;
+}
+
+#OrderDetails .col-1 {
+    flex-basis: 50%;
+}
+#OrderDetails .col-2 {
+    flex-basis: 25%;
+}
+#OrderDetails .col-3 {
+    flex-basis: 25%;
+}
+#OrderDetails .total {
+    background-color:#e9d6cd;
+}
+#OrderDetails .notice {
+    font-size:70%;
+    padding-bottom:10px;
+}
+#OrderDetails .bullet {
+    height:20px;
+    width:20px;
+    border-radius:100%;
+    border:1px solid var(--color-dark);
+    color:var(--color-dark);
+    line-height:20px;
+    font-size:70%;
+    text-align:center;
+    align-items:center;
+}
+#OrderDetails .step{
+    display:flex;
+}
+#OrderDetails .step-text{
+    flex-grow:1;
+    margin-left:5px;
+    font-size:70%;
+    align-items:center;
+    padding-left:5px;
+    padding-bottom:10px;
+}
+#OrderDetails .step-text-button{
+    width:100px;
+    padding:10px;
+}
+
+#OrderDetails .button-container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-bottom:10px;
+}
+
+@media screen and (max-width: 700px) {
+    #OrderDetails .flex-direction{
+        flex-direction:column;
+    }
+    
+  }
+    
+  @media only screen and (max-width: 767px)
+  {
+    #OrderDetails .container {
+        width:100%;
+    }
+    #OrderDetails .summary, #OrderDetails .status
+      {
+          display: block; 
+          float: none; 
+          width: 100%;
+          padding: 20px;
+      }
+  }

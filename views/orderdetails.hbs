@@ -1,27 +1,115 @@
 <section id="OrderDetails">
     <h1>Order Details</h1><br>
-    <table>
-        <tr>
-            <th>Order ID</th>
-            <th>Items</th>
-            <th>Order time</th>
-            <th>Status</th>
-            <th>Allocated Van</th>
-        </tr>
-        {{#each thisOrder}}
-            <tr>
-                <td> {{this._id}}</td>
-                <td> 
-                {{#each items}}
-                    {{#if this.quantity}}
-                    <p>{{this.quantity}}x{{this.snackId.name}}</p>
-                    {{/if}}
+    <div class="orderid"><strong>Order #{{thisOrder._id}}</strong></div>
+    <div class="container">
+        <div class="summary">
+            <div class="section-title">Order Summary</div>
+            
+            <ul>
+                {{#each thisOrder.items}}
+                {{#if this.quantity}}
+                <li>
+                    <div class="col col-1"><strong>{{this.snackId.name}}</strong></div>
+                    <div class="col col-2">Qty: {{this.quantity}}</div>
+                    <div class="col col-3">${{multiply this.snackId.price this.quantity}}</div>
+                </li>
+                {{/if}}
                 {{/each}}
-                </td>
-                <td> {{this.time_ordered}}</td>
-                <td>{{#if this.fulfilled}}Fulfilled{{else}}Outstanding{{/if}}</td>
-                <td>{{this.van.name}}</td>
-            </tr>
-        {{/each}}
-        </table>
+                <li class="total">
+                    <div class="col col-1"><strong>TOTAL</strong></div>
+                    <div class="col col-2"></div>
+                        <div class="col col-3">${{total}}</div>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="status">
+            <div class="section-title">Order Status</div>
+            <div>
+                <ul>
+                    <li>
+                        <div class="col col-1"><strong>Van Name: </strong></div>
+                        <div>{{thisOrder.van.name}}</div>
+                    </li>
+
+                    <li>
+                        <div class="col col-1"><strong>Time Remaining: </strong></div>
+                        <div id="countdown"></div>
+                    </li>
+                    
+                    <p class="notice">We will give you 20% discount if your order is not ready within the time limit!</p>
+                    
+                    <li>
+                        <div class="col col-1"><strong>Status: </strong></div>
+                        <div>{{#if thisOrder.fulfilled}}Fulfilled{{else}}Outstanding{{/if}}</div>
+                    </li>
+                    <p hidden id="fulfilled">{{thisOrder.fulfilled}}</p>
+                    <p hidden id="pickup">{{thisOrder.picked_up}}</p>
+                    <div class="step">
+                        <div class="bullet" id="bullet1">&#10003;</div>
+                        <div class="step-text"><strong>Order Received</strong></div>
+                    </div>
+                    <div class="step-text">We are processing your order.<br><br>
+                        You can change or cancel your order within
+                        10 minutes and before your order is fulfilled. 
+                    </div>
+
+                    <div class="button-container">
+                        <button class="step-text-button">CHANGE</button>&nbsp;
+                        <button class="step-text-button">CANCEL</button>
+                    </div>
+
+
+                    <div class="step">
+                        <div class="bullet"  id="bullet2">&#10003;</div>
+                        <div class="step-text"><strong>Ready for Pickup</strong></div>
+                    </div>
+                    <div class="step-text">Your order is ready for pickup.</div>
+                    <div class="button-container">
+                        <button class="step-text-button">PAY</button>&nbsp;
+                        <button class="step-text-button">RATE US</button>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
 </section>
+
+<script>
+    const startingMinutes = 15;
+    //total time in seconds
+    let time = startingMinutes * 60;
+    
+    const countdownEl = document.getElementById('countdown');
+   
+    //call function every second
+    setInterval(updateCountdown, 1000);
+    function updateCountdown() {
+        //get the minute and the second
+        const minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+
+        //add 0 when second is 0-9
+        seconds = seconds < 10 ? '0' + seconds: seconds;
+        //add to the html
+        countdownEl.innerHTML = `${minutes}:${seconds}`;
+        time--;
+    }
+
+    //change bullet color in order status
+    
+    const firstbulletEl = document.getElementById('bullet1');
+    const secondbulletEl = document.getElementById('bullet2');
+    const fulfilledStatus = document.getElementById('fulfilled');
+
+    firstbulletEl.style.color="white";
+    firstbulletEl.style.backgroundColor="#24305E";
+
+    //when order is fulfilled and ready to be picked up
+    if (fulfilledStatus) {
+        secondbulletEl.style.color="white";
+        secondbulletEl.style.backgroundColor="#24305E";
+    }
+    
+</script>
