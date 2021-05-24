@@ -10,10 +10,21 @@ var register = function(Handlebars) {
     },
     // subtract between current time and time ordered
     subtract: function (time_ordered, current_time) {
-      var diff = Math.abs(current_time - time_ordered);
-      console.log(time_ordered)
-      console.log(current_time)
-      console.log(typeof(time_ordered))
+      var diff = Math.abs(Date.parse(current_time) - Date.parse(time_ordered)); // in miliseconds
+      // now we want to convert to hours
+
+      var milliseconds = Math.floor((diff % 1000) / 100)
+      var seconds = Math.floor((diff / 1000) % 60)
+      var minutes = Math.floor((diff / (60 * 1000) % 60))
+      var hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
+
+      hours = (hours < 10) ? "0" + hours : hours;
+      minutes = (minutes < 10) ? "0" + minutes : minutes;
+      seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+      return (hours + ":" + minutes + ":" + seconds + "." + milliseconds)
+
+      console.log(diff)
       return 
     },
     
