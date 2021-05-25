@@ -9,7 +9,10 @@ const startOrder = mongoose.model("startOrder");
 const getVanOrder= async (req, res) => {
   try{
     console.log("inside")
-    const order = await customerOrder.findById(req.params.id).populate({path: 'items.snackId', model: 'Snack'}).lean();
+    const order = await customerOrder.findById(req.params.id)
+    .populate([{path: 'van', model: 'Van'}, {path: 'customer', model: 'Customer'},
+  {path: 'items.snackId', model: 'Snack'}]).lean();
+    console.log(order)
     if (order) {
       return res.render('van-orderdetails', {'order': order, layout: 'vendor-main', 'vanloggedin': req.isAuthenticated()})
     } else {

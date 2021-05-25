@@ -1,3 +1,9 @@
 <section id="van-orderdetails">
-    {{order.items}}
+    {{order.van.name}}<br>
+    {{order.customer.nameGiven}} {{order.customer.nameFamily}}<br>
+    {{order._id}}<br>
+    {{#each order.items}}
+    {{this.snackId.name}}<br>
+    {{this.quantity}}<Br>
+    {{/each}}
 </section>
