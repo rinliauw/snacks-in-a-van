@@ -21,6 +21,9 @@ vendorRouter.get("/orders/:id", orderController.getVanOrder);
 // handle the GET request to get all outstanding orders with current logged in
 vendorRouter.get("/outstanding-orders", orderController.getOrderWithVanName);
 
+//handle the GET request to get a specific order
+vendorRouter.get("/outstanding-orders/:order_id", orderController.getOneOutstandingOrder);
+
 // handle the GET request to get all outstanding orders with current logged in
 vendorRouter.get("/pickedup-orders", orderController.getPickedupOrder);
 

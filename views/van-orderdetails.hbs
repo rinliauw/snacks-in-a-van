@@ -1,9 +1,66 @@
 <section id="van-orderdetails">
+    <h1>Order #{{order._id}}</h1>
+    <h2>Customer: {{order.customer.nameGiven}} {{order.customer.nameFamily}}</h2>
+    <div>
+        <table>
+            <tr> 
+                <th>Product</th>
+                <th></th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                
+            </tr>
+            
+            {{#each order.items}}
+            {{#if this.quantity}}
+            <tr>
+                <td>
+                    <div class="order-info">
+                        <img class="van-orderdetails" src="https://source.unsplash.com/{{this.snackId.photo}}" alt="hosted by Unsplash">
+                        
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <p>{{this.snackId.name}}</p>
+                        <small>Price: ${{this.snackId.price}}</small>
+                    </div>
+                </td>
+                <td>{{this.quantity}}</td>
+                <td>{{multiply this.snackId.price this.quantity}}</td>
+                  
+            </tr>
+            {{/if}}
+            {{/each}}
+        </table>
+    </div>
+    <div class="submit">
+        <table>
+            <tr>
+                <td>Discount applied?</td>
+                <td>Time until discount: {{subtract Date.now order.time_ordered}}</td>
+            </tr>
+            <tr>
+                <td><b>Total Price</b></td>
+                <td>${{total}}</td>
+            </tr>
+            <tr>
+                <td><form method="post" action="/vendor/outstanding-orders" id="van_form">
+                    <input type="hidden" name="current_van" id = "current_van"/>
+                    <input id ="fulfill_button" class="btn btn-primary" type="submit"  value="Order Fulfilled"/>
+
+                    <input id ="submit_button" class="btn btn-primary" type="submit"  value="Ready For Pickup"/>
+                </form></td>
+            </tr>
+        </table>
+
+    </div>
     {{order.van.name}}<br>
     {{order.customer.nameGiven}} {{order.customer.nameFamily}}<br>
     {{order._id}}<br>
     {{#each order.items}}
     {{this.snackId.name}}<br>
+    {{this.snackId.price}}
     {{this.quantity}}<Br>
     {{/each}}
 </section>

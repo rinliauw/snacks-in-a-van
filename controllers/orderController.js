@@ -57,6 +57,30 @@ const getOrderWithVanName = async (req, res) => {
   }
 };
 
+
+//handle request to get one order
+const getOneOutstandingOrder = async(req, res) => {
+  try {
+    //find van
+    const chosenVan = await Van.findOne({ name: req.session.name });
+    //find the desired order
+    const vanOrder = await Order
+      .findOne(
+        { van: chosenVan._id, fulfilled: false },
+        {_id: order_id}
+      )
+      .lean();
+
+    res.render("van-orderdetails", {
+      vanOrder: vanOrder,
+      layout: "vendor-main",
+      vanloggedin: req.isAuthenticated(),
+    });
+  } catch(e){
+
+  }
+}
+
 const getPickedupOrder = async (req, res) => {
   try {
     //find van
@@ -262,4 +286,5 @@ module.exports = {
   confirmOrder,
   viewOrderHistory,
   getPickedupOrder,
+  getOneOutstandingOrder
 };

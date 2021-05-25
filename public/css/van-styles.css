@@ -27,8 +27,20 @@ p {
 }
 
 h1 {
+  padding: 20px;
+  font-size: var(--text-big);
+  text-align: center;
+  color: var(--color-dark);
   font-family: "Orelega One", cursive;
 }
+
+h2 {
+  font-size: var(--text-medium);
+  text-indent: 20%;
+  color: var(--color-dark);
+  font-family: "Orelega One", cursive;
+}
+
 
 .list-group-item {
   background-color: var(--color-listgroup) !important;
@@ -89,4 +101,42 @@ h1 {
 .btn-primary:focus {
   background-color: var(--color-primary-hover);
   border: hidden;
+}
+
+#van-orderdetails img {
+  width: 150px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+
+#van-orderdetails table {
+  width: 60%;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 3px solid;
+}
+
+#van-orderdetails th {
+  text-align: center;
+  padding: 5px;
+  background: var(--color-primary);
+  color: var(--color-beige);
+}
+#van-orderdetails td {
+  text-align: center;
+}
+#van-orderdetails td p{
+  font-size: var(--text-small);
+}
+
+#van-orderdetails .countdown{
+  margin-top:2%;
+  font-size: var(--text-small);
+  text-indent: 20%;
+}
+
+#van-orderdetails .submit td{
+  text-align: right;
 }
