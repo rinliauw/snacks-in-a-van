@@ -522,6 +522,9 @@ p {
   margin-left: auto;
   margin-right: auto;
 }
+#currentCart form{
+  width:50%;
+}
 
 #currentCart th {
   text-align: left;
@@ -540,21 +543,19 @@ p {
 
 #currentCart .total-price {
   display: flex;
-  justify-content: flex-end;
+  flex-wrap: nowrap;
+  justify-content:center;
+  width:100%;
 }
 
 #currentCart .total-price table {
   border-top: 3px solid;
   width: 60%;
 }
-
-#currentCart td:last-child {
-  text-align: right;
+#currentCart .total-price table td:last-child{
+  text-align:right;
 }
 
-#currentCart th:last-child {
-  text-align: right;
-}
 
 #currentCart input[type="submit"] {
   border-radius: 12px;
@@ -564,36 +565,27 @@ p {
   padding: 10px;
   border: none;
   float: right;
+  width:auto;
 }
 
 #currentCart input[type="submit"]:hover {
-  border-radius: 12px;
   background: var(--color-pinkhover);
-  color: var(--color-beige);
-  font-size: var(--text-small);
-  padding: 10px;
-  border: none;
-  float: right;
 }
 
 #currentCart button {
+  width:auto;
   border-radius: 12px;
   background: var(--color-pink);
   color: var(--color-beige);
   font-size: var(--text-small);
+  margin-top:40px;
   padding: 10px;
   border: none;
   float: right;
 }
 
 #currentCart button:hover {
-  border-radius: 12px;
   background: var(--color-pinkhover);
-  color: var(--color-beige);
-  font-size: var(--text-small);
-  padding: 10px;
-  border: none;
-  float: right;
 }
 
 /* layout for snack details */
@@ -668,7 +660,7 @@ h1 {
   letter-spacing: 3px;
 }
 
-input[type="submit"] {
+input[type$="submit"] {
   background: #966c45;
   border: none;
   outline: none;
@@ -678,9 +670,8 @@ input[type="submit"] {
   width: 20em;
 }
 
-input[type="submit"]:hover {
+input[type$="submit"]:hover {
   background: #966c45;
-
   margin-top: 20px;
   border: none;
   outline: none;
@@ -799,7 +790,7 @@ button:hover {
   font-size: var(--text-small);
   text-decoration: underline;
 }
-#profile label[for="value"] {
+#profile label[for$="value"] {
   font-size: smaller;
   display: block;
   margin: 10px auto;
@@ -827,9 +818,9 @@ button:hover {
   font-size: var(--text-small);
 }
 
-#login input[type="submit"],
-#signUp input[type="submit"],
-#editProfile input[type="submit"] {
+#login input[type$="submit"],
+#signUp input[type$="submit"],
+#editProfile input[type$="submit"] {
   background: #dfa167;
   border: none;
   outline: none;
@@ -840,9 +831,9 @@ button:hover {
   margin-top: 50px;
 }
 
-#login input[type="submit"]:hover,
-#signUp input[type="submit"]:hover,
-#editProfile input[type="submit"]:hover {
+#login input[type$="submit"]:hover,
+#signUp input[type$="submit"]:hover,
+#editProfile input[type$="submit"]:hover {
   background: #966c45;
   border: none;
   outline: none;
