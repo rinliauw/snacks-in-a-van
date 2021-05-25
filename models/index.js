@@ -1,29 +1,33 @@
-require('dotenv').config()
-const mongoose = require("mongoose")
+require("dotenv").config();
+const mongoose = require("mongoose");
 
 // Connect to MongoDB - database login is retrieved from environment variables
-CONNECTION_STRING = "mongodb+srv://<username>:<password>@cluster0.7qkom.mongodb.net/snacksinavan?retryWrites=true&w=majority"
+CONNECTION_STRING =
+  "mongodb+srv://<username>:<password>@cluster0.7qkom.mongodb.net/snacksinavan?retryWrites=true&w=majority";
 
-MONGO_URL = CONNECTION_STRING.replace("<username>",process.env.MONGO_USERNAME).replace("<password>",process.env.MONGO_PASSWORD)
+MONGO_URL = CONNECTION_STRING.replace(
+  "<username>",
+  process.env.MONGO_USERNAME
+).replace("<password>", process.env.MONGO_PASSWORD);
 
-mongoose.connect(MONGO_URL || "mongodb://localhost", { 
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    dbName: "snacksinavan" 
-})
+mongoose.connect(MONGO_URL || "mongodb://localhost", {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  dbName: "snacksinavan",
+});
 
-const db = mongoose.connection
+const db = mongoose.connection;
 
-db.on("error", err => { 
-    console.error(err); 
-    process.exit(1)
-})
+db.on("error", (err) => {
+  console.error(err);
+  process.exit(1);
+});
 
 db.once("open", async () => {
-    console.log("Mongo connection started on " + db.host + ":" + db.port)
-}) 
-require("./snack")
-require("./order")
-require("./van")
+  console.log("Mongo connection started on " + db.host + ":" + db.port);
+});
+require("./snack");
+require("./order");
+require("./van");

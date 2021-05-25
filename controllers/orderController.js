@@ -1,174 +1,245 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const Order = mongoose.model("Order")
-const Van = mongoose.model("Van")
-const Customer = mongoose.model("Customer")
-const customerOrder = mongoose.model("customerOrder")
-const startOrder = mongoose.model("startOrder")
+const Order = mongoose.model("Order");
+const Van = mongoose.model("Van");
+const Customer = mongoose.model("Customer");
+const customerOrder = mongoose.model("customerOrder");
+const startOrder = mongoose.model("startOrder");
 
 // handle request to get all outstanding orders (not fulfilled) with a van name
 // show from the most recent
 const getOrderWithVanName = async (req, res) => {
-    try {
-        //find van
-        const oneVan = await Van.findOne( {"name": req.session.name} )
-        //find all its outstanding orders
-        const vanOrders = await customerOrder.find({ van:oneVan._id, fulfilled:false },{},{sort: '-time_ordered'}).populate({path: 'customer'}).lean()
-        let date_ob = Date()
-        for (var i=0; i < vanOrders.length; i++){
-            vanOrders[i].current_date = date_ob
-        }
-        console.log;(vanOrders)
-        res.render('van-orders', {"vanOrders": vanOrders, layout: 'vendor-main', "vanloggedin": req.isAuthenticated()});
-        
-    } catch (e) {
-        res.status(400)
-        return res.send("Database query failed - an error occurred")
+  try {
+    //find van
+    const oneVan = await Van.findOne({ name: req.session.name });
+    //find all its outstanding orders
+    const vanOrders = await customerOrder
+      .find(
+        { van: oneVan._id, fulfilled: false },
+        {},
+        { sort: "-time_ordered" }
+      )
+      .populate({ path: "customer" })
+      .lean();
+    let date_ob = Date();
+    for (var i = 0; i < vanOrders.length; i++) {
+      vanOrders[i].current_date = date_ob;
     }
-}
+    console.log;
+    vanOrders;
+    res.render("van-orders", {
+      vanOrders: vanOrders,
+      layout: "vendor-main",
+      vanloggedin: req.isAuthenticated(),
+    });
+  } catch (e) {
+    res.status(400);
+    return res.send("Database query failed - an error occurred");
+  }
+};
 
 const getPickedupOrder = async (req, res) => {
-    try {
-        //find van
-        const oneVan = await Van.findOne( {"name": req.session.name} )
-        //find all its outstanding orders
-        const vanOrders = await customerOrder.find({ van:oneVan._id, fulfilled:true },{},{sort: '-time_ordered'}).populate({path: 'customer'}).lean()
-        res.render('van-pickedup-orders.hbs', {"vanOrders": vanOrders, layout: 'vendor-main', "vanloggedin": req.isAuthenticated()});
-        
-    } catch (e) {
-        res.status(400)
-        return res.send("Database query failed - an error occurred")
-    }
-}
+  try {
+    //find van
+    const oneVan = await Van.findOne({ name: req.session.name });
+    //find all its outstanding orders
+    const vanOrders = await customerOrder
+      .find({ van: oneVan._id, fulfilled: true }, {}, { sort: "-time_ordered" })
+      .populate({ path: "customer" })
+      .lean();
+    res.render("van-pickedup-orders.hbs", {
+      vanOrders: vanOrders,
+      layout: "vendor-main",
+      vanloggedin: req.isAuthenticated(),
+    });
+  } catch (e) {
+    res.status(400);
+    return res.send("Database query failed - an error occurred");
+  }
+};
 
 // handle request to mark an order as fulfilled
-const markOrderAsFulfilled = async (req, res) => {  
-    try {
-        //find van
-        const oneVan = await Van.findOne( {"name": req.params.name} )
-        console.log(oneVan)
-        //find order and mark order as fulfilled
-        const thisOrder = await Order.findOneAndUpdate( 
-            {order_id: req.params.order_id, van:oneVan._id},
-            {"$set":{fulfilled:true}},
-            {new: true}
-            )
-        return res.send(thisOrder)  // van was found
-    } catch (e) {     // error occurred
-        res.status(400)
-        return res.send("Database query failed")
-    }
-}
+const markOrderAsFulfilled = async (req, res) => {
+  try {
+    //find van
+    const oneVan = await Van.findOne({ name: req.params.name });
+    console.log(oneVan);
+    //find order and mark order as fulfilled
+    const thisOrder = await Order.findOneAndUpdate(
+      { order_id: req.params.order_id, van: oneVan._id },
+      { $set: { fulfilled: true } },
+      { new: true }
+    );
+    return res.send(thisOrder); // van was found
+  } catch (e) {
+    // error occurred
+    res.status(400);
+    return res.send("Database query failed");
+  }
+};
 
 // handles request to confirm order
 const confirmOrder = async (req, res, current_van) => {
-    try {
-        //find the customer
-        const oneCust = await Customer.findOne( {email: req.session.email} ).lean()
-        console.log(current_van)
-        // if hasn't found a van, redirect to find the nearest van
-        if (!Object.keys(current_van).length){
-            return res.redirect('/customer/')
-        }
-        else{ // if has chosen a van, proceed to create an order
-        // console.log(oneCust) for debugging purposes
-        // console.log("confirmorder")
-        // console.log(typeof(current_van))
-        // console.log("after")
+  try {
+    //find the customer
+    const oneCust = await Customer.findOne({ email: req.session.email }).lean();
+    console.log(current_van);
+    // if hasn't found a van, redirect to find the nearest van
+    if (!Object.keys(current_van).length) {
+      return res.redirect("/customer/");
+    } else {
+      // if has chosen a van, proceed to create an order
+      // console.log(oneCust) for debugging purposes
+      // console.log("confirmorder")
+      // console.log(typeof(current_van))
+      // console.log("after")
 
-        const oneCart = oneCust.cart
-        if(oneCart.length === 0) { // if cart is 0, render 'cart is empty page'
-            const thisOrder = await customerOrder.findOne({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
-            //count total
-            const items = thisOrder.items;
-            var total = 0;
-            var totalEach = new Array(items.length);
-            for (var i = 0; i < items.length; i++) {
-                var currentItem = items[i];
-                totalEach[i] = currentItem.snackId.price*currentItem.quantity
-                total+=(currentItem.snackId.price*currentItem.quantity)
-            }
-            return res.render('orderdetails', {"thisOrder": thisOrder, "total": total, "loggedin": req.isAuthenticated()})
-        }
-        var isnotEmpty = 0; // check if cart is not empty
-        for(var i=0; i<oneCart.length; i++) {
-            if(oneCart[i].quantity != 0) {
-                isnotEmpty = 1;
-            }
-        }
-
-        if(!isnotEmpty){ // if cart is not empty, render 'order details' page
-            const thisOrder = await customerOrder.findOne({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
-            //count total
-            const items = thisOrder.items;
-            var total = 0;
-            var totalEach = new Array(items.length);
-            for (var i = 0; i < items.length; i++) {
-                var currentItem = items[i];
-                totalEach[i] = currentItem.snackId.price*currentItem.quantity
-                total+=(currentItem.snackId.price*currentItem.quantity)
-            }
-            return res.render('orderdetails', {"thisOrder": thisOrder, "total": total, "loggedin": req.isAuthenticated()})
-        }
-        
-        // make new order
-        const newOrder = new customerOrder({customer: oneCust._id})
-        
-        //make order outstanding
-        newOrder.fulfilled = false;
-        newOrder.picked_up = false;
-        newOrder.discount = false;
-        newOrder.van = JSON.parse(current_van); // add van details (JSON) from sessionstorage to the database
-
-        for(var i=0; i<oneCart.length; i++) {
-            
-            var newItem = new startOrder({snackId: oneCart[i].snackId, quantity: oneCart[i].quantity})
-            
-            newOrder.items.push(newItem)
-        }
-        console.log("finish for loop")
-        
-        await newOrder.save() // update the new order to the database
-        console.log(newOrder)
-
-        await Customer.updateOne({_id: oneCust._id}, { $set: { cart: [] }}, function(err, affected){
-            console.log('affected: ', affected);
-        });
-
-        const thisOrder = await customerOrder.findOne({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
+      const oneCart = oneCust.cart;
+      if (oneCart.length === 0) {
+        // if cart is 0, render 'cart is empty page'
+        const thisOrder = await customerOrder
+          .findOne({ customer: oneCust._id }, {}, { sort: "-time_ordered" })
+          .populate([
+            { path: "items.snackId", model: "Snack" },
+            { path: "van", model: "Van" },
+          ])
+          .lean();
         //count total
         const items = thisOrder.items;
         var total = 0;
         var totalEach = new Array(items.length);
         for (var i = 0; i < items.length; i++) {
-            var currentItem = items[i];
-            totalEach[i] = currentItem.snackId.price*currentItem.quantity
-            total+=(currentItem.snackId.price*currentItem.quantity)
+          var currentItem = items[i];
+          totalEach[i] = currentItem.snackId.price * currentItem.quantity;
+          total += currentItem.snackId.price * currentItem.quantity;
         }
-        return res.render('orderdetails', {"thisOrder": thisOrder, "total":total, "loggedin": req.isAuthenticated()})
+        return res.render("orderdetails", {
+          thisOrder: thisOrder,
+          total: total,
+          loggedin: req.isAuthenticated(),
+        });
+      }
+      var isnotEmpty = 0; // check if cart is not empty
+      for (var i = 0; i < oneCart.length; i++) {
+        if (oneCart[i].quantity != 0) {
+          isnotEmpty = 1;
+        }
+      }
+
+      if (!isnotEmpty) {
+        // if cart is not empty, render 'order details' page
+        const thisOrder = await customerOrder
+          .findOne({ customer: oneCust._id }, {}, { sort: "-time_ordered" })
+          .populate([
+            { path: "items.snackId", model: "Snack" },
+            { path: "van", model: "Van" },
+          ])
+          .lean();
+        //count total
+        const items = thisOrder.items;
+        var total = 0;
+        var totalEach = new Array(items.length);
+        for (var i = 0; i < items.length; i++) {
+          var currentItem = items[i];
+          totalEach[i] = currentItem.snackId.price * currentItem.quantity;
+          total += currentItem.snackId.price * currentItem.quantity;
+        }
+        return res.render("orderdetails", {
+          thisOrder: thisOrder,
+          total: total,
+          loggedin: req.isAuthenticated(),
+        });
+      }
+
+      // make new order
+      const newOrder = new customerOrder({ customer: oneCust._id });
+
+      //make order outstanding
+      newOrder.fulfilled = false;
+      newOrder.picked_up = false;
+      newOrder.discount = false;
+      newOrder.van = JSON.parse(current_van); // add van details (JSON) from sessionstorage to the database
+
+      for (var i = 0; i < oneCart.length; i++) {
+        var newItem = new startOrder({
+          snackId: oneCart[i].snackId,
+          quantity: oneCart[i].quantity,
+        });
+
+        newOrder.items.push(newItem);
+      }
+      console.log("finish for loop");
+
+      await newOrder.save(); // update the new order to the database
+      console.log(newOrder);
+
+      await Customer.updateOne(
+        { _id: oneCust._id },
+        { $set: { cart: [] } },
+        function (err, affected) {
+          console.log("affected: ", affected);
+        }
+      );
+
+      const thisOrder = await customerOrder
+        .findOne({ customer: oneCust._id }, {}, { sort: "-time_ordered" })
+        .populate([
+          { path: "items.snackId", model: "Snack" },
+          { path: "van", model: "Van" },
+        ])
+        .lean();
+      //count total
+      const items = thisOrder.items;
+      var total = 0;
+      var totalEach = new Array(items.length);
+      for (var i = 0; i < items.length; i++) {
+        var currentItem = items[i];
+        totalEach[i] = currentItem.snackId.price * currentItem.quantity;
+        total += currentItem.snackId.price * currentItem.quantity;
+      }
+      return res.render("orderdetails", {
+        thisOrder: thisOrder,
+        total: total,
+        loggedin: req.isAuthenticated(),
+      });
     }
-    } catch (e) {     // error occurred
-        res.status(400)
-        return res.send("Database query failed")
-    }
-}
+  } catch (e) {
+    // error occurred
+    res.status(400);
+    return res.send("Database query failed");
+  }
+};
 
 // handles request to view order history
 const viewOrderHistory = async (req, res) => {
-    console.log("view order history")
-    try {
-        //find the customer
-        const oneCust = await Customer.findOne( {email: req.session.email} ).lean()
-        
-        const thisOrder = await customerOrder.find({customer: oneCust._id},{},{sort: '-time_ordered'}).populate([{path:'items.snackId', model:'Snack'}, {path: 'van', model: 'Van'}]).lean()
-        
-        return res.render('orderhistory', {"thisOrder": thisOrder, "loggedin": req.isAuthenticated()})
-    } catch (e) {     // error occurred
-        res.status(400)
-        return res.send("Database query failed")
-    }
-}
+  console.log("view order history");
+  try {
+    //find the customer
+    const oneCust = await Customer.findOne({ email: req.session.email }).lean();
+
+    const thisOrder = await customerOrder
+      .find({ customer: oneCust._id }, {}, { sort: "-time_ordered" })
+      .populate([
+        { path: "items.snackId", model: "Snack" },
+        { path: "van", model: "Van" },
+      ])
+      .lean();
+
+    return res.render("orderhistory", {
+      thisOrder: thisOrder,
+      loggedin: req.isAuthenticated(),
+    });
+  } catch (e) {
+    // error occurred
+    res.status(400);
+    return res.send("Database query failed");
+  }
+};
 
 module.exports = {
-    getOrderWithVanName, markOrderAsFulfilled, confirmOrder, viewOrderHistory, getPickedupOrder
-}
+  getOrderWithVanName,
+  markOrderAsFulfilled,
+  confirmOrder,
+  viewOrderHistory,
+  getPickedupOrder,
+};

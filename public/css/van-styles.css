@@ -1,93 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
-
-:root {  
-    --color-primary:#dfa167;
-    --color-primary-hover:#af7d4f;
-    --color-primary-click:#7c5939;
-    --text-big: 36px;
-    --text-medium: 22px;
-    --text-small: 16px;
-    --font-heading: 'Roboto', sans-serif;
-    --font-body: 'Work Sans', cursive;
-    --color-dark: #24305E;
-    --color-purple: #374785;
-    --color-blue: #A8D0E6;
-    --color-pink: #F76C6C; 
-    --color-pinkhover: #f3a9a9;
-    --color-yellow: #F8E9A1;
-    --color-beige: #e9d6cd;
-    --color-listgroup: #ffefdf;
-    --color-listgrouphover: #c9b6a4;
+:root {
+  --color-primary: #dfa167;
+  --color-primary-hover: #af7d4f;
+  --color-primary-click: #7c5939;
+  --text-big: 36px;
+  --text-medium: 22px;
+  --text-small: 16px;
+  --font-heading: "Roboto", sans-serif;
+  --font-body: "Work Sans", cursive;
+  --color-dark: #24305e;
+  --color-purple: #374785;
+  --color-blue: #a8d0e6;
+  --color-pink: #f76c6c;
+  --color-pinkhover: #f3a9a9;
+  --color-yellow: #f8e9a1;
+  --color-beige: #e9d6cd;
+  --color-listgroup: #ffefdf;
+  --color-listgrouphover: #c9b6a4;
 }
 
-p{
-    font-family: 'Raleway', sans-serif;
+p {
+  font-family: "Raleway", sans-serif;
 }
 
-h1{
-    font-family: 'Orelega One', cursive;
+h1 {
+  font-family: "Orelega One", cursive;
 }
 
-.list-group-item{
-    background-color:var(--color-listgroup) !important;
+.list-group-item {
+  background-color: var(--color-listgroup) !important;
 }
 
-.list-group-item:hover{
-    background-color: var(--color-listgrouphover) !important;
+.list-group-item:hover {
+  background-color: var(--color-listgrouphover) !important;
 }
 
-.bg-light{
-    background-color: var(--color-primary) !important;
+.bg-light {
+  background-color: var(--color-primary) !important;
 }
 
-.body-bg{
-    background-color: var(--color-beige);
+.body-bg {
+  background-color: var(--color-beige);
 }
 
-.btn-primary{
-    background-color: var(--color-primary);
-    border: hidden;
-  }
-  
-.btn-primary:hover{
-background-color: var(--color-primary-hover);
-border: hidden;
+.btn-primary {
+  background-color: var(--color-primary);
+  border: hidden;
 }
 
-.btn-primary:active{
-    background-color: var(--color-primary-click);
-    border: hidden;
-    }
-
-.btn-primary:focus{
-    background-color: var(--color-primary-click);
-    border: hidden;
-    }
-
-.btn-secondary{
-    background-color: var(--color-pinkhover);
-    border: hidden;
-    }
-      
-.btn-secondary:hover{
-    background-color: var(--color-pink);
-    border: hidden;
-    }
-    
-.btn-secondary:active{
-    background-color: var(--color-pink);
-    border: hidden;
-    }
-    
-.btn-secondary:focus{
-    background-color: var(--color-pink);
-    border: hidden;
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  border: hidden;
 }
-    
-.btn-primary:focus{
-    background-color: var(--color-primary-hover);
-    border: hidden;
+
+.btn-primary:active {
+  background-color: var(--color-primary-click);
+  border: hidden;
+}
+
+.btn-primary:focus {
+  background-color: var(--color-primary-click);
+  border: hidden;
+}
+
+.btn-secondary {
+  background-color: var(--color-pinkhover);
+  border: hidden;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-pink);
+  border: hidden;
+}
+
+.btn-secondary:active {
+  background-color: var(--color-pink);
+  border: hidden;
+}
+
+.btn-secondary:focus {
+  background-color: var(--color-pink);
+  border: hidden;
+}
+
+.btn-primary:focus {
+  background-color: var(--color-primary-hover);
+  border: hidden;
 }
