@@ -22,9 +22,6 @@ var register = function(Handlebars) {
       seconds = (seconds < 10) ? "0" + seconds : seconds;
 
       return (hours + ":" + minutes + ":" + seconds)
-
-      console.log(diff)
-      return 
     },
     
     van_helper: function (thisVan){
