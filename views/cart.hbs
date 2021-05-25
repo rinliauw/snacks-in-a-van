@@ -29,7 +29,8 @@
     <div class= "cart-page">
         {{#if total}}
         <table>
-            <tr>
+            <tr><th>Selected Van: <span id="van_name"></span> </th><th><th></th></th></tr>
+            <tr> 
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
@@ -81,6 +82,13 @@
 </section>
 
 <script>
+// get van name from sessionstorage
+if (window.sessionStorage.getItem('current_van') != null){
+    document.getElementById('van_name').innerHTML = JSON.stringify(JSON.parse(window.sessionStorage.getItem('current_van')).name)
+}
+else{
+    document.getElementById('van_name').innerHTML = '<a href="/customer/">Please select a van</a>'
+}
 
 // Get the modal
 var modal = document.getElementById("myModal");

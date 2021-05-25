@@ -375,6 +375,10 @@ form span.bigScreen {
   border: 0;
 }
 
+#snacksMenu .snack-img:hover{
+  opacity: 0.3;
+}
+
 #snacksMenu .snack-body {
   box-sizing: border-box;
 }
