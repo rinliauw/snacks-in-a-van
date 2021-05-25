@@ -921,7 +921,7 @@ button:hover{
     padding-bottom: 30px;
 }
 
-#signUp .container, #editProfile .container, #profile .container {
+#signUp, #editProfile, #profile .container {
     width: 500px;
     height: 700px;
     text-align: center;
@@ -933,14 +933,14 @@ button:hover{
     margin-right: auto;
 }
 
-#signUp label, #editProfile label {
+#signUp, #editProfile label {
     display: block;
     margin-bottom: 0;
     margin-top: 5px;
     font-size: smaller;
 }
 
-#signUp input, #editProfile input {
+#signUp, #editProfile input {
     display: block;
     margin: 10px auto;
     margin-bottom: 30px; 
@@ -952,7 +952,7 @@ button:hover{
     color: black;
 }
 
-#signUp input[type="submit"], #editProfile input[type="submit"]{
+#signUp, #editProfile input[type="submit"]{
     background: #dfa167;
     border: none;
     outline: none;
@@ -963,7 +963,7 @@ button:hover{
     margin-top: 50px;
 }
 
-#signUp input[type="submit"]:hover, #editProfile input[type="submit"]:hover{
+#signUp, #editProfile input[type="submit"]:hover{
     background: #966c45;
     border: none;
     outline: none;
