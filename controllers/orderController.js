@@ -9,9 +9,9 @@ const startOrder = mongoose.model("startOrder");
 const getVanOrder= async (req, res) => {
   try{
     console.log("inside")
-    const order = await customerOrder.findById(req.params.id);
+    const order = await customerOrder.findById(req.params.id).populate({path: 'items.snackId', model: 'Snack'}).lean();
     if (order) {
-      return res.send(order);
+      return res.render('van-orderdetails', {'order': order, layout: 'vendor-main', 'vanloggedin': req.isAuthenticated()})
     } else {
       res.status(404);
       return res.send("Customer is not found in database");
