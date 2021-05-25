@@ -13,6 +13,8 @@ const orderController = require("../controllers/orderController.js");
 // require the van controller
 const vanController = require("../controllers/vanController.js");
 
+vendorRouter.get("/orders/:id", orderController.getVanOrder);
+
 // handle the GET request to get all outstanding orders with this van
 // vendorRouter.get('/:name/outstanding-orders', orderController.getOrderWithVanName)
 
