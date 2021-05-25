@@ -921,7 +921,7 @@ button:hover{
     padding-bottom: 30px;
 }
 
-#signUp, #editProfile, #profile .container {
+#signUp .container {
     width: 500px;
     height: 700px;
     text-align: center;
@@ -933,14 +933,14 @@ button:hover{
     margin-right: auto;
 }
 
-#signUp, #editProfile label {
+#signUp label {
     display: block;
     margin-bottom: 0;
     margin-top: 5px;
     font-size: smaller;
 }
 
-#signUp, #editProfile input {
+#signUp input {
     display: block;
     margin: 10px auto;
     margin-bottom: 30px; 
@@ -952,7 +952,7 @@ button:hover{
     color: black;
 }
 
-#signUp, #editProfile input[type="submit"]{
+#signUp input[type="submit"]{
     background: #dfa167;
     border: none;
     outline: none;
@@ -963,7 +963,7 @@ button:hover{
     margin-top: 50px;
 }
 
-#signUp, #editProfile input[type="submit"]:hover{
+#signUp input[type="submit"]:hover{
     background: #966c45;
     border: none;
     outline: none;
@@ -1024,7 +1024,6 @@ button:hover{
     width:70%;
     overflow: hidden;
     margin:auto;
-    
 }
 
 #OrderDetails .flex-direction{
@@ -1055,7 +1054,7 @@ button:hover{
     padding-bottom: 20px;
 }
 
-#OrderDetails li {
+#OrderDetails, #cart li {
     border-radius: 3px;
     padding: 25px 30px;
     display: flex;
@@ -1066,16 +1065,16 @@ button:hover{
     font-size: 70%;
 }
 
-#OrderDetails .col-1 {
+#OrderDetails, #cart .col-1 {
     flex-basis: 50%;
 }
-#OrderDetails .col-2 {
+#OrderDetails, #cart .col-2 {
     flex-basis: 25%;
 }
-#OrderDetails .col-3 {
+#OrderDetails, #cart .col-3 {
     flex-basis: 25%;
 }
-#OrderDetails .total {
+#OrderDetails, #cart .total {
     background-color:#e9d6cd;
 }
 #OrderDetails .notice {
