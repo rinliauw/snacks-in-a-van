@@ -6,6 +6,25 @@ const Customer = mongoose.model("Customer");
 const customerOrder = mongoose.model("customerOrder");
 const startOrder = mongoose.model("startOrder");
 
+const getVanOrder= async (req, res) => {
+  try{
+    console.log("inside")
+    const order = await customerOrder.findById(req.params.id)
+    .populate([{path: 'van', model: 'Van'}, {path: 'customer', model: 'Customer'},
+  {path: 'items.snackId', model: 'Snack'}]).lean();
+    console.log(order)
+    if (order) {
+      return res.render('van-orderdetails', {'order': order, layout: 'vendor-main', 'vanloggedin': req.isAuthenticated()})
+    } else {
+      res.status(404);
+      return res.send("Customer is not found in database");
+    }
+  }
+  catch (e){
+    res.status(400)
+    return res.send("Database query failed - an error occured")
+  }
+}
 // handle request to get all outstanding orders (not fulfilled) with a van name
 // show from the most recent
 const getOrderWithVanName = async (req, res) => {
@@ -237,6 +256,7 @@ const viewOrderHistory = async (req, res) => {
 };
 
 module.exports = {
+  getVanOrder,
   getOrderWithVanName,
   markOrderAsFulfilled,
   confirmOrder,
