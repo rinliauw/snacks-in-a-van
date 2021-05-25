@@ -42,7 +42,6 @@ customerSchema.methods.validPassword = function (password) {
 // bcrypt middleware
 customerSchema.pre("save", function customerSchemaPre(next) {
   const user = this;
-  user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   console.log(user);
   next();
 });
