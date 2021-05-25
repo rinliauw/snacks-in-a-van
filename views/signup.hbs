@@ -1,13 +1,14 @@
 {{! Code based on that from foodbuddy app, provided by INFO30005 Faculty 2021}}
 
 <section id="signUp">
+    <h1>Sign Up</h1>
     <form method="post" action="/customer/signup">
     <div class="container">
-      <h1>Sign Up</h1>
       
-      <label for="gname">Given name</label>
+      
+      <label for="gname">Given Name</label>
       <input placeholder="Given Name" name='nameGiven' id='nameGiven' value=""/>
-      <label for="fname">Family name</label>
+      <label for="fname">Family Name</label>
       <input placeholder="Family Name"  name='nameFamily' id='nameFamily' value=""/>
       <label for="email">Email</label>
       <input placeholder="Email" name='email' id='email' pattern="[\.0-9A-Za-z]+@[\.A-Za-z]+" value=""/>

@@ -1,12 +1,12 @@
 <section id="editProfile">
+    <h1>Edit Profile</h1>
     <form method="post" action="/customer/edit-profile">
     <div class="container">
-      <h1>Edit Profile</h1>
       
-      <label for="gname">Given name</label>
+      <label for="gname">Given Name</label>
       <input placeholder="Given Name" name='nameGiven' id='nameGiven' value={{givenname}}></input>
 
-      <label for="fname">Family name</label>
+      <label for="fname">Family Name</label>
       <input placeholder="Family Name"  name='nameFamily' id='nameFamily' value={{familyname}}></input>
 
       <label for="newpassword">New Password</label>
@@ -20,6 +20,7 @@
       <p id="passwordalert">{{#if msg}}**{{msg}}{{/if}}</p>
 
       <input type="submit" value="SAVE">
+      <a href="/customer/profile">Cancel</a>
     </div>
     </form>
 </section>
