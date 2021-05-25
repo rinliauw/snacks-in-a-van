@@ -35,6 +35,9 @@ customerRouter.get("/profile", (res, req) =>
 customerRouter.get("/edit-profile", (res, req) =>
   customerController.getEditProfilePage(res, req)
 );
+customerRouter.get("/change-password", (res, req) =>
+  customerController.getChangePasswordPage(res, req)
+);
 // handle the GET request to get all snacks
 customerRouter.get("/snacks", snackController.getAllSnacks);
 
@@ -117,11 +120,18 @@ customerRouter.get("/", (res, req) =>
 
 //handle the GET request to get the details of one customer
 customerRouter.get("/:id", customerController.getOneCustomer);
+
+//handle the POST request to add an item to order
 customerRouter.post("/:id/order", customerController.addItem);
 
 //handle the GET request to get the customer order
 customerRouter.get("/:id/cart", customerController.getCustomerCart);
 
+//handle the POST request to change user's profile (fam name + given name)
 customerRouter.post("/edit-profile", customerController.editProfile);
+
+//handle the POST request to change user's password
+customerRouter.post("/change-password", customerController.changePassword);
+
 // export the router
 module.exports = customerRouter;

@@ -11,6 +11,7 @@ const vanController = require("../controllers/vanController.js");
 // get express-validator, to validate user data in forms
 const expressValidator = require("express-validator");
 const bcrypt = require("bcrypt");
+const passport = require("passport");
 
 // update
 
@@ -318,39 +319,85 @@ const getEditProfilePage = async (req, res) => {
   }
 };
 
-//edit user's profile details
+//update user's profile details  (fam name + given name)
 const editProfile = async (req, res, next) => {
   try {
-    var newpassword = req.body.newpassword;
-    var confirmpassword = req.body.confirmpassword;
-    let user = await Customer.findOne({ email: req.session.email });
-
-    if (newpassword !== confirmpassword) {
-      //send error message if the new password and confirmed password is different
-      return res.render("editprofile", {
-        loggedin: req.isAuthenticated(),
-        givenname: user.nameGiven,
-        familyname: user.nameFamily,
-        msg: "Password and Confirm Password do not match!",
-      });
-    }
-
     var nameGiven = req.body.nameGiven;
     var nameFamily = req.body.nameFamily;
 
-    //assign the new values into the respective fields
+    //find the user in the database
+    let user = await Customer.findOne({ email: req.session.email });
+
     user.nameGiven = nameGiven;
     user.nameFamily = nameFamily;
-    user.password = newpassword;
-
+    
     //save the new values
     user.save(function (err) {
       if (err) {
         next(err);
       } else {
+        console.log("edit profile successful")
+        console.log(user)
         res.redirect("/customer/profile/");
       }
     });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//update user's password
+const changePassword = async (req, res, next) => {
+  try {
+    var newpassword = req.body.newpassword;
+    var confirmpassword = req.body.confirmpassword;
+
+    //find the user in the database
+    let user = await Customer.findOne({ email: req.session.email });
+    
+    if (newpassword !== confirmpassword) {
+      //send error message if the new password and confirmed password is different
+      return res.render("changepassword", {
+        loggedin: req.isAuthenticated(),
+        msg: "Password and Confirm Password do not match!",
+      });
+    }
+
+    //password is empty, send error message
+    if(!newpassword || !confirmpassword) {
+      return res.render("changepassword", {
+        loggedin: req.isAuthenticated(),
+        msg: "Password and Confirm Password cannot be blank."
+      });
+    }
+    else {
+        console.log("password is in valid format");
+        user.password = user.generateHash(confirmpassword);
+    }
+    
+    //save the new values
+    user.save(function (err) {
+      if (err) {
+        next(err);
+      } else {
+        console.log("change password successful")
+        console.log(user)
+        res.redirect("/customer/profile/");
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//get user's edit profile page
+const getChangePasswordPage = async (req, res) => {
+  try {
+    if (req.isAuthenticated()) {
+      return res.render("changepassword", {
+        loggedin: req.isAuthenticated(),
+      });
+    }
   } catch (err) {
     console.log(err);
   }
@@ -371,4 +418,6 @@ module.exports = {
   getProfilePage,
   getEditProfilePage,
   editProfile,
+  changePassword,
+  getChangePasswordPage,
 };

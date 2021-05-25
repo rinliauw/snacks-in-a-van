@@ -9,16 +9,6 @@
       <label for="fname">Family Name</label>
       <input placeholder="Family Name"  name='nameFamily' id='nameFamily' value={{familyname}}></input>
 
-      <label for="newpassword">New Password</label>
-      <p id="passwordreq">(At least 8 characters with 1 uppercase letter & 1 number)</p>
-      <input placeholder="New Password" type="password" name='newpassword' pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[a-zA-Z0-9]{8,}"
-      id='newpassword' value=""/>
-
-      <label for="confirmpassword">Confirm Password</label>
-      <input placeholder="Confirm Password" type="password" name='confirmpassword' pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[a-zA-Z0-9]{8,}"
-      id='confirmpassword' value=""/>
-      <p id="passwordalert">{{#if msg}}**{{msg}}{{/if}}</p>
-
       <input type="submit" value="SAVE">
       <a href="/customer/profile">Cancel</a>
     </div>
