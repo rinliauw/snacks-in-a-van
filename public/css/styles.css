@@ -661,44 +661,6 @@ p {
   padding: 15px 15px;
 }
 
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
 
 h1 {
   font-family: "Orelega One", cursive;
@@ -765,7 +727,7 @@ button:hover {
   align-items: center;
 }
 
-.addcart-modal {
+.addcart-modal, .order-modal{
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0);
@@ -787,7 +749,7 @@ button:hover {
   position: relative;
 }
 
-.close {
+.close, .close2 {
   position: absolute;
   top: 0;
   right: 14px;
@@ -827,7 +789,11 @@ button:hover {
   display: block;
   margin-bottom: 0;
   margin-top: 5px;
-  font-size: var(--text-medium);
+  font-size: var(--text-small);
+}
+
+#login a, p{
+  font-size: var(--text-small);
 }
 #editProfile a {
   font-size: var(--text-small);
@@ -858,7 +824,7 @@ button:hover {
   border: 2px solid grey;
   background-color: transparent;
   color: black;
-  font-size: smaller;
+  font-size: var(--text-small);
 }
 
 #login input[type="submit"],
