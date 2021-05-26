@@ -56,9 +56,6 @@ const getOrderWithVanName = async (req, res) => {
     return res.send("Database query failed - an error occurred");
   }
 };
-
-
-//handle request to get one order
 const getOneOutstandingOrder = async(req, res) => {
   try {
     //find van
@@ -70,10 +67,17 @@ const getOneOutstandingOrder = async(req, res) => {
         {_id: order_id}
       )
       .lean();
-
+    var total = 0;
+    var totalEach = new Array(vanOrder.items.length);
+    for (var i = 0; i < vanOrder.items.length; i++) {
+      var currentItem = vanOrder.items[i];
+      totalEach[i] = currentItem.snackId.price * currentItem.quantity;
+      total += currentItem.snackId.price * currentItem.quantity;
+    }
     res.render("van-orderdetails", {
       vanOrder: vanOrder,
       layout: "vendor-main",
+      total: total,
       vanloggedin: req.isAuthenticated(),
     });
   } catch(e){
@@ -105,11 +109,11 @@ const getPickedupOrder = async (req, res) => {
 const markOrderAsFulfilled = async (req, res) => {
   try {
     //find van
-    const oneVan = await Van.findOne({ name: req.params.name });
+    const oneVan = await Van.findOne({ name: req.session.name });
     console.log(oneVan);
     //find order and mark order as fulfilled
     const thisOrder = await Order.findOneAndUpdate(
-      { order_id: req.params.order_id, van: oneVan._id },
+      { _id: req.params.order_id, van: oneVan._id },
       { $set: { fulfilled: true } },
       { new: true }
     );

@@ -42,17 +42,37 @@
             </tr>
             <tr>
                 <td><b>Total Price</b></td>
-                <td>${{order.total}}</td>
+                <td>${{total}}</td>
             </tr>
             <tr><td></td>
-                <td><form method="post" action="/vendor/outstanding-orders" id="van_form">
-                    <input type="hidden" name="current_van" id = "current_van"/>
-                    <input id ="fulfill_button" class="btn btn-primary" type="submit"  value="Order Fulfilled"/>
+                <td>
 
-                    <input id ="submit_button" class="btn btn-primary" type="submit"  value="Ready For Pickup"/>
-                </form></td>
+
+                <button type="button" class="btn btn-primary btn-lg" onclick="markOrderAsFulfilled()">Fulfill Order</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="markOrderAsPickedUp()">Picked Up</button>
+
+                <form method="post" action="/vendor/orders/{{order._id}}/fulfilled" style="display: none;" id="fulfill_order" />
+                <form method="post" action="/vendor/orders/{{order._id}}/pickedup" style="display: none;" id="pickup_order" />
+
+                
+
+
+                {{!-- <form method="post" action="/vendor/orders/{{order._id}}/fulfilled" id="van_form"></form>
+                    <input id ="fulfill_button" class="btn btn-primary" type="submit"  value="Order Fulfilled"/>
+                    <input id ="pickup_button" class="btn btn-primary" type="submit"  value="Ready For Pickup"/>
+                </form> --}}
+                </td>
             </tr>
         </table>
 
     </div>
+    <script>
+        // Form Submit Script
+        function markOrderAsFulfilled() {
+        document.getElementById("fulfill_order").submit()
+        }
+        function markOrderAsPickedUp() {
+        document.getElementById("pickup_order").submit()
+        }
+    </script>
 </section>
