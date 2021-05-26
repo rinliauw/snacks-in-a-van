@@ -44,15 +44,31 @@
                 <td><b>Total Price</b></td>
                 <td>${{total}}</td>
             </tr>
+            
             <tr><td></td>
                 <td>
+                {{#unless order.fulfilled}}
+                <form method="post" action="/vendor/orders/{{order._id}}/fulfilled" id="fulfill_order">
+                    <button type="button" class="btn btn-primary btn-lg" onclick="markOrderAsFulfilled()">Fulfill Order</button>
+                </form>
+                {{else}}
+                <p>Fulfilled Order!</p>
+                {{/unless}}
 
+                {{#if order.fulfilled}}
+                    {{#unless order.picked_up}}
+                    <form method="post" action="/vendor/orders/{{order._id}}/pickedup" id="pickup_order">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="markOrderAsPickedUp()">Picked Up</button>
+                    </form>
+                    {{else}}
+                    <p>Picked Up!</p>
+                    {{/unless}}
+                {{/if}}
+                
+                {{!-- <form method="post" action="/vendor/orders/{{order._id}}/fulfilled" style="display: none;" id="fulfill_order">
+                <form method="post" action="/vendor/orders/{{order._id}}/pickedup" style="display: none;" id="pickup_order" /> --}}
 
-                <button type="button" class="btn btn-primary btn-lg" onclick="markOrderAsFulfilled()">Fulfill Order</button>
-                <button type="button" class="btn btn-primary btn-lg" onclick="markOrderAsPickedUp()">Picked Up</button>
-
-                <form method="post" action="/vendor/orders/{{order._id}}/fulfilled" style="display: none;" id="fulfill_order" />
-                <form method="post" action="/vendor/orders/{{order._id}}/pickedup" style="display: none;" id="pickup_order" />
+                
 
                 
 
