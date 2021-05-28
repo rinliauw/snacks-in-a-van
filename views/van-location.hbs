@@ -1,5 +1,5 @@
 <section id="setlocation">
-  <div class="p-2 mb-4 bg-light rounded-3">
+  <div class="p-2 mb-4 bg-light">
     <div class="container text-center">
       <h1 class="display-5 fw-bold">Update Location</h1>
     </div>
@@ -10,29 +10,47 @@
         <div id="mapping"></div>
       </div>
       <div class="col-lg-6">
-        <div class="col-xl-3 col-lg-5 col-md-8 text-left">
-          {{#if vanloggedin}}
-          <form method="post" action="/vendor/update-van-details/open">
-            <p>Location longitude</p>
-            <input type="hidden" id="location" name="location">
-            <p>Latitude: <span id="latitude" name="latitude"></span>&deg;<br />
-              Longitude: <span id="longitude" name="longitude"></span>&deg;</p>
-            <br>
-            <!--<input type="text" id="location" name="location", placeholder="Example: -12983, 119823">!-->
-            <p>Location description</p>
-            <input type="text" id="location" name="location_description" ,
-              placeholder="Example: 31 Collins St"><Br><br>
-            <p>Open for business?</p>
-            <input class="btn btn-secondary" type="submit" value="Open">
-          </form>
-          <br>
-          <form method="post" action="/vendor/update-van-details/close">
-            <input class="btn btn-primary" type="submit" value="Close">
-          </form>
-
-          {{else}}<p>Please <a href="/vendor/">Log In</a> to Set Location</p>
-          {{/if}}
+        {{#if vanloggedin}}
+          <div class="row">
+            <form method="post" action="/vendor/update-van-details/open" class="col-lg-12 col-sm-6 my-3" id="open_van">
+              <h5>Location longitude</h5>
+              <input type="hidden" id="location" name="location">
+              <table class="my-2 mb-5">
+                <tr>
+                  <td>
+                    Latitude
+                  </td>
+                  <td>:</td>
+                  <td>
+                    <span id="latitude" name="latitude">Loading...</span>&deg;
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Longitude
+                  </td>
+                  <td>:</td>
+                  <td>
+                    <span id="longitude" name="longitude">Loading...</span>&deg;
+                  </td>
+                </tr>
+              </table>
+              {{!-- <p>Latitude: <br>
+                Longitude: <span id="longitude" name="longitude"></span>&deg;</p> --}}
+              <h5>Location description</h5>
+              <input type="text" id="location" name="location_description" placeholder="Example: 31 Collins St" class="mb-3">
+            </form>
+            <div class="col-lg-12 col-sm-6 mt-3">
+              <h5>Open for business?</h5>
+              <button type="button" class="btn btn-primary btn-lg" onclick="openVan()">Open Van</button>
+              <button type="button" class="btn btn-secondary btn-lg" onclick="closeVan()">Close</button>
+              <form method="post" action="/vendor/update-van-details/close" style="display: none;" id="close_van" />
+            </div>
+          </div>
         </div>
+        {{else}}
+        <p>Please <a href="/vendor/">Log In</a> to Set Location</p>
+        {{/if}}
       </div>
     </div>
   </div>
@@ -42,9 +60,8 @@
       navigator.geolocation.getCurrentPosition(position => {
         lat = position.coords.latitude;
         lon = position.coords.longitude;
-        //console.log(lat, lon);
 
-        a = JSON.stringify({'latitude': lat, 'longitude':lon})
+        a = JSON.stringify({ 'latitude': lat, 'longitude': lon })
         console.log(a)
         document.getElementById('latitude').textContent = lat;
         document.getElementById('longitude').textContent = lon;
@@ -62,6 +79,14 @@
       console.log('geolocation not available');
     }
 
+
+    // Form Submit Script
+    function openVan() {
+      document.getElementById("open_van").submit()
+    }
+    function closeVan() {
+      document.getElementById("close_van").submit()
+    }
   </script>
 
 </section>

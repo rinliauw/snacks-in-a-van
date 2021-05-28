@@ -8,9 +8,9 @@
 
 {{#if loggedin}}
 <label for="quantity"><p>Quantity: (put 0 to remove item)</p></label>
-<input type="number" id="quantity" name="quantity" min="0" max="50">
+<input type="number" id="quantity" name="quantity" min="0" max="50" oninput="validity.valid||(value='');">
 <button onclick="toLocalStorage()" type="submit">Add to Cart</button><br>
-<a href="/customer/cart">Proceed to Checkout</a> 
+<a href="javascript:void(0);" onclick="savetoCart()">Proceed to Checkout</a> 
 {{else}}
 <p>Please <a href="/customer/getLoginPage">Log In</a> to Order</p>
 {{/if}}
@@ -27,6 +27,17 @@
     </div>
 </div>
 
+<!-- pop up message when clicking add to cart -->
+<div class="order-modal">
+    <div class="modal-content">
+        <div class="close2">&times;</div>
+        <div><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></div>
+        <div>
+            <p id="orderMessage"></p>
+        </div>
+    </div>
+</div>
+
     <form method="post" action="/customer/cart" id="cartform">
         <input type="hidden" name="items" id="items"/>
         <input type="hidden" name="qty" id="qty"/>
@@ -34,7 +45,8 @@
 
 <script>
 
-    function saveItems(){
+    function savetoCart(){
+        if (localStorage.getItem("current_cart") != null && localStorage.getItem("quantity") != null){
         // get the snack object IDs from local storage
         document.getElementById("items").value = JSON.parse(JSON.stringify(localStorage.getItem("current_cart")));
         document.getElementById("qty").value = JSON.parse(JSON.stringify(localStorage.getItem("quantity")));
@@ -48,10 +60,13 @@
         // submit a hidden form with the snack ids. You could use fetch to submit the data to API as well.
         document.getElementById("cartform").submit();
         localStorage.clear();
-                    
+        }
+        else{
+            document.getElementById("orderMessage").innerHTML = 'Please add to cart.'
+            document.querySelector('.order-modal').style.display='flex';
+        }    
     }
-
-
+    
     function toLocalStorage() {
         // create a new Array if it does not exist and put Snack ID in it.
         if (localStorage.getItem("current_cart") === null){
@@ -66,12 +81,33 @@
                 document.getElementById("addToCartMessage").innerHTML = "Successfully added to cart."
             }
         }
-        
+        else{ // get list of Snacks in localStorage
+            currentCart = JSON.parse(localStorage.getItem("current_cart"));
+            currentQuantity = JSON.parse(localStorage.getItem("quantity"));
+            thisItem = document.getElementById("snackid").innerHTML;
+            thisQuantity = document.getElementById("quantity").value;
+            if(thisQuantity.length === 0) {
+                //user haven't put quantity
+                console.log("quantity empty");
+                document.getElementById("addToCartMessage").innerHTML = "Please put desired quantity.";
+            }
+            else { //add to array in local storage
+                currentCart.push(thisItem);
+                currentQuantity.push(thisQuantity);
+                localStorage.setItem("current_cart", JSON.stringify(currentCart));
+                localStorage.setItem("quantity", JSON.stringify(currentQuantity));
+                document.getElementById("addToCartMessage").innerHTML = "Successfully added to cart."
+            }   
+        }
         document.querySelector('.addcart-modal').style.display='flex';
     }
 
     document.querySelector('.close').addEventListener('click', function() {
         document.querySelector('.addcart-modal').style.display='none';
+    });
+
+    document.querySelector('.close2').addEventListener('click', function() {
+        document.querySelector('.order-modal').style.display='none';
     });
 </script>
 

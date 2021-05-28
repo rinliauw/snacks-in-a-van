@@ -346,8 +346,8 @@ Customer login example details:
 
 |    <!-- -->          |        <!-- -->                     |
 |----------------------|-------------------------------------|
-| **Email**            | max123@gmail.com   |
-| **Password**         | Max123456 |
+| **Email**            | admin@gmail.com   |
+| **Password**         | Admin123456 |
 | **Details**       | Should redirect to the customer home page if login is successful, otherwise redirect to the customer login page |
 
 ### Van Login

@@ -20,47 +20,56 @@
     <link rel="stylesheet" href="/css/van-styles.css">
 
 </head>
+
 <body class="body-bg">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="/" style="position: relative; overflow: hidden; height: 50px;"><img
-                    src="https://i.imgur.com/tZ47M5M.png" width="100px" height="100px" style="margin-top: -25px;"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/vendor/location">Update Location</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/vendor/outstanding-orders">Outstanding Orders</a>
-                    </li>
-                    <!--<li class="nav-item">
-                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>!-->
-                </ul>
-                <form class="d-flex">
+    <div class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="/" style="position: relative; overflow: hidden; height: 50px;"><img
+                        src="https://i.imgur.com/tZ47M5M.png" width="100px" height="100px"
+                        style="margin-top: -25px;"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        {{#unless vanloggedin}}
+                        {{#if vanloggedin}}
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/vendor/">Login</a>
+                            <a class="nav-link" aria-current="page" href="/vendor/location">Update Location</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/vendor/outstanding-orders">Outstanding Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/vendor/pickedup-orders">Picked-up Orders</a>
                         </li>
                         <!--<li class="nav-item">
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>!-->
+                        {{/if}}
+                    </ul>
+                    <form class="d-flex">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            {{#unless vanloggedin}}
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/vendor/">Login</a>
+                            </li>
+                            <!--<li class="nav-item">
                             <a class="nav-link" href="#">Register</a>
                         </li>!-->
-                        {{else}}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/vendor/logout">Logout</a>
-                        </li>
-                        {{/unless}}
-                    </ul>
+                            {{else}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/vendor/logout">Logout</a>
+                            </li>
+                            {{/unless}}
+                        </ul>
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+    </div>
     </nav>
     <main>
         {{{body}}}
@@ -84,4 +93,5 @@
         })
     </script>
 </body>
+
 </html>

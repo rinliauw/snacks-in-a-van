@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway&display=swap');
@@ -183,4 +186,142 @@ border: hidden;
 .btn-primary:focus{
     background-color: var(--color-primary-hover);
     border: hidden;
+}
+:root {
+  --color-primary: #dfa167;
+  --color-primary-hover: #af7d4f;
+  --color-primary-click: #7c5939;
+  --text-big: 36px;
+  --text-medium: 22px;
+  --text-small: 16px;
+  --font-heading: "Roboto", sans-serif;
+  --font-body: "Work Sans", cursive;
+  --color-dark: #24305e;
+  --color-purple: #374785;
+  --color-blue: #a8d0e6;
+  --color-pink: #f76c6c;
+  --color-pinkhover: #f3a9a9;
+  --color-yellow: #f8e9a1;
+  --color-beige: #e9d6cd;
+  --color-listgroup: #ffefdf;
+  --color-listgrouphover: #c9b6a4;
+}
+
+p {
+  font-family: "Raleway", sans-serif;
+}
+
+h1 {
+  padding: 20px;
+  font-size: var(--text-big);
+  text-align: center;
+  color: var(--color-dark);
+  font-family: "Orelega One", cursive;
+}
+
+h2 {
+  font-size: var(--text-medium);
+  text-indent: 20%;
+  color: var(--color-dark);
+  font-family: "Orelega One", cursive;
+}
+
+
+.list-group-item {
+  background-color: var(--color-listgroup) !important;
+}
+
+.list-group-item:hover {
+  background-color: var(--color-listgrouphover) !important;
+}
+
+.bg-light {
+  background-color: var(--color-primary) !important;
+}
+
+.body-bg {
+  background-color: var(--color-beige);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  border: hidden;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  border: hidden;
+}
+
+.btn-primary:active {
+  background-color: var(--color-primary-click);
+  border: hidden;
+}
+
+.btn-primary:focus {
+  background-color: var(--color-primary-click);
+  border: hidden;
+}
+
+.btn-secondary {
+  background-color: var(--color-pinkhover);
+  border: hidden;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-pink);
+  border: hidden;
+}
+
+.btn-secondary:active {
+  background-color: var(--color-pink);
+  border: hidden;
+}
+
+.btn-secondary:focus {
+  background-color: var(--color-pink);
+  border: hidden;
+}
+
+.btn-primary:focus {
+  background-color: var(--color-primary-hover);
+  border: hidden;
+}
+
+#van-orderdetails img {
+  width: 150px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+
+#van-orderdetails table {
+  width: 60%;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 3px solid;
+}
+
+#van-orderdetails th {
+  text-align: center;
+  padding: 5px;
+  background: var(--color-primary);
+  color: var(--color-beige);
+}
+#van-orderdetails td {
+  text-align: center;
+}
+#van-orderdetails td p{
+  font-size: var(--text-small);
+}
+
+#van-orderdetails .countdown{
+  margin-top:2%;
+  font-size: var(--text-small);
+  text-indent: 20%;
+}
+
+#van-orderdetails .submit td{
+  text-align: right;
 }

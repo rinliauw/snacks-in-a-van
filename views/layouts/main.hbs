@@ -13,8 +13,31 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <script>
+    // update the timer when page is onload 
+    if (window.localStorage.getItem('second') != null && window.localStorage.getItem('minutes') != null){
+        var startingMinutes = parseInt(window.localStorage.getItem("minutes"))
+        time = startingMinutes * 60;
+        time += parseInt(window.localStorage.getItem("second"))
+        setInterval(updateCountdown, 1000);
+        function updateCountdown() { // start timer onload
+                //get the minute and the second
+                const minutes = Math.floor(time / 60);
+                let seconds = time % 60;
+
+                //add 0 when second is 0-9
+                seconds = seconds < 10 ? '0' + seconds: seconds;
+                console.log(seconds, minutes)
+                //add to the html
+                
+                time--;
+                // add value to local storage every second
+                localStorage.setItem("minutes", minutes)
+                localStorage.setItem("second", seconds)
+            }
+    }
     function saveLogOut(){
         // get the snack object IDs from local storage
         document.getElementById("logoutitems").value = JSON.parse(JSON.stringify(localStorage.getItem("current_cart")));
@@ -47,7 +70,7 @@
 
 <body>
     <nav class="navbar">
-            <a href="/"><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></a>
+            <a href="/" id="logo"><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></a>
         
         <a href="#" class="menu-toggle">
             <span class="bar"></span>
@@ -64,6 +87,7 @@
                 <li><a href="/customer/signup">Sign Up</a></li>
                 {{else}}
                 <li><a href="javascript:void(0);" onclick="saveLogOut();">Logout</a></li>
+                <li><a href="/customer/profile"><i class="fa fa-user-circle-o" style="color":#24305E;></i></a></li>
                 {{/unless}}
             </ul>
         </div>
@@ -94,4 +118,10 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
 </body>
+
+<style>
+    #logo:hover{
+        background-color:#e9d6cd;
+    }
+</style>
 </html>

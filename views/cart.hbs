@@ -1,15 +1,20 @@
 <script>
     // do we want the van to be removed when submitting order ?
     function saveItems(){
+        // redirect to home page if customer has not chosen a van
+        if (sessionStorage.getItem("current_van") === null){
+            document.getElementById("orderMessage").innerHTML = 'Please choose a van.'
+            document.querySelector('.order-modal').style.display='flex';
+        }    
+        else{ // if customer has chosen a van, pass the key & value pair frm session storage to the controller
         console.log(sessionStorage.getItem("current_van"))
         document.getElementById("current_van").value = JSON.parse(JSON.stringify(sessionStorage.getItem("current_van")));
         console.log(document.getElementById("current_van").value)
-
         document.getElementById("van_form").submit();
         // sessionStorage.removeItem("current_van")
         // sessionStorage.clear();
-                    
-    }
+        }
+    }      
 
 </script>
 
@@ -21,7 +26,8 @@
     <div class= "cart-page">
         {{#if total}}
         <table>
-            <tr>
+            <tr><th>Selected Van: <span id="van_name"></span> </th><th><th></th></th></tr>
+            <tr> 
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
@@ -61,10 +67,8 @@
                 <td> <button onclick="location.href = '/customer/snacks'">CHANGE ORDER</button></td>
                 <td><form method="post" action="/customer/order-details" id="van_form">
                     <input type="hidden" name="current_van" id = "current_van"/>
-                    <input type="submit" onclick = "saveItems()" value="CONFIRM ORDER"/>
-                </form>
-                <td>
-                </div>
+                    <input id ="submit_button" type="submit" onclick = "saveItems()" value="CONFIRM ORDER"/>
+                </form></td>
             </tr>
         </table>
     </div>
@@ -72,33 +76,36 @@
     {{else}}
     <p><a href="/customer/getLoginPage">Login to view order history</a></p>
     {{/if}}
+
+
+<!-- pop up message when clicking add to cart -->
+<div class="order-modal">
+    <div class="modal-content">
+        <div class="close2">&times;</div>
+        <div><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></div>
+        <div>
+            <p id="orderMessage"></p>
+        </div>
+    </div>
+</div>
+
+    <form method="post" action="/customer/cart" id="cartform">
+        <input type="hidden" name="items" id="items"/>
+        <input type="hidden" name="qty" id="qty"/>
+    </form>
+
 </section>
 
 <script>
-
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
+// get van name from sessionstorage: let user know if has chosen van in the table
+if (window.sessionStorage.getItem('current_van') != null){
+    document.getElementById('van_name').innerHTML = JSON.stringify(JSON.parse(window.sessionStorage.getItem('current_van')).name)
+}
+else{
+    document.getElementById('van_name').innerHTML = '<a href="/customer/">Please select a van</a>'
 }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+    document.querySelector('.close2').addEventListener('click', function() {
+        document.querySelector('.order-modal').style.display='none';
+    });
 </script>
