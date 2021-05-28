@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-const Order = mongoose.model("Order");
 const Van = mongoose.model("Van");
 const Customer = mongoose.model("Customer");
 const customerOrder = mongoose.model("customerOrder");

@@ -84,37 +84,6 @@ const getAllCustomers = async (req, res) => {
   }
 };
 
-// handle request to show current customer's cart
-const getCustomerCart = async (req, res) => {
-  try {
-    const oneCust = await Customer.findById(req.params.id)
-      .populate({ path: "cart.snackId", model: "Snack" })
-      .lean();
-    if (oneCust) {
-      const cart = oneCust.cart;
-      var total = 0;
-      var totalEach = new Array(cart.length);
-      for (var i = 0; i < cart.length; i++) {
-        var currentItem = cart[i];
-        totalEach[i] = currentItem.snackId.price * currentItem.quantity;
-        total += currentItem.snackId.price * currentItem.quantity;
-      }
-
-      return res.render("cart", {
-        cart,
-        total,
-        totalEach,
-        loggedin: req.isAuthenticated(),
-      });
-    } else {
-      res.status(404);
-      return res.send("Customer is not found in database");
-    }
-  } catch (e) {
-    res.status(400);
-    return res.send("Database query failed - this customer could not be found");
-  }
-};
 
 // handle request to get one customer
 const getOneCustomer = async (req, res) => {
@@ -133,7 +102,7 @@ const getOneCustomer = async (req, res) => {
 };
 
 // handle request to show current customer's cart
-const getCustomerCart2 = async (req, res) => {
+const getCustomerCart = async (req, res) => {
   try {
     let oneCust = await Customer.findOne({ email: req.session.email })
       .populate({ path: "cart.snackId", model: "Snack" })
@@ -202,14 +171,6 @@ const addItem = async (req, res) => {
 // handle request to save to Cart
 const saveCart = async (req, res, items, qty) => {
   try {
-    // get the user whose email is stored in the session -- user is logged in
-    // // and that we are saving at least one item
-    // if(req.session.email){
-    //     van_name = JSON.parse(van_name)
-    //     let user = await Customer.findOne({email: req.session.email});
-    //     user.
-    //     console.log(van_name)
-    // }
     if (req.session.email && items.length > 0) {
       // find user in database
       let user = await Customer.findOne({ email: req.session.email });
@@ -407,10 +368,9 @@ module.exports = {
   getAllCustomers,
   getOneCustomer,
   getSignUpPage,
-  getCustomerCart2,
+  getCustomerCart,
   addItem,
   getHomePage,
-  getCustomerCart,
   getLoginPage,
   saveCart,
   saveAfterLogOut,

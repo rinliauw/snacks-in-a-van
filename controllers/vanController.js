@@ -7,11 +7,6 @@ const utility = require("../routes/utility.js");
 
 // get nearest van
 const getNearestVan = async (customerlocation, limit = 5) => {
-  // getallVan
-  // customerlocation input {"latitude": ... , "longitude": ...}
-  // variable distance -> mskin ke getallVan tiap van
-  // location user
-  // location getallVan : longitude, latitude
   try {
     console.log(customerlocation);
     const vans = await Van.find().lean();
@@ -51,11 +46,22 @@ const getVanLogin = async (req, res) => {
     console.log(getResponse);
     console.log("IsAuthenticated:");
     console.log(req.isAuthenticated());
-    res.render("van-login.hbs", {
-      layout: "vendor-main.hbs",
-      vanloggedin: req.isAuthenticated(),
-      message: req.flash("loginMessage")[0],
-    });
+    //If not logged in, display the login page
+    if (!req.isAuthenticated()){
+      res.render("van-login.hbs", {
+        layout: "vendor-main.hbs",
+        vanloggedin: req.isAuthenticated(),
+        message: req.flash("loginMessage")[0],
+      });
+    // if already logged in, display the location page instead
+    } else {
+      res.header("Access-Control-Allow-Credentials", true);
+      res.render("van-location", {
+        layout: "vendor-main.hbs",
+        vanloggedin: req.isAuthenticated(),
+      });
+    }
+    
   } catch (e) {
     console.log(e);
   }
