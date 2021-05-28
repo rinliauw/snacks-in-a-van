@@ -1,6 +1,6 @@
 <div class="p-2 bg-light rounded-3">
     <div class="container text-center">
-      <h1 class="display-5 fw-bold">Pickedup Orders</h1></div>
+      <h1 class="display-5 fw-bold">Picked-Up Orders</h1></div>
   </div>
   <div class="list-group" style="overflow: hidden;">
 {{#each vanOrders}}
@@ -13,6 +13,6 @@
     <small>Discount: {{#if this.discount}}Applied{{else}}Not applied{{/if}}</small> 
   </a>
   {{else}}<div class="alert alert-warning" role="alert">
-  <center>No Picked-up Orders.</center>
+  <center>No Picked-Up Orders.</center>
 </div>
   {{/each}}

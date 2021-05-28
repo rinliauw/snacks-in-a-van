@@ -23,6 +23,14 @@ var register = function (Handlebars) {
       return hours + ":" + minutes + ":" + seconds;
     },
 
+    has_discount: function (time_ordered, current_time){
+      var diff = Math.abs(Date.parse(current_time) - Date.parse(time_ordered));
+      if (diff <= 0){
+        return true;
+      }
+      return false;
+    },
+
     van_helper: function (thisVan) {
       var ret = "";
 
@@ -52,7 +60,7 @@ var register = function (Handlebars) {
 
   if (Handlebars && typeof Handlebars.registerHelper === "function") {
     // register helpers
-    // for each helper defined above (we have only one, listfood)
+    // for each helper defined above 
     for (var prop in helpers) {
       // we register helper using the registerHelper method
       Handlebars.registerHelper(prop, helpers[prop]);

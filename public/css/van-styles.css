@@ -40,8 +40,29 @@ p{
     font-family: 'Raleway', sans-serif;
 }
 
-h1{
-    font-family: 'Orelega One', cursive;
+
+h1 {
+  font-size: var(--text-big);
+  text-align: center;
+  color: var(--color-dark);
+  font-family: "Orelega One", cursive;
+}
+
+h2 {
+  font-size: var(--text-medium);
+  text-indent: 20%;
+  color: var(--color-dark);
+  font-family: "Orelega One", cursive;
+}
+
+input {
+  display: block;
+  width: 70%;
+  padding: 10px 20px;
+  border: 2px solid grey;
+  background-color: transparent;
+  color: black;
+  margin-bottom: 20px;
 }
 
 .bg-light{
@@ -51,26 +72,6 @@ h1{
 .body-bg{
     background-color: var(--color-beige);
 }
-
-.btn-primary{
-    background-color: var(--color-primary);
-    border: hidden;
-  }
-  
-.btn-primary:hover{
-background-color: var(--color-primary-hover);
-border: hidden;
-}
-
-.btn-primary:active{
-    background-color: var(--color-primary-click);
-    border: hidden;
-    }
-
-.btn-primary:focus{
-    background-color: var(--color-primary-click);
-    border: hidden;
-    }
 
 .btn-secondary{
     background-color: var(--color-pinkhover);
@@ -92,138 +93,57 @@ border: hidden;
     border: hidden;
     }
 
-    #login {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    #login h1{
-        text-align: center;
-        font-family: 'Orelega One', cursive;
-        font-size:var(--text-big);
-        padding-bottom: 30px;
-    }
-    
-    #login .container {
-        width: 500px;
-        height: 500px;
-        text-align: center;
-        background-color: transparent;
-        border-radius: 5px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        padding: 40px 30px;
-        margin-top: 50px;
-    }
-    
-    #login input {
-        display: block;
-        margin: 10px auto;
-        width: 70%;
-        padding: 10px 20px;
-        border-radius: 50px;
-        border: 2px solid grey;
-        background-color: transparent;
-        color: black;
-        margin-bottom: 20px;
-    }
-    
-    #login input[type="submit"]{
-        background: #dfa167;
-        border: none;
-        outline: none;
-        letter-spacing: .04em;
-        font-size: 15px;
-        padding: 15px 10px;
-        width: 50%;
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-    
-    #login p {
-        font-size: var(--text-small);
-    }
-    
-    #login input[type="submit"]:hover{
-        background: #966c45;
-        border: none;
-        outline: none;
-        letter-spacing: .04em;
-        font-size: 15px;
-        padding: 15px 10px;
-        width: 50%; 
-    
-    }
-    
-    #login input:focus {
-        outline: none;
-    }
-    
-    #login .btn {
-        margin: 0px;
-        border: 0;
-        padding: 10px 30px;
-        border-radius: 50px;
-        background-color: #dfa167;
-        color: white;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        cursor: pointer;
-        margin-bottom: 30px;
-    }
-    
-    #login a {
-        text-decoration: underline;
-        color: var(--color-dark);
-    }
-    
-    #login label {
-        display: block;
-        margin-bottom: 0;
-        margin-top: 5px;
-        font-size: var(--text-small);
-    }
-    
-.btn-primary:focus{
-    background-color: var(--color-primary-hover);
-    border: hidden;
-}
-:root {
-  --color-primary: #dfa167;
-  --color-primary-hover: #af7d4f;
-  --color-primary-click: #7c5939;
-  --text-big: 36px;
-  --text-medium: 22px;
-  --text-small: 16px;
-  --font-heading: "Roboto", sans-serif;
-  --font-body: "Work Sans", cursive;
-  --color-dark: #24305e;
-  --color-purple: #374785;
-  --color-blue: #a8d0e6;
-  --color-pink: #f76c6c;
-  --color-pinkhover: #f3a9a9;
-  --color-yellow: #f8e9a1;
-  --color-beige: #e9d6cd;
-  --color-listgroup: #ffefdf;
-  --color-listgrouphover: #c9b6a4;
+#login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-p {
-  font-family: "Raleway", sans-serif;
+#login h1{
+    text-align: center;
+    font-family: 'Orelega One', cursive;
+    font-size:var(--text-big);
+    padding-bottom: 20px;
 }
 
-h1 {
-  padding: 20px;
-  font-size: var(--text-big);
-  text-align: center;
-  color: var(--color-dark);
-  font-family: "Orelega One", cursive;
+#login .container {
+    width: 500px;
+    height: auto;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 20px 30px;
+    margin-top: 50px;
 }
 
-h2 {
-  font-size: var(--text-medium);
-  text-indent: 20%;
-  color: var(--color-dark);
-  font-family: "Orelega One", cursive;
+
+
+#login p {
+    font-size: var(--text-small);
+}
+
+#login input:focus {
+    outline: none;
+}
+
+#login .btn {
+    background-color: #dfa167;
+    color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-bottom: 30px;
+    margin: 10px auto;
+    width: 70%;
+    padding: 10px 20px;
+}
+
+#login label {
+    display: block;
+    margin-bottom: 2px;
+    margin-top: 5px;
+
+    font-size: var(--text-medium);
 }
 
 
@@ -260,31 +180,6 @@ h2 {
 
 .btn-primary:focus {
   background-color: var(--color-primary-click);
-  border: hidden;
-}
-
-.btn-secondary {
-  background-color: var(--color-pinkhover);
-  border: hidden;
-}
-
-.btn-secondary:hover {
-  background-color: var(--color-pink);
-  border: hidden;
-}
-
-.btn-secondary:active {
-  background-color: var(--color-pink);
-  border: hidden;
-}
-
-.btn-secondary:focus {
-  background-color: var(--color-pink);
-  border: hidden;
-}
-
-.btn-primary:focus {
-  background-color: var(--color-primary-hover);
   border: hidden;
 }
 

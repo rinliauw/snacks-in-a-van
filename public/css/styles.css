@@ -907,6 +907,8 @@ button:hover {
     font-family: 'Orelega One', cursive;
     font-size:var(--text-big);
     padding-bottom: 30px;
+}
+
 #OrderDetails .flex-direction {
   flex-direction: row;
 }

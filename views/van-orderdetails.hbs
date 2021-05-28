@@ -38,11 +38,19 @@
         <table>
             <tr>
                 <td>Discount applied?</td>
-                <td>Time until discount: {{subtract order.time_ordered Date.now}}</td>
+                {{#if (has_discount order.time_ordered order.current_date)}}
+                <td>-20%</td>
+                {{else}}
+                <td>Time until discount: {{subtract order.time_ordered order.current_date}}</td>
+                {{/if}}
             </tr>
             <tr>
                 <td><b>Total Price</b></td>
+                {{#if (has_discount order.time_ordered order.current_date)}}
+                <td>${{multiply total 0.8}}</td>
+                {{else}}
                 <td>${{total}}</td>
+                {{/if}}
             </tr>
             
             <tr><td></td>
