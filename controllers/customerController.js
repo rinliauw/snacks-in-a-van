@@ -102,7 +102,7 @@ const getOneCustomer = async (req, res) => {
 };
 
 // handle request to show current customer's cart
-const getCustomerCart2 = async (req, res) => {
+const getCustomerCart = async (req, res) => {
   try {
     let oneCust = await Customer.findOne({ email: req.session.email })
       .populate({ path: "cart.snackId", model: "Snack" })
@@ -368,7 +368,7 @@ module.exports = {
   getAllCustomers,
   getOneCustomer,
   getSignUpPage,
-  getCustomerCart2,
+  getCustomerCart,
   addItem,
   getHomePage,
   getLoginPage,

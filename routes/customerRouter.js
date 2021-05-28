@@ -45,7 +45,7 @@ customerRouter.get("/snacks", snackController.getAllSnacks);
 customerRouter.get("/snacks/:name", snackController.getOneSnack);
 
 //handle the GET request to get the customer's cart
-customerRouter.get("/cart", customerController.getCustomerCart2);
+customerRouter.get("/cart", customerController.getCustomerCart);
 
 //handle the GET request to get customer order details
 // customerRouter.post('/order-details', orderController.confirmOrder)
