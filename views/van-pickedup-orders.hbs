@@ -4,7 +4,7 @@
   </div>
   <div class="list-group" style="overflow: hidden;">
 {{#each vanOrders}}
-  <a href="/vendor/pickedup-orders/{{this._id}}" class="list-group-item list-group-item-action flex-column align-items-start "> <!-- active !-->
+  <a href="/vendor/orders/{{this._id}}" class="list-group-item list-group-item-action flex-column align-items-start "> <!-- active !-->
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">Order #{{this._id}}</h5>
       <small class="text-muted">{{#unless this.fulfilled}}Not fulfilled{{else}}Fulfilled{{/unless}}</small>
@@ -16,16 +16,3 @@
   <center>No Picked-up Orders.</center>
 </div>
   {{/each}}
-
-{{!-- {{#each vanOrders}}
-  <span class="border border-secondary">
-    <div class="col">
-    Order ID: {{this._id}}<br>
-    Customer {{this.customer.nameGiven}} {{this.customer.nameFamily}}<br>
-    Time remaining: {{this.time_ordered}}<br>
-    {{#if this.discount}}
-      {{this.discount}}
-    {{/if}}
-    </div></span>
-</div>
-{{/each}}  --}}

@@ -58,76 +58,27 @@ const getOrderWithVanName = async (req, res) => {
 };
 
 
-const getOneOutstandingOrder = async(req, res) => {
-  try {
-    //find van
-    const chosenVan = await Van.findOne({ name: req.session.name });
-    //find the desired order
-    const vanOrder = await customerOrder
-      .findOne(
-        { van: chosenVan._id, picked_up: false },
-        {_id: order_id}
-      )
-      .lean();
-    var total = 0;
-    var totalEach = new Array(vanOrder.items.length);
-    for (var i = 0; i < vanOrder.items.length; i++) {
-      var currentItem = vanOrder.items[i];
-      totalEach[i] = currentItem.snackId.price * currentItem.quantity;
-      total += currentItem.snackId.price * currentItem.quantity;
-    }
-    return res.render("van-orderdetails", {
-      vanOrder: vanOrder,
-      layout: "vendor-main",
-      total: total,
-      vanloggedin: req.isAuthenticated(),
-    });
-  } catch(e){
-    res.status(400);
-    return res.send("Database query failed - an error occurred");
-  }
-}
-
-const getOnePickedUpOrder = async (req, res) => {
-  try {
-    //find van
-    const chosenVan = await Van.findOne({ name: req.session.name });
-    //find the desired order
-    const vanOrder = await customerOrder
-    .findOne(
-      { van: chosenVan._id, picked_up: true },
-      {_id: order_id}
-    )
-    .lean();
-    var total = 0;
-    var totalEach = new Array(vanOrder.items.length);
-    for (var i = 0; i < vanOrder.items.length; i++) {
-      var currentItem = vanOrder.items[i];
-      totalEach[i] = currentItem.snackId.price * currentItem.quantity;
-      total += currentItem.snackId.price * currentItem.quantity;
-    }
-    return res.render("van-orderdetails", {
-      vanOrder: vanOrder,
-      layout: "vendor-main",
-      total: total,
-      vanloggedin: req.isAuthenticated(),
-    });
-  } catch(e){
-    res.status(400);
-    return res.send("Database query failed - an error occurred");
-  }
-};
-
 
 const getPickedupOrder = async (req, res) => {
   try {
     //find van
     const oneVan = await Van.findOne({ name: req.session.name });
-    //find all its picked up orders
+    //find all its outstanding orders
     const vanOrders = await customerOrder
-      .find({ van: oneVan._id, picked_up: true }, {}, { sort: "-time_ordered" })
+      .find(
+        { van: oneVan._id, picked_up: true },
+        {},
+        { sort: "-time_ordered" }
+      )
+      .populate({ path: "customer" })
       .lean();
-    return res.render("van-pickedup-orders.hbs", {
+    let date_ob = Date();
+    for (var i = 0; i < vanOrders.length; i++) {
+      vanOrders[i].current_date = date_ob;
+    }
+    console.log;
+    vanOrders;
+    return res.render("van-pickedup-orders", {
       vanOrders: vanOrders,
       layout: "vendor-main",
       vanloggedin: req.isAuthenticated(),
@@ -369,7 +320,5 @@ module.exports = {
   confirmOrder,
   viewOrderHistory,
   getPickedupOrder,
-  getOneOutstandingOrder,
   markOrderAsPickedUp,
-  getOnePickedUpOrder
 };

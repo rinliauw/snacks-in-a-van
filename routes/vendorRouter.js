@@ -21,8 +21,6 @@ vendorRouter.get("/orders/:id", orderController.getVanOrder);
 // handle the GET request to get all outstanding orders with current logged in
 vendorRouter.get("/outstanding-orders", orderController.getOrderWithVanName);
 
-//handle the GET request to get a specific order
-vendorRouter.get("/outstanding-orders/:order_id", orderController.getOneOutstandingOrder);
 
 // handle the GET request to get all outstanding orders with current logged in
 vendorRouter.get("/pickedup-orders", orderController.getPickedupOrder);
@@ -33,8 +31,6 @@ vendorRouter.post("/orders/:order_id/fulfilled", orderController.markOrderAsFulf
 // handle the POST request to mark an order from a van as picked up
 vendorRouter.post("/orders/:order_id/pickedup", orderController.markOrderAsPickedUp);
 
-//handle the GET request to get a specific picked up order
-vendorRouter.get("/pickedup-orders/:order_id", orderController.getOnePickedUpOrder);
 
 // handle the GET request to view a van details
 vendorRouter.get("/:name/update-van-details", vanController.showVanDetail);
