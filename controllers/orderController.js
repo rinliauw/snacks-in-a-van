@@ -40,35 +40,27 @@ const getVanOrder= async (req, res) => {
 }
 // handle request to get all outstanding orders (not fulfilled) with a van name
 // show from the most recent
-const getOrderWithVanName = async (req, res) => {
-  try {
-    //find van
-    const oneVan = await Van.findOne({ name: req.session.name });
-    //find all its outstanding orders
-    const vanOrders = await customerOrder
-      .find(
-        { van: oneVan._id, picked_up: false },
-        {},
-        { sort: "-time_ordered" }
-      )
-      .populate({ path: "customer" })
-      .lean();
-    let date_ob = Date();
-    for (var i = 0; i < vanOrders.length; i++) {
-      vanOrders[i].current_date = date_ob;
-    }
-    console.log;
-    vanOrders;
-    return res.render("van-orders", {
-      vanOrders: vanOrders,
-      layout: "vendor-main",
-      vanloggedin: req.isAuthenticated(),
-    });
-  } catch (e) {
-    res.status(400);
-    return res.send("Database query failed - an error occurred");
+
+const getOrderWithVanName = function(io){
+  return async (req, res) => {
+      try {
+          //find van
+          const oneVan = await Van.findOne( {"name": req.session.name} )
+          //find all its outstanding orders
+          const vanOrders = await customerOrder.find({ van:oneVan._id, fulfilled:false },{},{sort: '-time_ordered'}).populate({path: 'customer'}).lean()
+          let date_ob = Date()
+          for (var i=0; i < vanOrders.length; i++){
+              vanOrders[i].current_date = date_ob
+          }
+          console.log;(vanOrders)
+          res.render('van-orders', {"vanOrders": vanOrders, "oneVan": oneVan._id, layout: 'vendor-main', "vanloggedin": req.isAuthenticated()});
+          
+      } catch (e) {
+          res.status(400)
+          return res.send("Database query failed - an error occurred")
+      }
   }
-};
+}
 
 
 
@@ -191,7 +183,7 @@ const markOrderAsPickedUp = async (req, res) => {
 };
 
 // handles request to confirm order
-const confirmOrder = async (req, res, current_van) => {
+const confirmOrder = async (req, res, current_van, io) => {
   try {
     //find the customer
     const oneCust = await Customer.findOne({ email: req.session.email }).lean();
@@ -271,6 +263,7 @@ const confirmOrder = async (req, res, current_van) => {
       newOrder.picked_up = false;
       newOrder.discount = false;
       newOrder.van = JSON.parse(current_van); // add van details (JSON) from sessionstorage to the database
+      const vanID = newOrder.van
 
       for (var i = 0; i < oneCart.length; i++) {
         var newItem = new startOrder({
@@ -300,15 +293,12 @@ const confirmOrder = async (req, res, current_van) => {
           { path: "van", model: "Van" },
         ])
         .lean();
-      //count total
-      const items = thisOrder.items;
-      var total = 0;
-      var totalEach = new Array(items.length);
-      for (var i = 0; i < items.length; i++) {
-        var currentItem = items[i];
-        totalEach[i] = currentItem.snackId.price * currentItem.quantity;
-        total += currentItem.snackId.price * currentItem.quantity;
-      }
+
+        // socket io emit 
+        const SocketEventName = "new_order_van_" + vanID
+        const isSuccess = io.emit(SocketEventName, thisOrder)
+        console.log("Socket IO Emmiting on ", SocketEventName, " status:", isSuccess)
+
       return res.render("orderdetails", {
         thisOrder: thisOrder,
         total: total,

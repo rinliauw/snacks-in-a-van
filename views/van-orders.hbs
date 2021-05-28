@@ -15,6 +15,39 @@
   </a>
   {{/each}}
 
+</div>
+
+<input type="hidden" value="{{oneVan}}" id="van_id">
+<script>
+  console.log("Test");
+</script>
+{{! Socket.IO CDN }}
+<script
+  src="https://cdn.socket.io/4.1.1/socket.io.min.js"
+  integrity="sha384-cdrFIqe3RasCMNE0jeFG9xJHog/tgOVC1E9Lzve8LQN1g5WUHo0Kvk1mawWjxX7a"
+  crossorigin="anonymous"
+></script>
+
+
+<script>
+  console.log("Test After IO");
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.min.js"></script>
+<script>
+    var socket = io();
+    console.log("Socket Listening");
+
+    const van_id = document.getElementById("van_id").value; 
+    // Listening to message published on event named new_order_van_{van_id}
+   socket.on("new_order_van_" + van_id, (msg)=>{ 
+     // reload page when a new order created
+    location.reload()
+   });
+
+    console.log(van_id)
+</script>
+
 {{!-- {{#each vanOrders}}
   <span class="border border-secondary">
     <div class="col">

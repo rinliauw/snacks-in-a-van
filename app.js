@@ -3,8 +3,10 @@
 
 const express = require("express");
 const app = express();
-const exphbs = require("express-handlebars");
-const MongoStore = require("connect-mongo");
+const exphbs = require('express-handlebars');
+const MongoStore = require('connect-mongo')
+const httpServer = require('http').Server(app)
+const io = require('socket.io')(httpServer)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // replaces body-parser
@@ -40,6 +42,7 @@ MONGO_URL = CONNECTION_STRING.replace(
   process.env.MONGO_USERNAME
 ).replace("<password>", process.env.MONGO_PASSWORD);
 
+console.log(MONGO_URL)
 // setup a session store signing the contents using the secret key
 app.use(
   session({
@@ -80,8 +83,8 @@ app.engine(
 app.set("view engine", "hbs");
 
 // set up routers
-const customerRouter = require("./routes/customerRouter");
-const vendorRouter = require("./routes/vendorRouter");
+const customerRouter = require('./routes/customerRouter')(io);
+const vendorRouter = require('./routes/vendorRouter')(io);
 
 // GET a main page that has links to the customer and vendor apps
 app.get("/", (req, res) => {
@@ -94,6 +97,10 @@ app.use("/customer", customerRouter);
 // Handle the vendor requests
 app.use("/vendor", vendorRouter);
 
-app.listen(process.env.PORT || 3030, () => {
-  console.log("The Snacks in a Van app is running on port 3030!");
-});
+io.on("connection", (socket)=>{
+    console.log("User Connected", socket.id)
+})
+
+httpServer.listen(process.env.PORT || 3030, () => {
+     console.log('The Snacks in a Van app is running on port 3030!')
+})
