@@ -77,7 +77,22 @@
     function vantoSessionstorage(name) {
       const van = nearestVan.find(van => van.name === name)
       sessionStorage.setItem("current_van", JSON.stringify(van))
-      window.location = "/customer/snacks"
+
+      console.log(document.referrer)
+      var parts = document.referrer.split('://')[1].split('/');
+      var previous_parts = parts[2] // if previous history is /customer
+      // console.log(parts[1] + '/' + parts[2])
+      if (previous_parts == 'cart'){
+        window.history.back()
+      }
+      else{ // if previous parts is customer/cart or other links
+        window.location = '/customer/snacks'
+      }
+      // window.location = "/customer/snacks"
+      //if (document.referrer = )
+        ///console.log('printing')
+        //console.log(document.referrer)
+      //window.history.back()
     }
 
 </script>

@@ -588,6 +588,21 @@ p {
   background: var(--color-pinkhover);
 }
 
+
+#currentCart input[type="button"] {
+  border-radius: 12px;
+  background: var(--color-pink);
+  color: var(--color-yellow);
+  font-size: var(--text-small);
+  border: none;
+}
+
+
+
+#currentCart input[type="button"]:hover{
+  background: var(--color-pinkhover)
+}
+
 /* layout for snack details */
 
 #snackDetails .Price {

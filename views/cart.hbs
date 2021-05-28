@@ -94,6 +94,9 @@
         <input type="hidden" name="qty" id="qty"/>
     </form>
 
+    <form id="get_nearest_form" method="post" action="/customer/nearest-van">
+    <input type="hidden" id="location" name="location"/>
+    </form>
 </section>
 
 <script>
@@ -102,10 +105,28 @@ if (window.sessionStorage.getItem('current_van') != null){
     document.getElementById('van_name').innerHTML = JSON.stringify(JSON.parse(window.sessionStorage.getItem('current_van')).name)
 }
 else{
-    document.getElementById('van_name').innerHTML = '<a href="/customer/">Please select a van</a>'
+    document.getElementById('van_name').innerHTML = 
+    `<input type="button" onclick="getNearestVan()" value="Find Nearest Van">`
+    // call back function: asynchronous
+    function getNearestVan(){
+    navigator.geolocation.getCurrentPosition(function (position){
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+        console.log(lat, lon);
+        json_location = JSON.stringify({ 'latitude': lat, 'longitude': lon })
+        console.log(json_location)
+        // set Element Location 
+        document.getElementById('location').value = json_location;
+        // submit After Successfully Getting Position from geoLocation API
+        document.getElementById("get_nearest_form").submit()
+    })
+    alert('Please wait')
+    }
 }
 
     document.querySelector('.close2').addEventListener('click', function() {
         document.querySelector('.order-modal').style.display='none';
     });
+
+
 </script>
