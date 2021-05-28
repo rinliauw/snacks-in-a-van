@@ -4,7 +4,14 @@
 {{/if}}
 
 <section id="login">
+    <form method="post" action="/vendor/login">
     <div class="container">
+        <h1>Login</h1>
+        <label for="name">Van Name</label>
+        <input type="text" size="10" name='name' id='name' placeholder="Van Name">
+        <label for="password">Password</label>
+        <input type="password" size="10" name='password' id='password' placeholder="Password">
+        <input type="submit" value="Submit">
         <div class="row justify-content-md-center mt-4">
             <div class="col-xl-3 col-lg-5 col-md-8">
                 <form method="post" action="/vendor/login">
@@ -27,4 +34,5 @@
             </div>
         </div>
     </div>
+    </form>
 </section>

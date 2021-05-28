@@ -896,6 +896,17 @@ button:hover {
   margin: auto;
 }
 
+#signUp p {
+    font-size: 12px;
+    margin-top: -20px;
+    margin-bottom: 60px;
+}
+
+#signUp h1{
+    text-align: center;
+    font-family: 'Orelega One', cursive;
+    font-size:var(--text-big);
+    padding-bottom: 30px;
 #OrderDetails .flex-direction {
   flex-direction: row;
 }
