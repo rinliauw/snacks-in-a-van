@@ -27,7 +27,7 @@
                     </div>
                 </td>
                 <td>{{this.quantity}}</td>
-                <td>{{multiply this.snackId.price this.quantity}}</td>
+                <td>{{two_dp (multiply this.snackId.price this.quantity)}}</td>
                   
             </tr>
             {{/if}}
@@ -37,19 +37,33 @@
     <div class="submit">
         <table>
             <tr>
-                <td>Discount applied?</td>
-                {{#if (has_discount order.time_ordered order.current_date)}}
-                <td>-20%</td>
-                {{else}}
-                <td>Time until discount: {{subtract order.time_ordered order.current_date}}</td>
-                {{/if}}
+                <td>Discount:</td>
+                {{#unless order.picked_up}}
+                    {{#unless order.discount}}
+                        {{#unless (discount (subtract order.time_ordered order.current_date))}}
+                            <td>Time until discount: {{subtract order.time_ordered order.current_date}}</td>
+                        {{else}}
+                        {{!-- Need to update the value of the discount attribute in the order --}}
+                        {{/unless}}
+
+                    {{/unless}}
+
+                {{/unless}}
+                {{order.discount}}
+                {{#unless order.discount}}
+                    {{#if order.picked_up}}
+                        <td>-0%</td>
+                    {{/if}}
+                {{else}}        
+                    <td>-20%</td>
+                {{/unless}}
             </tr>
             <tr>
                 <td><b>Total Price</b></td>
-                {{#if (has_discount order.time_ordered order.current_date)}}
-                <td>${{multiply total 0.8}}</td>
+                {{#if order.discount}}
+                <td>${{two_dp (multiply total 0.8)}}</td>
                 {{else}}
-                <td>${{total}}</td>
+                <td>${{two_dp total}}</td>
                 {{/if}}
             </tr>
             

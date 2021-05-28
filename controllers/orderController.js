@@ -13,8 +13,21 @@ const getVanOrder= async (req, res) => {
     .populate([{path: 'van', model: 'Van'}, {path: 'customer', model: 'Customer'},
   {path: 'items.snackId', model: 'Snack'}]).lean();
     console.log(order)
+    // create currtime attribute for each order with the current time
+    let date_ob = Date();
+    order.current_date = date_ob;
+    
+    //count total
+    const items = order.items;
+    var total = 0;
+    var totalEach = new Array(items.length);
+    for (var i = 0; i < items.length; i++) {
+      var currentItem = items[i];
+      totalEach[i] = currentItem.snackId.price * currentItem.quantity;
+      total += currentItem.snackId.price * currentItem.quantity;
+    }
     if (order) {
-      return res.render('van-orderdetails', {'order': order, layout: 'vendor-main', 'vanloggedin': req.isAuthenticated()})
+      return res.render('van-orderdetails', {'order': order, layout: 'vendor-main', 'total': total, 'vanloggedin': req.isAuthenticated()})
     } else {
       res.status(404);
       return res.send("Customer is not found in database");
@@ -120,6 +133,30 @@ const markOrderAsFulfilled = async (req, res) => {
     return res.send("Database query failed");
   }
 };
+
+// handle request to get an order discount
+const markOrderAsDiscounted = async (req, res) => {
+  try {
+    //find van
+    const oneVan = await Van.findOne({ name: req.session.name });
+    console.log(oneVan);
+    //find order and mark order as fulfilled
+    const thisOrder = await customerOrder.findOneAndUpdate(
+      { _id: req.params.order_id, van: oneVan._id },
+      { $set: { discount: true } },
+      { new: true }).lean();
+    return res.render("van-orderdetails", {
+      order: thisOrder,
+      layout: "vendor-main",
+      vanloggedin: req.isAuthenticated(),
+    });
+  } catch (e) {
+    // error occurred
+    res.status(400);
+    return res.send("Database query failed");
+  }
+};
+
 
 // handle request to mark an order as picked up
 const markOrderAsPickedUp = async (req, res) => {
@@ -321,4 +358,5 @@ module.exports = {
   viewOrderHistory,
   getPickedupOrder,
   markOrderAsPickedUp,
+  markOrderAsDiscounted
 };
