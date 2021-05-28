@@ -46,7 +46,7 @@ const getOrderWithVanName = function(io){
           //find van
           const oneVan = await Van.findOne( {"name": req.session.name} )
           //find all its outstanding orders
-          const vanOrders = await customerOrder.find({ van:oneVan._id},{},{sort: 'time_ordered'}).populate({path: 'customer'}).lean()
+          const vanOrders = await customerOrder.find({ van:oneVan._id, picked_up:'false'},{},{sort: 'time_ordered'}).populate({path: 'customer'}).lean()
           let date_ob = Date()
           for (var i=0; i < vanOrders.length; i++){
               vanOrders[i].current_date = date_ob
@@ -165,11 +165,7 @@ const markOrderAsPickedUp = async (req, res) => {
       )
       .populate({ path: "customer" })
       .lean();
-    return res.render("van-orders", {
-      vanOrders: vanOrders,
-      layout: "vendor-main",
-      vanloggedin: req.isAuthenticated(),
-    }); // van was found
+    return res.redirect('/vendor/outstanding-orders'); // van was found
   } catch (e) {
     // error occurred
     res.status(400);
