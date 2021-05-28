@@ -208,6 +208,7 @@ const confirmOrder = async (req, res, current_van, io) => {
           totalEach[i] = currentItem.snackId.price * currentItem.quantity;
           total += currentItem.snackId.price * currentItem.quantity;
         }
+        
         return res.render("orderdetails", {
           thisOrder: thisOrder,
           total: total,
@@ -221,7 +222,7 @@ const confirmOrder = async (req, res, current_van, io) => {
         }
       }
 
-      if (!isnotEmpty) {
+      if (isnotEmpty) {
         // if cart is not empty, render 'order details' page
         const thisOrder = await customerOrder
           .findOne({ customer: oneCust._id }, {}, { sort: "-time_ordered" })
@@ -239,6 +240,10 @@ const confirmOrder = async (req, res, current_van, io) => {
           totalEach[i] = currentItem.snackId.price * currentItem.quantity;
           total += currentItem.snackId.price * currentItem.quantity;
         }
+        
+        let date_ob = Date();
+        thisOrder.current_date = date_ob;
+
         return res.render("orderdetails", {
           thisOrder: thisOrder,
           total: total,
