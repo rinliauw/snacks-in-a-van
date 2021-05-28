@@ -60,7 +60,7 @@
                         <button class="step-text-button">CANCEL</button>
                     </div>
 
-
+                    {{#if thisOrder.ready_for_pickup}}
                     <div class="step">
                         <div class="bullet"  id="bullet2">&#10003;</div>
                         <div class="step-text"><strong>Ready for Pickup</strong></div>
@@ -70,6 +70,7 @@
                         <button class="step-text-button">PAY</button>&nbsp;
                         <button class="step-text-button">RATE US</button>
                     </div>
+                    {{/if}}
                 </ul>
             </div>
         </div>

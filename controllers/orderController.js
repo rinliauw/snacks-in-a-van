@@ -222,7 +222,7 @@ const confirmOrder = async (req, res, current_van, io) => {
         }
       }
 
-      if (isnotEmpty) {
+      if (!isnotEmpty) {
         // if cart is not empty, render 'order details' page
         const thisOrder = await customerOrder
           .findOne({ customer: oneCust._id }, {}, { sort: "-time_ordered" })
@@ -282,6 +282,7 @@ const confirmOrder = async (req, res, current_van, io) => {
         }
       );
 
+
       const thisOrder = await customerOrder
         .findOne({ customer: oneCust._id }, {}, { sort: "-time_ordered" })
         .populate([
@@ -289,6 +290,18 @@ const confirmOrder = async (req, res, current_van, io) => {
           { path: "van", model: "Van" },
         ])
         .lean();
+        //get total cost
+        const items = thisOrder.items;
+        var total = 0;
+        var totalEach = new Array(items.length);
+        for (var i = 0; i < items.length; i++) {
+          var currentItem = items[i];
+          totalEach[i] = currentItem.snackId.price * currentItem.quantity;
+          total += currentItem.snackId.price * currentItem.quantity;
+        }
+        //update current time attribute 
+        let date_ob = Date();
+        thisOrder.current_date = date_ob;
 
         // socket io emit 
         const SocketEventName = "new_order_van_" + vanID
@@ -301,6 +314,7 @@ const confirmOrder = async (req, res, current_van, io) => {
         loggedin: req.isAuthenticated(),
       });
     }
+    
   } catch (e) {
     // error occurred
     res.status(400);
