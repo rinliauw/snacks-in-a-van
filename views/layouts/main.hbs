@@ -16,28 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <script>
-    // update the timer when page is onload 
-    //if (window.localStorage.getItem('second') != null && window.localStorage.getItem('minutes') != null){
-        //var startingMinutes = parseInt(window.localStorage.getItem("minutes"))
-        //time = startingMinutes * 60;
-        //time += parseInt(window.localStorage.getItem("second"))
-        //setInterval(updateCountdown, 1000);
-        //function updateCountdown() { // start timer onload
-                //get the minute and the second
-                //const minutes = Math.floor(time / 60);
-                //let seconds = time % 60;
-
-                //add 0 when second is 0-9
-                //seconds = seconds < 10 ? '0' + seconds: seconds;
-                //console.log(seconds, minutes)
-                //add to the html
-                
-                //time--;
-                // add value to local storage every second
-                //localStorage.setItem("minutes", minutes)
-                //localStorage.setItem("second", seconds)
-            //}
-    //}
     //countdown timer for time remaining
     var timeoutHandle;
     function countdown(minutes, seconds) {

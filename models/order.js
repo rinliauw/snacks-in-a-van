@@ -22,11 +22,11 @@ const Order = mongoose.model("Order", orderSchema);
 
 const customerOrderSchema = new mongoose.Schema({
   customer: { type: mongoose.Schema.Types.ObjectId, ref: "Customer" },
-  items: [startOrderSchema], //what is the datatype?
+  items: [startOrderSchema], 
   time_ordered: { type: Date, default: Date.now },
   fulfilled: { type: Boolean, required: true },
   picked_up: { type: Boolean, required: true },
-  discount: { type: Boolean, required: true }, //change
+  discount: { type: Boolean, required: true },
   van: { type: mongoose.Schema.Types.ObjectId, ref: "Van" },
 });
 

@@ -184,10 +184,6 @@ const confirmOrder = async (req, res, current_van, io) => {
       return res.redirect("/customer/");
     } else {
       // if has chosen a van, proceed to create an order
-      // console.log(oneCust) for debugging purposes
-      // console.log("confirmorder")
-      // console.log(typeof(current_van))
-      // console.log("after")
 
       const oneCart = oneCust.cart;
       if (oneCart.length === 0) {
