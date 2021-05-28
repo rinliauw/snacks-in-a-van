@@ -41,12 +41,12 @@
                         <img class="currentCart" src="https://source.unsplash.com/{{this.snackId.photo}}" alt="hosted by Unsplash">
                         <div>
                             <p>{{this.snackId.name}}</p>
-                            <small>Price: ${{this.snackId.price}}</small>
+                            <small>Price: ${{two_dp this.snackId.price}}</small>
                         </div>
                     </div>
                 </td>
                 <td>{{this.quantity}}</td>
-                <td>{{multiply this.snackId.price this.quantity}}</td>
+                <td>{{two_dp (multiply this.snackId.price this.quantity)}}</td>
                   
             </tr>
             {{/if}}
@@ -61,7 +61,7 @@
         <table>
             <tr>
                 <td><b>Total Price</b></td>
-                <td>${{total}}</td>
+                <td>${{two_dp total}}</td>
             </tr>
             <tr>
                 <td> <button onclick="location.href = '/customer/snacks'">CHANGE ORDER</button></td>

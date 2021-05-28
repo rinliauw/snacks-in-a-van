@@ -216,6 +216,7 @@ const confirmOrder = async (req, res, current_van, io) => {
           totalEach[i] = currentItem.snackId.price * currentItem.quantity;
           total += currentItem.snackId.price * currentItem.quantity;
         }
+        
         return res.render("orderdetails", {
           thisOrder: thisOrder,
           total: total,
@@ -247,6 +248,10 @@ const confirmOrder = async (req, res, current_van, io) => {
           totalEach[i] = currentItem.snackId.price * currentItem.quantity;
           total += currentItem.snackId.price * currentItem.quantity;
         }
+        
+        let date_ob = Date();
+        thisOrder.current_date = date_ob;
+        
         return res.render("orderdetails", {
           thisOrder: thisOrder,
           total: total,
