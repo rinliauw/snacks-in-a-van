@@ -1,3 +1,6 @@
+const mongoose = require("mongoose");
+const customerOrder = mongoose.model("customerOrder");
+
 var register = function (Handlebars) {
   var helpers = {
     multiply: function (num1, num2) {
@@ -11,24 +14,36 @@ var register = function (Handlebars) {
     subtract: function (time_ordered, current_time) {
       var diff = Math.abs(Date.parse(current_time) - Date.parse(time_ordered)); // in miliseconds
       // now we want to convert to hours
-
-      var seconds = Math.floor((diff / 1000) % 60);
-      var minutes = Math.floor((diff / (60 * 1000)) % 60);
-      var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      var MILLI_15_MIN = 900000;
+      time_rem = MILLI_15_MIN - diff;
+      if (time_rem <= 0){
+        return "0:0:0";
+      }
+      var seconds = Math.floor((time_rem / 1000) % 60);
+      var minutes = Math.floor((time_rem / (60 * 1000)) % 60);
+      var hours = Math.floor((time_rem / (1000 * 60 * 60)) % 24);
 
       hours = hours < 10 ? "0" + hours : hours;
       minutes = minutes < 10 ? "0" + minutes : minutes;
       seconds = seconds < 10 ? "0" + seconds : seconds;
-
+      
       return hours + ":" + minutes + ":" + seconds;
     },
+    //print to two decimal places
+    two_dp: function (price){
+      return price.toFixed(2);
+    },
+    // check if a discount should  be applied
+    discount: function (time_rem){
+      return ("0:0:0"==time_rem);
+    },
 
-    has_discount: function (time_ordered, current_time){
-      var diff = Math.abs(Date.parse(current_time) - Date.parse(time_ordered));
-      if (diff <= 0){
-        return true;
-      }
-      return false;
+    //update the discount value in the object stored in the database
+    update_discount: function (id){
+      const thisOrder = customerOrder.findOneAndUpdate(
+        { _id: id},
+        { $set: { discount: true } },
+        { new: true }).lean();
     },
 
     van_helper: function (thisVan) {

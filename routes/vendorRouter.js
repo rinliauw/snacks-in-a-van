@@ -31,6 +31,9 @@ vendorRouter.post("/orders/:order_id/fulfilled", orderController.markOrderAsFulf
 // handle the POST request to mark an order from a van as picked up
 vendorRouter.post("/orders/:order_id/pickedup", orderController.markOrderAsPickedUp);
 
+// handle the POST request to mark an order from a van as discounted
+vendorRouter.post("/orders/:order_id/discounted", orderController.markOrderAsDiscounted);
+
 
 // handle the GET request to view a van details
 vendorRouter.get("/:name/update-van-details", vanController.showVanDetail);

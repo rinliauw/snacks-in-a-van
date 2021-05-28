@@ -118,7 +118,6 @@ input {
 }
 
 
-
 #login p {
     font-size: var(--text-small);
 }
@@ -146,6 +145,13 @@ input {
     font-size: var(--text-medium);
 }
 
+#van-orderdetails h1 {
+  margin-top:30px;
+}
+
+#van-orderdetails h2 {
+  margin-top:30px;
+}
 
 .list-group-item {
   background-color: var(--color-listgroup) !important;
