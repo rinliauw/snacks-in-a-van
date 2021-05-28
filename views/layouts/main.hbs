@@ -17,27 +17,58 @@
 </head>
 <script>
     // update the timer when page is onload 
-    if (window.localStorage.getItem('second') != null && window.localStorage.getItem('minutes') != null){
-        var startingMinutes = parseInt(window.localStorage.getItem("minutes"))
-        time = startingMinutes * 60;
-        time += parseInt(window.localStorage.getItem("second"))
-        setInterval(updateCountdown, 1000);
-        function updateCountdown() { // start timer onload
+    //if (window.localStorage.getItem('second') != null && window.localStorage.getItem('minutes') != null){
+        //var startingMinutes = parseInt(window.localStorage.getItem("minutes"))
+        //time = startingMinutes * 60;
+        //time += parseInt(window.localStorage.getItem("second"))
+        //setInterval(updateCountdown, 1000);
+        //function updateCountdown() { // start timer onload
                 //get the minute and the second
-                const minutes = Math.floor(time / 60);
-                let seconds = time % 60;
+                //const minutes = Math.floor(time / 60);
+                //let seconds = time % 60;
 
                 //add 0 when second is 0-9
-                seconds = seconds < 10 ? '0' + seconds: seconds;
-                console.log(seconds, minutes)
+                //seconds = seconds < 10 ? '0' + seconds: seconds;
+                //console.log(seconds, minutes)
                 //add to the html
                 
-                time--;
+                //time--;
                 // add value to local storage every second
-                localStorage.setItem("minutes", minutes)
-                localStorage.setItem("second", seconds)
+                //localStorage.setItem("minutes", minutes)
+                //localStorage.setItem("second", seconds)
+            //}
+    //}
+    //countdown timer for time remaining
+    var timeoutHandle;
+    function countdown(minutes, seconds) {
+        function tick() {
+            var counter = document.getElementById("countdown");
+            if(typeof counter !== 'undefined' && counter !== null) {
+                counter.innerHTML = minutes.toString() + ":" + 
+                (seconds < 10 ? "0" : "") + String(seconds);
             }
+            
+            seconds--;
+            if (seconds >= 0) {
+                timeoutHandle = setTimeout(tick, 1000);
+                localStorage.setItem("seconds", seconds);
+                localStorage.setItem("minutes", minutes);
+            } else {
+                if (minutes >= 1) {
+                    setTimeout(function () {
+                        countdown(minutes - 1, 59);
+                    }, 1000);
+                    localStorage.setItem("seconds", 59);
+                    localStorage.setItem("minutes", minutes-1);
+                }
+            }
+        }
+        tick();
     }
+    if(localStorage.getItem("minutes") !== null) {
+        countdown(localStorage.getItem("minutes"), localStorage.getItem("seconds"));
+    }
+
     function saveLogOut(){
         // get the snack object IDs from local storage
         document.getElementById("logoutitems").value = JSON.parse(JSON.stringify(localStorage.getItem("current_cart")));

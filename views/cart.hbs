@@ -13,7 +13,13 @@
         document.getElementById("van_form").submit();
         // sessionStorage.removeItem("current_van")
         // sessionStorage.clear();
+
+        //start timer to local storage when customer submit order
+        console.log("local storage")
+        window.localStorage.setItem("seconds", 0);
+        window.localStorage.setItem("minutes", 15);
         }
+        
     }      
 
 </script>

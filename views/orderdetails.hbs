@@ -18,8 +18,15 @@
                 <li class="total">
                     <div class="col col-1"><strong>TOTAL</strong></div>
                     <div class="col col-2"></div>
-                        <div class="col col-3">${{two_dp total}}</div>
+                    <div class="col col-3">${{two_dp total}}</div>
                 </li>
+                {{#if thisOrder.discount}}
+                <li class="total">
+                    <div class="col col-1"><strong>After Discount</strong></div>
+                    <div class="col col-2"></div>
+                    <div class="col col-3">${{two_dp (multiply 0.8 total)}}</div>
+                </li>
+                {{/if}}
             </ul>
         </div>
 
@@ -33,13 +40,14 @@
                         <div>{{thisOrder.van.name}}</div>
                     </li>
 
+                    {{#unless thisOrder.fulfilled}}
                     <li>
                         <div class="col col-1"><strong>Time Remaining: </strong></div>
                         <div id="countdown"></div> {{!- we could use subtract but we could also use the javascript from above}}
                     </li>
                     
                     <p class="notice">We will give you 20% discount if your order is not ready within the time limit!</p>
-                    
+                    {{/unless}}
                     <li>
                         <div class="col col-1"><strong>Status: </strong></div>
                         <div>{{#if thisOrder.fulfilled}}Fulfilled{{else}}Outstanding{{/if}}</div>
@@ -50,17 +58,20 @@
                         <div class="bullet" id="bullet1">&#10003;</div>
                         <div class="step-text"><strong>Order Received</strong></div>
                     </div>
-                    <div class="step-text">We are processing your order.<br><br>
-                        You can change or cancel your order within
-                        10 minutes and before your order is fulfilled. 
+                    <div class="step-text">We are processing your order.</div>
+                    <div id="step-subtitle">
+                        <div class="step-text"><br><br>
+                            You can change or cancel your order within
+                            10 minutes and before your order is fulfilled. 
+                        </div>
+
+                        <div class="button-container">
+                            <button class="step-text-button" onclick=showchangeModal()>CHANGE</button>&nbsp;
+                            <button class="step-text-button" onclick=showModal()>CANCEL</button>
+                        </div>
                     </div>
 
-                    <div class="button-container">
-                        <button class="step-text-button">CHANGE</button>&nbsp;
-                        <button class="step-text-button">CANCEL</button>
-                    </div>
-
-                    {{#if thisOrder.ready_for_pickup}}
+                    {{#if thisOrder.fulfilled}}
                     <div class="step">
                         <div class="bullet"  id="bullet2">&#10003;</div>
                         <div class="step-text"><strong>Ready for Pickup</strong></div>
@@ -77,40 +88,37 @@
     </div>
 </section>
 
-<script>
-    
-    // add to local storage: if not in local storage
-    if ((window.localStorage.getItem("minutes") == null) && (window.localStorage.getItem("second") == null)){
-        var startingMinutes = 15;
-        //total time in seconds
-        var time = startingMinutes * 60;
-    }
-    else{ // if already in local storage, update the value
-        console.log(typeof(parseInt(window.localStorage.getItem("minutes"))))
-        var startingMinutes = parseInt(window.localStorage.getItem("minutes"))
-        var time = startingMinutes * 60;
-        time += parseInt(window.localStorage.getItem("second"))
-    }
-    const countdownEl = document.getElementById('countdown');
-   
-    //call function every second
-    setInterval(updateCountdown, 1000);
-    function updateCountdown() { // start timer onload
-            //get the minute and the second
-            const minutes = Math.floor(time / 60);
-            let seconds = time % 60;
+<!-- pop up message when clicking CANCEL -->
+<div class="addcart-modal">
+    <div class="modal-content">
+        <div><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></div>
+        <div>
+            <p id="addToCartMessage">Are you sure you want to cancel your order?</p>
+            <p><button>YES</button> <button onclick=closeModal()>NO</button></p>
+        </div>
+    </div>
+</div>
 
-            //add 0 when second is 0-9
-            seconds = seconds < 10 ? '0' + seconds: seconds;
-            console.log(seconds, minutes)
-            //add to the html
-            countdownEl.innerHTML = `${minutes}:${seconds}`;
-            time--;
-            // add value to local storage every second
-            localStorage.setItem("minutes", minutes)
-            localStorage.setItem("second", seconds)
+<div class="change-modal">
+    <div class="modal-content">
+        <div><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></div>
+        <div>
+            <p id="addToCartMessage">Are you sure you want to change your order?</p>
+            <p><button>YES</button> <button onclick=closechangeModal()>NO</button></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // show cancel and change button if time >= 10 minutes
+    setInterval(function () {
+        const current_time = localStorage.getItem("minutes");
+        const fulfilledStatus = document.getElementById('fulfilled').innerHTML;
+        if(Number(current_time) >= 1 && fulfilledStatus === "false") {
+            const subtitle = document.getElementById('step-subtitle');
+            subtitle.style.display="block";
         }
-    
+    }, 1000);
 
     //change bullet color in order status
     
@@ -126,5 +134,21 @@
         secondbulletEl.style.color="white";
         secondbulletEl.style.backgroundColor="#24305E";
     }
-    
+
+    function showModal() {
+         document.querySelector('.addcart-modal').style.display = "flex";
+    }
+
+    function closeModal(){
+        document.querySelector('.addcart-modal').style.display = "none";
+    }
+
+    function showchangeModal() {
+         document.querySelector('.change-modal').style.display = "flex";
+    }
+
+    function closechangeModal(){
+        document.querySelector('.change-modal').style.display = "none";
+    }
+       
 </script>
