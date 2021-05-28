@@ -1,151 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Orelega+One&family=Raleway&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
-
-:root {  
-    --color-primary:#dfa167;
-    --color-primary-hover:#af7d4f;
-    --color-primary-click:#7c5939;
-    --text-big: 36px;
-    --text-medium: 22px;
-    --text-small: 16px;
-    --font-heading: 'Roboto', sans-serif;
-    --font-body: 'Work Sans', cursive;
-    --color-dark: #24305E;
-    --color-purple: #374785;
-    --color-blue: #A8D0E6;
-    --color-pink: #F76C6C; 
-    --color-pinkhover: #f3a9a9;
-    --color-yellow: #F8E9A1;
-    --color-beige: #e9d6cd;
+:root {
+  --color-primary: #dfa167;
+  --color-primary-hover: #af7d4f;
+  --color-primary-click: #7c5939;
+  --text-big: 36px;
+  --text-medium: 22px;
+  --text-small: 16px;
+  --font-heading: "Roboto", sans-serif;
+  --font-body: "Work Sans", cursive;
+  --color-dark: #24305e;
+  --color-purple: #374785;
+  --color-blue: #a8d0e6;
+  --color-pink: #f76c6c;
+  --color-pinkhover: #f3a9a9;
+  --color-yellow: #f8e9a1;
+  --color-beige: #e9d6cd;
+  --color-listgroup: #ffefdf;
+  --color-listgrouphover: #c9b6a4;
 }
 
-a{
-    color: var(--color-dark);
-    font-family: 'Raleway', sans-serif;
+p {
+  font-family: "Raleway", sans-serif;
 }
-
-
-a:hover{
-    border: 10px;
-    background-color:#dfa167;
-    color: white;
-}
-
-p{
-    font-family: 'Raleway', sans-serif;
-}
-
 
 h1 {
-  font-size: var(--text-big);
-  text-align: center;
-  color: var(--color-dark);
   font-family: "Orelega One", cursive;
 }
-
-h2 {
-  font-size: var(--text-medium);
-  text-indent: 20%;
-  color: var(--color-dark);
-  font-family: "Orelega One", cursive;
-}
-
-input {
-  display: block;
-  width: 70%;
-  padding: 10px 20px;
-  border: 2px solid grey;
-  background-color: transparent;
-  color: black;
-  margin-bottom: 20px;
-}
-
-.bg-light{
-    background-color: var(--color-primary) !important;
-}
-
-.body-bg{
-    background-color: var(--color-beige);
-}
-
-.btn-secondary{
-    background-color: var(--color-pinkhover);
-    border: hidden;
-    }
-      
-.btn-secondary:hover{
-    background-color: var(--color-pink);
-    border: hidden;
-    }
-    
-.btn-secondary:active{
-    background-color: var(--color-pink);
-    border: hidden;
-    }
-    
-.btn-secondary:focus{
-    background-color: var(--color-pink);
-    border: hidden;
-    }
-
-#login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#login h1{
-    text-align: center;
-    font-family: 'Orelega One', cursive;
-    font-size:var(--text-big);
-    padding-bottom: 20px;
-}
-
-#login .container {
-    width: 500px;
-    height: auto;
-    text-align: center;
-    background-color: transparent;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    padding: 20px 30px;
-    margin-top: 50px;
-}
-
-
-
-#login p {
-    font-size: var(--text-small);
-}
-
-#login input:focus {
-    outline: none;
-}
-
-#login .btn {
-    background-color: #dfa167;
-    color: white;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    margin-bottom: 30px;
-    margin: 10px auto;
-    width: 70%;
-    padding: 10px 20px;
-}
-
-#login label {
-    display: block;
-    margin-bottom: 2px;
-    margin-top: 5px;
-
-    font-size: var(--text-medium);
-}
-
 
 .list-group-item {
   background-color: var(--color-listgroup) !important;
@@ -183,12 +65,68 @@ input {
   border: hidden;
 }
 
+.btn-primary:disabled {
+  background-color: var(--color-primary-click);
+}
+
+.btn-secondary {
+  background-color: var(--color-pinkhover);
+  border: hidden;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-pink);
+  border: hidden;
+}
+
+.btn-secondary:active {
+  background-color: var(--color-pink);
+  border: hidden;
+}
+
+.btn-secondary:focus {
+  background-color: var(--color-pink);
+  border: hidden;
+}
+
+.btn-primary:focus {
+  background-color: var(--color-primary-hover);
+  border: hidden;
+}
+
+
+#login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#login .container {
+  width: 400px;
+  height: auto;
+  text-align: center;
+  background-color: transparent;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  padding: 20px 30px;
+  margin-top: 50px;
+}
+
 #van-orderdetails img {
   width: 150px;
   padding: 10px;
   border-radius: 50%;
 }
 
+#van-orderdetails h1, h2{
+  text-align: center;
+  font-size: var(--text-big);
+}
+
+#van-orderdetails h2{
+  text-align: center;
+  font-size: var(--text-medium);
+}
 
 #van-orderdetails table {
   width: 60%;
