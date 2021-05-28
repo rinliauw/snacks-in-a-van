@@ -46,9 +46,6 @@ module.exports = function (io){
   //handle the GET request to get the details of one snack
   customerRouter.get("/snacks/:name", snackController.getOneSnack);
 
-  //handle the GET request to get the customer's cart
-  customerRouter.get("/cart", customerController.getCustomerCart2);
-
   //handle the GET request to get customer order details
   // customerRouter.post('/order-details', orderController.confirmOrder)
   customerRouter.post("/order-details", async function (req, res) {
