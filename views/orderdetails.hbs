@@ -35,7 +35,7 @@
 
                     <li>
                         <div class="col col-1"><strong>Time Remaining: </strong></div>
-                        <div id="countdown">{{subtract thisOrder.time_ordered thisOrder.current_date}}</div>
+                        <div id="countdown"></div> {{!- we could use subtract but we could also use the javascript from above}}
                     </li>
                     
                     <p class="notice">We will give you 20% discount if your order is not ready within the time limit!</p>
@@ -82,12 +82,12 @@
     if ((window.localStorage.getItem("minutes") == null) && (window.localStorage.getItem("second") == null)){
         var startingMinutes = 15;
         //total time in seconds
-        let time = startingMinutes * 60;
+        var time = startingMinutes * 60;
     }
     else{ // if already in local storage, update the value
         console.log(typeof(parseInt(window.localStorage.getItem("minutes"))))
         var startingMinutes = parseInt(window.localStorage.getItem("minutes"))
-        time = startingMinutes * 60;
+        var time = startingMinutes * 60;
         time += parseInt(window.localStorage.getItem("second"))
     }
     const countdownEl = document.getElementById('countdown');
