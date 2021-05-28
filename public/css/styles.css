@@ -552,6 +552,8 @@ p {
   border-top: 3px solid;
   width: 60%;
 }
+
+
 #currentCart .total-price table td:last-child{
   text-align:right;
 }
@@ -586,6 +588,21 @@ p {
 
 #currentCart button:hover {
   background: var(--color-pinkhover);
+}
+
+@media screen and (max-width: 450px) {
+  #currentCart .total-price table {
+    width: 100%;
+  }
+  #currentCart button {
+    float:none;
+  }
+  #currentCart input[type="submit"] {
+    float:none;
+  }
+  #currentCart form {
+    width:auto;
+  }
 }
 
 

@@ -70,14 +70,22 @@
                 <td>${{two_dp total}}</td>
             </tr>
             <tr>
-                <td> <button onclick="location.href = '/customer/snacks'">CHANGE ORDER</button></td>
-                <td><form method="post" action="/customer/order-details" id="van_form">
+                <td>
+                    <button onclick="location.href = '/customer/snacks'">CHANGE ORDER</button>
+                </td>
+                <td>
+                    <div>
+                    <form method="post" action="/customer/order-details" id="van_form">
                     <input type="hidden" name="current_van" id = "current_van"/>
                     <input id ="submit_button" type="submit" onclick = "saveItems()" value="CONFIRM ORDER"/>
-                </form></td>
+                    </form>
+                    </div>
+                </td>
             </tr>
         </table>
     </div>
+    
+    
     {{/if}}
     {{else}}
     <p><a href="/customer/getLoginPage">Login to view order history</a></p>
