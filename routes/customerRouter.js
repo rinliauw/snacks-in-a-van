@@ -46,6 +46,9 @@ module.exports = function (io){
   //handle the GET request to get the details of one snack
   customerRouter.get("/snacks/:name", snackController.getOneSnack);
 
+  //handle the GET request to get the customer's cart
+  customerRouter.get("/cart", customerController.getCustomerCart);
+
   //handle the GET request to get customer order details
   // customerRouter.post('/order-details', orderController.confirmOrder)
   customerRouter.post("/order-details", async function (req, res) {
@@ -123,8 +126,6 @@ module.exports = function (io){
   //handle the POST request to add an item to order
   customerRouter.post("/:id/order", customerController.addItem);
 
-  //handle the GET request to get the customer order
-  customerRouter.get("/:id/cart", customerController.getCustomerCart);
 
   //handle the POST request to change user's profile (fam name + given name)
   customerRouter.post("/edit-profile", customerController.editProfile);
