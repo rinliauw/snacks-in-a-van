@@ -3,20 +3,21 @@
 
 <div class="container">
 
-<h1 id="h1">5 Vans Near You</h1>
-<div id="mapping2"></div>
+  <h1 id="h1">5 Vans Near You</h1>
+  <div id="mapping2" class="map"></div>
 </div>
+
 {{#each nearestVan}}
 <div class="row">
   <div class="column">
-    <p><div id="van_name">{{this.name}}</div></p>
+    <p><div id="van_name" class="van_name">{{this.name}}</div></p>
     <p>{{this.location_description}}</p>
     <p><span class="vans_lat">{{this.location.latitude}}</span>
     <span class="vans_lon">{{this.location.longitude}}</span></p>
   </div>
     <button type="submit" onclick="vantoSessionstorage('{{this.name}}')">Choose this van</button>
     {{/each}}
-    </div>
+</div>
 {{!-- {{/van_helper}} --}}
 </section>
 

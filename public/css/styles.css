@@ -228,6 +228,10 @@ button:hover {
   align-items: center;
 }
 
+#nearestVan .van_name {
+  margin-bottom: 5px;
+}
+
 #nearestVan h1 {
   text-align: center;
   font-family: "Orelega One", cursive;
@@ -243,7 +247,7 @@ button:hover {
 }
 
 #nearestVan .container {
-  width: 500px;
+  width: 80%;
   height: 700px;
   text-align: center;
   background-color: transparent;
@@ -284,11 +288,7 @@ button:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   margin-bottom: 30px;
-}
-
-#nearestVan a {
-  text-decoration: underline;
-  color: var(--color-dark);
+  margin-top: 10px;
 }
 
 #nearestVan label {
@@ -847,6 +847,7 @@ button:hover {
     padding-bottom: 30px;
 }
 
+
 #OrderDetails .flex-direction {
   flex-direction: row;
 }
@@ -889,19 +890,24 @@ button:hover {
 #OrderDetails .col-1 {
   flex-basis: 50%;
 }
+
 #OrderDetails .col-2 {
   flex-basis: 25%;
 }
+
 #OrderDetails .col-3 {
   flex-basis: 25%;
 }
+
 #OrderDetails .total {
   background-color: #e9d6cd;
 }
+
 #OrderDetails .notice {
   font-size: 70%;
   padding-bottom: 10px;
 }
+
 #OrderDetails .bullet {
   height: 20px;
   width: 20px;
@@ -913,9 +919,11 @@ button:hover {
   text-align: center;
   align-items: center;
 }
+
 #OrderDetails .step {
   display: flex;
 }
+
 #OrderDetails .step-text {
   flex-grow: 1;
   margin-left: 5px;
@@ -924,6 +932,7 @@ button:hover {
   padding-left: 5px;
   padding-bottom: 10px;
 }
+
 #OrderDetails .step-text-button {
   width: 100px;
   padding: 10px;
@@ -940,7 +949,13 @@ button:hover {
 
 /* Phone Size */
 @media screen and (max-width: 375px) {
-
+  #nearestVan {
+    flex-direction: column;
+  }
+  #nearestVan .container {
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
 }
 
 /* Tablet Size */
@@ -994,10 +1009,6 @@ button:hover {
     width: 63%;
   }
 
-  #nearestVan {
-    display: block;
-  }
-
   #OrderDetails .container {
     width: 100%;
   }
@@ -1009,9 +1020,7 @@ button:hover {
     width: 100%;
     padding: 20px;
   }
-}
 
-@media screen and (max-width: 700px) {
   #OrderDetails .flex-direction {
     flex-direction: column;
   }
