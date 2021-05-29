@@ -1,6 +1,3 @@
-// yang harus diperbaiki
-// proceed to checkout, find a van button css, confirm order
-
 const express = require("express");
 const app = express();
 const exphbs = require('express-handlebars');
@@ -104,3 +101,6 @@ io.on("connection", (socket)=>{
 httpServer.listen(process.env.PORT || 3030, () => {
      console.log('The Snacks in a Van app is running on port 3030!')
 })
+
+// export module for jest testing
+module.exports = app
