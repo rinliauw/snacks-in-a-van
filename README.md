@@ -15,8 +15,9 @@ There will be 2 web apps, one for the customers and one for the vendors.
 * [Commit ID](#commit-id)
 * [Getting Started](#getting-started)
 * [Database Access Details](#database-access-details)
-* [Postman Requests Instruction](#postman-requests-instruction)
 * [Login Details](#login-details)
+* [Tests Instruction](#tests-instruction)
+* [Postman Requests Instruction](#postman-requests-instruction)
 
 ## Team Members
 
@@ -77,6 +78,7 @@ To view the database from Mongo Compass, please navigate to File -> Connect and 
 `mongodb+srv://group2:group2@cluster0.7qkom.mongodb.net/snacksinavan?retryWrites=true&w=majority`
 
 ## Postman Requests Instruction
+Note: This is outdated since we are using sessions now.
 ### Customer
 
 **1. View menu of snacks (including pictures and prices)**
@@ -360,6 +362,17 @@ Van login example details:
 | **Password**         | Sister123456 |
 | **Details**       | Should redirect to the customer home page if login is successful, otherwise redirect to the vendor login page |
 
+## Tests Instruction
+"Using the vendor app, the van operator sets the status of their van". Here, we use Jest Javascript Testing.
+
+- To run the integration test to check routes, controllers and models implemented the above feature:
+```
+npm test van.integration.js --detectOpenHandles
+```
+- To run the unit test for the controller functions (locateVan and closeVan):
+```
+npm test van.unit.js --detectOpenHandles
+```
 
 **Task List:**
 
@@ -367,6 +380,6 @@ Van login example details:
 - [x] User Interface (UI)mockup
 - [x] App server mockup
 - [x] Front-end + back-end (one feature)
-- [ ] Complete system + source code
-- [ ] Report on your work(+ test1 feature)
-
+- [x] Complete system + source code
+- [x] Report on your work(+ test1 feature)
+- Completed!
