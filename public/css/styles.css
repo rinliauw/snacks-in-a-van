@@ -24,6 +24,11 @@ a {
   color: var(--color-dark);
   font-family: "Raleway", sans-serif;
 }
+
+p {
+  text-align: center;
+}
+
 section {
   padding-right: 10px;
 }
@@ -75,6 +80,89 @@ footer {
   bottom: 0;
   height: 50px;
   padding-top: 50px;
+}
+
+form {
+  /* centre the form */
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 1%;
+}
+
+form input[type$="text"] {
+  width: auto;
+  margin-bottom: 2%;
+  font-size: var(--text-small);
+}
+
+form input[type$="submit"] {
+  margin-top: 20px;
+  background: #dfa167;
+  border: none;
+  outline: none;
+  letter-spacing: 0.04em;
+  font-size: 15px;
+  padding: 15px 15px;
+  width: 50%;
+}
+
+form span.bigScreen {
+  /* on small screens, hide some of the wording */
+  display: none;
+}
+
+h1 {
+  font-family: "Orelega One", cursive;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+input[type$="submit"] {
+  background: #966c45;
+  border: none;
+  outline: none;
+  letter-spacing: 0.04em;
+  font-size: 15px;
+  padding: 15px 10px;
+  width: 20em;
+}
+
+input[type$="submit"]:hover {
+  background: #966c45;
+  margin-top: 20px;
+  border: none;
+  outline: none;
+  letter-spacing: 0.04em;
+  font-size: 15px;
+  padding: 15px 10px;
+  width: 50%;
+}
+
+button {
+  margin-top: 5px;
+  margin-bottom: 25px;
+  border-radius: 20px;
+  background: #dfa167;
+  border: none;
+  outline: none;
+  letter-spacing: 0.04em;
+  font-size: 15px;
+  padding: 15px 15px;
+  width: 200px;
+}
+
+button:hover {
+  margin-top: 5px;
+  margin-bottom: 25px;
+  border-radius: 20px;
+  background: #966c45;
+  border: none;
+  outline: none;
+  letter-spacing: 0.04em;
+  font-size: 15px;
+  padding: 15px 15px;
+  width: 200px;
 }
 
 /* top navigation bar */
@@ -132,8 +220,8 @@ footer {
   background-color: var(--color-dark);
   border-radius: 10px;
 }
-/* the nearest van page */
 
+/* the nearest van page */
 #nearestVan {
   display: flex;
   justify-content: center;
@@ -210,9 +298,7 @@ footer {
   font-size: smaller;
 }
 
-/* The homepage */
-
-/* the homepage css for customer app */
+/* The homepage for customer app */
 
 #homePage .col1 {
   position: relative;
@@ -248,7 +334,7 @@ footer {
   border: none;
   outline: none;
   letter-spacing: 0.04em;
-  font-size: 23px;
+  font-size: 18px;
   font-family: "Raleway", sans-serif;
   padding: 15px 15px;
   width: 250px;
@@ -270,36 +356,6 @@ footer {
   top: 150px;
   right: 100px;
   max-width: 50%;
-}
-
-form {
-  /* centre the form */
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  margin-bottom: 1%;
-}
-
-form input[type$="text"] {
-  width: auto;
-  margin-bottom: 2%;
-  font-size: var(--text-small);
-}
-
-form input[type$="submit"] {
-  margin-top: 20px;
-  background: #dfa167;
-  border: none;
-  outline: none;
-  letter-spacing: 0.04em;
-  font-size: 15px;
-  padding: 15px 15px;
-  width: 50%;
-}
-
-form span.bigScreen {
-  /* on small screens, hide some of the wording */
-  display: none;
 }
 
 /* The menu */
@@ -410,84 +466,8 @@ form span.bigScreen {
   width: 15%;
 }
 
-/* Responsive Design */
-
-p {
-  text-align: center;
-}
-
-@media screen and (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .menu-toggle {
-    display: flex;
-  }
-
-  .navbar-links {
-    display: none;
-    width: 100%;
-  }
-
-  .navbar-links ul {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .navbar-links ul li {
-    text-align: center;
-  }
-
-  .navbar-links ul li a {
-    padding: 0.5rem 1rem;
-  }
-
-  .navbar-links.active {
-    display: flex;
-  }
-
-  #snacksMenu ul {
-    column-count: 2;
-  }
-
-  #login .container {
-    width: 300px;
-  }
-
-  #homePage .col2 img {
-    width: 100%;
-    position: sticky;
-    right: 0rem;
-    /* position: fixed; */
-    top: 0px;
-    left: 0px;
-    max-width: 100%;
-    z-index: -1;
-  }
-
-  #homePage .col1 {
-    position: relative;
-    top: 13vh;
-    left: 10%;
-    width: 63%;
-  }
-  #nearestVan {
-    display: block;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  #snacksMenu ul {
-    column-count: 3;
-  }
-}
-
-@media screen and (min-width: 1600px) {
-  #snacksMenu ul {
-    column-count: 4;
-  }
+#snacksMenu ul {
+  column-count: 2;
 }
 
 /* cart */
@@ -552,12 +532,9 @@ p {
   border-top: 3px solid;
   width: 60%;
 }
-
-
 #currentCart .total-price table td:last-child{
   text-align:right;
 }
-
 
 #currentCart input[type="submit"] {
   border-radius: 12px;
@@ -590,22 +567,6 @@ p {
   background: var(--color-pinkhover);
 }
 
-@media screen and (max-width: 450px) {
-  #currentCart .total-price table {
-    width: 100%;
-  }
-  #currentCart button {
-    float:none;
-  }
-  #currentCart input[type="submit"] {
-    float:none;
-  }
-  #currentCart form {
-    width:auto;
-  }
-}
-
-
 #currentCart input[type="button"] {
   border-radius: 12px;
   background: var(--color-pink);
@@ -613,8 +574,6 @@ p {
   font-size: var(--text-small);
   border: none;
 }
-
-
 
 #currentCart input[type="button"]:hover{
   background: var(--color-pinkhover)
@@ -685,58 +644,8 @@ p {
   padding: 15px 15px;
 }
 
-
-h1 {
-  font-family: "Orelega One", cursive;
-  text-align: center;
-  letter-spacing: 3px;
-}
-
-input[type$="submit"] {
-  background: #966c45;
-  border: none;
-  outline: none;
-  letter-spacing: 0.04em;
-  font-size: 15px;
-  padding: 15px 10px;
-  width: 20em;
-}
-
-input[type$="submit"]:hover {
-  background: #966c45;
-  margin-top: 20px;
-  border: none;
-  outline: none;
-  letter-spacing: 0.04em;
-  font-size: 15px;
-  padding: 15px 10px;
-  width: 50%;
-}
-
-button {
-  margin-top: 5px;
-  margin-bottom: 25px;
-  border-radius: 20px;
-  background: #dfa167;
-  border: none;
-  outline: none;
-  letter-spacing: 0.04em;
-  font-size: 15px;
-  padding: 15px 15px;
-  width: 200px;
-}
-
-button:hover {
-  margin-top: 5px;
-  margin-bottom: 25px;
-  border-radius: 20px;
-  background: #966c45;
-  border: none;
-  outline: none;
-  letter-spacing: 0.04em;
-  font-size: 15px;
-  padding: 15px 15px;
-  width: 200px;
+#login a, p{
+  font-size: var(--text-small);
 }
 
 .bg-modal {
@@ -750,7 +659,7 @@ button:hover {
   align-items: center;
 }
 
-.addcart-modal, .change-modal, .order-modal{
+.addcart-modal, .order-modal{
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0);
@@ -764,7 +673,7 @@ button:hover {
 
 .modal-content {
   width: 500px;
-  min-height: 250px;
+  height: 250px;
   background-color: #dfa167;
   border-radius: 4px;
   text-align: center;
@@ -815,9 +724,6 @@ button:hover {
   font-size: var(--text-small);
 }
 
-#login a, p{
-  font-size: var(--text-small);
-}
 #editProfile a {
   font-size: var(--text-small);
   text-decoration: underline;
@@ -1010,11 +916,6 @@ button:hover {
 #OrderDetails .step {
   display: flex;
 }
-
-#OrderDetails #step-subtitle {
-  display: none;
-}
-
 #OrderDetails .step-text {
   flex-grow: 1;
   margin-left: 5px;
@@ -1035,22 +936,84 @@ button:hover {
   padding-bottom: 10px;
 }
 
-@media screen and (max-width: 700px) {
-  #OrderDetails .flex-direction {
-    flex-direction: column;
-  }
+/* Responsive Design */
+
+/* Phone Size */
+@media screen and (max-width: 375px) {
+
 }
 
-@media only screen and (max-width: 767px) {
+/* Tablet Size */
+@media screen and (max-width: 1024px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .navbar-links {
+    display: none;
+    width: 100%;
+  }
+
+  .navbar-links ul {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .navbar-links ul li {
+    text-align: center;
+  }
+
+  .navbar-links ul li a {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+
+  #login .container {
+    width: 300px;
+  }
+
+  #homePage .col2 img {
+    width: 100%;
+    position: sticky;
+    max-width: 100%;
+    z-index: -1;
+  }
+
+  #homePage .col1 {
+    position: relative;
+    top: 13vh;
+    left: 10%;
+    width: 63%;
+  }
+
+  #nearestVan {
+    display: block;
+  }
+
   #OrderDetails .container {
     width: 100%;
   }
+
   #OrderDetails .summary,
   #OrderDetails .status {
     display: block;
     float: none;
     width: 100%;
     padding: 20px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #OrderDetails .flex-direction {
+    flex-direction: column;
   }
 }
 
