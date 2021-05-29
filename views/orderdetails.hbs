@@ -2,6 +2,8 @@
     <h1>Order Details</h1><br>
     <div class="orderid"><strong>Order #{{thisOrder._id}}</strong></div>
     <div class="container">
+
+        <!--ORDER SUMMARY-->
         <div class="summary">
             <div class="section-title">Order Summary</div>
             
@@ -30,7 +32,7 @@
             </ul>
         </div>
 
-
+        <!--ORDER STATUS-->
         <div class="status">
             <div class="section-title">Order Status</div>
             <div>
@@ -103,6 +105,7 @@
     </div>
 </div>
 
+<!-- pop up message when clicking CHANGE -->
 <div class="change-modal">
     <div class="modal-content">
         <div><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></div>
@@ -116,6 +119,7 @@
 </div>
 
 <script>
+
     //countdown timer for time remaining
     var timeoutHandle;
     function countdown(minutes, seconds) {
@@ -163,7 +167,7 @@
     setInterval(function () {
         const current_time = localStorage.getItem("minutes");
         const fulfilledStatus = document.getElementById('fulfilled').innerHTML;
-        if(Number(current_time) >= 0 && fulfilledStatus === "false") {
+        if(Number(current_time) >= 10 && fulfilledStatus === "false") {
             const subtitle = document.getElementById('step-subtitle');
             subtitle.style.display="block";
         }
