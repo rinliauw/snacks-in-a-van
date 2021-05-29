@@ -2,6 +2,8 @@
     <h1>Order Details</h1><br>
     <div class="orderid"><strong>Order #{{thisOrder._id}}</strong></div>
     <div class="container">
+
+        <!--ORDER SUMMARY-->
         <div class="summary">
             <div class="section-title">Order Summary</div>
             
@@ -10,7 +12,7 @@
                 {{#if this.quantity}}
                 <li>
                     <div class="col col-1"><strong>{{this.snackId.name}}</strong></div>
-                    <div class="col col-2">Qty: {{this.quantity}}</div>
+                    <div class="col col-2" id="qty">Qty: {{this.quantity}}</div>
                     <div class="col col-3">${{two_dp (multiply this.snackId.price this.quantity)}}</div>
                 </li>
                 {{/if}}
@@ -30,7 +32,7 @@
             </ul>
         </div>
 
-
+        <!--ORDER STATUS-->
         <div class="status">
             <div class="section-title">Order Status</div>
             <div>
@@ -54,6 +56,7 @@
                     </li>
                     <p hidden id="fulfilled">{{thisOrder.fulfilled}}</p>
                     <p hidden id="pickup">{{thisOrder.picked_up}}</p>
+                    <p hidden id="items">{{thisOrder.items}}</p>
                     <div class="step">
                         <div class="bullet" id="bullet1">&#10003;</div>
                         <div class="step-text"><strong>Order Received</strong></div>
@@ -94,24 +97,72 @@
         <div><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></div>
         <div>
             <p id="addToCartMessage">Are you sure you want to cancel your order?</p>
-            <p><button>YES</button> 
+            <form method="post" action="/customer/order-detail/cancel" id="cancel_order">
+                <button type="button" class="btn btn-primary btn-lg" onclick="markOrderAsCancelled()">YES</button>
+            </form>
             <button onclick=closeModal()>NO</button></p>
         </div>
     </div>
 </div>
 
+<!-- pop up message when clicking CHANGE -->
 <div class="change-modal">
     <div class="modal-content">
         <div><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></div>
         <div>
             <p id="addToCartMessage">Are you sure you want to change your order?</p>
-            <p><button onclick="goBack()">YES</button> 
+            <p>
+            <button onclick="copytoLocal(), location.href = '/customer/snacks'">YES</button>
             <button onclick=closechangeModal()>NO</button></p>
         </div>
     </div>
 </div>
 
 <script>
+
+    //countdown timer for time remaining
+    var timeoutHandle;
+    function countdown(minutes, seconds) {
+        function tick() {
+            var counter = document.getElementById("countdown");
+            if(typeof counter !== 'undefined' && counter !== null) {
+                counter.innerHTML = minutes.toString() + ":" + 
+                (seconds < 10 ? "0" : "") + String(seconds);
+            }
+            
+            seconds--;
+            if (seconds >= 0) {
+                timeoutHandle = setTimeout(tick, 1000);
+                localStorage.setItem("seconds", seconds);
+                localStorage.setItem("minutes", minutes);
+            } else {
+                if (minutes >= 1) {
+                    setTimeout(function () {
+                        if(localStorage.getItem("minutes")){
+                            countdown(minutes - 1, 59);
+                        }
+                        else{
+                            return
+                        }
+                    }, 1000);
+                    localStorage.setItem("seconds", 59);
+                    localStorage.setItem("minutes", minutes-1);
+                }
+            }
+        }
+        if(localStorage.getItem("minutes")){
+            tick();
+        }
+        else{
+            return;
+        }
+        
+    }
+    
+    if(localStorage.getItem("minutes")) {
+        countdown(localStorage.getItem("minutes"), localStorage.getItem("seconds"));
+    }
+
     // show cancel and change button if time >= 10 minutes
     setInterval(function () {
         const current_time = localStorage.getItem("minutes");
@@ -153,8 +204,28 @@
         document.querySelector('.change-modal').style.display = "none";
     }
 
-    function goBack() {
-        window.history.back();
+    function copytoLocal() {
+        localStorage.removeItem('minutes');
+        localStorage.removeItem('seconds');
+        const items = {{{ json thisOrder.items }}};
+        console.log(items)
+        console.log(items.length)
+        var i;
+        let items_arr = new Array(items.length);
+        let qty_arr = new Array(items.length);
+        for(i = 0; i < items.length; i++){
+            items_arr[i] = items[i].snackId._id;
+            qty_arr[i] = String(items[i].quantity);
+        }
+        console.log(qty_arr)
+        console.log(items_arr)
+        localStorage.setItem('quantity', JSON.stringify(qty_arr));
+        localStorage.setItem('current_cart', JSON.stringify(items_arr));
+    }
+
+    //Submit Script
+    function markOrderAsCancelled() {
+        document.getElementById("cancel_order").submit()
     }
        
 </script>

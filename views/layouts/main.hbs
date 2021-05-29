@@ -16,38 +16,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <script>
-    //countdown timer for time remaining
-    var timeoutHandle;
-    function countdown(minutes, seconds) {
-        function tick() {
-            var counter = document.getElementById("countdown");
-            if(typeof counter !== 'undefined' && counter !== null) {
-                counter.innerHTML = minutes.toString() + ":" + 
-                (seconds < 10 ? "0" : "") + String(seconds);
-            }
-            
-            seconds--;
-            if (seconds >= 0) {
-                timeoutHandle = setTimeout(tick, 1000);
-                localStorage.setItem("seconds", seconds);
-                localStorage.setItem("minutes", minutes);
-            } else {
-                if (minutes >= 1) {
-                    setTimeout(function () {
-                        countdown(minutes - 1, 59);
-                    }, 1000);
-                    localStorage.setItem("seconds", 59);
-                    localStorage.setItem("minutes", minutes-1);
-                }
-            }
-        }
-        tick();
+    //function to delete the timer
+    function stopTimer(){
+        localStorage.removeItem("minutes");
+        localStorage.removeItem("seconds");
     }
     
-    if(localStorage.getItem("minutes") !== null) {
-        countdown(localStorage.getItem("minutes"), localStorage.getItem("seconds"));
-    }
-
     function saveLogOut(){
         // get the snack object IDs from local storage
         document.getElementById("logoutitems").value = JSON.parse(JSON.stringify(localStorage.getItem("current_cart")));

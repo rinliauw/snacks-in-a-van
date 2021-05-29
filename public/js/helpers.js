@@ -45,6 +45,10 @@ var register = function (Handlebars) {
         { $set: { discount: true } },
         { new: true }).lean();
     },
+    
+    json: function(obj) {
+      return JSON.stringify(obj);
+    },
 
     van_helper: function (thisVan) {
       var ret = "";
