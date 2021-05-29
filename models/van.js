@@ -21,4 +21,4 @@ vanSchema.methods.validPassword = function (password) {
 
 const Van = mongoose.model("Van", vanSchema);
 
-module.exports = { Van };
+module.exports = Van;
