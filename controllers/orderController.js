@@ -46,7 +46,6 @@ const getOrderWithVanName = function(io){
           //find van
           const oneVan = await Van.findOne( {"name": req.session.name} )
           //find all its outstanding orders
-          const vanOrders = await customerOrder.find({ van:oneVan._id, picked_up:'false'},{},{sort: 'time_ordered'}).populate({path: 'customer'}).lean()
           let date_ob = Date()
           for (var i=0; i < vanOrders.length; i++){
               vanOrders[i].current_date = date_ob
