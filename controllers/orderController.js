@@ -187,7 +187,7 @@ const confirmOrder = async (req, res, current_van, io) => {
 
       const oneCart = oneCust.cart;
       if (oneCart.length === 0) {
-        // if cart is 0, render 'cart is empty page'
+        // if cart is 0, render the earliest order
         const thisOrder = await customerOrder
           .findOne({ customer: oneCust._id }, {}, { sort: "-time_ordered" })
           .populate([
@@ -256,7 +256,7 @@ const confirmOrder = async (req, res, current_van, io) => {
       newOrder.discount = false;
       newOrder.van = JSON.parse(current_van); // add van details (JSON) from sessionstorage to the database
       const vanID = newOrder.van
-
+      //paste all items in the cart
       for (var i = 0; i < oneCart.length; i++) {
         var newItem = new startOrder({
           snackId: oneCart[i].snackId,
@@ -269,7 +269,8 @@ const confirmOrder = async (req, res, current_van, io) => {
 
       await newOrder.save(); // update the new order to the database
       console.log(newOrder);
-
+      
+      //remove all items in cart
       await Customer.updateOne(
         { _id: oneCust._id },
         { $set: { cart: [] } },
@@ -343,8 +344,6 @@ const viewOrderHistory = async (req, res) => {
     return res.send("Database query failed");
   }
 };
-
-
 
 module.exports = {
   getVanOrder,

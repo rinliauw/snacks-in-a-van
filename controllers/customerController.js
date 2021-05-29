@@ -109,6 +109,7 @@ const getCustomerCart = async (req, res) => {
       .lean();
 
     console.log(oneCust.cart);
+    // calculate the cart's total price
     if (oneCust) {
       const cart = oneCust.cart;
       var total = 0;
