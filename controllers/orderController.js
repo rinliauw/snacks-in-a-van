@@ -173,6 +173,26 @@ const markOrderAsPickedUp = async (req, res) => {
   }
 };
 
+//handle request to mark customer most recent order as cancelled
+const markOrderAsCancelled = async (req, res) => {
+  try {
+    //find customer
+    const oneCust = await Customer.findOne({ email: req.session.email });
+
+    //find order and mark order as cancelled
+    const thisOrder = await customerOrder.findOneAndUpdate(
+      { customer: oneCust._id },
+      { $set: { cancelled: true } },
+      { sort: "-time_ordered", new: true }).lean();
+    return res.redirect('/customer/'); // redirect to homepage
+  } catch (e) {
+    // error occurred
+    res.status(400);
+    return res.send("Database query failed");
+  }
+};
+
+
 // handles request to confirm order
 const confirmOrder = async (req, res, current_van, io) => {
   try {
@@ -187,7 +207,7 @@ const confirmOrder = async (req, res, current_van, io) => {
 
       const oneCart = oneCust.cart;
       if (oneCart.length === 0) {
-        // if cart is 0, render the earliest order
+        // if cart is 0, render the most recent order
         const thisOrder = await customerOrder
           .findOne({ customer: oneCust._id }, {}, { sort: "-time_ordered" })
           .populate([
@@ -353,5 +373,6 @@ module.exports = {
   viewOrderHistory,
   getPickedupOrder,
   markOrderAsPickedUp,
-  markOrderAsDiscounted
+  markOrderAsDiscounted,
+  markOrderAsCancelled
 };

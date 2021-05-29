@@ -27,6 +27,7 @@ const customerOrderSchema = new mongoose.Schema({
   fulfilled: { type: Boolean, required: true },
   picked_up: { type: Boolean, required: true },
   discount: { type: Boolean, required: true },
+  cancelled: { type: Boolean },
   van: { type: mongoose.Schema.Types.ObjectId, ref: "Van" },
 });
 

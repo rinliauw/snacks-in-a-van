@@ -133,6 +133,9 @@ module.exports = function (io){
   //handle the POST request to change user's password
   customerRouter.post("/change-password", customerController.changePassword);
 
+  //handle the POST request to cancel the most recent order
+  customerRouter.post("/order-detail/cancel", orderController.markOrderAsCancelled);
+
   // export the router
   return customerRouter;
 

@@ -95,6 +95,9 @@
         <div><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></div>
         <div>
             <p id="addToCartMessage">Are you sure you want to cancel your order?</p>
+            <form method="post" action="/customer/order-detail/cancel" id="cancel_order">
+                <button type="button" class="btn btn-primary btn-lg" onclick="markOrderAsCancelled()">YES</button>
+            </form>
             <p><button>YES</button> 
             <button onclick=closeModal()>NO</button></p>
         </div>
@@ -156,7 +159,7 @@
     if(localStorage.getItem("minutes")) {
         countdown(localStorage.getItem("minutes"), localStorage.getItem("seconds"));
     }
-    
+
     // show cancel and change button if time >= 10 minutes
     setInterval(function () {
         const current_time = localStorage.getItem("minutes");
@@ -217,6 +220,9 @@
         localStorage.setItem('current_cart', JSON.stringify(items_arr));
     }
 
-
+    //Submit Script
+    function markOrderAsCancelled() {
+        document.getElementById("cancel_order").submit()
+    }
        
 </script>
