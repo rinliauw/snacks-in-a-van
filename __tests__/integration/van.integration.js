@@ -1,4 +1,5 @@
 // snippets of this code are extracted from FoodBuddy-testing-w10 by INFO30005
+// to run the test use npm test van.integration.js --detectOpenHandles
 
 // include supertest to enable sending HTTP requests to app
 const { sanitizeBody } = require('express-validator');
@@ -98,6 +99,6 @@ describe('integration test: set up van status as opened', () => {
             })
         })
 
-        // didnt thought of a case where the van would fail to update close because
+        // may not have a case where the van would fail to update status to close because
         // we are retrieving van name from session and the van has to be in the database to be logged in
     })

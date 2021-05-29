@@ -128,15 +128,15 @@ const closeVan = async (req, res) => {
 
 //handle request to update van location and status to 'open'
 const locateVan = async (req, res) => {
-  console.log("locate van");
+  // console.log("locate van");
   // console.log(req.body.location);
   // console.log(req.session.name)
   // console.log(req.body.location_description)
   const new_loc_desc = req.body.location_description;
   const new_loc = req.body.location; //req.body is the json file
-console.log(new_loc,  new_loc_desc, req.session.name)
+// console.log(new_loc,  new_loc_desc, req.session.name)
   try {
-    console.log("inside")
+    // console.log("inside")
     //find van
     //update new location and change status to open
     const oneVan = await Van.findOneAndUpdate(
@@ -150,13 +150,14 @@ console.log(new_loc,  new_loc_desc, req.session.name)
       },
       { new: true }
     ).lean();
-    console.log(oneVan)
+
+    // console.log(oneVan)
     if (oneVan === null) {
       // no van found in database
       res.status(404);
       return res.send("Van not found");
     }
-    console.log(oneVan);
+    // console.log(oneVan);
     return res.render("van-open", {
       oneVan: oneVan,
       layout: "vendor-main.hbs",
@@ -164,6 +165,7 @@ console.log(new_loc,  new_loc_desc, req.session.name)
     }); // van was found
   } catch (e) {
     // error occurred
+    console.log('err', e)
     res.status(400);
     return res.send("Database query failed");
   }
