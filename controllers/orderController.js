@@ -45,6 +45,7 @@ const getOrderWithVanName = function(io){
       try {
           //find van
           const oneVan = await Van.findOne( {"name": req.session.name} )
+          const vanOrders = await customerOrder.find({ van:oneVan._id, picked_up:'false'},{},{sort: 'time_ordered'}).populate({path: 'customer'}).lean()
           //find all its outstanding orders
           let date_ob = Date()
           for (var i=0; i < vanOrders.length; i++){
