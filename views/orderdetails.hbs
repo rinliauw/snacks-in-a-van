@@ -94,7 +94,8 @@
         <div><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></div>
         <div>
             <p id="addToCartMessage">Are you sure you want to cancel your order?</p>
-            <p><button>YES</button> <button onclick=closeModal()>NO</button></p>
+            <p><button>YES</button> 
+            <button onclick=closeModal()>NO</button></p>
         </div>
     </div>
 </div>
@@ -104,7 +105,8 @@
         <div><img src="https://i.imgur.com/tZ47M5M.png" width="150px" height="140px"></div>
         <div>
             <p id="addToCartMessage">Are you sure you want to change your order?</p>
-            <p><button>YES</button> <button onclick=closechangeModal()>NO</button></p>
+            <p><button onclick="goBack()">YES</button> 
+            <button onclick=closechangeModal()>NO</button></p>
         </div>
     </div>
 </div>
@@ -114,7 +116,7 @@
     setInterval(function () {
         const current_time = localStorage.getItem("minutes");
         const fulfilledStatus = document.getElementById('fulfilled').innerHTML;
-        if(Number(current_time) >= 1 && fulfilledStatus === "false") {
+        if(Number(current_time) >= 10 && fulfilledStatus === "false") {
             const subtitle = document.getElementById('step-subtitle');
             subtitle.style.display="block";
         }
@@ -149,6 +151,10 @@
 
     function closechangeModal(){
         document.querySelector('.change-modal').style.display = "none";
+    }
+
+    function goBack() {
+        window.history.back();
     }
        
 </script>
