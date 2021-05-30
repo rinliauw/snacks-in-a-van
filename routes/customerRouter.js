@@ -135,7 +135,7 @@ module.exports = function (io){
 
   //handle the POST request to cancel the most recent order
   customerRouter.post("/order-detail/cancel", orderController.markOrderAsCancelled);
-  
+
   // export the router
   return customerRouter;
 
