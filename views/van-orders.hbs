@@ -1,23 +1,30 @@
-
 <div class="p-2 bg-light rounded-3">
-    <div class="container text-center">
-      <h1 class="display-5 fw-bold">Outstanding Orders</h1></div>
-  </div>
-  <div class="list-group" >
-{{#each vanOrders}}
-  <a href="/vendor/orders/{{this._id}}" class="list-group-item list-group-item-action flex-column align-items-start "> <!-- active !-->
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Order #{{this._id}}</h5>
-      <small class="text-muted">{{#unless this.fulfilled}}Not fulfilled{{else}}Fulfilled{{/unless}}</small>
-    </div>
-    <p class="mb-1">Customer Name: {{this.customer.nameGiven}} {{this.customer.nameFamily}}</p>
-    <small>Time remaining: {{subtract this.time_ordered this.current_date}}</small> <!-- to be changed for time remaining !-->
-  </a>
+  <div class="container text-center">
+    <h1 class="display-5 fw-bold">Outstanding Orders</h1></div>
+</div>
+<div class="list-group">
+  {{#each vanOrders}}
+    <a
+      href="/vendor/orders/{{this._id}}"
+      class="list-group-item list-group-item-action flex-column align-items-start"
+    >
+      <!-- active !-->
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Order #{{this._id}}</h5>
+        <small class="text-muted">{{#unless this.fulfilled}}Not fulfilled{{else}}Fulfilled{{/unless}}</small>
+      </div>
+      <p class="mb-1">Customer Name:
+        {{this.customer.nameGiven}}
+        {{this.customer.nameFamily}}</p>
+      <small>Time remaining:
+        {{subtract this.time_ordered this.current_date}}</small>
+      <!-- to be changed for time remaining !-->
+    </a>
   {{/each}}
 
 </div>
 
-<input type="hidden" value="{{oneVan}}" id="van_id">
+<input type="hidden" value="{{oneVan}}" id="van_id" />
 <script>
   console.log("Test");
 </script>
@@ -28,24 +35,19 @@
   crossorigin="anonymous"
 ></script>
 
-
 <script>
   console.log("Test After IO");
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.min.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.min.js"
+></script>
 <script>
-    var socket = io();
-    console.log("Socket Listening");
-
-    const van_id = document.getElementById("van_id").value; 
-    // Listening to message published on event named new_order_van_{van_id}
-   socket.on("new_order_van_" + van_id, (msg)=>{ 
-     // reload page when a new order created
-    location.reload()
-   });
-
-    console.log(van_id)
+  var socket = io(); console.log("Socket Listening"); const van_id =
+  document.getElementById("van_id").value; // Listening to message published on
+  event named new_order_van_{van_id} socket.on("new_order_van_" + van_id,
+  (msg)=>{ // reload page when a new order created location.reload() });
+  console.log(van_id)
 </script>
 
 {{!-- {{#each vanOrders}}
