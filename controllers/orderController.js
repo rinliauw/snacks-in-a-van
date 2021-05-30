@@ -345,7 +345,7 @@ const viewOrderHistory = async (req, res) => {
     const oneCust = await Customer.findOne({ email: req.session.email }).lean();
 
     const thisOrder = await customerOrder
-      .find({ customer: oneCust._id }, {}, { sort: "-time_ordered" })
+      .find({ customer: oneCust._id, cancelled: false }, {}, { sort: "-time_ordered" })
       .populate([
         { path: "items.snackId", model: "Snack" },
         { path: "van", model: "Van" },
