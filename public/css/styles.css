@@ -713,7 +713,7 @@ button:hover {
 #signUp .container,
 #editProfile .container,
 #profile .container {
-  width: 80%;
+  width: 40%;
   height: auto;
   text-align: center;
   background-color: transparent;
@@ -955,7 +955,7 @@ button:hover {
 /* Responsive Design */
 
 /* Phone Size */
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 376px) {
   #nearestVan {
     flex-direction: column;
   }
@@ -985,6 +985,14 @@ button:hover {
     display: block;
     text-align: center;
   }
+
+  #login .container,
+  #signUp .container,
+  #editProfile .container,
+  #profile .container {
+    width: 90%;
+}
+
 
 }
 
