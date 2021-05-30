@@ -1,6 +1,10 @@
 <section id="van-orderdetails">
     <h1>Order #{{order._id}}</h1>
     <h2>Customer: {{order.customer.nameGiven}} {{order.customer.nameFamily}}</h2>
+    {{#if order.cancelled}}
+    <p id="cancel">This order has been cancelled.</p>
+    <p id="cancel"><a href="/vendor/outstanding-orders">Go back to the oustanding orders page.</a></p>
+    {{else}}
     <div>
         <table>
             <tr> 
@@ -43,7 +47,8 @@
                         {{#unless (discount (subtract order.time_ordered order.current_date))}}
                             <td>Time until discount: {{subtract order.time_ordered order.current_date}}</td>
                         {{else}}
-                        {{!-- Need to update the value of the discount attribute in the order --}}
+                            <form method="post" input="hidden" action="/vendor/orders/{{order._id}}/discounted" id="discount"/>
+                            <script>document.getElementById("discount").submit()</script>
                         {{/unless}}
 
                     {{/unless}}
@@ -91,6 +96,7 @@
         </table>
 
     </div>
+    {{/if}}
     <script>
         // Form Submit Script
         function markOrderAsFulfilled() {

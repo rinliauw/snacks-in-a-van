@@ -158,3 +158,7 @@ h1 {
 #van-orderdetails .submit td{
   text-align: right;
 }
+
+#van-orderdetails p .cancel{
+  text-align: center;
+}
