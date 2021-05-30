@@ -45,8 +45,8 @@ const getOrderWithVanName = function(io){
       try {
           //find van
           const oneVan = await Van.findOne( {"name": req.session.name} )
+          const vanOrders = await customerOrder.find({ van:oneVan._id, picked_up:'false', cancelled: false},{},{sort: 'time_ordered'}).populate({path: 'customer'}).lean()
           //find all its outstanding orders
-          const vanOrders = await customerOrder.find({ van:oneVan._id, picked_up:'false'},{},{sort: 'time_ordered'}).populate({path: 'customer'}).lean()
           let date_ob = Date()
           for (var i=0; i < vanOrders.length; i++){
               vanOrders[i].current_date = date_ob
@@ -70,7 +70,7 @@ const getPickedupOrder = async (req, res) => {
     //find all its outstanding orders
     const vanOrders = await customerOrder
       .find(
-        { van: oneVan._id, picked_up: true },
+        { van: oneVan._id, picked_up: true, cancelled: false },
         {},
         { sort: "-time_ordered" }
       )
@@ -184,6 +184,7 @@ const markOrderAsCancelled = async (req, res) => {
       { customer: oneCust._id },
       { $set: { cancelled: true } },
       { sort: "-time_ordered", new: true }).lean();
+    
     return res.redirect('/customer/'); // redirect to homepage
   } catch (e) {
     // error occurred
@@ -274,6 +275,7 @@ const confirmOrder = async (req, res, current_van, io) => {
       newOrder.fulfilled = false;
       newOrder.picked_up = false;
       newOrder.discount = false;
+      newOrder.cancelled = false;
       newOrder.van = JSON.parse(current_van); // add van details (JSON) from sessionstorage to the database
       const vanID = newOrder.van
       //paste all items in the cart
