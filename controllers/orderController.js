@@ -132,11 +132,7 @@ const markOrderAsDiscounted = async (req, res) => {
       { _id: req.params.order_id, van: oneVan._id },
       { $set: { discount: true } },
       { new: true }).lean();
-    return res.render("van-orderdetails", {
-      order: thisOrder,
-      layout: "vendor-main",
-      vanloggedin: req.isAuthenticated(),
-    });
+    return res.redirect('back');
   } catch (e) {
     // error occurred
     res.status(400);
