@@ -551,7 +551,7 @@ button:hover {
   background: var(--color-pinkhover);
 }
 
-#currentCart button {
+#currentCart button{
   width:auto;
   border-radius: 12px;
   background: var(--color-pink);
@@ -561,6 +561,10 @@ button:hover {
   padding: 10px;
   border: none;
   float: right;
+}
+
+#currentCart .confirm-order {
+  width: auto;
 }
 
 #currentCart button:hover {
@@ -577,6 +581,12 @@ button:hover {
 
 #currentCart input[type="button"]:hover{
   background: var(--color-pinkhover)
+}
+
+
+#currentCart a {
+  font-size: var(--text-small);
+  text-decoration: underline;
 }
 
 /* layout for snack details */
@@ -703,7 +713,7 @@ button:hover {
 #signUp .container,
 #editProfile .container,
 #profile .container {
-  width: 500px;
+  width: 80%;
   height: auto;
   text-align: center;
   background-color: transparent;
@@ -728,6 +738,7 @@ button:hover {
   font-size: var(--text-small);
   text-decoration: underline;
 }
+
 #profile label[for$="value"] {
   font-size: smaller;
   display: block;
@@ -739,6 +750,7 @@ button:hover {
   border: 2px solid rgb(187, 185, 185, 0.5);
   background-color: transparent;
   color: var(--color-dark);
+  overflow: auto;
 }
 
 #login input,
@@ -810,11 +822,6 @@ button:hover {
   text-align: left;
   background-color: var(--color-pink);
   color: white;
-}
-
-#currentCart a {
-  font-size: var(--text-small);
-  text-decoration: underline;
 }
 
 #OrderDetails {
@@ -952,10 +959,33 @@ button:hover {
   #nearestVan {
     flex-direction: column;
   }
+  
   #nearestVan .container {
     margin-right: 0;
     margin-bottom: 30px;
   }
+
+  /* hides table headers */
+  #OrderHistory th {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  #OrderHistory tr {
+    display: block;
+  }
+
+  #OrderHistory td {
+    display: block;
+    text-align: center;
+  }
+
 }
 
 /* Tablet Size */

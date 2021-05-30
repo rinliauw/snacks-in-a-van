@@ -51,8 +51,8 @@
                         </div>
                     </div>
                 </td>
-                <td>{{this.quantity}}</td>
-                <td>{{two_dp (multiply this.snackId.price this.quantity)}}</td>
+                <td class="quantity">{{this.quantity}}</td>
+                <td class="total">{{two_dp (multiply this.snackId.price this.quantity)}}</td>
                   
             </tr>
             {{/if}}
@@ -75,7 +75,7 @@
                 </td>
                 <td>
                     <div>
-                    <form method="post" action="/customer/order-details" id="van_form">
+                    <form method="post" action="/customer/order-details" id="van_form" class="confirm-order">
                     <input type="hidden" name="current_van" id = "current_van"/>
                     <input id ="submit_button" type="submit" onclick = "saveItems()" value="CONFIRM ORDER"/>
                     </form>
