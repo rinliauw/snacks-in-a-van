@@ -22,13 +22,13 @@
                     <div class="col col-2"></div>
                     <div class="col col-3">${{two_dp total}}</div>
                 </li>
-                {{#if thisOrder.discount}}
-                <li class="total">
+            
+                <li class="total" id="discount">
                     <div class="col col-1"><strong>After Discount</strong></div>
                     <div class="col col-2"></div>
                     <div class="col col-3">${{two_dp (multiply 0.8 total)}}</div>
                 </li>
-                {{/if}}
+                
             </ul>
         </div>
 
@@ -164,13 +164,30 @@
         countdown(localStorage.getItem("minutes"), localStorage.getItem("seconds"));
     }
 
-    // show cancel and change button if time >= 10 minutes
+    
     setInterval(function () {
         const current_time = localStorage.getItem("minutes");
         const fulfilledStatus = document.getElementById('fulfilled').innerHTML;
+        const current_second = localStorage.getItem("seconds");
+        // show cancel and change button if time >= 10 minutes
         if(Number(current_time) >= 10 && fulfilledStatus === "false") {
             const subtitle = document.getElementById('step-subtitle');
             subtitle.style.display="block";
+        }
+        else {
+            const subtitle = document.getElementById('step-subtitle');
+            subtitle.style.display="none";
+        }
+
+        //show discount div if timer reach 0:00
+        if(Number(current_time) === 0 && Number(current_second) === 0
+        && fulfilledStatus === "false") {
+            const discount = document.getElementById('discount');
+            discount.style.display="flex";
+        }
+        else {
+            const discount = document.getElementById('discount');
+            discount.style.display="none";
         }
     }, 1000);
 

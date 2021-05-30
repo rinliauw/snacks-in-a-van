@@ -1013,6 +1013,10 @@ button:hover {
     width: 100%;
   }
 
+  #OrderDetails #discount {
+    display:none;
+  }
+
   #OrderDetails .summary,
   #OrderDetails .status {
     display: block;
