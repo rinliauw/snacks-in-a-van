@@ -57,6 +57,7 @@
                     <p hidden id="fulfilled">{{thisOrder.fulfilled}}</p>
                     <p hidden id="pickup">{{thisOrder.picked_up}}</p>
                     <p hidden id="items">{{thisOrder.items}}</p>
+                    <p hidden id="_id">{{thisOrder._id}}</p>
                     <div class="step">
                         <div class="bullet" id="bullet1">&#10003;</div>
                         <div class="step-text"><strong>Order Received</strong></div>
@@ -227,5 +228,6 @@
     function markOrderAsCancelled() {
         document.getElementById("cancel_order").submit()
     }
+    console.log(document.getElementbyId("_id").innerHTML)
        
 </script>
