@@ -673,7 +673,7 @@ button:hover {
 
 .modal-content {
   width: 500px;
-  height: 250px;
+  min-height: 250px;
   background-color: #dfa167;
   border-radius: 4px;
   text-align: center;
