@@ -139,7 +139,7 @@ describe("Unit testing locateVan from vanController.js for invalid input", () =>
       _id: "60815f63b544b956283d6ca5",
       name: "SisterCoffee",
       location_description: "37 Spencer Street",
-      location: { latitude: -239, longitude: 188 },
+      location: JSON.stringify({ latitude: -239, longitude: 188 }),
       ready_for_order: true,
     });
     // We are using the lean() method, so need to

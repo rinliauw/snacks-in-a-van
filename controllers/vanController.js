@@ -2,7 +2,7 @@ const { compareSync } = require("bcrypt");
 const mongoose = require("mongoose");
 
 // import van model
-const { Van } = require("../models/van");
+const Van = require("../models/van");
 const utility = require("../routes/utility.js");
 
 // get nearest van
